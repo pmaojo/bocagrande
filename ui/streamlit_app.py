@@ -157,7 +157,7 @@ Devuelve una lista JSON de transformaciones, usando SIEMPRE los nombres de clave
                         transformaciones_sugeridas = json.loads(json_str)
                         st.session_state['transformaciones_sugeridas'] = transformaciones_sugeridas
                         st.session_state['prompt_gemini'] = prompt
-                        st.subheader("Transformaciones Sugeridas (Pentaho/ETL):")
+                        st.subheader("Transformaciones Sugeridas (ETL):")
                         if transformaciones_sugeridas:
                             st.dataframe(pd.DataFrame(transformaciones_sugeridas))
                         else:
@@ -171,7 +171,7 @@ Devuelve una lista JSON de transformaciones, usando SIEMPRE los nombres de clave
 
         # Botón de aceptación SIEMPRE visible si hay sugeridas
         if st.session_state.get('transformaciones_sugeridas'):
-            if st.button("Guardar Transformaciones (Pentaho/ETL)", key="aceptar_transformaciones"):
+            if st.button("Guardar Transformaciones (ETL)", key="aceptar_transformaciones"):
                 st.session_state['transformaciones_aceptadas'] = st.session_state['transformaciones_sugeridas']
                 st.success("¡Transformaciones guardadas! Ahora puedes probarlas o aplicarlas a tus datos reales.")
 
@@ -237,7 +237,7 @@ Devuelve una lista JSON de transformaciones, usando SIEMPRE los nombres de clave
                     if col not in df_transformado.columns:
                         df_transformado[col] = None
                 df_transformado = df_transformado[columnas_salida]
-                st.subheader("Datos Transformados (Pentaho/ETL, solo columnas de salida):")
+                st.subheader("Datos Transformados (ETL, solo columnas de salida):")
                 st.dataframe(df_transformado)
 
                 # --- Resumen de campos obligatorios vacíos ---
