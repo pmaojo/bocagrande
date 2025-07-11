@@ -6,4 +6,5 @@ pytest-playwright
 google-generativeai
 rdflib
 pyyaml
-pyshacl 
+pyshacl
+pytest-asyncio
