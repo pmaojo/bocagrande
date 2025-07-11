@@ -1,7 +1,10 @@
 """
 Aplicación: servicio para construir la ontología OWL a partir de esquemas y datos.
 """
-from typing import Any
+from typing import Any, Tuple, Optional
+import tempfile
+
+from adapter.reasoner import Reasoner
 from rdflib import Graph, Namespace, RDF, RDFS, OWL, Literal, URIRef, XSD # Añadir URIRef y XSD para posibles rangos
 import pandas as pd # Añadir pandas para manejar DataFrames
 from urllib.parse import quote
@@ -13,8 +16,9 @@ class OntologyBuilder:
     Orquesta la construcción de un grafo OWL (rdflib.Graph) a partir de TableSchema y datos (DataFrame).
     Ahora, recibe una TBox base y solo añade los individuos (ABox).
     """
-    def __init__(self, tbox_base_graph: Graph):
+    def __init__(self, tbox_base_graph: Graph, reasoner: Optional[Reasoner] = None):
         self.tbox_base_graph = tbox_base_graph
+        self.reasoner = reasoner
 
     def build_abox_graph(self, schema, df) -> Graph:
         """
@@ -68,3 +72,11 @@ class OntologyBuilder:
                         literal_valor = Literal(valor) # Default a string
                     g.add((ind_uri, prop_uri, literal_valor))
         return g
+
+    def reason_graph(self, graph: Graph) -> Tuple[bool, str]:
+        """Run the configured reasoner on the provided graph."""
+        if self.reasoner is None:
+            raise ValueError("No reasoner configured")
+        with tempfile.NamedTemporaryFile(suffix=".ttl", delete=False) as tmp:
+            graph.serialize(destination=tmp.name, format="turtle")
+            return self.reasoner.reason(tmp.name)

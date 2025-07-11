@@ -5,8 +5,6 @@ import tempfile
 import streamlit as st
 import sys
 import os
-import asyncio # Importar asyncio
-from typing import Tuple # Importar Tuple
 import pandas as pd # Añadir import para pandas
 import numpy as np
 import traceback
@@ -20,23 +18,21 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from ontology.service import OntologyBuilder
 from adapter.yaml_loader import load_schema
 from adapter.csv_loader import read_csv
-from adapter.hermit_runner import reason_async
+from adapter.reasoner import Reasoner
+from adapter.hermit_runner import HermiTReasoner
 from adapter.shacl_runner import validate_shacl
 from adapter.yaml_to_shacl import generar_shape_shacl
 from ontology.tbox_builder import build_global_tbox
 
 # Estructura básica de la UI
 
-# Función síncrona para ejecutar la coroutine de HermiT
-def _run_hermit_sync(owl_path: str) -> Tuple[bool, str]:
-    return asyncio.run(reason_async(owl_path))
 
 # Cargar la TBox global al inicio de la aplicación (se cachea con @st.cache_resource)
 @st.cache_resource
 def get_global_tbox():
     return build_global_tbox()
 
-def main():
+def main(reasoner: Reasoner = HermiTReasoner()):
     """
     Orquesta la carga de archivos, comparación, prueba y aplicación de transformaciones.
     """
@@ -257,13 +253,13 @@ Devuelve una lista JSON de transformaciones, usando SIEMPRE los nombres de clave
                 try:
                     global_tbox = build_global_tbox()
                     tabla_schema_destino = load_schema(str(esquema_destino_comparacion))
-                    builder = OntologyBuilder(global_tbox)
+                    builder = OntologyBuilder(global_tbox, reasoner=reasoner)
                     grafo_owl = builder.build_abox_graph(tabla_schema_destino, df_transformado)
                     with tempfile.NamedTemporaryFile(suffix=".ttl", delete=False) as tmp:
                         grafo_owl.serialize(destination=tmp.name, format="turtle")
                         owl_path = tmp.name
                     st.info(f"OWL (TBox + ABox) generado para validación: {owl_path}")
-                    razonado, logs_hermit = _run_hermit_sync(owl_path)
+                    razonado, logs_hermit = reasoner.reason(owl_path)
                     st.markdown("**Validación semántica (HermiT):** " + ("✅ Consistente" if razonado else "❌ Inconsistente"))
                     with st.expander("Log HermiT", expanded=False):
                         st.text(logs_hermit)
