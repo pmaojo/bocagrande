@@ -1,32 +1,37 @@
-"""
-Dominio: entidades para TBox (clases, propiedades) y ABox (individuos).
-"""
-from typing import List, Dict, Any
+"""Domain entities for TBox (classes, properties) and ABox (individuals)."""
 
+from dataclasses import dataclass, field
+from typing import Any, Dict, List
+
+
+@dataclass
 class PropertyDef:
-    """Definición de una propiedad de datos OWL."""
-    def __init__(self, name: str, tipo: str = "string", requerido: bool = False, metadata: Dict[str, Any] = None):
-        self.name = name
-        self.tipo = tipo
-        self.requerido = requerido
-        self.metadata = metadata or {}
+    """Data property definition for OWL."""
 
+    name: str
+    tipo: str = "string"
+    requerido: bool = False
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+@dataclass
 class ClassDef:
-    """Definición de una clase OWL (tabla YAML)."""
-    def __init__(self, name: str, properties: List[PropertyDef]):
-        self.name = name
-        self.properties = properties
+    """OWL class definition (YAML table)."""
 
+    name: str
+    properties: List[PropertyDef]
+
+@dataclass
 class Individual:
-    """Instancia de una clase OWL (fila de datos)."""
-    def __init__(self, class_name: str, values: Dict[str, Any]):
-        self.class_name = class_name
-        self.values = values
+    """Instance of an OWL class (row of data)."""
 
+    class_name: str
+    values: Dict[str, Any]
+
+@dataclass
 class TableSchema:
-    """Esquema de tabla cargado desde YAML, con metadatos y campos."""
-    def __init__(self, name: str, fields: List[PropertyDef], primary_key: List[str] = None, metadata: Dict[str, Any] = None):
-        self.name = name
-        self.fields = fields
-        self.primary_key = primary_key or []
-        self.metadata = metadata or {}
+    """Table schema loaded from YAML with metadata and fields."""
+
+    name: str
+    fields: List[PropertyDef]
+    primary_key: List[str] = field(default_factory=list)
+    metadata: Dict[str, Any] = field(default_factory=dict)
