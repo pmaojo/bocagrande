@@ -1,0 +1,3 @@
+customerId,shop_code,full_name,first_name,last_name,gender,birthdate,email,phone,address_line1,address_line2,city,region,country,postal_code,opt_in_sms,opt_in_email,created_at,updated_at,status,notes
+1,001,"María del Carmen García",María,García,F,1985-07-12,maria.carmen@example.com,"+34 600 123 456","C/ Mayor 12","",Sevilla,Sevilla,ES,41001,YES,YES,2025-05-03T10:20:30Z,2025-07-10T08:15:00Z,Active,"Cliente VIP con seguimiento optométrico"
+2,001,"José Luis Fernández Pérez",José Luis,Fernández,M,1978-11-03,j.l.fernandez@example.es,"+34 699 456 789","Av. Constitución 45","Esc. B, 3º D",Sevilla,Sevilla,ES,41005,NO,YES,2025-03-21T15:10:00Z,2025-06-30T12:00:00Z,Active,"Prefiere SMS en horario tarde" 

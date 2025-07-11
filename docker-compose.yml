@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/app
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    command: ["streamlit", "run", "ui/streamlit_app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+
+  e2e-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    network_mode: "host" # Usar la red del host para depuración
+    environment:
+      - APP_HOST=127.0.0.1 # Cambiar a localhost ya que usa la red del host
+      - APP_PORT=8501
+    depends_on:
+      - app
+    command: ["pytest", "tests/e2e/"] 

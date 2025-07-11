@@ -1,0 +1,9 @@
+streamlit
+pandas
+playwright
+pytest
+pytest-playwright
+google-generativeai
+rdflib
+pyyaml
+pyshacl 

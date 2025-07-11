@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: panda-etl-nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - frontend
+      - backend
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: panda-etl-backend
+    # Remove direct port exposure, only accessible through nginx
+    # ports:
+    #   - "5328:5328"
+    volumes:
+      - ./instance:/app/instance
+      - ./uploads:/app/uploads
+      - ./processed:/app/processed
+    environment:
+      - ENV=production
+    restart: unless-stopped
+    command: >
+      sh -c "poetry run alembic upgrade head && poetry run uvicorn app.main:app --host 0.0.0.0 --port 5328"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: panda-etl-frontend
+    # Remove direct port exposure, only accessible through nginx
+    # ports:
+    #   - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=http://localhost:8080
+    depends_on:
+      - backend
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

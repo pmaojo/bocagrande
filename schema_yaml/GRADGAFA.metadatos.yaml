@@ -1,0 +1,11 @@
+GRADGAFA:
+  notes:
+  - Requerimientos para el trasvase de datos 2
+  formulas:
+    primary_key:
+      operation: concat
+      fields: &id001
+      - id
+      - tienda
+      expression: id + tienda
+  primary_key: *id001
