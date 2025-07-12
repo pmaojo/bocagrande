@@ -35,18 +35,30 @@ def construir_owl_desde_yaml(yaml_dir, datos_df=None, clase_objetivo=None):
         g.add((class_uri, RDF.type, OWL.Class))
         clases[class_name] = class_uri
         # Propiedades
-        cols = schema.get("columns") or schema.get("campos") or []
-        for col in cols:
-            if isinstance(col, dict) and "name" in col:
-                colname = col["name"]
-            elif isinstance(col, str):
-                colname = col
-            else:
-                continue
-            prop_uri = BASE[str(colname).upper()]
-            g.add((prop_uri, RDF.type, OWL.DatatypeProperty))
-            g.add((prop_uri, RDFS.domain, class_uri))
-            props[colname] = prop_uri
+        # Handle the actual YAML structure where fields are in a list with "Campo" keys
+        if isinstance(schema, list):
+            # Extract field names from the list structure
+            for field in schema:
+                if isinstance(field, dict) and "Campo" in field:
+                    colname = field["Campo"]
+                    prop_uri = BASE[str(colname).upper()]
+                    g.add((prop_uri, RDF.type, OWL.DatatypeProperty))
+                    g.add((prop_uri, RDFS.domain, class_uri))
+                    props[colname] = prop_uri
+        else:
+            # Fallback for the old structure
+            cols = schema.get("columns") or schema.get("campos") or []
+            for col in cols:
+                if isinstance(col, dict) and "name" in col:
+                    colname = col["name"]
+                elif isinstance(col, str):
+                    colname = col
+                else:
+                    continue
+                prop_uri = BASE[str(colname).upper()]
+                g.add((prop_uri, RDF.type, OWL.DatatypeProperty))
+                g.add((prop_uri, RDFS.domain, class_uri))
+                props[colname] = prop_uri
     # 2. Instancias (ABox)
     if datos_df is not None and clase_objetivo is not None:
         for idx, row in datos_df.iterrows():
