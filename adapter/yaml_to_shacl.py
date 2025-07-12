@@ -2,7 +2,6 @@
 Infraestructura: Generador de shapes SHACL a partir de un TableSchema (YAML).
 """
 from ontology.model import TableSchema
-from typing import Any
 
 def generar_shape_shacl(tabla_schema: TableSchema) -> str:
     """
