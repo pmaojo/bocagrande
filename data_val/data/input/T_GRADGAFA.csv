@@ -1,0 +1,33 @@
+Campo,Tipo,Longitud,Obligatorio,Descripción,Formnato
+id,Numérico,10,Sí,"Identificador graduación",
+tienda,Numérico,10,Sí,Código tienda,
+idClientes,Numérico,10,Sí,Clientes.id,
+ejeD,Numérico,4,No,"Campo para la medición del eje derecho.","[-XXX, XXX]"
+cilindroD,Numérico,6,No,"Campo para la medición del cilindro derecho.","[-XX.XX, XX.XX]"
+esferaD,Numérico,6,No,"Campo para la medición de la esfera derecha.","[-XX.XX, XX.XX]"
+ejeI,Numérico,4,No,"Campo para la medición del eje izquierdo.","[-XXX, XXX]"
+cilindroI,Numérico,6,No,"Campo para la medición del cilindro izquierdo.","[-XX.XX, XX.XX]"
+esferaI,Numérico,6,No,"Campo para la medición de la esfera izquierda.","[-XX.XX, XX.XX]"
+adicionD,Numérico,4,No,Campo para registrar los datos de la adición ojo derecho.,[X.XX]
+adicionI,Numérico,4,No,Campo para registrar los datos de la adición ojo izquierdo.,[X.XX]
+esferaCercaD,Numérico,6,No,"Campo para la medición de la esfera de cerca derecha.","[-XX.XX, XX.XX]"
+esferaCercaI,Numérico,6,No,"Campo para la medición de la esfera de cerca izquierda.","[-XX.XX, XX.XX]"
+avscd,Numérico,4,No,"Campo para registrar los datos de la agudeza visual sin corrección del ojo derecho.",[X.XX]
+avsci,Numérico,4,No,"Campo para registrar los datos de la agudeza visual sin corrección del ojo izquierdo",[X.XX]
+avd,Numérico,4,No,"Campo para registrar los datos de la agudeza visual del ojo derecho.",[X.XX]
+avi,Numérico,4,No,"Campo para registrar los datos de la agudeza visual del ojo izquierdo.",[X.XX]
+avao,Numérico,4,No,"Campo para registrar los datos de la agudeza visual ambos ojos.",[X.XX]
+dnpd,Numérico,10,No,"Campo para registrar los datos de la distancia naso-pupilar derecha.",
+dnpi,Numérico,10,No,"Campo para registrar los datos de la distancia naso-pupilar izquierda.",
+prismaD,Alfanumérico,20,No,Campo para registrar los datos del prisma derecho,
+prismaI,Alfanumérico,20,No,Campo para registrar los datos del prisma izquierdo,
+di,Numérico,2,No,Campo deprecado,
+obs,Alfanumérico,4GB,No,"Notas relacionadas con la graduación optométrica.",
+fecha,Fecha,,Si,"Fecha de creación para la graduación optométrica.","dd/mm/yyyy hh:mm:ss"
+usuario,Numérico,6,Si,"Identificador del Usuario que tramitó está graduación",
+codVendedor,Numérico,,No,Uduarios.cdgusuario,
+dnpCercaD   ,Numérico,,No,Campo para registrar los datos de la distancia naso-pupilar cerca derecha.,
+dnpCercaI,Numérico,,No,"Campo para registrar los datos de la 
+distancia naso-pupilar cerca izquierda.",
+doctor,Numérico,8,Si,DOCTORES.codOrigen,
+proxGraduacion,Fecha,,No,"Próxima revisión optométrica del paciente.","dd/mm/yyyy hh:mm:ss"

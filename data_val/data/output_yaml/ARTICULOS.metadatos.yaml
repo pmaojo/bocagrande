@@ -1,0 +1,6 @@
+ARTICULOS:
+  notes:
+  - En Gio, los artículos se agrupan por familias, y estas familias tienen asignadas
+    6 precios y de 1 a 8 propiedades dependiendo de la familia a la que pertenece
+  unique:
+  - entre ellos y entre cualquier otro registro de la tabla

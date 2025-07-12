@@ -1,0 +1,9 @@
+CAJAS:
+  formulas:
+    primary_key:
+      operation: concat
+      fields: &id001
+      - venta
+      - tienda
+      expression: venta + tienda
+  primary_key: *id001

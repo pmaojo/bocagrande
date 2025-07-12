@@ -1,0 +1,35 @@
+Campo,Tipo,Longitud,Obligatorio,Descripción,Formato
+id,Numérico,10,Sí,"Identificador graduación",
+idCliente,Numérico,10,Sí,Clientes.id,
+dsc,Alfanumérico,1,Sí,"Si es definitiva una D si es una prueba o adaptación P",
+ejeD,Numérico,4,No,"Campo para la medición del eje derecho.","[-XXX, XXX]"
+cilindroD,Numérico,6,No,"Campo para la medición del cilindro derecho.","[-XX.XX, XX.XX]"
+esferaD,Numérico,6,No,"Campo para la medición de la esfera derecha.","[-XX.XX, XX.XX]"
+adicionD,Numérico,4,No,Campo para registrar los datos de la adición ojo derecho,"[-XXX, XXX]"
+avd,Numérico,4,No,Campo para registrar los datos de la agudeza visual del ojo derecho,[X.XX]
+rcd,Alfanumérico,20,No,Campo para indicar el radio de curvatura de la lente derecha,
+ejeI,Numérico,4,No,Campo para la medición del eje izquierdo.,[X.XX]
+cilindroI,Numérico,4,No,"Campo para la medición del cilindro izquierdo.","[-XX.XX, XX.XX]"
+esferaI,Numérico,6,No,"Campo para la medición del Esfera izquierda.","[-XX.XX, XX.XX]"
+adicionI,Numérico,4,No,Campo para registrar los datos de la adición ojo izquierda,[X.XX]
+avi,Numérico,4,No,Campo para registrar los datos de la agudeza visual del ojo izquierdo,[X.XX]
+rci,Alfanumérico,20,No,Campo para indicar el radio de curvatura de la lente izquierda,
+fecha,Fecha,,Si,"Fecha de creación para la graduación optométrica.","dd/mm/yyyy hh:mm:ss"
+doctor,Numérico,8,Si,Doctores.codOrigen,
+diametroD,Alfanumérico,20,No,"Campo para guardar la información del diámetro del ojo derecho en la graduación contactológica.",
+diametroI,Alfanumérico,20,No,"Campo para guardar la información del diámetro del ojo izquierdo en la graduación contactológica.",
+obs,Alfanumérico,4GB,No,"Campo para registrar los datos de la distancia naso-pupilar derecha.",
+avao,Numérico,10,No,Campo para registrar los datos de la agudeza visual ambos ojos.,[X.XX]
+dzod,Alfanumérico,20,No,Campo para registrar los datos del diámetro para el ojo derecho,
+dzoi,Alfanumérico,20,No,Campo para registrar los datos del diámetr para el ojo izquierdo,
+codigolcd,Alfanumérico,5,No,Campo deprecado,
+codigolci,Alfanumérico,5,No,Campo deprecado,
+marcaD,Alfanumérico,30,No,Campo deprecado,"dd/mm/yyyy hh:mm:ss"
+marcaI,Alfanumérico,30,No,Campo deprecado,
+laboratorioD,Alfanumérico,200,No,Uduarios.cdgusuario,
+laboratorioI,Alfanumérico,200,No,"Campo para registrar los datos de la distancia naso-pupilar cerca derecha.",
+proxRevision,Date,,No,"Campo para registrar los datos de la distancia naso-pupilar cerca izquierda.","dd/mm/yyyy hh:mm:ss"
+tipolenteD,Alfanumérico,50,No,"Tipo de lente prescrita del ojo derecho para la graduación contactológica.",
+tipoLenteI,Alfanumérico,50,No,"Tipo de lente prescrita del ojo izquierdo para la graduación contactológica.",
+tienda,Numérico,6,Si,"Indica la tienda a la que pertenece la graduación.",
+usuario,Numérico,6,Si,Usuarios.cdgusuario,

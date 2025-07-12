@@ -1,0 +1,4 @@
+Campo,Tipo,Longitud,Obligatorio,Descripción,
+tienda,Numérico,5,Sí,Código tienda,
+cdgArticulo,Alfanumérico,20,Sí,Articulos.cdgArt,
+unidades,Numérico,5,Sí,Unidades en stock,

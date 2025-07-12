@@ -1,0 +1,166 @@
+- Campo: venta
+  Tipo: integer
+  Longitud: '10'
+  Obligatorio: Sí
+  Descripción: Ventacab.venta
+  ? ''
+  : ''
+  foreign_key: Ventacab.venta
+- Campo: linea
+  Tipo: integer
+  Longitud: '10'
+  Obligatorio: Sí
+  Descripción: Número de línea
+  ? ''
+  : ''
+- Campo: cdg_art
+  Tipo: string
+  Longitud: '20'
+  Obligatorio: Sí
+  Descripción: Articulos.id
+  ? ''
+  : ''
+  foreign_key: Articulos.id
+- Campo: cdg_pro
+  Tipo: string
+  Longitud: '20'
+  Obligatorio: 'No'
+  Descripción: Campo deprecado
+  ? ''
+  : ''
+  Deprecado: true
+- Campo: producto
+  Tipo: string
+  Longitud: '80'
+  Obligatorio: Si
+  Descripción: Descripción
+  ? ''
+  : ''
+- Campo: und
+  Tipo: integer
+  Longitud: '10'
+  Obligatorio: Si
+  Descripción: Unidades vendidas
+  ? ''
+  : ''
+- Campo: coste
+  Tipo: float
+  Longitud: 20,6
+  Obligatorio: 'No'
+  Descripción: Precio de compradel articulo
+  ? ''
+  : ''
+- Campo: pvp
+  Tipo: float
+  Longitud: 20,6
+  Obligatorio: Si
+  Descripción: Precio de venta
+  ? ''
+  : ''
+- Campo: dcto
+  Tipo: float
+  Longitud: 20,6
+  Obligatorio: 'No'
+  Descripción: Descuento en euros
+  ? ''
+  : ''
+- Campo: dcto_porcentaje
+  Tipo: float
+  Longitud: 20,6
+  Obligatorio: 'No'
+  Descripción: Descuento %
+  ? ''
+  : ''
+- Campo: precio
+  Tipo: float
+  Longitud: 20,6
+  Obligatorio: Si
+  Descripción: Precio total línea + descuento + impuesto
+  ? ''
+  : ''
+- Campo: IVA
+  Tipo: float
+  Longitud: 20,6
+  Obligatorio: Si
+  Descripción: Porcentaje de impuesto aplicado
+  ? ''
+  : ''
+- Campo: tipo
+  Tipo: string
+  Longitud: '40'
+  Obligatorio: Si
+  Descripción: 'Familia del articulo seleccionado Valores disponibles: Cristales =
+    1 Lentillas = 2 Graduado = 3 Varios = 4 Sol = 5 Pdtos Mantenimiento = 6 Audifonos
+    = 7 Varios Audio = 8'
+  ? ''
+  : ''
+- Campo: tienda
+  Tipo: integer
+  Longitud: '6'
+  Obligatorio: Si
+  Descripción: Ventacab.tienda
+  ? ''
+  : ''
+  foreign_key: Ventacab.tienda
+- Campo: estado
+  Tipo: string
+  Longitud: '25'
+  Obligatorio: 'No'
+  Descripción: Deprecado
+  ? ''
+  : ''
+  Deprecado: true
+- Campo: pedido
+  Tipo: string
+  Longitud: '10'
+  Obligatorio: 'No'
+  Descripción: Deprecado
+  ? ''
+  : ''
+  Deprecado: true
+- Campo: cdgSucPedido
+  Tipo: string
+  Longitud: '10'
+  Obligatorio: 'No'
+  Descripción: Deprecado
+  ? ''
+  : ''
+  Deprecado: true
+- Campo: cdgPedido
+  Tipo: string
+  Longitud: '10'
+  Obligatorio: 'No'
+  Descripción: Deprecado
+  ? ''
+  : ''
+  Deprecado: true
+- Campo: cdgLineaPedido Alfanumérico
+  Tipo: ''
+  Longitud: '10'
+  Obligatorio: 'No'
+  Descripción: Deprecado
+  ? ''
+  : ''
+  Deprecado: true
+- Campo: alturaFocal
+  Tipo: string
+  Longitud: '20'
+  Obligatorio: 'No'
+  Descripción: Altura focal de la lente seleccionada en el detalle de la venta Si
+    la linea es de tipo lentes
+  ? ''
+  : ''
+- Campo: vision
+  Tipo: string
+  Longitud: '10'
+  Obligatorio: 'No'
+  Descripción: Si la lente es de Lejos se introduce una L, si de cerca una C
+  ? ''
+  : ''
+- Campo: ojo
+  Tipo: string
+  Longitud: '10'
+  Obligatorio: 'No'
+  Descripción: Si es ojo Derecho D, si no I para lineas de tipo lentes
+  ? ''
+  : ''

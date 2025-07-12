@@ -1,0 +1,27 @@
+Campo,Tipo,Longitud,Obligatorio,Descripción,Formato
+cdgArt,Alfanumérico,20,Sí,Código artículo,
+dsc,Alfanumérico,50,Sí,Descripción,
+precio_costo,Decimal,"20,4",No,Precio de compra del articulo,
+prop1,Alfanumérico,64,No,"• AUDIFONOS: Marca • LENTES DE CONTACTO: Marca • LENTES: Marca • MONTURAS - SOL: Marca • VARIOS/PDTOS DE MANTENIMIENTO: Marca",
+prop2,Alfanumérico,64,No,"• AUDIFONOS: Familia • LENTES DE CONTACTO: Reposición • LENTES: Foco • MONTURAS - SOL: Material • VARIOS/PDTOS DE MANTENIMIENTO: Grupo",
+prop3,Alfanumérico,64,No,"• AUDIFONOS: Tipo • LENTES DE CONTACTO: Categoría • LENTES: Tipo • MONTURAS - SOL: Destinatario • VARIOS/PDTOS DE MANTENIMIENTO: Familia • AUDIFONOS: Tecnología • LENTES DE CONTACTO: Stock/Fabricación • LENTES: Gama • MONTURAS-SOL: Modelo • VARIOS/PDTOS DE MANTENIMIENTO: Capacidad",
+prop4,Alfanumérico,64,No,,
+prop5,Alfanumérico,64,No,"• LENTES DE CONTACTO: Gama • LENTES: Esfera • MONTURAS - SOL: Color",
+prop6,Alfanumérico,64,No,"• LENTES DE CONTACTO: Diámetro • LENTES: Cilindro • MONTURAS - SOL: Calibre",
+prop7,Alfanumérico,64,No,"• LENTES DE CONTACTO: Radio • LENTES: Diámetro • MONTURAS-SOL: Puente",
+prop8,Alfanumérico,64,No,"• LENTES DE CONTACTO: Esfera • MONTURAS-SOL: Estado",
+cdgBarras,Alfanumérico,50,No,Código de barras,
+cdgEdi,Alfanumérico,13,No,"Código registrado en el GS1 para el intercambio electrónico de este producto.",
+pvp1,Decimal,"20,4",Si,"Precio principal de venta para el artículo.",
+pvp2,Decimal,"20,4",No,"Precio secundario de venta para el artículo.",
+pvp3,Decimal,"20,4",No,"Precio secundario de venta para el artículo.",
+pvp4,Decimal,"20,4",No,"Precio secundario de venta para el artículo.",
+pvp5,Decimal,"20,4",No,"Precio secundario de venta para el artículo.",
+tipo,Alfanumérico,40,Si,"Familia del articulo Valores posibles: [ LENTES, LC, GRADUADO, SOL, PDTOS MANTENIMIENTO VARIOS, AUDIFONOS, VARIOS AUDIO ]",
+proveedor,DECIMAL,,Si,"Proveedores.cdgProv Valor por defecto 1, si no se dispone de esta información",
+pdtosProv,DECIMAL,"20,6",No,"Descuento de compra que ofrece el proveedor sobre el artículo.",
+fechaUltCompra,Fecha,,No,"Fecha que corresponde a la última compra del artículo.",dd/mm/yyyy
+fecha_UltVenta,Fecha,,No,"Fecha que corresponde a la última venta del artículo.",dd/mm/yyyy
+fechaCreacion,Fecha,,No,Fecha de creación del artículo.,dd/mm/yyyy
+saft,Alfanumérico,1,No,Deprecado,
+descatalogado,Alfanumérico,2,Si,"Producto que ya no esta activo en la empresa Valores posible SI/NO",

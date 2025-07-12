@@ -1,0 +1,56 @@
+- Campo: codOrigen
+  Tipo: integer
+  Longitud: '8'
+  Obligatorio: Sí
+  Descripción: Identificador doctor
+  ? ''
+  : ''
+- Campo: nombre
+  Tipo: string
+  Longitud: '20'
+  Obligatorio: Sí
+  Descripción: Nombre
+  ? ''
+  : ''
+- Campo: apellidos
+  Tipo: string
+  Longitud: '70'
+  Obligatorio: 'No'
+  Descripción: Apellidos
+  ? ''
+  : ''
+- Campo: numeroColegiado Alfanumérico
+  Tipo: ''
+  Longitud: '16'
+  Obligatorio: 'No'
+  Descripción: Número colegiado
+  ? ''
+  : ''
+- Campo: direccion
+  Tipo: string
+  Longitud: '50'
+  Obligatorio: 'No'
+  Descripción: Dirección
+  ? ''
+  : ''
+- Campo: cp
+  Tipo: string
+  Longitud: '5'
+  Obligatorio: 'No'
+  Descripción: Código postal
+  ? ''
+  : ''
+- Campo: provincia
+  Tipo: string
+  Longitud: '35'
+  Obligatorio: 'No'
+  Descripción: Provincia
+  ? ''
+  : ''
+- Campo: poblacion
+  Tipo: string
+  Longitud: '16'
+  Obligatorio: 'No'
+  Descripción: Población
+  ? ''
+  : ''

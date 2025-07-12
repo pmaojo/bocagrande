@@ -1,0 +1,5 @@
+pdfplumber
+ruamel.yaml
+google-generativeai
+pytest
+PyYAML 

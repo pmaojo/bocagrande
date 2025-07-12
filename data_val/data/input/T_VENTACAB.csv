@@ -1,0 +1,18 @@
+Campo,Tipo,Longitud,Obligatorio,Descripción,Formato
+venta,Numérico,10,Sí,Código de venta,
+talon,Alfanumérico,25,No,"Código que se utiliza en los traspasos para identificar la venta de 
+origen si el campo venta debe recalcular en Gioweb",
+importeTotal,Decimal,"20,6",Sí,Importe total venta,
+fechaRetirado,Fecha,,No,Fecha retirada,"dd/mm/yyyy hh:mm:ss"
+idCliente,Numérico,10,Sí,Clientes.id,
+tienda,Numérico,6,Sí,Código tienda,
+facturado,Alfanumérico,2,No,SI/NO,
+factura,Alfanumérico,20,No,Número de la venta que origina la factura,
+obs,Alfanumérico,4GB,No,Observaciones,
+usuario,Numérico,6,Si,Usuarios.cdgusuario,
+copago,Alfanumérico,14,No,Deprecado,
+tiendaDevuelta,Numérico,6,No,Tienda asociada a la devolución,
+ventaDevuelta,Numérico,10,No,Venta asociada a la devolución,
+fecha,Fecha,,Sí,Fecha de realización de la venta,"dd/mm/yyyy hh:mm:ss"
+anticipo,Decimal,20,No,Deprecado,
+formPagoAnticipo Alfanumericos,,50,No,Deprecado,

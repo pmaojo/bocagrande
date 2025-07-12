@@ -1,0 +1,1514 @@
+paginas:
+- number: 1
+  text: "Requerimientos para el trasvase de\ndatos\nEs importante recalcar que los
+    campos están ordenador por orden de columnas en el CSV.\nTambién destacar que
+    es case sensitive, por lo que se debe respetar completamente la semántica y el\n\
+    orden además.\nEl separador que usan todos los documentos CSV es el por defecto
+    ‘,ʼ\nEl símbolo de decimales va marcado por un .\nSi van a usar valores con caracteres
+    especiales en campos de tipo CLOB, utilizar las “ˮ para envolver\nel contenido\n\
+    Es importante respetar los formatos de campos como fechas o de mediciones oftalmológicas\n\
+    1. Usuarios (T_USUARIOS.csv)\nCampo Tipo Longitud Obligatorio Descripción\ncdgusuario
+    Numérico 6 Sí Código de usuario\nnombre Alfanumérico 35 Sí Nombre completo\nusuario
+    Alfanumérico 35 Sí Nombre de usuario\ntienda Alfanumérico 6 Sí Código de tienda\n\
+    2. Clientes (T_CLIENTES.csv)\nLa clave de cliente se genera con la combinación
+    de id + tienda\nCampo Tipo Longitud Obligatorio Descripción\nid Numérico 10 Sí
+    Código de cliente\ntienda Numérico 6 Sí Código de tienda\nnombre Alfanumérico
+    35 Sí Nombre\napellido1 Alfanumérico 25 No Primer apellido\napellido2 Alfanumérico
+    25 No Segundo apellido\ndireccion Alfanumérico 64 No Dirección\npoblacion Alfanumérico
+    64 No Población\nprovincia Alfanumérico 64 No Provincia\npais Alfanumérico 64
+    No País\nsexo Alfanumérico 1 No M Mujer, H Hombre\nRequerimientos para el trasvase
+    de datos 1"
+  tables:
+  - columns:
+    - name
+    - type
+    - length
+    - required
+    - description
+    rows:
+    - name: cdgusuario
+      type: int
+      length: 6
+      required: true
+      description: Código de usuario
+    - name: nombre
+      type: string
+      length: 35
+      required: true
+      description: Nombre completo
+    - name: usuario
+      type: string
+      length: 35
+      required: true
+      description: Nombre de usuario
+    - name: tienda
+      type: string
+      length: 6
+      required: true
+      description: Código de tienda
+  - columns:
+    - name
+    - type
+    - length
+    - required
+    - description
+    rows:
+    - name: id
+      type: int
+      length: 10
+      required: true
+      description: Código de cliente
+    - name: tienda
+      type: int
+      length: 6
+      required: true
+      description: Código de tienda
+    - name: nombre
+      type: string
+      length: 35
+      required: true
+      description: Nombre
+    - name: apellido1
+      type: string
+      length: 25
+      required: false
+      description: Primer apellido
+    - name: apellido2
+      type: string
+      length: 25
+      required: false
+      description: Segundo apellido
+    - name: direccion
+      type: string
+      length: 64
+      required: false
+      description: Dirección
+    - name: poblacion
+      type: string
+      length: 64
+      required: false
+      description: Población
+    - name: provincia
+      type: string
+      length: 64
+      required: false
+      description: Provincia
+    - name: pais
+      type: string
+      length: 64
+      required: false
+      description: País
+    - name: sexo
+      type: string
+      length: 1
+      required: false
+      description: M Mujer, H Hombre
+- number: 2
+  text: "Campo Tipo Longitud Obligatorio Descripción\ncp Alfanumérico 10 No Código
+    postal\nfechaNac Fecha No Fecha nacimiento (dd/mm/yyyy)\ntelefono Alfanumérico
+    25 No Teléfono principal\ntelefono2 Alfanumérico 25 No Teléfono secundario\nmovil
+    Alfanumérico 25 No Teléfono móvil\nfax Alfanumérico 25 No Campo deprecado\nemail
+    Alfanumérico 256 No Correo electrónico\ndni Alfanumérico 16 No DNI/NIF/NIE\nporSms
+    Alfanumérico 2 Si Permiso SMS SI/NO\nporMail Alfanumérico 2 Si Permiso Mail
+    SI/NO\nultVisita Fecha No Última visita\nprimeraVisita Fecha No Primera visita\n\
+    obs Alfanumérico 4GB No Observaciones\nmotivo Alfanumérico 5 No Campo deprecado\n\
+    profesion Alfanumérico 64 No Profesión\nlopd Alfanumérico 2 Si LOPD aceptada SI/NO\n\
+    mailing Alfanumérico 2 Si Permiso mailing SI/NO\ngrupoCliente Alfanumérico 10
+    No Agrupación de clientes No se utiliza)\ninactivo Alfanumérico 2 Si Cliente
+    inactivo SI/NO\n3. Doctores (T_DOCTORES.CSV)\nCampo Tipo Longitud Obligatorio
+    Descripción\ncodOrigen Numérico 8 Sí Identificador doctor\nnombre Alfanumérico
+    20 Sí Nombre\napellidos Alfanumérico 70 No Apellidos\nnumeroColegiado Alfanumérico
+    16 No Número colegiado\ndireccion Alfanumérico 50 No Dirección\ncp Alfanumérico
+    5 No Código postal\nprovincia Alfanumérico 35 No Provincia\npoblacion Alfanumérico
+    16 No Población\n4. Graduaciones Optométricas (T_GRADGAFA.csv)\nLa clave de este
+    fichero es la combinación de id + tienda\nRequerimientos para el trasvase de datos
+    2"
+  tables:
+  - columns:
+    - name
+    - type
+    - length
+    - required
+    - description
+    rows:
+    - name: cp
+      type: string
+      length: 10
+      required: false
+      description: Código postal
+    - name: fechaNac
+      type: date
+      length: ''
+      required: false
+      description: Fecha nacimiento (dd/mm/yyyy)
+    - name: telefono
+      type: string
+      length: 25
+      required: false
+      description: Teléfono principal
+    - name: telefono2
+      type: string
+      length: 25
+      required: false
+      description: Teléfono secundario
+    - name: movil
+      type: string
+      length: 25
+      required: false
+      description: Teléfono móvil
+    - name: fax
+      type: string
+      length: 25
+      required: false
+      description: Campo deprecado
+    - name: email
+      type: string
+      length: 256
+      required: false
+      description: Correo electrónico
+    - name: dni
+      type: string
+      length: 16
+      required: false
+      description: DNI/NIF/NIE
+    - name: porSms
+      type: string
+      length: 2
+      required: true
+      description: Permiso SMS SI/NO
+    - name: porMail
+      type: string
+      length: 2
+      required: true
+      description: Permiso Mail SI/NO
+    - name: ultVisita
+      type: date
+      length: ''
+      required: false
+      description: Última visita
+    - name: primeraVisita
+      type: date
+      length: ''
+      required: false
+      description: Primera visita
+    - name: obs
+      type: string
+      length: 4
+      required: false
+      description: Observaciones
+    - name: motivo
+      type: string
+      length: 5
+      required: false
+      description: Campo deprecado
+    - name: profesion
+      type: string
+      length: 64
+      required: false
+      description: Profesión
+    - name: lopd
+      type: string
+      length: 2
+      required: true
+      description: LOPD aceptada SI/NO
+    - name: mailing
+      type: string
+      length: 2
+      required: true
+      description: Permiso mailing SI/NO
+    - name: grupoCliente
+      type: string
+      length: 10
+      required: false
+      description: Agrupación de clientes No se utiliza)
+    - name: inactivo
+      type: string
+      length: 2
+      required: true
+      description: Cliente inactivo SI/NO
+  - columns:
+    - name
+    - type
+    - length
+    - required
+    - description
+    rows:
+    - name: codOrigen
+      type: int
+      length: 8
+      required: true
+      description: Identificador doctor
+    - name: nombre
+      type: string
+      length: 20
+      required: true
+      description: Nombre
+    - name: apellidos
+      type: string
+      length: 70
+      required: false
+      description: Apellidos
+    - name: numeroColegiado
+      type: string
+      length: 16
+      required: false
+      description: Número colegiado
+    - name: direccion
+      type: string
+      length: 50
+      required: false
+      description: Dirección
+    - name: cp
+      type: string
+      length: 5
+      required: false
+      description: Código postal
+    - name: provincia
+      type: string
+      length: 35
+      required: false
+      description: Provincia
+    - name: poblacion
+      type: string
+      length: 16
+      required: false
+      description: Población
+- number: 3
+  text: "Campo Tipo Longitud Obligatorio Descripción Formnato\nIdentificador\nid Numérico
+    10 Sí\ngraduación\ntienda Numérico 10 Sí Código tienda\nidClientes Numérico 10
+    Sí Clientes.id\nCampo para la\nejeD Numérico 4 No medición del eje XXX, XXX\n\
+    derecho.\nCampo para la\nXX.XX,\ncilindroD Numérico 6 No medición del cilindro\n\
+    XX.XX\nderecho.\nCampo para la\nXX.XX,\nesferaD Numérico 6 No medición de la
+    esfera\nXX.XX\nderecha.\nCampo para la\nejeI Numérico 4 No medición del eje XXX,
+    XXX\nizquierdo.\nCampo para la\nXX.XX,\ncilindroI Numérico 6 No medición del
+    cilindro\nXX.XX\nizquierdo.\nCampo para la\nXX.XX,\nesferaI Numérico 6 No medición
+    de la esfera\nXX.XX\nizquierda.\nCampo para registrar\nadicionD Numérico 4 No
+    los datos de la adición X.XX\nojo derecho.\nCampo para registrar\nadicionI Numérico
+    4 No los datos de la adición X.XX\nojo izquierdo.\nCampo para la\nXX.XX,\n\
+    esferaCercaD Numérico 6 No medición de la esfera\nXX.XX\nde cerca derecha.\n\
+    Campo para la\nXX.XX,\nesferaCercaI Numérico 6 No medición de la esfera\nXX.XX\n\
+    de cerca izquierda.\nCampo para registrar\nlos datos de la\navscd Numérico 4 No
+    agudeza visual sin X.XX\ncorrección del ojo\nderecho.\nRequerimientos para el
+    trasvase de datos 3"
+  tables:
+  - columns:
+    - name
+    - type
+    - length
+    - required
+    - description
+    - formnato
+    rows:
+    - name: id
+      type: int
+      length: 10
+      required: true
+      description: "Identificador\ngraduación"
+      formnato: ''
+    - name: tienda
+      type: int
+      length: 10
+      required: true
+      description: Código tienda
+      formnato: ''
+    - name: idClientes
+      type: int
+      length: 10
+      required: true
+      description: Clientes.id
+      formnato: ''
+    - name: ejeD
+      type: int
+      length: 4
+      required: false
+      description: "Campo para la\nmedición del eje\nderecho."
+      formnato: XXX, XXX
+    - name: cilindroD
+      type: int
+      length: 6
+      required: false
+      description: "Campo para la\nmedición del cilindro\nderecho."
+      formnato: "XX.XX,\nXX.XX"
+    - name: esferaD
+      type: int
+      length: 6
+      required: false
+      description: "Campo para la\nmedición de la esfera\nderecha."
+      formnato: "XX.XX,\nXX.XX"
+    - name: ejeI
+      type: int
+      length: 4
+      required: false
+      description: "Campo para la\nmedición del eje\nizquierdo."
+      formnato: XXX, XXX
+    - name: cilindroI
+      type: int
+      length: 6
+      required: false
+      description: "Campo para la\nmedición del cilindro\nizquierdo."
+      formnato: "XX.XX,\nXX.XX"
+    - name: esferaI
+      type: int
+      length: 6
+      required: false
+      description: "Campo para la\nmedición de la esfera\nizquierda."
+      formnato: "XX.XX,\nXX.XX"
+    - name: adicionD
+      type: int
+      length: 4
+      required: false
+      description: "Campo para registrar\nlos datos de la adición\nojo derecho."
+      formnato: X.XX
+    - name: adicionI
+      type: int
+      length: 4
+      required: false
+      description: "Campo para registrar\nlos datos de la adición\nojo izquierdo."
+      formnato: X.XX
+    - name: esferaCercaD
+      type: int
+      length: 6
+      required: false
+      description: "Campo para la\nmedición de la esfera\nde cerca derecha."
+      formnato: "XX.XX,\nXX.XX"
+    - name: esferaCercaI
+      type: int
+      length: 6
+      required: false
+      description: "Campo para la\nmedición de la esfera\nde cerca izquierda."
+      formnato: "XX.XX,\nXX.XX"
+    - name: avscd
+      type: int
+      length: 4
+      required: false
+      description: "Campo para registrar\nlos datos de la\nagudeza visual sin\ncorrección
+        del ojo\nderecho."
+      formnato: X.XX
+- number: 4
+  text: "Campo Tipo Longitud Obligatorio Descripción Formnato\nCampo para registrar\n\
+    los datos de la\navsci Numérico 4 No agudeza visual sin X.XX\ncorrección del
+    ojo\nizquierdo\nCampo para registrar\nlos datos de la\navd Numérico 4 No X.XX\n\
+    agudeza visual del ojo\nderecho.\nCampo para registrar\nlos datos de la\navi Numérico
+    4 No X.XX\nagudeza visual del ojo\nizquierdo.\nCampo para registrar\nlos datos
+    de la\navao Numérico 4 No X.XX\nagudeza visual ambos\nojos.\nCampo para registrar\n\
+    los datos de la\ndnpd Numérico 10 No\ndistancia naso-pupilar\nderecha.\nCampo
+    para registrar\nlos datos de la\ndnpi Numérico 10 No\ndistancia naso-pupilar\n\
+    izquierda.\nCampo para registrar\nprismaD Alfanumérico 20 No los datos del prisma\n\
+    derecho\nCampo para registrar\nprismaI Alfanumérico 20 No los datos del prisma\n\
+    izquierdo\ndi Numérico 2 No Campo deprecado\nNotas relacionadas con\nobs Alfanumérico
+    4GB No la graduación\noptométrica.\nFecha de creación para\ndd/mm/yyyy\nfecha
+    Fecha Si la graduación\nhh:mm:ss\noptométrica.\nIdentificador del\nusuario Numérico
+    6 Si Usuario que tramitó\nestá graduación\ncodVendedor Numérico No Uduarios.cdgusuario\n\
+    dnpCercaD Numérico No Campo para registrar\nlos datos de la\nRequerimientos para
+    el trasvase de datos 4"
+  tables:
+  - columns:
+    - name
+    - type
+    - length
+    - required
+    - description
+    - formnato
+    rows:
+    - name: avsci
+      type: int
+      length: 4
+      required: false
+      description: "Campo para registrar\nlos datos de la\nagudeza visual sin\ncorrección
+        del ojo\nizquierdo"
+      formnato: X.XX
+    - name: avd
+      type: int
+      length: 4
+      required: false
+      description: "Campo para registrar\nlos datos de la\nagudeza visual del ojo\n\
+        derecho."
+      formnato: X.XX
+    - name: avi
+      type: int
+      length: 4
+      required: false
+      description: "Campo para registrar\nlos datos de la\nagudeza visual del ojo\n\
+        izquierdo."
+      formnato: X.XX
+    - name: avao
+      type: int
+      length: 4
+      required: false
+      description: "Campo para registrar\nlos datos de la\nagudeza visual ambos\n\
+        ojos."
+      formnato: X.XX
+    - name: dnpd
+      type: int
+      length: 10
+      required: false
+      description: "Campo para registrar\nlos datos de la\ndistancia naso-pupilar\n\
+        derecha."
+      formnato: ''
+    - name: dnpi
+      type: int
+      length: 10
+      required: false
+      description: "Campo para registrar\nlos datos de la\ndistancia naso-pupilar\n\
+        izquierda."
+      formnato: ''
+    - name: prismaD
+      type: string
+      length: 20
+      required: false
+      description: "Campo para registrar\nlos datos del prisma\nderecho"
+      formnato: ''
+    - name: prismaI
+      type: string
+      length: 20
+      required: false
+      description: "Campo para registrar\nlos datos del prisma\nizquierdo"
+      formnato: ''
+    - name: di
+      type: int
+      length: 2
+      required: false
+      description: Campo deprecado
+      formnato: ''
+    - name: obs
+      type: string
+      length: 4
+      required: false
+      description: "Notas relacionadas con\nla graduación\noptométrica."
+      formnato: ''
+    - name: fecha
+      type: date
+      length: ''
+      required: true
+      description: "Fecha de creación para\nla graduación\noptométrica."
+      formnato: "dd/mm/yyyy\nhh:mm:ss"
+    - name: usuario
+      type: int
+      length: 6
+      required: true
+      description: "Identificador del\nUsuario que tramitó\nestá graduación"
+      formnato: ''
+    - name: codVendedor
+      type: int
+      length: ''
+      required: false
+      description: Uduarios.cdgusuario
+      formnato: ''
+- number: 5
+  text: "Campo Tipo Longitud Obligatorio Descripción Formnato\ndistancia naso-pupilar-\n\
+    cerca derecha.\nCampo para registrar\nlos datos de la\ndnpCercaI Numérico No\n\
+    distancia naso-pupilar-\ncerca izquierda.\ndoctor Numérico 8 Si DOCTORES.codOrigen\n\
+    Próxima revisión\ndd/mm/yyyy\nproxGraduacion Fecha No optométrica del\nhh:mm:ss\n\
+    paciente.\n5. Graduaciones Contactológicas (T_GRADLENT.csv)\nLa clave de este
+    fichero es la combinación de id + tienda\nCampo Tipo Longitud Obligatorio Descripción
+    Formato\nIdentificador\nid Numérico 10 Sí\ngraduación\nidCliente Numérico 10 Sí
+    Clientes.id\nSi es definitiva una D si\ndsc Alfanumérico 1 Sí es una prueba o\n\
+    adaptación P\nCampo para la\nejeD Numérico 4 No medición del eje XXX, XXX\n\
+    derecho.\nCampo para la\nXX.XX,\ncilindroD Numérico 6 No medición del cilindro\n\
+    XX.XX\nderecho.\nCampo para la\nXX.XX,\nesferaD Numérico 6 No medición de la
+    esfera\nXX.XX\nderecha.\nCampo para registrar\nadicionD Numérico 4 No los datos
+    de la adición XXX, XXX\nojo derecho\nCampo para registrar\navd Numérico 4 No
+    los datos de la agudeza X.XX\nvisual del ojo derecho\nCampo para indicar el\n\
+    rcd Alfanumérico 20 No radio de curvatura de\nla lente derecha\nejeI Numérico
+    4 No Campo para la X.XX\nmedición del eje\nRequerimientos para el trasvase de
+    datos 5"
+  tables:
+  - columns:
+    - name
+    - type
+    - length
+    - required
+    - description
+    - formnato
+    rows:
+    - name: ''
+      type: string
+      length: ''
+      required: ''
+      description: "distancia naso-pupilar-\ncerca derecha."
+      formnato: ''
+    - name: dnpCercaI
+      type: int
+      length: ''
+      required: false
+      description: "Campo para registrar\nlos datos de la\ndistancia naso-pupilar-\n\
+        cerca izquierda."
+      formnato: ''
+    - name: doctor
+      type: int
+      length: 8
+      required: true
+      description: DOCTORES.codOrigen
+      formnato: ''
+    - name: proxGraduacion
+      type: date
+      length: ''
+      required: false
+      description: "Próxima revisión\noptométrica del\npaciente."
+      formnato: "dd/mm/yyyy\nhh:mm:ss"
+  - columns:
+    - name
+    - type
+    - length
+    - required
+    - description
+    - format
+    rows:
+    - name: id
+      type: int
+      length: 10
+      required: true
+      description: "Identificador\ngraduación"
+      format: ''
+    - name: idCliente
+      type: int
+      length: 10
+      required: true
+      description: Clientes.id
+      format: ''
+    - name: dsc
+      type: string
+      length: 1
+      required: true
+      description: "Si es definitiva una D si\nes una prueba o\nadaptación P"
+      format: ''
+    - name: ejeD
+      type: int
+      length: 4
+      required: false
+      description: "Campo para la\nmedición del eje\nderecho."
+      format: XXX, XXX
+    - name: cilindroD
+      type: int
+      length: 6
+      required: false
+      description: "Campo para la\nmedición del cilindro\nderecho."
+      format: "XX.XX,\nXX.XX"
+    - name: esferaD
+      type: int
+      length: 6
+      required: false
+      description: "Campo para la\nmedición de la esfera\nderecha."
+      format: "XX.XX,\nXX.XX"
+    - name: adicionD
+      type: int
+      length: 4
+      required: false
+      description: "Campo para registrar\nlos datos de la adición\nojo derecho"
+      format: XXX, XXX
+    - name: avd
+      type: int
+      length: 4
+      required: false
+      description: "Campo para registrar\nlos datos de la agudeza\nvisual del ojo
+        derecho"
+      format: X.XX
+    - name: rcd
+      type: string
+      length: 20
+      required: false
+      description: "Campo para indicar el\nradio de curvatura de\nla lente derecha"
+      format: ''
+- number: 6
+  text: "Campo Tipo Longitud Obligatorio Descripción Formato\nizquierdo.\nCampo para
+    la\nXX.XX,\ncilindroI Numérico 4 No medición del cilindro\nXX.XX\nizquierdo.\n\
+    Campo para la\nXX.XX,\nesferaI Numérico 6 No medición del Esfera\nXX.XX\nizquierda.\n\
+    Campo para registrar\nadicionI Numérico 4 No los datos de la adición X.XX\n\
+    ojo izquierda\nCampo para registrar\navi Numérico 4 No los datos de la agudeza
+    X.XX\nvisual del ojo izquierdo\nCampo para indicar el\nrci Alfanumérico 20 No
+    radio de curvatura de\nla lente izquierda\nFecha de creación para\ndd/mm/yyyy\n\
+    fecha Fecha Si la graduación\nhh:mm:ss\noptométrica.\ndoctor Numérico 8 Si Doctores.codOrigen\n\
+    Campo para guardar la\ninformación del\ndiámetro del ojo\ndiametroD Alfanumérico
+    20 No\nderecho en la\ngraduación\ncontactológica.\nCampo para guardar la\ninformación
+    del\ndiámetro del ojo\ndiametroI Alfanumérico 20 No\nizquierdo en la\ngraduación\n\
+    contactológica.\nCampo para registrar\nlos datos de la\nobs Alfanumérico 4GB No\n\
+    distancia naso-pupilar\nderecha.\nCampo para registrar\navao Numérico 10 No los
+    datos de la agudeza X.XX\nvisual ambos ojos.\nCampo para registrar\ndzod Alfanumérico
+    20 No los datos del diámetro\npara el ojo derecho\ndzoi Alfanumérico 20 No Campo
+    para registrar\nlos datos del diámetro\nRequerimientos para el trasvase de datos
+    6"
+  tables:
+  - columns:
+    - name
+    - type
+    - length
+    - required
+    - description
+    - format
+    rows:
+    - name: ''
+      type: string
+      length: ''
+      required: ''
+      description: izquierdo.
+      format: ''
+    - name: cilindroI
+      type: int
+      length: 4
+      required: false
+      description: "Campo para la\nmedición del cilindro\nizquierdo."
+      format: "XX.XX,\nXX.XX"
+    - name: esferaI
+      type: int
+      length: 6
+      required: false
+      description: "Campo para la\nmedición del Esfera\nizquierda."
+      format: "XX.XX,\nXX.XX"
+    - name: adicionI
+      type: int
+      length: 4
+      required: false
+      description: "Campo para registrar\nlos datos de la adición\nojo izquierda"
+      format: X.XX
+    - name: avi
+      type: int
+      length: 4
+      required: false
+      description: "Campo para registrar\nlos datos de la agudeza\nvisual del ojo
+        izquierdo"
+      format: X.XX
+    - name: rci
+      type: string
+      length: 20
+      required: false
+      description: "Campo para indicar el\nradio de curvatura de\nla lente izquierda"
+      format: ''
+    - name: fecha
+      type: date
+      length: ''
+      required: true
+      description: "Fecha de creación para\nla graduación\noptométrica."
+      format: "dd/mm/yyyy\nhh:mm:ss"
+    - name: doctor
+      type: int
+      length: 8
+      required: true
+      description: Doctores.codOrigen
+      format: ''
+    - name: diametroD
+      type: string
+      length: 20
+      required: false
+      description: "Campo para guardar la\ninformación del\ndiámetro del ojo\nderecho
+        en la\ngraduación\ncontactológica."
+      format: ''
+    - name: diametroI
+      type: string
+      length: 20
+      required: false
+      description: "Campo para guardar la\ninformación del\ndiámetro del ojo\nizquierdo
+        en la\ngraduación\ncontactológica."
+      format: ''
+    - name: obs
+      type: string
+      length: 4
+      required: false
+      description: "Campo para registrar\nlos datos de la\ndistancia naso-pupilar\n\
+        derecha."
+      format: ''
+    - name: avao
+      type: int
+      length: 10
+      required: false
+      description: "Campo para registrar\nlos datos de la agudeza\nvisual ambos ojos."
+      format: X.XX
+    - name: dzod
+      type: string
+      length: 20
+      required: false
+      description: "Campo para registrar\nlos datos del diámetro\npara el ojo derecho"
+      format: ''
+- number: 7
+  text: "Campo Tipo Longitud Obligatorio Descripción Formato\npara el ojo izquierdo\n\
+    codigolcd Alfanumérico 5 No Campo deprecado\ncodigolci Alfanumérico 5 No Campo
+    deprecado\ndd/mm/yyyy\nmarcaD Alfanumérico 30 No Campo deprecado\nhh:mm:ss\nmarcaI
+    Alfanumérico 30 No Campo deprecado\nlaboratorioD Alfanumérico 200 No Uduarios.cdgusuario\n\
+    Campo para registrar\nlos datos de la\nlaboratorioI Alfanumérico 200 No\ndistancia
+    naso-pupilar-\ncerca derecha.\nCampo para registrar\nlos datos de la dd/mm/yyyy\n\
+    proxRevision Date No\ndistancia naso-pupilar- hh:mm:ss\ncerca izquierda.\nTipo
+    de lente prescrita\ndel ojo derecho para la\ntipolenteD Alfanumérico 50 No\ngraduación\n\
+    contactológica.\nTipo de lente prescrita\ndel ojo izquierdo para\ntipoLenteI Alfanumérico
+    50 No\nla graduación\ncontactológica.\nIndica la tienda a la que\ntienda Numérico
+    6 Si pertenece la\ngraduación.\nusuario Numérico 6 Si Usuarios.cdgusuario\n5.
+    Proveedores (T_PROVEEDORES.csv)\nCampo Tipo Longitud Obligatorio Descripción\n\
+    cdgProv Numérico 10 Sí Código proveedor\nnombre Alfanumérico 35 Sí Nombre proveedor\n\
+    nif Alfanumérico 10 No NIF\ndireccion Alfanumérico 35 No Dirección\ncp Alfanumérico
+    10 No Código postal\npoblacion Alfanumérico 35 No Población\nprovincia Alfanumérico
+    35 No Provincia\ntelefono Alfanumérico 25 No Teléfono 1\ntelefono2 Alfanumérico
+    25 No Teléfono 2\nRequerimientos para el trasvase de datos 7"
+  tables:
+  - columns:
+    - name
+    - type
+    - length
+    - required
+    - description
+    - format
+    rows:
+    - name: ''
+      type: string
+      length: ''
+      required: ''
+      description: para el ojo izquierdo
+      format: ''
+    - name: codigolcd
+      type: string
+      length: 5
+      required: false
+      description: Campo deprecado
+      format: ''
+    - name: codigolci
+      type: string
+      length: 5
+      required: false
+      description: Campo deprecado
+      format: ''
+    - name: marcaD
+      type: string
+      length: 30
+      required: false
+      description: Campo deprecado
+      format: "dd/mm/yyyy\nhh:mm:ss"
+    - name: marcaI
+      type: string
+      length: 30
+      required: false
+      description: Campo deprecado
+      format: ''
+    - name: laboratorioD
+      type: string
+      length: 200
+      required: false
+      description: Uduarios.cdgusuario
+      format: ''
+    - name: laboratorioI
+      type: string
+      length: 200
+      required: false
+      description: "Campo para registrar\nlos datos de la\ndistancia naso-pupilar-\n\
+        cerca derecha."
+      format: ''
+    - name: proxRevision
+      type: string
+      length: ''
+      required: false
+      description: "Campo para registrar\nlos datos de la\ndistancia naso-pupilar-\n\
+        cerca izquierda."
+      format: "dd/mm/yyyy\nhh:mm:ss"
+    - name: tipolenteD
+      type: string
+      length: 50
+      required: false
+      description: "Tipo de lente prescrita\ndel ojo derecho para la\ngraduación\n\
+        contactológica."
+      format: ''
+    - name: tipoLenteI
+      type: string
+      length: 50
+      required: false
+      description: "Tipo de lente prescrita\ndel ojo izquierdo para\nla graduación\n\
+        contactológica."
+      format: ''
+    - name: tienda
+      type: int
+      length: 6
+      required: true
+      description: "Indica la tienda a la que\npertenece la\ngraduación."
+      format: ''
+    - name: usuario
+      type: int
+      length: 6
+      required: true
+      description: Usuarios.cdgusuario
+      format: ''
+  - columns:
+    - name
+    - type
+    - length
+    - required
+    - description
+    rows:
+    - name: cdgProv
+      type: int
+      length: 10
+      required: true
+      description: Código proveedor
+    - name: nombre
+      type: string
+      length: 35
+      required: true
+      description: Nombre proveedor
+    - name: nif
+      type: string
+      length: 10
+      required: false
+      description: NIF
+    - name: direccion
+      type: string
+      length: 35
+      required: false
+      description: Dirección
+    - name: cp
+      type: string
+      length: 10
+      required: false
+      description: Código postal
+    - name: poblacion
+      type: string
+      length: 35
+      required: false
+      description: Población
+    - name: provincia
+      type: string
+      length: 35
+      required: false
+      description: Provincia
+    - name: telefono
+      type: string
+      length: 25
+      required: false
+      description: Teléfono 1
+    - name: telefono2
+      type: string
+      length: 25
+      required: false
+      description: Teléfono 2
+- number: 8
+  text: "Campo Tipo Longitud Obligatorio Descripción\nfax Alfanumérico 30 No deprecado\n\
+    email Alfanumérico 50 No Email\n6. Artículos (T_ARTICULOS.csv)\nEn Gio, los artículos
+    se agrupan por familias, y estas familias tienen asignadas 6 precios y de 1 a
+    8\npropiedades dependiendo de la familia a la que pertenece\nEs importante saber
+    que los campos cdgArt, los cdgBarras y los cdgEdi deben ser UNIQUE, entre\nellos
+    y entre cualquier otro registro de la tabla. Si no se sabe si en origen hay duplicaciones
+    con\nalguno de estos campos, recomendamos solo traspasar el Codigo de articulo\n\
+    Campo Tipo Longitud Obligatorio Descripción Formato\ncdgArt Alfanumérico 20 Sí
+    Código artículo\ndsc Alfanumérico 50 Sí Descripción\nPrecio de compra del\nprecio_costo
+    Decimal 20,4 No\narticulo\n AUDIFONOS Marca\n LENTES DE\nCONTACTO Marca\n\
+     LENTES Marca\n MONTURAS  SOL\nprop1 Alfanumérico 64 No\nMarca\n VARIOS/PDTOS
+    DE\nMANTENIMIENTO\nMarca\n AUDIFONOS Familia\n LENTES DE\nCONTACTO\nReposición\n\
+     LENTES Foco\nprop2 Alfanumérico 64 No\n MONTURAS  SOL\nMaterial\n VARIOS/PDTOS
+    DE\nMANTENIMIENTO\nGrupo\nprop3 Alfanumérico 64 No  AUDIFONOS Tipo\n LENTES
+    DE\nCONTACTO\nCategoría\n LENTES Tipo\n MONTURAS  SOL\nDestinatario\n VARIOS/PDTOS
+    DE\nRequerimientos para el trasvase de datos 8"
+  tables:
+  - columns:
+    - name
+    - type
+    - length
+    - required
+    - description
+    rows:
+    - name: fax
+      type: string
+      length: 30
+      required: false
+      description: deprecado
+    - name: email
+      type: string
+      length: 50
+      required: false
+      description: Email
+  - columns:
+    - name
+    - type
+    - length
+    - required
+    - description
+    - format
+    rows:
+    - name: cdgArt
+      type: string
+      length: 20
+      required: true
+      description: Código artículo
+      format: ''
+    - name: dsc
+      type: string
+      length: 50
+      required: true
+      description: Descripción
+      format: ''
+    - name: precio_costo
+      type: float
+      length: 204
+      required: false
+      description: "Precio de compra del\narticulo"
+      format: ''
+    - name: prop1
+      type: string
+      length: 64
+      required: false
+      description: " AUDIFONOS Marca\n LENTES DE\nCONTACTO Marca\n LENTES Marca\n\
+         MONTURAS  SOL\nMarca\n VARIOS/PDTOS DE\nMANTENIMIENTO\nMarca"
+      format: ''
+    - name: prop2
+      type: string
+      length: 64
+      required: false
+      description: " AUDIFONOS Familia\n LENTES DE\nCONTACTO\nReposición\n LENTES
+        Foco\n MONTURAS  SOL\nMaterial\n VARIOS/PDTOS DE\nMANTENIMIENTO\nGrupo"
+      format: ''
+- number: 9
+  text: "Campo Tipo Longitud Obligatorio Descripción Formato\nMANTENIMIENTO\nFamilia\n\
+     AUDIFONOS\nTecnología\n LENTES DE\nCONTACTO\nStock/Fabricación\n LENTES
+    Gama\nprop4 Alfanumérico 64 No\n MONTURASSOL\nModelo\n VARIOS/PDTOS DE\nMANTENIMIENTO\n\
+    Capacidad\n LENTES DE\nCONTACTO Gama\nprop5 Alfanumérico 64 No  LENTES Esfera\n\
+     MONTURAS  SOL\nColor\n LENTES DE\nCONTACTO Diámetro\nprop6 Alfanumérico
+    64 No  LENTES Cilindro\n MONTURAS  SOL\nCalibre\n LENTES DE\nCONTACTO Radio\n\
+    prop7 Alfanumérico 64 No  LENTES Diámetro\n MONTURASSOL\nPuente\n LENTES
+    DE\nCONTACTO Esfera\nprop8 Alfanumérico 64 No  MONTURASSOL\nEstado\ncdgBarras
+    Alfanumérico 50 No Código de barras\nCódigo registrado en\nel GS1 para\ncdgEdi
+    Alfanumérico 13 No el intercambio\nelectrónico de\neste producto.\nPrecio principal
+    de\npvp1 Decimal 20,4 Si venta para el\nartículo.\nRequerimientos para el trasvase
+    de datos 9"
+  tables:
+  - columns:
+    - name
+    - type
+    - length
+    - required
+    - description
+    - format
+    rows:
+    - name: ''
+      type: string
+      length: ''
+      required: ''
+      description: "MANTENIMIENTO\nFamilia"
+      format: ''
+    - name: prop4
+      type: string
+      length: 64
+      required: false
+      description: " AUDIFONOS\nTecnología\n LENTES DE\nCONTACTO\nStock/Fabricación\n\
+         LENTES Gama\n MONTURASSOL\nModelo\n VARIOS/PDTOS DE\nMANTENIMIENTO\n\
+        Capacidad"
+      format: ''
+    - name: prop5
+      type: string
+      length: 64
+      required: false
+      description: " LENTES DE\nCONTACTO Gama\n LENTES Esfera\n MONTURAS  SOL\n\
+        Color"
+      format: ''
+    - name: prop6
+      type: string
+      length: 64
+      required: false
+      description: " LENTES DE\nCONTACTO Diámetro\n LENTES Cilindro\n MONTURAS
+         SOL\nCalibre"
+      format: ''
+    - name: prop7
+      type: string
+      length: 64
+      required: false
+      description: " LENTES DE\nCONTACTO Radio\n LENTES Diámetro\n MONTURASSOL\n\
+        Puente"
+      format: ''
+    - name: prop8
+      type: string
+      length: 64
+      required: false
+      description: " LENTES DE\nCONTACTO Esfera\n MONTURASSOL\nEstado"
+      format: ''
+    - name: cdgBarras
+      type: string
+      length: 50
+      required: false
+      description: Código de barras
+      format: ''
+    - name: cdgEdi
+      type: string
+      length: 13
+      required: false
+      description: "Código registrado en\nel GS1 para\nel intercambio\nelectrónico
+        de\neste producto."
+      format: ''
+    - name: pvp1
+      type: float
+      length: 204
+      required: true
+      description: "Precio principal de\nventa para el\nartículo."
+      format: ''
+- number: 10
+  text: "Campo Tipo Longitud Obligatorio Descripción Formato\nPrecio secundario de\n\
+    pvp2 Decimal 20,4 No venta para el\nartículo.\nPrecio secundario de\npvp3 Decimal
+    20,4 No venta para el\nartículo.\nPrecio secundario de\npvp4 Decimal 20,4 No venta
+    para el\nartículo.\nPrecio secundario de\npvp5 Decimal 20,4 No venta para el\n\
+    artículo.\nFamilia del articulo\nValores posibles: [\nLENTES,\nLC,\nGRADUADO,\n\
+    SOL,\ntipo Alfanumérico 40 Si\nPDTOS\nMANTENIMIENTO\nVARIOS,\nAUDIFONOS,\nVARIOS
+    AUDIO\n]\nProveedores.cdgProv\nValor por defecto 1, si\nproveedor DECIMAL Si\n\
+    no se dispone de esta\ninformación\nDescuento de compra\nque ofrece\npdtosProv
+    DECIMAL 20,6 No\nel proveedor sobre el\nartículo.\nFecha que\ncorresponde a la\n\
+    fechaUltCompra Fecha No dd/mm/yyyy\núltima compra del\nartículo.\nFecha que\n\
+    corresponde a la\nfecha_UltVenta Fecha No dd/mm/yyyy\núltima venta del\nartículo.\n\
+    Fecha de creación del\nfechaCreacion Fecha No dd/mm/yyyy\nartículo.\nsaft Alfanumérico
+    1 No Deprecado\nRequerimientos para el trasvase de datos 10"
+  tables:
+  - columns:
+    - name
+    - type
+    - length
+    - required
+    - description
+    - format
+    rows:
+    - name: pvp2
+      type: float
+      length: 204
+      required: false
+      description: "Precio secundario de\nventa para el\nartículo."
+      format: ''
+    - name: pvp3
+      type: float
+      length: 204
+      required: false
+      description: "Precio secundario de\nventa para el\nartículo."
+      format: ''
+    - name: pvp4
+      type: float
+      length: 204
+      required: false
+      description: "Precio secundario de\nventa para el\nartículo."
+      format: ''
+    - name: pvp5
+      type: float
+      length: 204
+      required: false
+      description: "Precio secundario de\nventa para el\nartículo."
+      format: ''
+    - name: tipo
+      type: string
+      length: 40
+      required: true
+      description: "Familia del articulo\nValores posibles: [\nLENTES,\nLC,\nGRADUADO,\n\
+        SOL,\nPDTOS\nMANTENIMIENTO\nVARIOS,\nAUDIFONOS,\nVARIOS AUDIO\n]"
+      format: ''
+    - name: proveedor
+      type: float
+      length: ''
+      required: true
+      description: "Proveedores.cdgProv\nValor por defecto 1, si\nno se dispone de
+        esta\ninformación"
+      format: ''
+    - name: pdtosProv
+      type: float
+      length: 206
+      required: false
+      description: "Descuento de compra\nque ofrece\nel proveedor sobre el\nartículo."
+      format: ''
+    - name: fechaUltCompra
+      type: date
+      length: ''
+      required: false
+      description: "Fecha que\ncorresponde a la\núltima compra del\nartículo."
+      format: dd/mm/yyyy
+    - name: fecha_UltVenta
+      type: date
+      length: ''
+      required: false
+      description: "Fecha que\ncorresponde a la\núltima venta del\nartículo."
+      format: dd/mm/yyyy
+    - name: fechaCreacion
+      type: date
+      length: ''
+      required: false
+      description: "Fecha de creación del\nartículo."
+      format: dd/mm/yyyy
+    - name: saft
+      type: string
+      length: 1
+      required: false
+      description: Deprecado
+      format: ''
+- number: 11
+  text: "Campo Tipo Longitud Obligatorio Descripción Formato\nProducto que ya no\n\
+    esta activo en la\ndescatalogado Alfanumérico 2 Si empresa\nValores posible SI/NO\n\
+    7. Stock (T_STOCK.csv)\nLa clave esta compuesta por tienda + cdgArticulo\nCampo
+    Tipo Longitud Obligatorio Descripción\ntienda Numérico 5 Sí Código tienda\ncdgArticulo
+    Alfanumérico 20 Sí Articulos.cdgArt\nunidades Numérico 5 Sí Unidades en stock\n\
+    8. Cabecera Venta (T_VENTACAB.csv)\nLa clave esta compuesta por venta + tienda\n\
+    Campo Tipo Longitud Obligatorio Descripción Formato\nventa Numérico 10 Sí Código
+    de venta\nCódigo que se utiliza\nen los traspasos para\nidentificar la venta de\n\
+    talon Alfanumérico 25 No\norigen si el campo\nventa debe recalcular\nen Gioweb\n\
+    importeTotal Decimal 20,6 Sí Importe total venta\ndd/mm/yyyy\nfechaRetirado Fecha
+    No Fecha retirada\nhh:mm:ss\nidCliente Numérico 10 Sí Clientes.id\ntienda Numérico
+    6 Sí Código tienda\nfacturado Alfanumérico 2 No SI/NO\nNúmero de la venta\nfactura
+    Alfanumérico 20 No\nque origina la factura\nobs Alfanumérico 4GB No Observaciones\n\
+    usuario Numérico 6 Si Usuarios.cdgusuario\ncopago Alfanumérico 14 No Deprecado\n\
+    Tienda asociada a la\ntiendaDevuelta Numérico 6 No\ndevolución\nRequerimientos
+    para el trasvase de datos 11"
+  tables:
+  - columns:
+    - name
+    - type
+    - length
+    - required
+    - description
+    - format
+    rows:
+    - name: descatalogado
+      type: string
+      length: 2
+      required: true
+      description: "Producto que ya no\nesta activo en la\nempresa\nValores posible
+        SI/NO"
+      format: ''
+  - columns:
+    - name
+    - type
+    - length
+    - required
+    - description
+    rows:
+    - name: tienda
+      type: int
+      length: 5
+      required: true
+      description: Código tienda
+    - name: cdgArticulo
+      type: string
+      length: 20
+      required: true
+      description: Articulos.cdgArt
+    - name: unidades
+      type: int
+      length: 5
+      required: true
+      description: Unidades en stock
+  - columns:
+    - name
+    - type
+    - length
+    - required
+    - description
+    - format
+    rows:
+    - name: venta
+      type: int
+      length: 10
+      required: true
+      description: Código de venta
+      format: ''
+    - name: talon
+      type: string
+      length: 25
+      required: false
+      description: "Código que se utiliza\nen los traspasos para\nidentificar la venta
+        de\norigen si el campo\nventa debe recalcular\nen Gioweb"
+      format: ''
+    - name: importeTotal
+      type: float
+      length: 206
+      required: true
+      description: Importe total venta
+      format: ''
+    - name: fechaRetirado
+      type: date
+      length: ''
+      required: false
+      description: Fecha retirada
+      format: "dd/mm/yyyy\nhh:mm:ss"
+    - name: idCliente
+      type: int
+      length: 10
+      required: true
+      description: Clientes.id
+      format: ''
+    - name: tienda
+      type: int
+      length: 6
+      required: true
+      description: Código tienda
+      format: ''
+    - name: facturado
+      type: string
+      length: 2
+      required: false
+      description: SI/NO
+      format: ''
+    - name: factura
+      type: string
+      length: 20
+      required: false
+      description: "Número de la venta\nque origina la factura"
+      format: ''
+    - name: obs
+      type: string
+      length: 4
+      required: false
+      description: Observaciones
+      format: ''
+    - name: usuario
+      type: int
+      length: 6
+      required: true
+      description: Usuarios.cdgusuario
+      format: ''
+    - name: copago
+      type: string
+      length: 14
+      required: false
+      description: Deprecado
+      format: ''
+    - name: tiendaDevuelta
+      type: int
+      length: 6
+      required: false
+      description: "Tienda asociada a la\ndevolución"
+      format: ''
+- number: 12
+  text: "Campo Tipo Longitud Obligatorio Descripción Formato\nVenta asociada a la\n\
+    ventaDevuelta Numérico 10 No\ndevolución\nFecha de realización dd/mm/yyyy\nfecha
+    Fecha Sí\nde la venta hh:mm:ss\nanticipo Decimal 20 No Deprecado\nformPagoAnticipo
+    Alfanumericos 50 No Deprecado\n9. Detalle Venta (T_VENTACON.csv)\nLa clave de
+    unicidad de esta tabla es la relacion entre venta + tienda + linea\nEl tipo que
+    debe asignarse es la clave y no la descripcion\nCampo Tipo Longitud Obligatorio
+    Descripción\nventa Numérico 10 Sí Ventacab.venta\nlinea Numérico 10 Sí Número
+    de línea\ncdg_art Alfanumérico 20 Sí Articulos.id\ncdg_pro Alfanumérico 20 No
+    Campo deprecado\nproducto Alfanumérico 80 Si Descripción\nund Numérico 10 Si Unidades
+    vendidas\ncoste Decimal 20,6 No Precio de compradel articulo\npvp Decimal 20,6
+    Si Precio de venta\ndcto Decimal 20,6 No Descuento en euros\ndcto_porcentaje Decimal
+    20,6 No Descuento %\nprecio Decimal 20,6 Si Precio total línea + descuento + impuesto\n\
+    IVA Decimal 20,6 Si Porcentaje de impuesto aplicado\nFamilia del articulo seleccionado\n\
+    Valores disponibles\nCristales  1\nLentillas  2\nGraduado  3\ntipo Alfanumérico
+    40 Si\nVarios  4\nSol  5\nPdtos Mantenimiento  6\nAudifonos  7\nVarios Audio
+     8\ntienda Numérico 6 Si Ventacab.tienda\nestado Alfanumérico 25 No Deprecado\n\
+    Requerimientos para el trasvase de datos 12"
+  tables:
+  - columns:
+    - name
+    - type
+    - length
+    - required
+    - description
+    - format
+    rows:
+    - name: ventaDevuelta
+      type: int
+      length: 10
+      required: false
+      description: "Venta asociada a la\ndevolución"
+      format: ''
+    - name: fecha
+      type: date
+      length: ''
+      required: true
+      description: "Fecha de realización\nde la venta"
+      format: "dd/mm/yyyy\nhh:mm:ss"
+    - name: anticipo
+      type: float
+      length: 20
+      required: false
+      description: Deprecado
+      format: ''
+    - name: formPagoAnticipo
+      type: string
+      length: 50
+      required: false
+      description: Deprecado
+      format: ''
+  - columns:
+    - name
+    - type
+    - length
+    - required
+    - description
+    rows:
+    - name: venta
+      type: int
+      length: 10
+      required: true
+      description: Ventacab.venta
+    - name: linea
+      type: int
+      length: 10
+      required: true
+      description: Número de línea
+    - name: cdg_art
+      type: string
+      length: 20
+      required: true
+      description: Articulos.id
+    - name: cdg_pro
+      type: string
+      length: 20
+      required: false
+      description: Campo deprecado
+    - name: producto
+      type: string
+      length: 80
+      required: true
+      description: Descripción
+    - name: und
+      type: int
+      length: 10
+      required: true
+      description: Unidades vendidas
+    - name: coste
+      type: float
+      length: 206
+      required: false
+      description: Precio de compradel articulo
+    - name: pvp
+      type: float
+      length: 206
+      required: true
+      description: Precio de venta
+    - name: dcto
+      type: float
+      length: 206
+      required: false
+      description: Descuento en euros
+    - name: dcto_porcentaje
+      type: float
+      length: 206
+      required: false
+      description: Descuento %
+    - name: precio
+      type: float
+      length: 206
+      required: true
+      description: Precio total línea + descuento + impuesto
+    - name: IVA
+      type: float
+      length: 206
+      required: true
+      description: Porcentaje de impuesto aplicado
+    - name: tipo
+      type: string
+      length: 40
+      required: true
+      description: "Familia del articulo seleccionado\nValores disponibles\nCristales
+         1\nLentillas  2\nGraduado  3\nVarios  4\nSol  5\nPdtos Mantenimiento
+         6\nAudifonos  7\nVarios Audio  8"
+    - name: tienda
+      type: int
+      length: 6
+      required: true
+      description: Ventacab.tienda
+    - name: estado
+      type: string
+      length: 25
+      required: false
+      description: Deprecado
+- number: 13
+  text: "Campo Tipo Longitud Obligatorio Descripción\npedido Alfanumérico 10 No Deprecado\n\
+    cdgSucPedido Alfanumérico 10 No Deprecado\ncdgPedido Alfanumérico 10 No Deprecado\n\
+    cdgLineaPedido Alfanumérico 10 No Deprecado\nAltura focal de la lente seleccionada
+    en\nalturaFocal Alfanumérico 20 No el detalle de la venta Si la linea es de tipo\n\
+    lentes\nSi la lente es de Lejos se introduce una L,\nvision Alfanumérico 10 No\n\
+    si de cerca una C\nSi es ojo Derecho D, si no I para lineas de\nojo Alfanumérico
+    10 No\ntipo lentes\n10. Cobros (T_CAJAS.csv)\nLa clave primaria de esta tabla
+    esta compuesta por venta + tienda\nCampo Tipo Longitud Obligatorio Descripción
+    Formato\nventa Numérico 10 Sí Ventacab.venta\npedido Numérico 10 No Deprecado\n\
+    tienda Numérico 3 Sí Ventacab.tienda\ndd/mm/yyyy\nfecha Fecha Sí Fecha de cobro\n\
+    hh:mm:ss\nfPago Alfanumérico 50 Sí Forma de pago\nagente Numérico 6 No Usuarios.cdgusuario\n\
+    importe Decimal 20, 6 Sí Importe cobrado\nnumtpv Numérico 3 No Deprecado\nnumero_cheque
+    Alfanumérico 15 No Deprecado\nRequerimientos para el trasvase de datos 13"
+  tables:
+  - columns:
+    - name
+    - type
+    - length
+    - required
+    - description
+    rows:
+    - name: pedido
+      type: string
+      length: 10
+      required: false
+      description: Deprecado
+    - name: cdgSucPedido
+      type: string
+      length: 10
+      required: false
+      description: Deprecado
+    - name: cdgPedido
+      type: string
+      length: 10
+      required: false
+      description: Deprecado
+    - name: cdgLineaPedido
+      type: string
+      length: 10
+      required: false
+      description: Deprecado
+    - name: alturaFocal
+      type: string
+      length: 20
+      required: false
+      description: "Altura focal de la lente seleccionada en\nel detalle de la venta
+        Si la linea es de tipo\nlentes"
+    - name: vision
+      type: string
+      length: 10
+      required: false
+      description: "Si la lente es de Lejos se introduce una L,\nsi de cerca una C"
+    - name: ojo
+      type: string
+      length: 10
+      required: false
+      description: "Si es ojo Derecho D, si no I para lineas de\ntipo lentes"
+  - columns:
+    - name
+    - type
+    - length
+    - required
+    - description
+    - format
+    rows:
+    - name: venta
+      type: int
+      length: 10
+      required: true
+      description: Ventacab.venta
+      format: ''
+    - name: pedido
+      type: int
+      length: 10
+      required: false
+      description: Deprecado
+      format: ''
+    - name: tienda
+      type: int
+      length: 3
+      required: true
+      description: Ventacab.tienda
+      format: ''
+    - name: fecha
+      type: date
+      length: ''
+      required: true
+      description: Fecha de cobro
+      format: "dd/mm/yyyy\nhh:mm:ss"
+    - name: fPago
+      type: string
+      length: 50
+      required: true
+      description: Forma de pago
+      format: ''
+    - name: agente
+      type: int
+      length: 6
+      required: false
+      description: Usuarios.cdgusuario
+      format: ''
+    - name: importe
+      type: float
+      length: 20, 6
+      required: true
+      description: Importe cobrado
+      format: ''
+    - name: numtpv
+      type: int
+      length: 3
+      required: false
+      description: Deprecado
+      format: ''
+    - name: numero_cheque
+      type: string
+      length: 15
+      required: false
+      description: Deprecado
+      format: ''

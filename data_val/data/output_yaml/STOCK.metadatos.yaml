@@ -1,0 +1,9 @@
+STOCK:
+  formulas:
+    primary_key:
+      operation: concat
+      fields: &id001
+      - tienda
+      - cdgArticulo
+      expression: tienda + cdgArticulo
+  primary_key: *id001

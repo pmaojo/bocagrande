@@ -1,0 +1,12 @@
+VENTACON:
+  notes:
+  - El tipo que debe asignarse es la clave y no la descripcion
+  formulas:
+    unique_key:
+      operation: concat
+      fields: &id001
+      - venta
+      - tienda
+      - linea
+      expression: venta + tienda + linea
+  unique: *id001
