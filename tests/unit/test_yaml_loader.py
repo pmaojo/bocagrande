@@ -85,6 +85,41 @@ columns:
     assert schema.fields[0].length is None
 
 
+def test_precision_and_scale_parsed(tmp_path):
+    yaml_content = """
+table: TEST
+columns:
+  - name: amount
+    type: float
+    precision: 10
+    scale: 2
+"""
+    file = tmp_path / "digits.yaml"
+    file.write_text(yaml_content)
+    schema = load_schema(str(file))
+    assert schema is not None
+    field = schema.fields[0]
+    assert field.precision == 10
+    assert field.scale == 2
+
+
+def test_precision_scale_from_length(tmp_path):
+    yaml_content = """
+table: TEST
+columns:
+  - name: amount
+    type: float
+    length: "20,6"
+"""
+    file = tmp_path / "length_digits.yaml"
+    file.write_text(yaml_content)
+    schema = load_schema(str(file))
+    assert schema is not None
+    field = schema.fields[0]
+    assert field.precision == 20
+    assert field.scale == 6
+
+
 def test_load_schema_unique(tmp_path):
     yaml_content = """
 table: TEST

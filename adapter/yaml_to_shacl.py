@@ -44,6 +44,15 @@ def generar_shape_shacl(tabla_schema: TableSchema) -> str:
         if campo.length:
             prop_lines.append(f"        sh:maxLength {campo.length} ;")
 
+        if campo.precision:
+            if tipo in {"float", "decimal"}:
+                digits_before = max(1, campo.precision - (campo.scale or 0))
+                frac = campo.scale or 0
+                pattern = rf"^-?\d{{1,{digits_before}}}(?:\.\d{{1,{frac}}})?$"
+            else:
+                pattern = rf"^-?\d{{1,{campo.precision}}}$"
+            prop_lines.append(f"        sh:pattern \"{pattern}\" ;")
+
         if campo.formato and tipo == "date":
             # Si el formato es ISO, podemos poner un pattern
             if campo.formato == "%Y-%m-%d":
