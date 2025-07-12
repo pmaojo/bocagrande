@@ -117,6 +117,8 @@ def load_schema(yaml_path: str) -> Optional[TableSchema]:
                     tipo=col.get('type') or col.get('Tipo', 'string'),
                     requerido=requerido,
                     length=length,
+                    precision=prec,
+                    scale=scale,
                     formato=formato,
                     metadata=metadata,
                 )

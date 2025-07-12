@@ -6,12 +6,34 @@ from typing import Any, Dict, List, Optional
 
 @dataclass
 class PropertyDef:
-    """Data property definition for OWL."""
+    """Data property definition for OWL.
+
+    Parameters
+    ----------
+    name:
+        Property name.
+    tipo:
+        Data type (default ``"string"``).
+    requerido:
+        Whether the field is mandatory.
+    length:
+        Maximum string length.
+    precision:
+        Total digits for numeric types.
+    scale:
+        Decimal digits for numeric types.
+    formato:
+        Format string for dates.
+    metadata:
+        Additional arbitrary attributes.
+    """
 
     name: str
     tipo: str = "string"
     requerido: bool = False
     length: Optional[int] = None
+    precision: Optional[int] = None
+    scale: Optional[int] = None
     formato: Optional[str] = None
     metadata: Dict[str, Any] = field(default_factory=dict)
 
