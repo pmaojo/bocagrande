@@ -10,7 +10,9 @@ from ontology.model import TableSchema, PropertyDef
 class DummyReasoner:
     def __init__(self):
         self.called_with = None
+
     def reason(self, owl_path: str):
+        assert os.path.exists(owl_path)
         self.called_with = owl_path
         return True, "ok"
 
@@ -24,5 +26,6 @@ def test_reason_graph_calls_reasoner(tmp_path):
     ok, logs = builder.reason_graph(g)
     assert ok is True
     assert logs == "ok"
-    assert reasoner.called_with and os.path.exists(reasoner.called_with)
+    assert reasoner.called_with
+    assert not os.path.exists(reasoner.called_with)
 

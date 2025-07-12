@@ -3,6 +3,7 @@ Aplicación: servicio para construir la ontología OWL a partir de esquemas y da
 """
 from typing import Any, Tuple, Optional
 import tempfile
+import os
 
 from adapter.reasoner import Reasoner
 from rdflib import Graph, Namespace, RDF, RDFS, OWL, Literal, URIRef, XSD # Añadir URIRef y XSD para posibles rangos
@@ -77,6 +78,12 @@ class OntologyBuilder:
         """Run the configured reasoner on the provided graph."""
         if self.reasoner is None:
             raise ValueError("No reasoner configured")
+        tmp_path = ""
         with tempfile.NamedTemporaryFile(suffix=".ttl", delete=False) as tmp:
-            graph.serialize(destination=tmp.name, format="turtle")
-            return self.reasoner.reason(tmp.name)
+            tmp_path = tmp.name
+            graph.serialize(destination=tmp_path, format="turtle")
+
+        try:
+            return self.reasoner.reason(tmp_path)
+        finally:
+            os.unlink(tmp_path)
