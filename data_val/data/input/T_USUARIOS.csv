@@ -1,5 +1,0 @@
-Campo,Tipo,Longitud,Obligatorio,Descripción,
-cdgusuario,Numérico,6,Sí,Código de usuario,
-nombre,Alfanumérico,35,Sí,Nombre completo,
-usuario,Alfanumérico,35,Sí,Nombre de usuario,
-tienda,Alfanumérico,6,Sí,Código de tienda,
