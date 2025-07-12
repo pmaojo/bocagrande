@@ -33,6 +33,13 @@ docker compose up --build
 ```
 The app will be available on http://localhost:8501.
 
+## Command-line interface
+Run the ETL pipeline from the shell:
+```bash
+bocagrande --schema schema_yaml/CLIENTES.yaml --csv raw/CLIENTES_sample.csv --output clientes.ttl
+```
+You can also use `python -m bocagrande` with the same arguments.
+
 ## Testing workflow
 Linting and typing checks are performed with `flake8` and `mypy` respectively. Unit and integration tests run with `pytest`.
 End‑to‑end tests live under `tests/e2e` and drive the Streamlit UI with Playwright. They can be executed through Docker Compose:
