@@ -57,13 +57,10 @@ def load_schema(yaml_path: str) -> Optional[TableSchema]:
         if len(data) == 1 and list(data.keys())[0].isupper() and isinstance(list(data.values())[0], dict):
             # Caso: {T_CLIENTES: {...}}
             table_name, table_def = list(data.items())[0]
-        elif 'table' in data and 'columns' in data:
+        else:
             table_name = data.get('table') or Path(yaml_path).stem.upper()
-            table_def = data
-        elif 'fields' in data or 'columns' in data or 'campos' in data:
-            # Caso: El propio archivo es la definición de la tabla (sin clave superior)
-            table_name = Path(yaml_path).stem.upper()
-            table_def = data
+            if any(k in data for k in ('columns', 'fields', 'campos')):
+                table_def = data
     elif isinstance(data, list) and all(isinstance(item, dict) and 'Campo' in item for item in data):
         # Caso: El archivo es una lista directa de definiciones de campo (como CLIENTES.yaml)
         table_name = Path(yaml_path).stem.upper() # Usar el nombre del archivo como nombre de la tabla
@@ -101,16 +98,25 @@ def load_schema(yaml_path: str) -> Optional[TableSchema]:
                 'required',
                 'Longitud',
                 'length',
-                'Formato',
-                'format',
                 'precision',
                 'scale',
+                'enum',
+                'foreign_key',
+                'deprecated',
+                'Formato',
+                'format',
             }
             metadata: Dict[str, Any] = {k: col[k] for k in metadata_keys}
             if prec is not None:
                 metadata['precision'] = prec
             if scale is not None:
                 metadata['scale'] = scale
+            if 'enum' in col:
+                metadata['enum'] = col['enum']
+            if 'foreign_key' in col:
+                metadata['foreign_key'] = col['foreign_key']
+            if 'deprecated' in col:
+                metadata['deprecated'] = col['deprecated']
             fields.append(
                 PropertyDef(
                     name=field_name,

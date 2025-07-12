@@ -126,3 +126,40 @@ def test_clientes_date_formats_loaded():
     expected = {f["name"]: f.get("format") for f in raw_fields if f["name"] in target}
     loaded = {field.name: field.formato for field in schema.fields if field.name in target}
     assert expected == loaded
+
+
+def test_canonical_extended_keys(tmp_path):
+    yaml_content = """
+table: EXTENDED
+columns:
+  - name: code
+    type: integer
+    length: 10
+    precision: 15
+    scale: 3
+    required: true
+    enum: [1, 2]
+    foreign_key: OTHERS.code
+    deprecated: true
+    format: "%Y"
+    extra: foo
+"""
+    file = tmp_path / "extended.yaml"
+    file.write_text(yaml_content)
+
+    schema = load_schema(str(file))
+    assert schema is not None
+    assert schema.name == "EXTENDED"
+
+    field = schema.fields[0]
+    assert field.name == "code"
+    assert field.tipo == "integer"
+    assert field.length == 10
+    assert field.requerido is True
+    assert field.formato == "%Y"
+    assert field.metadata["precision"] == 15
+    assert field.metadata["scale"] == 3
+    assert field.metadata["enum"] == [1, 2]
+    assert field.metadata["foreign_key"] == "OTHERS.code"
+    assert field.metadata["deprecated"] is True
+    assert field.metadata["extra"] == "foo"
