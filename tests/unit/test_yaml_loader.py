@@ -161,3 +161,40 @@ def test_clientes_date_formats_loaded():
     expected = {f["name"]: f.get("format") for f in raw_fields if f["name"] in target}
     loaded = {field.name: field.formato for field in schema.fields if field.name in target}
     assert expected == loaded
+
+
+def test_load_schema_canonical_style(tmp_path):
+    yaml_content = """
+table: CUSTOM
+columns:
+  - name: code
+    type: string
+    length: 10
+    precision: 20
+    scale: 5
+    required: true
+    enum:
+      - A
+      - B
+    foreign_key: Others.code
+    deprecated: false
+    format: "%Y"
+    extra: foo
+"""
+    file = tmp_path / "custom.yaml"
+    file.write_text(yaml_content)
+    schema = load_schema(str(file))
+    assert schema is not None
+    assert schema.name == "CUSTOM"
+    field = schema.fields[0]
+    assert field.name == "code"
+    assert field.tipo == "string"
+    assert field.length == 10
+    assert field.requerido is True
+    assert field.formato == "%Y"
+    assert field.metadata["precision"] == 20
+    assert field.metadata["scale"] == 5
+    assert field.metadata["enum"] == ["A", "B"]
+    assert field.metadata["foreign_key"] == "Others.code"
+    assert field.metadata["deprecated"] is False
+    assert field.metadata["extra"] == "foo"

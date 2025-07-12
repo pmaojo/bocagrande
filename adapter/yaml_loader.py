@@ -35,12 +35,22 @@ def _parse_precision_scale(value: Any) -> Tuple[Optional[int], Optional[int]]:
     return None, None
 
 
+
+def _parse_bool(value: Any) -> Optional[bool]:
+    """Parse ``value`` into a boolean if possible."""
+    if value is None:
+        return None
+    text = str(value).strip().lower()
+    if text in {"sí", "si", "yes", "true", "1"}:
+        return True
+    if text in {"no", "false", "0"}:
+        return False
+    return None
+
+
 def _is_required(value: Any) -> bool:
     """Return ``True`` if ``value`` means the field is required."""
-    if value is None:
-        return False
-    text = str(value).strip().lower()
-    return text in {"sí", "si", "yes", "true", "1"}
+    return _parse_bool(value) is True
 
 def load_schema(yaml_path: str) -> Optional[TableSchema]:
     """
@@ -54,12 +64,12 @@ def load_schema(yaml_path: str) -> Optional[TableSchema]:
     table_def = None
 
     if isinstance(data, dict):
-        if len(data) == 1 and list(data.keys())[0].isupper() and isinstance(list(data.values())[0], dict):
+        if 'table' in data:
+            table_name = data.get('table')
+            table_def = data
+        elif len(data) == 1 and list(data.keys())[0].isupper() and isinstance(list(data.values())[0], dict):
             # Caso: {T_CLIENTES: {...}}
             table_name, table_def = list(data.items())[0]
-        elif 'table' in data and 'columns' in data:
-            table_name = data.get('table') or Path(yaml_path).stem.upper()
-            table_def = data
         elif 'fields' in data or 'columns' in data or 'campos' in data:
             # Caso: El propio archivo es la definición de la tabla (sin clave superior)
             table_name = Path(yaml_path).stem.upper()
@@ -91,6 +101,9 @@ def load_schema(yaml_path: str) -> Optional[TableSchema]:
                 scale = col.get('scale', scale)
             requerido = _is_required(col.get('required') or col.get('Obligatorio'))
             formato = col.get('format') or col.get('Formato')
+            enum_values = col.get('enum')
+            foreign_key = col.get('foreign_key')
+            deprecated = _parse_bool(col.get('deprecated'))
 
             metadata_keys = set(col.keys()) - {
                 'Campo',
@@ -105,12 +118,21 @@ def load_schema(yaml_path: str) -> Optional[TableSchema]:
                 'format',
                 'precision',
                 'scale',
+                'enum',
+                'foreign_key',
+                'deprecated',
             }
             metadata: Dict[str, Any] = {k: col[k] for k in metadata_keys}
             if prec is not None:
                 metadata['precision'] = prec
             if scale is not None:
                 metadata['scale'] = scale
+            if enum_values is not None:
+                metadata['enum'] = enum_values
+            if foreign_key is not None:
+                metadata['foreign_key'] = foreign_key
+            if deprecated is not None:
+                metadata['deprecated'] = deprecated
             fields.append(
                 PropertyDef(
                     name=field_name,
