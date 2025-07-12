@@ -11,7 +11,7 @@ A Streamlit UI orchestrates the process and integrates Google Gemini to suggest 
 - `docker-compose.yml` builds the app container and a service to run the e2e tests.
 
 ## Prerequisites
-- Python 3.9 or later.
+ - Python 3.12 or later.
 - The dependencies listed in `requirements.txt` (use `requirements-dev.txt` to install lint and typing tools).
 - A `.env` file with the environment variables shown in `.env.example`.
 
