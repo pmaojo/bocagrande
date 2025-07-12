@@ -1,12 +1,11 @@
 """
 Dominio: servicio para construir la TBox (ontología de clases y propiedades).
 """
-from rdflib import Graph, Namespace, RDF, RDFS, OWL, XSD # Añadir XSD para tipos
+from rdflib import Graph, RDF, RDFS, OWL, XSD
 from pathlib import Path
 from adapter.yaml_loader import load_schema
-from urllib.parse import quote
 
-BASE = Namespace("http://bocagrande.local/ont#")
+from .utils import BASE, limpiar_para_uri
 
 def build_global_tbox(schema_dir: str = "schema_yaml") -> Graph:
     """
@@ -17,9 +16,6 @@ def build_global_tbox(schema_dir: str = "schema_yaml") -> Graph:
     g.bind("rdfs", RDFS)
     g.bind("bg", BASE)
     g.bind("xsd", XSD) # Bindear XSD para tipos de datos
-
-    def limpiar_para_uri(texto):
-        return quote(str(texto).split()[0].replace(' ', '_'), safe='')
 
     schema_path = Path(schema_dir)
     for yaml_file in schema_path.glob("*.yaml"):

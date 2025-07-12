@@ -2,14 +2,14 @@ import streamlit as st
 import pandas as pd
 import yaml
 from pathlib import Path
-from rdflib import Graph, Namespace, RDF, RDFS, OWL, Literal, URIRef
+from rdflib import Graph, RDF, RDFS, OWL, Literal, URIRef
 import subprocess
 import os
 import tempfile
+from ontology.utils import BASE
 
 # --- Configuración ---
 SCHEMA_DIR = Path("schema_yaml")
-BASE = Namespace("http://bocagrande.local/ont#")
 HERMIT_JAR = str(Path("HermiT/HermiT.jar"))
 
 st.set_page_config(page_title="Conversor Semántico OWL + HermiT")
