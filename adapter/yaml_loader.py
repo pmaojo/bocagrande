@@ -45,11 +45,13 @@ def load_schema(yaml_path: str) -> Optional[TableSchema]:
                 length = int(length_val) if length_val is not None else None
             except (TypeError, ValueError):
                 length = None
+            oblig = str(col.get('Obligatorio', '')).strip()
+            requerido = oblig in {"Sí", "Si"}
             fields.append(
                 PropertyDef(
                     name=field_name,
-                    tipo=col.get('Tipo', 'string'),  # Actualizado a 'Tipo'
-                    requerido=col.get('Obligatorio', False) == 'Sí',  # Convertida a bool
+                    tipo=col.get('Tipo', 'string'),
+                    requerido=requerido,
                     length=length,
                     formato=col.get('Formato'),
                     metadata={k: v for k, v in col.items() if k not in ['Campo', 'name', 'Tipo', 'Obligatorio', 'Longitud', 'Formato', 'tipo', 'requerido']},

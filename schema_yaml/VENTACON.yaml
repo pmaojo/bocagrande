@@ -24,12 +24,12 @@
 - Campo: producto
   Tipo: string
   Longitud: '80'
-  Obligatorio: Si
+  Obligatorio: Sí
   Descripción: Descripción
 - Campo: und
   Tipo: integer
   Longitud: '10'
-  Obligatorio: Si
+  Obligatorio: Sí
   Descripción: Unidades vendidas
 - Campo: coste
   Tipo: float
@@ -39,7 +39,7 @@
 - Campo: pvp
   Tipo: float
   Longitud: 20,6
-  Obligatorio: Si
+  Obligatorio: Sí
   Descripción: Precio de venta
 - Campo: dcto
   Tipo: float
@@ -54,24 +54,24 @@
 - Campo: precio
   Tipo: float
   Longitud: 20,6
-  Obligatorio: Si
+  Obligatorio: Sí
   Descripción: Precio total línea + descuento + impuesto
 - Campo: IVA
   Tipo: float
   Longitud: 20,6
-  Obligatorio: Si
+  Obligatorio: Sí
   Descripción: Porcentaje de impuesto aplicado
 - Campo: tipo
   Tipo: string
   Longitud: '40'
-  Obligatorio: Si
+  Obligatorio: Sí
   Descripción: 'Familia del articulo seleccionado Valores disponibles: Cristales =
     1 Lentillas = 2 Graduado = 3 Varios = 4 Sol = 5 Pdtos Mantenimiento = 6 Audifonos
     = 7 Varios Audio = 8'
 - Campo: tienda
   Tipo: integer
   Longitud: '6'
-  Obligatorio: Si
+  Obligatorio: Sí
   Descripción: Ventacab.tienda
   foreign_key: Ventacab.tienda
 - Campo: estado

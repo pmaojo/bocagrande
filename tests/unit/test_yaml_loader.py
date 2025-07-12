@@ -36,3 +36,31 @@ def test_load_schema_invalid_yaml(tmp_path):
     file.write_text("foo: [bar")
     with pytest.raises(yaml.YAMLError):
         load_schema(str(file))
+
+
+def test_required_field_with_accent(tmp_path):
+    yaml_content = """
+fields:
+  - Campo: nombre
+    Tipo: string
+    Obligatorio: Sí
+"""
+    file = tmp_path / "accent.yaml"
+    file.write_text(yaml_content)
+    schema = load_schema(str(file))
+    assert schema is not None
+    assert schema.fields[0].requerido is True
+
+
+def test_required_field_without_accent(tmp_path):
+    yaml_content = """
+fields:
+  - Campo: nombre
+    Tipo: string
+    Obligatorio: Si
+"""
+    file = tmp_path / "noaccent.yaml"
+    file.write_text(yaml_content)
+    schema = load_schema(str(file))
+    assert schema is not None
+    assert schema.fields[0].requerido is True

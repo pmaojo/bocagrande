@@ -86,7 +86,7 @@
 - Campo: pvp1
   Tipo: float
   Longitud: 20,4
-  Obligatorio: Si
+  Obligatorio: Sí
   Descripción: Precio principal de venta para el artículo.
   Formato: ''
 - Campo: pvp2
@@ -116,7 +116,7 @@
 - Campo: tipo
   Tipo: string
   Longitud: '40'
-  Obligatorio: Si
+  Obligatorio: Sí
   Descripción: 'Familia del articulo Valores posibles: [ LENTES, LC, GRADUADO, SOL,
     PDTOS MANTENIMIENTO VARIOS, AUDIFONOS, VARIOS AUDIO ]'
   Formato: ''
@@ -131,7 +131,7 @@
 - Campo: proveedor
   Tipo: DECIMAL
   Longitud: ''
-  Obligatorio: Si
+  Obligatorio: Sí
   Descripción: Proveedores.cdgProv Valor por defecto 1, si no se dispone de esta información
   Formato: ''
   foreign_key: Proveedores.cdgProv
@@ -169,7 +169,7 @@
 - Campo: descatalogado
   Tipo: string
   Longitud: '2'
-  Obligatorio: Si
+  Obligatorio: Sí
   Descripción: Producto que ya no esta activo en la empresa Valores posible SI/NO
   Formato: ''
   Enum:
