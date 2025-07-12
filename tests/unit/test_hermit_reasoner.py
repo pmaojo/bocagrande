@@ -39,6 +39,18 @@ async def test_hermit_reasoner_returncode_failure(monkeypatch):
 
 
 @pytest.mark.asyncio
+async def test_hermit_reasoner_inconsistent(monkeypatch):
+    async def make_proc(*args, **kwargs):
+        return DummyProc(stdout=b"Ontology is inconsistent")
+
+    monkeypatch.setattr(asyncio, "create_subprocess_exec", make_proc)
+    reasoner = HermiTReasoner(jar_path="fake.jar")
+    ok, logs = await reasoner._reason_async("dummy.owl")
+    assert ok is False
+    assert "inconsistent" in logs.lower()
+
+
+@pytest.mark.asyncio
 async def test_hermit_reasoner_timeout(monkeypatch):
     class SlowProc(DummyProc):
         async def communicate(self):

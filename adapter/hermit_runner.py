@@ -26,7 +26,12 @@ class HermiTReasoner:
             proc.kill()
             return False, f"Reasoner timed out after {timeout} seconds"
         logs = stdout.decode() + stderr.decode()
-        ok = proc.returncode == 0 and "consistent" in logs.lower()
+        lower_logs = logs.lower()
+        ok = (
+            proc.returncode == 0
+            and "inconsistent" not in lower_logs
+            and "consistent" in lower_logs
+        )
         return ok, logs
 
     def reason(
