@@ -1,7 +1,7 @@
 """Domain entities for TBox (classes, properties) and ABox (individuals)."""
 
 from dataclasses import dataclass, field
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 
 @dataclass
@@ -11,6 +11,8 @@ class PropertyDef:
     name: str
     tipo: str = "string"
     requerido: bool = False
+    length: Optional[int] = None
+    formato: Optional[str] = None
     metadata: Dict[str, Any] = field(default_factory=dict)
 
 @dataclass

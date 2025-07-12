@@ -42,10 +42,10 @@ def generar_shape_shacl(tabla_schema: TableSchema) -> str:
             f"        sh:minCount {min_count} ;"
         ]
         
-        if hasattr(campo, "length") and campo.length:
+        if campo.length:
             prop_lines.append(f"        sh:maxLength {campo.length} ;")
-        
-        if hasattr(campo, "formato") and campo.formato and tipo == "date":
+
+        if campo.formato and tipo == "date":
             # Si el formato es ISO, podemos poner un pattern
             if campo.formato == "%Y-%m-%d":
                 prop_lines.append('        sh:pattern "^\\d{4}-\\d{2}-\\d{2}$" ;')

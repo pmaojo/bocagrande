@@ -39,13 +39,22 @@ def load_schema(yaml_path: str) -> Optional[TableSchema]:
     campos = table_def.get('fields') or table_def.get('columns') or table_def.get('campos') or []
     for col in campos:
         if isinstance(col, dict):
-            field_name = col.get('Campo') or col.get('name') or '' # Priorizar 'Campo'
-            fields.append(PropertyDef(
-                name=field_name,
-                tipo=col.get('Tipo', 'string'), # Actualizado a 'Tipo'
-                requerido=col.get('Obligatorio', False) == 'Sí', # Actualizado a 'Obligatorio' y convertida a bool
-                metadata={k: v for k, v in col.items() if k not in ['Campo', 'name', 'Tipo', 'Obligatorio', 'tipo', 'requerido']} # Actualizar exclusiones
-            ))
+            field_name = col.get('Campo') or col.get('name') or ''  # Priorizar 'Campo'
+            length_val = col.get('Longitud')
+            try:
+                length = int(length_val) if length_val is not None else None
+            except (TypeError, ValueError):
+                length = None
+            fields.append(
+                PropertyDef(
+                    name=field_name,
+                    tipo=col.get('Tipo', 'string'),  # Actualizado a 'Tipo'
+                    requerido=col.get('Obligatorio', False) == 'Sí',  # Convertida a bool
+                    length=length,
+                    formato=col.get('Formato'),
+                    metadata={k: v for k, v in col.items() if k not in ['Campo', 'name', 'Tipo', 'Obligatorio', 'Longitud', 'Formato', 'tipo', 'requerido']},
+                )
+            )
         elif isinstance(col, str):
             fields.append(PropertyDef(name=col))
             
