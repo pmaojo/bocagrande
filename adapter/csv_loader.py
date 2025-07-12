@@ -1,16 +1,19 @@
 """
 Infraestructura: carga de datos CSV a DataFrame.
 """
+from __future__ import annotations
+
 import pandas as pd
-# import os # Ya no es necesario
+from pathlib import Path
+from typing import BinaryIO, Union, IO
+
 from streamlit.runtime.uploaded_file_manager import UploadedFile
 
-def read_csv(archivo_csv: UploadedFile) -> pd.DataFrame:
-    """
-    Carga un archivo CSV desde un objeto UploadedFile y devuelve un DataFrame.
-    Valida que el archivo tiene columnas.
-    """
-    # Streamlit UploadedFile ya maneja la existencia del archivo temporalmente
+FileType = Union[str, Path, UploadedFile, BinaryIO, IO[str]]
+
+
+def read_csv(archivo_csv: FileType) -> pd.DataFrame:
+    """Return a DataFrame from ``archivo_csv`` validating it has columns."""
     df = pd.read_csv(archivo_csv)
     if df.empty or len(df.columns) == 0:
         raise ValueError("El CSV no tiene columnas o está vacío.")
