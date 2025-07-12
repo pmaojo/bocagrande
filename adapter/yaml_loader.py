@@ -71,5 +71,6 @@ def load_schema(yaml_path: str) -> Optional[TableSchema]:
             fields.append(PropertyDef(name=col))
             
     primary_key = table_def.get('primary_key', [])
-    metadata = {k: v for k, v in table_def.items() if k not in ['fields', 'columns', 'campos', 'primary_key']}
-    return TableSchema(name=table_name, fields=fields, primary_key=primary_key, metadata=metadata)
+    unique = table_def.get('unique', [])
+    metadata = {k: v for k, v in table_def.items() if k not in ['fields', 'columns', 'campos', 'primary_key', 'unique']}
+    return TableSchema(name=table_name, fields=fields, primary_key=primary_key, unique=unique, metadata=metadata)

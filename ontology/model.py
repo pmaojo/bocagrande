@@ -36,4 +36,5 @@ class TableSchema:
     name: str
     fields: List[PropertyDef]
     primary_key: List[str] = field(default_factory=list)
+    unique: List[List[str]] = field(default_factory=list)
     metadata: Dict[str, Any] = field(default_factory=dict)
