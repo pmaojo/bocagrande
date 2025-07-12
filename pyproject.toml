@@ -3,3 +3,11 @@ python_version = "3.12"
 ignore_missing_imports = true
 # Disable strict error codes to allow gradual typing
 disable_error_code = "assignment,arg-type,misc,union-attr,import-untyped"
+
+[project]
+name = "bocagrande"
+version = "0.1.0"
+requires-python = ">=3.9"
+
+[project.scripts]
+bocagrande = "bocagrande.cli:main"
