@@ -149,13 +149,13 @@
 - Campo: fecha
   Tipo: date
   Longitud: ''
-  Obligatorio: Si
+  Obligatorio: Sí
   Descripción: Fecha de creación para la graduación optométrica.
   Formnato: dd/mm/yyyy hh:mm:ss
 - Campo: usuario
   Tipo: integer
   Longitud: '6'
-  Obligatorio: Si
+  Obligatorio: Sí
   Descripción: Identificador del Usuario que tramitó está graduación
   Formnato: ''
 - Campo: codVendedor
@@ -181,7 +181,7 @@
 - Campo: doctor
   Tipo: integer
   Longitud: '8'
-  Obligatorio: Si
+  Obligatorio: Sí
   Descripción: DOCTORES.codOrigen
   Formnato: ''
   foreign_key: DOCTORES.codOrigen

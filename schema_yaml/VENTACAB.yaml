@@ -60,7 +60,7 @@
 - Campo: usuario
   Tipo: integer
   Longitud: '6'
-  Obligatorio: Si
+  Obligatorio: Sí
   Descripción: Usuarios.cdgusuario
   Formato: ''
   foreign_key: Usuarios.cdgusuario

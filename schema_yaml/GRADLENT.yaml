@@ -92,13 +92,13 @@
 - Campo: fecha
   Tipo: date
   Longitud: ''
-  Obligatorio: Si
+  Obligatorio: Sí
   Descripción: Fecha de creación para la graduación optométrica.
   Formato: dd/mm/yyyy hh:mm:ss
 - Campo: doctor
   Tipo: integer
   Longitud: '8'
-  Obligatorio: Si
+  Obligatorio: Sí
   Descripción: Doctores.codOrigen
   Formato: ''
   foreign_key: Doctores.codOrigen
@@ -202,13 +202,13 @@
 - Campo: tienda
   Tipo: integer
   Longitud: '6'
-  Obligatorio: Si
+  Obligatorio: Sí
   Descripción: Indica la tienda a la que pertenece la graduación.
   Formato: ''
 - Campo: usuario
   Tipo: integer
   Longitud: '6'
-  Obligatorio: Si
+  Obligatorio: Sí
   Descripción: Usuarios.cdgusuario
   Formato: ''
   foreign_key: Usuarios.cdgusuario
