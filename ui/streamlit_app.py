@@ -18,14 +18,12 @@ import pandas.errors
 # Añadir la raíz del proyecto al sys.path para asegurar la detección de módulos
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from ontology.service import OntologyBuilder
 from adapter.yaml_loader import load_schema
 from adapter.csv_loader import read_csv
-from adapter.reasoner import Reasoner
 from adapter.hermit_runner import HermiTReasoner
-from adapter.shacl_runner import validate_shacl
-from adapter.yaml_to_shacl import generar_shape_shacl
 from ontology.tbox_builder import build_global_tbox
+from bocagrande.transform import ETLStep, apply_transformations
+from bocagrande.validation import validate_dataframe
 
 # Estructura básica de la UI
 
@@ -239,26 +237,9 @@ Devuelve una lista JSON de transformaciones, usando SIEMPRE los nombres de clave
             st.write("Muestra aleatoria del CSV de entrada:")
             st.dataframe(muestra)
             try:
-                df_muestra_transformada = muestra.copy()
-                transformaciones_a_aplicar = st.session_state['transformaciones_aceptadas']
+                steps = [ETLStep(**t) for t in st.session_state['transformaciones_aceptadas']]
                 st.write("Aplicando transformaciones ETL sobre la muestra...")
-                for t in transformaciones_a_aplicar:
-                    tipo = t.get("tipo_transformacion")
-                    entrada = t.get("campo_entrada")
-                    salida = t.get("campo_salida")
-                    formula = t.get("formula")
-                    if tipo == "mapping" and entrada and salida:
-                        if entrada in df_muestra_transformada.columns:
-                            df_muestra_transformada[salida] = df_muestra_transformada[entrada]
-                    elif tipo == "calculo" and salida and formula:
-                        # Aquí podrías implementar lógica para evaluar fórmulas simples
-                        df_muestra_transformada[salida] = None
-                # --- Solo columnas de salida en la muestra transformada ---
-                columnas_salida = [t['campo_salida'] for t in transformaciones_a_aplicar if 'campo_salida' in t]
-                for col in columnas_salida:
-                    if col not in df_muestra_transformada.columns:
-                        df_muestra_transformada[col] = None
-                df_muestra_transformada = df_muestra_transformada[columnas_salida]
+                df_muestra_transformada, _, _, _ = apply_transformations(muestra, steps)
                 st.write("Resultado de la muestra transformada (solo columnas de salida):")
                 st.dataframe(df_muestra_transformada)
                 st.success("Transformaciones aplicadas automáticamente sobre la muestra. Si el resultado es correcto, puedes proceder a transformar todo el dataset.")
@@ -272,24 +253,8 @@ Devuelve una lista JSON de transformaciones, usando SIEMPRE los nombres de clave
         if archivo_datos_transformar:
             if st.button("Aplicar Transformaciones (ETL)"):
                 df_original = leer_a_dataframe(archivo_datos_transformar)
-                df_transformado = df_original.copy()
-                transformaciones_a_aplicar = st.session_state['transformaciones_aceptadas']
-                for t in transformaciones_a_aplicar:
-                    tipo = t.get("tipo_transformacion")
-                    entrada = t.get("campo_entrada")
-                    salida = t.get("campo_salida")
-                    formula = t.get("formula")
-                    if tipo == "mapping" and entrada and salida:
-                        if entrada in df_transformado.columns:
-                            df_transformado[salida] = df_transformado[entrada]
-                    elif tipo == "calculo" and salida and formula:
-                        df_transformado[salida] = None # Placeholder para cálculos
-                # --- Solo columnas de salida en el resultado final ---
-                columnas_salida = [t['campo_salida'] for t in transformaciones_a_aplicar if 'campo_salida' in t]
-                for col in columnas_salida:
-                    if col not in df_transformado.columns:
-                        df_transformado[col] = None
-                df_transformado = df_transformado[columnas_salida]
+                steps = [ETLStep(**t) for t in st.session_state['transformaciones_aceptadas']]
+                df_transformado, _, _, _ = apply_transformations(df_original, steps)
                 st.subheader("Datos Transformados (ETL, solo columnas de salida):")
                 st.dataframe(df_transformado)
 
@@ -308,24 +273,21 @@ Devuelve una lista JSON de transformaciones, usando SIEMPRE los nombres de clave
 
                 # --- Validación semántica y SHACL por detrás ---
                 try:
-                    global_tbox = build_global_tbox()
                     tabla_schema_destino = load_schema(str(esquema_destino_comparacion))
-                    builder = OntologyBuilder(global_tbox, reasoner=reasoner)
-                    grafo_owl = builder.build_abox_graph(tabla_schema_destino, df_transformado)
-                    with tempfile.NamedTemporaryFile(suffix=".ttl", delete=False) as tmp:
-                        grafo_owl.serialize(destination=tmp.name, format="turtle")
-                        owl_path = tmp.name
-                    st.info(f"OWL (TBox + ABox) generado para validación: {owl_path}")
-                    razonado, logs_hermit = reasoner.reason(owl_path)
-                    st.markdown("**Validación semántica (HermiT):** " + ("✅ Consistente" if razonado else "❌ Inconsistente"))
+                    hermit_ok, shacl_ok, logs_hermit, logs_shacl = validate_dataframe(
+                        df_transformado,
+                        tabla_schema_destino,
+                        reasoner=reasoner,
+                    )
+                    st.markdown(
+                        "**Validación semántica (HermiT):** "
+                        + ("✅ Consistente" if hermit_ok else "❌ Inconsistente")
+                    )
                     with st.expander("Log HermiT", expanded=False):
                         st.text(logs_hermit)
-                    shape_ttl = generar_shape_shacl(tabla_schema_destino)
-                    with tempfile.NamedTemporaryFile(suffix=".ttl", delete=False, mode="w") as tmp_sh:
-                        tmp_sh.write(shape_ttl)
-                        shacl_path = tmp_sh.name
-                    valido, logs_shacl = validate_shacl(owl_path, shacl_path)
-                    st.markdown("**Validación SHACL:** " + ("✅ Válido" if valido else "❌ Inválido"))
+                    st.markdown(
+                        "**Validación SHACL:** " + ("✅ Válido" if shacl_ok else "❌ Inválido")
+                    )
                     with st.expander("Log SHACL", expanded=False):
                         st.text(logs_shacl)
                 except Exception as e:
@@ -335,51 +297,26 @@ Devuelve una lista JSON de transformaciones, usando SIEMPRE los nombres de clave
                 # (esto debe ir en el bloque donde aplicas las transformaciones)
                 if archivo_datos_transformar and 'transformaciones_aceptadas' in st.session_state:
                     df = leer_a_dataframe(archivo_datos_transformar)
-                    transformaciones = st.session_state['transformaciones_aceptadas']
+                    steps = [ETLStep(**t) for t in st.session_state['transformaciones_aceptadas']]
                     sobrescribir = st.session_state.get('sobrescribir', True)
-                    generados, sobrescritos, faltantes = [], [], []
-                    df_result = pd.DataFrame()
-                    for t in transformaciones:
-                        campo_entrada = t.get('campo_entrada')
-                        campo_salida = t.get('campo_salida')
-                        if not campo_salida:
-                            continue
-                        if campo_entrada and campo_entrada in df.columns:
-                            if sobrescribir or campo_salida not in df_result.columns or df_result[campo_salida].isnull().all():
-                                df_result[campo_salida] = df[campo_entrada]
-                                if campo_salida in df.columns:
-                                    sobrescritos.append(campo_salida)
-                                else:
-                                    generados.append(campo_salida)
-                            else:
-                                # No sobrescribe, solo rellena vacíos
-                                df_result[campo_salida] = df_result[campo_salida].combine_first(df[campo_entrada])
-                                generados.append(campo_salida)
-                        elif t.get('tipo_transformacion') == 'formula' and t.get('formula'):
-                            # Aquí puedes evaluar la fórmula de forma segura (eval limitada o pandas.eval)
-                            try:
-                                df_result[campo_salida] = df.eval(t['formula'])
-                                generados.append(campo_salida)
-                            except Exception:
-                                faltantes.append(campo_salida)
-                        else:
-                            faltantes.append(campo_salida)
-                    # Asegura el orden de columnas de salida
-                    columnas_salida = [t['campo_salida'] for t in transformaciones if 'campo_salida' in t]
-                    for col in columnas_salida:
-                        if col not in df_result.columns:
-                            df_result[col] = None
-                    df_result = df_result[columnas_salida]
+                    df_result, generados, sobrescritos, faltantes = apply_transformations(
+                        df,
+                        steps,
+                        overwrite=sobrescribir,
+                    )
                     st.subheader("Datos Transformados (solo columnas de salida):")
                     st.dataframe(df_result)
                     st.info(f"Campos generados: {generados}")
                     st.info(f"Campos sobrescritos: {sobrescritos}")
                     if faltantes:
                         st.warning(f"Campos faltantes/no generados: {faltantes}")
-                    # Exportar
                     formato_export = st.selectbox("Formato de exportación", ["csv", "excel", "parquet"])
                     datos_export = exportar_dataframe(df_result, formato_export)
-                    st.download_button("Descargar datos transformados", datos_export, file_name=f"datos_transformados.{formato_export if formato_export != 'excel' else 'xlsx'}")
+                    st.download_button(
+                        "Descargar datos transformados",
+                        datos_export,
+                        file_name=f"datos_transformados.{formato_export if formato_export != 'excel' else 'xlsx'}",
+                    )
 
                 csv_output = df_transformado.to_csv(index=False).encode('utf-8')
                 st.download_button(
