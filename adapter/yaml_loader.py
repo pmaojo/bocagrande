@@ -5,6 +5,20 @@ from ontology.model import TableSchema, PropertyDef
 import yaml
 from typing import List, Dict, Any, Optional
 from pathlib import Path
+import re
+
+
+def _parse_length(value: Any) -> Optional[int]:
+    """Return an int length if ``value`` is purely numeric, else ``None``."""
+    if value is None:
+        return None
+    try:
+        if isinstance(value, int):
+            return value
+        text = str(value).strip()
+        return int(text) if text.isdigit() else None
+    except (TypeError, ValueError):
+        return None
 
 def load_schema(yaml_path: str) -> Optional[TableSchema]:
     """
@@ -40,11 +54,7 @@ def load_schema(yaml_path: str) -> Optional[TableSchema]:
     for col in campos:
         if isinstance(col, dict):
             field_name = col.get('Campo') or col.get('name') or ''  # Priorizar 'Campo'
-            length_val = col.get('Longitud')
-            try:
-                length = int(length_val) if length_val is not None else None
-            except (TypeError, ValueError):
-                length = None
+            length = _parse_length(col.get('Longitud'))
             oblig = str(col.get('Obligatorio', '')).strip()
             requerido = oblig in {"Sí", "Si"}
             fields.append(

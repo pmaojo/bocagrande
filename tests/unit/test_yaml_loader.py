@@ -67,6 +67,20 @@ fields:
     assert schema.fields[0].requerido is True
 
 
+def test_length_4gb_is_none(tmp_path):
+    yaml_content = """
+fields:
+  - Campo: obs
+    Tipo: string
+    Longitud: 4GB
+"""
+    file = tmp_path / "big.yaml"
+    file.write_text(yaml_content)
+    schema = load_schema(str(file))
+    assert schema is not None
+    assert schema.fields[0].length is None
+
+
 def test_gradgafa_formats_loaded():
     """Ensure that all Formato values from GRADGAFA.yaml are parsed correctly."""
     path = Path("schema_yaml/GRADGAFA.yaml")
