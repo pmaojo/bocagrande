@@ -4,12 +4,15 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 import sys
+import logging
 
 from adapter.csv_loader import read_csv
 from adapter.yaml_loader import load_schema
 from adapter.hermit_runner import HermiTReasoner
 from ontology.tbox_builder import build_global_tbox
 from ontology.service import OntologyBuilder
+
+logger = logging.getLogger(__name__)
 
 
 def _parse_args(argv: list[str] | None) -> argparse.Namespace:
@@ -31,6 +34,7 @@ def _parse_args(argv: list[str] | None) -> argparse.Namespace:
 
 
 def main(argv: list[str] | None = None) -> None:
+    logging.basicConfig(level=logging.INFO)
     args = _parse_args(argv)
 
     schema = load_schema(args.schema)
@@ -47,12 +51,12 @@ def main(argv: list[str] | None = None) -> None:
 
     if not args.skip_reasoner:
         ok, logs = builder.reason_graph(graph)
-        print(logs)
+        logger.warning(logs)
         if not ok:
             raise SystemExit(1)
 
     graph.serialize(destination=args.output, format="turtle")
-    print(f"Wrote {args.output}")
+    logger.info("Wrote %s", args.output)
 
 
 if __name__ == "__main__":  # pragma: no cover - manual entrypoint
