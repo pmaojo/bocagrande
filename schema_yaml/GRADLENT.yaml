@@ -172,9 +172,9 @@
   Tipo: string
   Longitud: '200'
   Obligatorio: 'No'
-  Descripción: Uduarios.cdgusuario
+  Descripción: Usuarios.cdgusuario
   Formato: ''
-  foreign_key: Uduarios.cdgusuario
+  foreign_key: Usuarios.cdgusuario
 - Campo: laboratorioI
   Tipo: string
   Longitud: '200'

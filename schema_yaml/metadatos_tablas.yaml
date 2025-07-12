@@ -34,7 +34,7 @@ GRADGAFA:
   - obs,Alfanumérico,4GB,No,"Notas relacionadas con la graduación optométrica."
   - fecha,Fecha,,Si,"Fecha de creación para la graduación optométrica.","dd/mm/yyyy
     hh:mm:ss"
-  - codVendedor,Numérico,,No,Uduarios.cdgusuario
+  - codVendedor,Numérico,,No,Usuarios.cdgusuario
   - dnpCercaD   ,Numérico,,No,Campo para registrar los datos de la distancia naso-pupilar
     cerca derecha.
   - dnpCercaI,Numérico,,No,"Campo para registrar los datos de la

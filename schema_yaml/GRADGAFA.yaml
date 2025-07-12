@@ -162,9 +162,9 @@
   Tipo: integer
   Longitud: ''
   Obligatorio: 'No'
-  Descripción: Uduarios.cdgusuario
+  Descripción: Usuarios.cdgusuario
   Formato: ''
-  foreign_key: Uduarios.cdgusuario
+  foreign_key: Usuarios.cdgusuario
 - Campo: dnpCercaD
   Tipo: integer
   Longitud: ''
