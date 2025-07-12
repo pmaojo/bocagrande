@@ -31,6 +31,7 @@ tables:
   - file: T_GRADGAFA.csv
     schema: schema_yaml/GRADGAFA.yaml
     primary_key: [id, tienda]
+    description: ""
     notes:
       - Requerimientos para el trasvase de datos 2
   - file: T_GRADLENT.csv
@@ -40,10 +41,12 @@ tables:
   - file: T_PROVEEDORES.csv
     schema: schema_yaml/PROVEEDORES.yaml
     primary_key: [cdg_prov]
+    description: ""
   - file: T_ARTICULOS.csv
     schema: schema_yaml/ARTICULOS.yaml
     primary_key: [cdg_art]
     unique:
+      - [cdg_art]
       - [cdg_barras]
       - [cdg_edi]
     notes:
@@ -51,14 +54,18 @@ tables:
   - file: T_STOCK.csv
     schema: schema_yaml/STOCK.yaml
     primary_key: [tienda, cdg_articulo]
+    description: ""
   - file: T_VENTACAB.csv
     schema: schema_yaml/VENTACAB.yaml
     primary_key: [venta, tienda]
+    description: ""
   - file: T_VENTACON.csv
     schema: schema_yaml/VENTACON.yaml
     primary_key: [venta, tienda, linea]
+    description: ""
     notes:
       - "El campo tipo es la clave (no la descripción)."
   - file: T_CAJAS.csv
     schema: schema_yaml/CAJAS.yaml
     primary_key: [venta, tienda]
+    description: ""

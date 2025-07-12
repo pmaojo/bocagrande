@@ -3,9 +3,12 @@ Infraestructura: carga de esquemas YAML a TableSchema.
 """
 from ontology.model import TableSchema, PropertyDef
 import yaml
-from typing import List, Dict, Any, Optional
+from typing import Any, Optional
 from pathlib import Path
 import re
+
+
+__all__ = ["load_schema"]
 
 
 def _parse_length(value: Any) -> Optional[int]:
@@ -16,7 +19,11 @@ def _parse_length(value: Any) -> Optional[int]:
         if isinstance(value, int):
             return value
         text = str(value).strip()
-        return int(text) if text.isdigit() else None
+        if text.isdigit():
+            return int(text)
+        if re.fullmatch(r"\d+,\d+", text):
+            return None
+        return None
     except (TypeError, ValueError):
         return None
 
@@ -55,8 +62,8 @@ def load_schema(yaml_path: str) -> Optional[TableSchema]:
         if isinstance(col, dict):
             field_name = col.get('Campo') or col.get('name') or ''  # Priorizar 'Campo'
             length = _parse_length(col.get('Longitud'))
-            oblig = str(col.get('Obligatorio', '')).strip()
-            requerido = oblig in {"Sí", "Si"}
+            oblig = str(col.get('Obligatorio', '')).strip().lower()
+            requerido = oblig in {"sí", "si", "yes", "true"}
             fields.append(
                 PropertyDef(
                     name=field_name,
@@ -72,5 +79,7 @@ def load_schema(yaml_path: str) -> Optional[TableSchema]:
             
     primary_key = table_def.get('primary_key', [])
     unique = table_def.get('unique', [])
+    if isinstance(unique, list) and all(isinstance(u, str) for u in unique):
+        unique = [unique]
     metadata = {k: v for k, v in table_def.items() if k not in ['fields', 'columns', 'campos', 'primary_key', 'unique']}
     return TableSchema(name=table_name, fields=fields, primary_key=primary_key, unique=unique, metadata=metadata)

@@ -1,6 +1,7 @@
 """Infrastructure: loader for the master data contract YAML."""
 from dataclasses import dataclass, field
-from typing import Any, Dict, List
+from pathlib import Path
+from typing import Any, Dict
 
 import yaml
 
@@ -15,7 +16,7 @@ class TableEntry:
     file: str
     schema: TableSchema
     description: str | None = None
-    notes: List[str] = field(default_factory=list)
+    notes: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -26,32 +27,46 @@ class DataContract:
     version: str
     owner: str
     globals: Dict[str, Any]
-    tables: List[TableEntry]
+    tables: list[TableEntry]
 
 
-def load_data_contract(path: str) -> DataContract:
+__all__ = ["TableEntry", "DataContract", "load_data_contract"]
+
+
+def load_data_contract(path: str | Path) -> DataContract:
     """Load a master data contract from ``path``."""
-    with open(path, "r", encoding="utf-8") as f:
-        data = yaml.safe_load(f)
+    path = Path(path)
+    data = yaml.safe_load(path.read_text(encoding="utf-8"))
 
     info = data.get("contract", {})
     globals_cfg = data.get("globals", {})
 
-    tables: List[TableEntry] = []
+    tables: list[TableEntry] = []
     for entry in data.get("tables", []):
-        schema_path = entry["schema"]
+        schema_path = Path(entry["schema"])
         schema = load_schema(schema_path)
         if schema is None:
-            continue
-        if pk := entry.get("primary_key"):
-            schema.primary_key = pk
-        if unique := entry.get("unique"):
-            schema.unique = unique
-        if desc := entry.get("description"):
-            schema.metadata["description"] = desc
-        if notes := entry.get("notes"):
-            schema.metadata["notes"] = notes
-        tables.append(TableEntry(file=entry["file"], schema=schema, description=desc, notes=notes or []))
+            raise FileNotFoundError(f"Schema not found or invalid: {schema_path}")
+
+        pk = entry.get("primary_key") or []
+        unique = entry.get("unique") or []
+        if isinstance(unique, list) and all(isinstance(u, str) for u in unique):
+            unique = [unique]
+        elif not (
+            isinstance(unique, list)
+            and all(isinstance(u, list) and all(isinstance(c, str) for c in u) for u in unique)
+        ):
+            raise TypeError("unique must be a list of string lists")
+
+        schema.primary_key = pk
+        schema.unique = unique
+
+        desc = entry.get("description")
+        notes = entry.get("notes", [])
+
+        tables.append(
+            TableEntry(file=entry["file"], schema=schema, description=desc, notes=notes)
+        )
 
     return DataContract(
         name=info.get("name", ""),

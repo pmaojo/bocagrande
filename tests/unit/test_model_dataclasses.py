@@ -30,3 +30,12 @@ def test_table_schema_defaults():
     assert schema.primary_key == []
     assert schema.unique == []
     assert schema.metadata == {}
+
+
+def test_table_schema_all_unique_cols():
+    schema = TableSchema(
+        name="TEST",
+        fields=[PropertyDef(name="id"), PropertyDef(name="email")],
+        unique=[["id"], ["email", "id"]],
+    )
+    assert schema.all_unique_cols() == {"id", "email"}

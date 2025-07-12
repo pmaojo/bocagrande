@@ -96,6 +96,34 @@ unique:
     assert schema.unique == [["id"]]
 
 
+def test_required_field_uppercase(tmp_path):
+    yaml_content = """
+fields:
+  - Campo: nombre
+    Tipo: string
+    Obligatorio: SI
+"""
+    file = tmp_path / "upper.yaml"
+    file.write_text(yaml_content)
+    schema = load_schema(str(file))
+    assert schema is not None
+    assert schema.fields[0].requerido is True
+
+
+def test_decimal_length_ignored(tmp_path):
+    yaml_content = """
+fields:
+  - Campo: price
+    Tipo: decimal
+    Longitud: 20,4
+"""
+    file = tmp_path / "decimal.yaml"
+    file.write_text(yaml_content)
+    schema = load_schema(str(file))
+    assert schema is not None
+    assert schema.fields[0].length is None
+
+
 def test_gradgafa_formats_loaded():
     """Ensure that all Formato values from GRADGAFA.yaml are parsed correctly."""
     path = Path("schema_yaml/GRADGAFA.yaml")
