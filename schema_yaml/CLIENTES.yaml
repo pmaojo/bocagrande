@@ -61,6 +61,7 @@
   Longitud: ''
   Obligatorio: 'No'
   Descripción: Fecha nacimiento (dd/mm/yyyy)
+  Formato: dd/mm/yyyy
 - Campo: telefono
   Tipo: string
   Longitud: '25'
@@ -113,11 +114,13 @@
   Longitud: ''
   Obligatorio: 'No'
   Descripción: Última visita
+  Formato: dd/mm/yyyy
 - Campo: primeraVisita
   Tipo: date
   Longitud: ''
   Obligatorio: 'No'
   Descripción: Primera visita
+  Formato: dd/mm/yyyy
 - Campo: obs
   Tipo: string
   Longitud: 4GB
