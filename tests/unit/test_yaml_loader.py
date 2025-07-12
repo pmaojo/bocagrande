@@ -1,5 +1,6 @@
 import yaml
 import pytest
+from pathlib import Path
 
 from adapter.yaml_loader import load_schema
 
@@ -64,3 +65,15 @@ fields:
     schema = load_schema(str(file))
     assert schema is not None
     assert schema.fields[0].requerido is True
+
+
+def test_gradgafa_formats_loaded():
+    """Ensure that all Formato values from GRADGAFA.yaml are parsed correctly."""
+    path = Path("schema_yaml/GRADGAFA.yaml")
+    raw_fields = yaml.safe_load(path.read_text())
+    schema = load_schema(str(path))
+    assert schema is not None
+
+    expected = {f["Campo"]: f.get("Formato") for f in raw_fields}
+    loaded = {field.name: field.formato for field in schema.fields}
+    assert expected == loaded
