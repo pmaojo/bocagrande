@@ -35,6 +35,12 @@ from ontology.tbox_builder import build_global_tbox
 def get_global_tbox():
     return build_global_tbox()
 
+# --- Razonería HermiT reutilizable ---
+@st.cache_resource
+def get_reasoner() -> HermiTReasoner:
+    """Return a cached HermiT reasoner instance."""
+    return HermiTReasoner()
+
 # --- Utilidad universal para leer archivos a DataFrame ---
 def leer_a_dataframe(archivo, sin_cabecera=False):
     nombre = archivo.name.lower()
@@ -80,6 +86,8 @@ def main():
     """
     st.title("Conversor Semántico Universal ")
     st.sidebar.info("Flujo: Comparación, prueba y transformación de datos.")
+
+    reasoner = get_reasoner()
 
     # --- 1. Comparación y Generación de Transformaciones ---
     st.header("1. Comparación y Generación de Transformaciones")
