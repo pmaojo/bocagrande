@@ -52,5 +52,21 @@ pytest              # runs unit tests only
 pytest -m e2e       # runs end-to-end tests
 ```
 
+## Auto-fix loop
+`tools/auto_fix.py` can run `pytest` in a loop and use a language model to
+suggest patches. A temporary virtual environment `.autoenv` keeps dependencies
+isolated and each iteration is logged under `artifacts/`.
+
+Run it locally:
+```bash
+python tools/auto_fix.py --max-iter 3
+```
+
+In GitHub Actions simply invoke the script in a step:
+```yaml
+- name: Auto fix
+  run: python tools/auto_fix.py --max-iter 3
+```
+
 ## Configuration
 Use `.env.example` as a template for your own `.env` file. Currently only `GEMINI_API_KEY` is required.
