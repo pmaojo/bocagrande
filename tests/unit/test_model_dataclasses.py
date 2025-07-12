@@ -6,6 +6,8 @@ def test_property_def_defaults():
     assert prop.name == "foo"
     assert prop.tipo == "string"
     assert prop.requerido is False
+    assert prop.length is None
+    assert prop.formato is None
     assert prop.metadata == {}
 
 

@@ -3,8 +3,7 @@ from adapter.yaml_to_shacl import generar_shape_shacl
 
 
 def test_generar_shape_shacl_basic():
-    field = PropertyDef(name="id", tipo="integer", requerido=True)
-    field.length = 5
+    field = PropertyDef(name="id", tipo="integer", requerido=True, length=5)
     schema = TableSchema(name="CLIENTES", fields=[field])
     turtle = generar_shape_shacl(schema)
     assert "bg:CLIENTESShape" in turtle
