@@ -6,11 +6,10 @@ import tempfile
 import os
 
 from adapter.reasoner import Reasoner
-from rdflib import Graph, Namespace, RDF, RDFS, OWL, Literal, URIRef, XSD # Añadir URIRef y XSD para posibles rangos
-import pandas as pd # Añadir pandas para manejar DataFrames
-from urllib.parse import quote
+from rdflib import Graph, RDF, RDFS, OWL, Literal, URIRef, XSD
+import pandas as pd
 
-BASE = Namespace("http://bocagrande.local/ont#")
+from .utils import BASE, limpiar_para_uri
 
 class OntologyBuilder:
     """
@@ -28,9 +27,6 @@ class OntologyBuilder:
         g = Graph() # Crear un nuevo grafo
         g += self.tbox_base_graph # Añadir las triples de la TBox base al nuevo grafo
         # No es necesario volver a bindear, la adición de grafos mantiene los bindings
-
-        def limpiar_para_uri(texto):
-            return quote(str(texto).split()[0].replace(' ', '_'), safe='')
 
         class_uri = BASE[limpiar_para_uri(schema.name.upper())]
 
