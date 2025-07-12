@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-"""
-Test script to verify the YAML parsing fix in app.py
-"""
+"""Utility to verify that YAML schemas load correctly."""
 import yaml
 from pathlib import Path
 
