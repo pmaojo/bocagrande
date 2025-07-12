@@ -1,16 +1,26 @@
-- Campo: tienda
-  Tipo: integer
-  Longitud: '5'
-  Obligatorio: Sí
-  Descripción: Código tienda
-- Campo: cdgArticulo
-  Tipo: string
-  Longitud: '20'
-  Obligatorio: Sí
-  Descripción: Articulos.cdgArt
+table: STOCK
+columns:
+- name: tienda
+  type: integer
+  length: 5
+  required: true
+  description: Código tienda
+- name: cdgArticulo
+  type: string
+  length: 20
+  required: true
+  description: Articulos.cdgArt
   foreign_key: Articulos.cdgArt
-- Campo: unidades
-  Tipo: integer
-  Longitud: '5'
-  Obligatorio: Sí
-  Descripción: Unidades en stock
+- name: unidades
+  type: integer
+  length: 5
+  required: true
+  description: Unidades en stock
+primary_key: &id001
+- tienda
+- cdgArticulo
+checks:
+  primary_key:
+    operation: concat
+    fields: *id001
+    expression: tienda + cdgArticulo

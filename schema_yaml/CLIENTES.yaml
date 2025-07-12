@@ -1,168 +1,174 @@
-- Campo: id
-  Tipo: integer
-  Longitud: '10'
-  Obligatorio: Sí
-  Descripción: Código de cliente
-- Campo: tienda
-  Tipo: integer
-  Longitud: '6'
-  Obligatorio: Sí
-  Descripción: Código de tienda
-- Campo: nombre
-  Tipo: string
-  Longitud: '35'
-  Obligatorio: Sí
-  Descripción: Nombre
-- Campo: apellido1
-  Tipo: string
-  Longitud: '25'
-  Obligatorio: 'No'
-  Descripción: Primer apellido
-- Campo: apellido2
-  Tipo: string
-  Longitud: '25'
-  Obligatorio: 'No'
-  Descripción: Segundo apellido
-- Campo: direccion
-  Tipo: string
-  Longitud: '64'
-  Obligatorio: 'No'
-  Descripción: Dirección
-- Campo: poblacion
-  Tipo: string
-  Longitud: '64'
-  Obligatorio: 'No'
-  Descripción: Población
-- Campo: provincia
-  Tipo: string
-  Longitud: '64'
-  Obligatorio: 'No'
-  Descripción: Provincia
-- Campo: pais
-  Tipo: string
-  Longitud: '64'
-  Obligatorio: 'No'
-  Descripción: País
-- Campo: sexo
-  Tipo: string
-  Longitud: '1'
-  Obligatorio: 'No'
-  Descripción: M= Mujer, H= Hombre
-  Enum:
+table: CLIENTES
+columns:
+- name: id
+  type: integer
+  length: 10
+  required: true
+  description: Código de cliente
+- name: tienda
+  type: integer
+  length: 6
+  required: true
+  description: Código de tienda
+- name: nombre
+  type: string
+  length: 35
+  required: true
+  description: Nombre
+- name: apellido1
+  type: string
+  length: 25
+  required: false
+  description: Primer apellido
+- name: apellido2
+  type: string
+  length: 25
+  required: false
+  description: Segundo apellido
+- name: direccion
+  type: string
+  length: 64
+  required: false
+  description: Dirección
+- name: poblacion
+  type: string
+  length: 64
+  required: false
+  description: Población
+- name: provincia
+  type: string
+  length: 64
+  required: false
+  description: Provincia
+- name: pais
+  type: string
+  length: 64
+  required: false
+  description: País
+- name: sexo
+  type: string
+  length: 1
+  required: false
+  description: M= Mujer, H= Hombre
+  enum:
   - M
   - H
-- Campo: cp
-  Tipo: string
-  Longitud: '10'
-  Obligatorio: 'No'
-  Descripción: Código postal
-- Campo: fechaNac
-  Tipo: date
-  Longitud: ''
-  Obligatorio: 'No'
-  Descripción: Fecha nacimiento (dd/mm/yyyy)
-  Formato: dd/mm/yyyy
-- Campo: telefono
-  Tipo: string
-  Longitud: '25'
-  Obligatorio: 'No'
-  Descripción: Teléfono principal
-- Campo: telefono2
-  Tipo: string
-  Longitud: '25'
-  Obligatorio: 'No'
-  Descripción: Teléfono secundario
-- Campo: movil
-  Tipo: string
-  Longitud: '25'
-  Obligatorio: 'No'
-  Descripción: Teléfono móvil
-- Campo: fax
-  Tipo: string
-  Longitud: '25'
-  Obligatorio: 'No'
-  Descripción: Campo deprecado
-  Deprecado: true
-- Campo: email
-  Tipo: string
-  Longitud: '256'
-  Obligatorio: 'No'
-  Descripción: Correo electrónico
-- Campo: dni
-  Tipo: string
-  Longitud: '16'
-  Obligatorio: 'No'
-  Descripción: DNI/NIF/NIE
-- Campo: porSms
-  Tipo: string
-  Longitud: '2'
-  Obligatorio: Sí
-  Descripción: Permiso SMS (SI/NO)
-  Enum:
+- name: cp
+  type: string
+  length: 10
+  required: false
+  description: Código postal
+- name: fechaNac
+  type: date
+  required: false
+  format: dd/mm/yyyy
+  description: Fecha nacimiento (dd/mm/yyyy)
+- name: telefono
+  type: string
+  length: 25
+  required: false
+  description: Teléfono principal
+- name: telefono2
+  type: string
+  length: 25
+  required: false
+  description: Teléfono secundario
+- name: movil
+  type: string
+  length: 25
+  required: false
+  description: Teléfono móvil
+- name: fax
+  type: string
+  length: 25
+  required: false
+  description: Campo deprecado
+  deprecated: true
+- name: email
+  type: string
+  length: 256
+  required: false
+  description: Correo electrónico
+- name: dni
+  type: string
+  length: 16
+  required: false
+  description: DNI/NIF/NIE
+- name: porSms
+  type: string
+  length: 2
+  required: true
+  description: Permiso SMS (SI/NO)
+  enum:
   - SI
   - 'NO'
-- Campo: porMail
-  Tipo: string
-  Longitud: '2'
-  Obligatorio: Sí
-  Descripción: Permiso Mail (SI/NO)
-  Enum:
+- name: porMail
+  type: string
+  length: 2
+  required: true
+  description: Permiso Mail (SI/NO)
+  enum:
   - SI
   - 'NO'
-- Campo: ultVisita
-  Tipo: date
-  Longitud: ''
-  Obligatorio: 'No'
-  Descripción: Última visita
-  Formato: dd/mm/yyyy
-- Campo: primeraVisita
-  Tipo: date
-  Longitud: ''
-  Obligatorio: 'No'
-  Descripción: Primera visita
-  Formato: dd/mm/yyyy
-- Campo: obs
-  Tipo: string
-  Longitud: 4GB
-  Obligatorio: 'No'
-  Descripción: Observaciones
-- Campo: motivo
-  Tipo: string
-  Longitud: '5'
-  Obligatorio: 'No'
-  Descripción: Campo deprecado
-  Deprecado: true
-- Campo: profesion
-  Tipo: string
-  Longitud: '64'
-  Obligatorio: 'No'
-  Descripción: Profesión
-- Campo: lopd
-  Tipo: string
-  Longitud: '2'
-  Obligatorio: Sí
-  Descripción: LOPD aceptada (SI/NO)
-  Enum:
+- name: ultVisita
+  type: date
+  required: false
+  format: dd/mm/yyyy
+  description: Última visita
+- name: primeraVisita
+  type: date
+  required: false
+  format: dd/mm/yyyy
+  description: Primera visita
+- name: obs
+  type: string
+  required: false
+  description: Observaciones
+- name: motivo
+  type: string
+  length: 5
+  required: false
+  description: Campo deprecado
+  deprecated: true
+- name: profesion
+  type: string
+  length: 64
+  required: false
+  description: Profesión
+- name: lopd
+  type: string
+  length: 2
+  required: true
+  description: LOPD aceptada (SI/NO)
+  enum:
   - SI
   - 'NO'
-- Campo: mailing
-  Tipo: string
-  Longitud: '2'
-  Obligatorio: Sí
-  Descripción: Permiso mailing (SI/NO)
-  Enum:
+- name: mailing
+  type: string
+  length: 2
+  required: true
+  description: Permiso mailing (SI/NO)
+  enum:
   - SI
   - 'NO'
-- Campo: grupoCliente
-  Tipo: string
-  Longitud: '10'
-  Obligatorio: 'No'
-  Descripción: Agrupación de clientes (No se utiliza)
-- Campo: inactivo
-  Tipo: string
-  Longitud: '2'
-  Obligatorio: Sí
-  Descripción: Cliente inactivo (SI/NO)
-  Enum:
+- name: grupoCliente
+  type: string
+  length: 10
+  required: false
+  description: Agrupación de clientes (No se utiliza)
+- name: inactivo
+  type: string
+  length: 2
+  required: true
+  description: Cliente inactivo (SI/NO)
+  enum:
   - SI
   - 'NO'
+primary_key: &id001
+- id
+- tienda
+checks:
+  primary_key:
+    operation: concat
+    fields: *id001
+    expression: id + tienda

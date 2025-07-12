@@ -7,13 +7,14 @@ from adapter.yaml_loader import load_schema
 
 def test_load_schema_success(tmp_path):
     yaml_content = """
-fields:
-  - Campo: id
-    Tipo: integer
-    Longitud: 5
-  - Campo: fecha
-    Tipo: date
-    Formato: "%Y-%m-%d"
+table: CLIENTES
+columns:
+  - name: id
+    type: integer
+    length: 5
+  - name: fecha
+    type: date
+    format: "%Y-%m-%d"
 """
     file = tmp_path / "clientes.yaml"
     file.write_text(yaml_content)
@@ -41,10 +42,11 @@ def test_load_schema_invalid_yaml(tmp_path):
 
 def test_required_field_with_accent(tmp_path):
     yaml_content = """
-fields:
-  - Campo: nombre
-    Tipo: string
-    Obligatorio: Sí
+table: TEST
+columns:
+  - name: nombre
+    type: string
+    required: Sí
 """
     file = tmp_path / "accent.yaml"
     file.write_text(yaml_content)
@@ -55,10 +57,11 @@ fields:
 
 def test_required_field_without_accent(tmp_path):
     yaml_content = """
-fields:
-  - Campo: nombre
-    Tipo: string
-    Obligatorio: Si
+table: TEST
+columns:
+  - name: nombre
+    type: string
+    required: Si
 """
     file = tmp_path / "noaccent.yaml"
     file.write_text(yaml_content)
@@ -69,10 +72,11 @@ fields:
 
 def test_length_4gb_is_none(tmp_path):
     yaml_content = """
-fields:
-  - Campo: obs
-    Tipo: string
-    Longitud: 4GB
+table: TEST
+columns:
+  - name: obs
+    type: string
+    length: 4GB
 """
     file = tmp_path / "big.yaml"
     file.write_text(yaml_content)
@@ -83,9 +87,10 @@ fields:
 
 def test_load_schema_unique(tmp_path):
     yaml_content = """
-fields:
-  - Campo: id
-    Tipo: integer
+table: TEST
+columns:
+  - name: id
+    type: integer
 unique:
   - [id]
 """
@@ -99,11 +104,12 @@ unique:
 def test_gradgafa_formats_loaded():
     """Ensure that all Formato values from GRADGAFA.yaml are parsed correctly."""
     path = Path("schema_yaml/GRADGAFA.yaml")
-    raw_fields = yaml.safe_load(path.read_text())
+    raw_schema = yaml.safe_load(path.read_text())
+    raw_fields = raw_schema["columns"]
     schema = load_schema(str(path))
     assert schema is not None
 
-    expected = {f["Campo"]: f.get("Formato") for f in raw_fields}
+    expected = {f["name"]: f.get("format") for f in raw_fields}
     loaded = {field.name: field.formato for field in schema.fields}
     assert expected == loaded
 
@@ -111,11 +117,12 @@ def test_gradgafa_formats_loaded():
 def test_clientes_date_formats_loaded():
     """Check Formato values for CLIENTES.yaml date fields."""
     path = Path("schema_yaml/CLIENTES.yaml")
-    raw_fields = yaml.safe_load(path.read_text())
+    raw_schema = yaml.safe_load(path.read_text())
+    raw_fields = raw_schema["columns"]
     schema = load_schema(str(path))
     assert schema is not None
 
     target = {"fechaNac", "ultVisita", "primeraVisita"}
-    expected = {f["Campo"]: f.get("Formato") for f in raw_fields if f["Campo"] in target}
+    expected = {f["name"]: f.get("format") for f in raw_fields if f["name"] in target}
     loaded = {field.name: field.formato for field in schema.fields if field.name in target}
     assert expected == loaded

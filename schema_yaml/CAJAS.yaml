@@ -1,60 +1,62 @@
-- Campo: venta
-  Tipo: integer
-  Longitud: '10'
-  Obligatorio: Sí
-  Descripción: Ventacab.venta
-  Formato: ''
+table: CAJAS
+columns:
+- name: venta
+  type: integer
+  length: 10
+  required: true
+  description: Ventacab.venta
   foreign_key: Ventacab.venta
-- Campo: pedido
-  Tipo: integer
-  Longitud: '10'
-  Obligatorio: 'No'
-  Descripción: Deprecado
-  Formato: ''
-  Deprecado: true
-- Campo: tienda
-  Tipo: integer
-  Longitud: '3'
-  Obligatorio: Sí
-  Descripción: Ventacab.tienda
-  Formato: ''
+- name: pedido
+  type: integer
+  length: 10
+  required: false
+  description: Deprecado
+  deprecated: true
+- name: tienda
+  type: integer
+  length: 3
+  required: true
+  description: Ventacab.tienda
   foreign_key: Ventacab.tienda
-- Campo: fecha
-  Tipo: date
-  Longitud: ''
-  Obligatorio: Sí
-  Descripción: Fecha de cobro
-  Formato: dd/mm/yyyy hh:mm:ss
-- Campo: fPago
-  Tipo: string
-  Longitud: '50'
-  Obligatorio: Sí
-  Descripción: Forma de pago
-  Formato: ''
-- Campo: agente
-  Tipo: integer
-  Longitud: '6'
-  Obligatorio: 'No'
-  Descripción: Usuarios.cdgusuario
-  Formato: ''
+- name: fecha
+  type: date
+  required: true
+  format: dd/mm/yyyy hh:mm:ss
+  description: Fecha de cobro
+- name: fPago
+  type: string
+  length: 50
+  required: true
+  description: Forma de pago
+- name: agente
+  type: integer
+  length: 6
+  required: false
+  description: Usuarios.cdgusuario
   foreign_key: Usuarios.cdgusuario
-- Campo: importe
-  Tipo: float
-  Longitud: 20, 6
-  Obligatorio: Sí
-  Descripción: Importe cobrado
-  Formato: ''
-- Campo: numtpv
-  Tipo: integer
-  Longitud: '3'
-  Obligatorio: 'No'
-  Descripción: Deprecado
-  Formato: ''
-  Deprecado: true
-- Campo: numero_cheque
-  Tipo: string
-  Longitud: '15'
-  Obligatorio: 'No'
-  Descripción: Deprecado
-  Formato: ''
-  Deprecado: true
+- name: importe
+  type: float
+  precision: 20
+  scale: 6
+  required: true
+  description: Importe cobrado
+- name: numtpv
+  type: integer
+  length: 3
+  required: false
+  description: Deprecado
+  deprecated: true
+- name: numero_cheque
+  type: string
+  length: 15
+  required: false
+  description: Deprecado
+  deprecated: true
+primary_key: &id001
+- venta
+- tienda
+checks:
+  primary_key:
+    operation: concat
+    fields: *id001
+    expression: venta + tienda

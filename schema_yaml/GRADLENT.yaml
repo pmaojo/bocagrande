@@ -1,214 +1,193 @@
-- Campo: id
-  Tipo: integer
-  Longitud: '10'
-  Obligatorio: Sí
-  Descripción: Identificador graduación
-  Formato: ''
-- Campo: idCliente
-  Tipo: integer
-  Longitud: '10'
-  Obligatorio: Sí
-  Descripción: Clientes.id
-  Formato: ''
+table: GRADLENT
+columns:
+- name: id
+  type: integer
+  length: 10
+  required: true
+  description: Identificador graduación
+- name: idCliente
+  type: integer
+  length: 10
+  required: true
+  description: Clientes.id
   foreign_key: Clientes.id
-- Campo: dsc
-  Tipo: string
-  Longitud: '1'
-  Obligatorio: Sí
-  Descripción: Si es definitiva una D si es una prueba o adaptación P
-  Formato: ''
-- Campo: ejeD
-  Tipo: integer
-  Longitud: '4'
-  Obligatorio: 'No'
-  Descripción: Campo para la medición del eje derecho.
-  Formato: '[-XXX, XXX]'
-- Campo: cilindroD
-  Tipo: integer
-  Longitud: '6'
-  Obligatorio: 'No'
-  Descripción: Campo para la medición del cilindro derecho.
-  Formato: '[-XX.XX, XX.XX]'
-- Campo: esferaD
-  Tipo: integer
-  Longitud: '6'
-  Obligatorio: 'No'
-  Descripción: Campo para la medición de la esfera derecha.
-  Formato: '[-XX.XX, XX.XX]'
-- Campo: adicionD
-  Tipo: integer
-  Longitud: '4'
-  Obligatorio: 'No'
-  Descripción: Campo para registrar los datos de la adición ojo derecho
-  Formato: '[-XXX, XXX]'
-- Campo: avd
-  Tipo: integer
-  Longitud: '4'
-  Obligatorio: 'No'
-  Descripción: Campo para registrar los datos de la agudeza visual del ojo derecho
-  Formato: '[X.XX]'
-- Campo: rcd
-  Tipo: string
-  Longitud: '20'
-  Obligatorio: 'No'
-  Descripción: Campo para indicar el radio de curvatura de la lente derecha
-  Formato: ''
-- Campo: ejeI
-  Tipo: integer
-  Longitud: '4'
-  Obligatorio: 'No'
-  Descripción: Campo para la medición del eje izquierdo.
-  Formato: '[X.XX]'
-- Campo: cilindroI
-  Tipo: integer
-  Longitud: '4'
-  Obligatorio: 'No'
-  Descripción: Campo para la medición del cilindro izquierdo.
-  Formato: '[-XX.XX, XX.XX]'
-- Campo: esferaI
-  Tipo: integer
-  Longitud: '6'
-  Obligatorio: 'No'
-  Descripción: Campo para la medición del Esfera izquierda.
-  Formato: '[-XX.XX, XX.XX]'
-- Campo: adicionI
-  Tipo: integer
-  Longitud: '4'
-  Obligatorio: 'No'
-  Descripción: Campo para registrar los datos de la adición ojo izquierda
-  Formato: '[X.XX]'
-- Campo: avi
-  Tipo: integer
-  Longitud: '4'
-  Obligatorio: 'No'
-  Descripción: Campo para registrar los datos de la agudeza visual del ojo izquierdo
-  Formato: '[X.XX]'
-- Campo: rci
-  Tipo: string
-  Longitud: '20'
-  Obligatorio: 'No'
-  Descripción: Campo para indicar el radio de curvatura de la lente izquierda
-  Formato: ''
-- Campo: fecha
-  Tipo: date
-  Longitud: ''
-  Obligatorio: Sí
-  Descripción: Fecha de creación para la graduación optométrica.
-  Formato: dd/mm/yyyy hh:mm:ss
-- Campo: doctor
-  Tipo: integer
-  Longitud: '8'
-  Obligatorio: Sí
-  Descripción: Doctores.codOrigen
-  Formato: ''
+- name: dsc
+  type: string
+  length: 1
+  required: true
+  description: Si es definitiva una D si es una prueba o adaptación P
+- name: ejeD
+  type: integer
+  length: 4
+  required: false
+  format: '[-XXX, XXX]'
+  description: Campo para la medición del eje derecho.
+- name: cilindroD
+  type: integer
+  length: 6
+  required: false
+  format: '[-XX.XX, XX.XX]'
+  description: Campo para la medición del cilindro derecho.
+- name: esferaD
+  type: integer
+  length: 6
+  required: false
+  format: '[-XX.XX, XX.XX]'
+  description: Campo para la medición de la esfera derecha.
+- name: adicionD
+  type: integer
+  length: 4
+  required: false
+  format: '[-XXX, XXX]'
+  description: Campo para registrar los datos de la adición ojo derecho
+- name: avd
+  type: integer
+  length: 4
+  required: false
+  format: '[X.XX]'
+  description: Campo para registrar los datos de la agudeza visual del ojo derecho
+- name: rcd
+  type: string
+  length: 20
+  required: false
+  description: Campo para indicar el radio de curvatura de la lente derecha
+- name: ejeI
+  type: integer
+  length: 4
+  required: false
+  format: '[X.XX]'
+  description: Campo para la medición del eje izquierdo.
+- name: cilindroI
+  type: integer
+  length: 4
+  required: false
+  format: '[-XX.XX, XX.XX]'
+  description: Campo para la medición del cilindro izquierdo.
+- name: esferaI
+  type: integer
+  length: 6
+  required: false
+  format: '[-XX.XX, XX.XX]'
+  description: Campo para la medición del Esfera izquierda.
+- name: adicionI
+  type: integer
+  length: 4
+  required: false
+  format: '[X.XX]'
+  description: Campo para registrar los datos de la adición ojo izquierda
+- name: avi
+  type: integer
+  length: 4
+  required: false
+  format: '[X.XX]'
+  description: Campo para registrar los datos de la agudeza visual del ojo izquierdo
+- name: rci
+  type: string
+  length: 20
+  required: false
+  description: Campo para indicar el radio de curvatura de la lente izquierda
+- name: fecha
+  type: date
+  required: true
+  format: dd/mm/yyyy hh:mm:ss
+  description: Fecha de creación para la graduación optométrica.
+- name: doctor
+  type: integer
+  length: 8
+  required: true
+  description: Doctores.codOrigen
   foreign_key: Doctores.codOrigen
-- Campo: diametroD
-  Tipo: string
-  Longitud: '20'
-  Obligatorio: 'No'
-  Descripción: Campo para guardar la información del diámetro del ojo derecho en la
+- name: diametroD
+  type: string
+  length: 20
+  required: false
+  description: Campo para guardar la información del diámetro del ojo derecho en la
     graduación contactológica.
-  Formato: ''
-- Campo: diametroI
-  Tipo: string
-  Longitud: '20'
-  Obligatorio: 'No'
-  Descripción: Campo para guardar la información del diámetro del ojo izquierdo en
+- name: diametroI
+  type: string
+  length: 20
+  required: false
+  description: Campo para guardar la información del diámetro del ojo izquierdo en
     la graduación contactológica.
-  Formato: ''
-- Campo: obs
-  Tipo: string
-  Longitud: 4GB
-  Obligatorio: 'No'
-  Descripción: Campo para registrar los datos de la distancia naso-pupilar derecha.
-  Formato: ''
-- Campo: avao
-  Tipo: integer
-  Longitud: '10'
-  Obligatorio: 'No'
-  Descripción: Campo para registrar los datos de la agudeza visual ambos ojos.
-  Formato: '[X.XX]'
-- Campo: dzod
-  Tipo: string
-  Longitud: '20'
-  Obligatorio: 'No'
-  Descripción: Campo para registrar los datos del diámetro para el ojo derecho
-  Formato: ''
-- Campo: dzoi
-  Tipo: string
-  Longitud: '20'
-  Obligatorio: 'No'
-  Descripción: Campo para registrar los datos del diámetr para el ojo izquierdo
-  Formato: ''
-- Campo: codigolcd
-  Tipo: string
-  Longitud: '5'
-  Obligatorio: 'No'
-  Descripción: Campo deprecado
-  Formato: ''
-  Deprecado: true
-- Campo: codigolci
-  Tipo: string
-  Longitud: '5'
-  Obligatorio: 'No'
-  Descripción: Campo deprecado
-  Formato: ''
-  Deprecado: true
-- Campo: marcaD
-  Tipo: string
-  Longitud: '30'
-  Obligatorio: 'No'
-  Descripción: Campo deprecado
-  Formato: dd/mm/yyyy hh:mm:ss
-  Deprecado: true
-- Campo: marcaI
-  Tipo: string
-  Longitud: '30'
-  Obligatorio: 'No'
-  Descripción: Campo deprecado
-  Formato: ''
-  Deprecado: true
-- Campo: laboratorioD
-  Tipo: string
-  Longitud: '200'
-  Obligatorio: 'No'
-  Descripción: Usuarios.cdgusuario
-  Formato: ''
+- name: obs
+  type: string
+  required: false
+  description: Campo para registrar los datos de la distancia naso-pupilar derecha.
+- name: avao
+  type: integer
+  length: 10
+  required: false
+  format: '[X.XX]'
+  description: Campo para registrar los datos de la agudeza visual ambos ojos.
+- name: dzod
+  type: string
+  length: 20
+  required: false
+  description: Campo para registrar los datos del diámetro para el ojo derecho
+- name: dzoi
+  type: string
+  length: 20
+  required: false
+  description: Campo para registrar los datos del diámetr para el ojo izquierdo
+- name: codigolcd
+  type: string
+  length: 5
+  required: false
+  description: Campo deprecado
+  deprecated: true
+- name: codigolci
+  type: string
+  length: 5
+  required: false
+  description: Campo deprecado
+  deprecated: true
+- name: marcaD
+  type: string
+  length: 30
+  required: false
+  format: dd/mm/yyyy hh:mm:ss
+  description: Campo deprecado
+  deprecated: true
+- name: marcaI
+  type: string
+  length: 30
+  required: false
+  description: Campo deprecado
+  deprecated: true
+- name: laboratorioD
+  type: string
+  length: 200
+  required: false
+  description: Usuarios.cdgusuario
   foreign_key: Usuarios.cdgusuario
-- Campo: laboratorioI
-  Tipo: string
-  Longitud: '200'
-  Obligatorio: 'No'
-  Descripción: Campo para registrar los datos de la distancia naso-pupilar cerca derecha.
-  Formato: ''
-- Campo: proxRevision
-  Tipo: date
-  Longitud: ''
-  Obligatorio: 'No'
-  Descripción: Campo para registrar los datos de la distancia naso-pupilar cerca izquierda.
-  Formato: dd/mm/yyyy hh:mm:ss
-- Campo: tipolenteD
-  Tipo: string
-  Longitud: '50'
-  Obligatorio: 'No'
-  Descripción: Tipo de lente prescrita del ojo derecho para la graduación contactológica.
-  Formato: ''
-- Campo: tipoLenteI
-  Tipo: string
-  Longitud: '50'
-  Obligatorio: 'No'
-  Descripción: Tipo de lente prescrita del ojo izquierdo para la graduación contactológica.
-  Formato: ''
-- Campo: tienda
-  Tipo: integer
-  Longitud: '6'
-  Obligatorio: Sí
-  Descripción: Indica la tienda a la que pertenece la graduación.
-  Formato: ''
-- Campo: usuario
-  Tipo: integer
-  Longitud: '6'
-  Obligatorio: Sí
-  Descripción: Usuarios.cdgusuario
-  Formato: ''
+- name: laboratorioI
+  type: string
+  length: 200
+  required: false
+  description: Campo para registrar los datos de la distancia naso-pupilar cerca derecha.
+- name: proxRevision
+  type: date
+  required: false
+  format: dd/mm/yyyy hh:mm:ss
+  description: Campo para registrar los datos de la distancia naso-pupilar cerca izquierda.
+- name: tipolenteD
+  type: string
+  length: 50
+  required: false
+  description: Tipo de lente prescrita del ojo derecho para la graduación contactológica.
+- name: tipoLenteI
+  type: string
+  length: 50
+  required: false
+  description: Tipo de lente prescrita del ojo izquierdo para la graduación contactológica.
+- name: tienda
+  type: integer
+  length: 6
+  required: true
+  description: Indica la tienda a la que pertenece la graduación.
+- name: usuario
+  type: integer
+  length: 6
+  required: true
+  description: Usuarios.cdgusuario
   foreign_key: Usuarios.cdgusuario

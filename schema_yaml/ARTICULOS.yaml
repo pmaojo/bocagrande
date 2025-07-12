@@ -1,126 +1,114 @@
-- Campo: cdgArt
-  Tipo: string
-  Longitud: '20'
-  Obligatorio: Sí
-  Descripción: Código artículo
-  Formato: ''
-- Campo: dsc
-  Tipo: string
-  Longitud: '50'
-  Obligatorio: Sí
-  Descripción: Descripción
-  Formato: ''
-- Campo: precio_costo
-  Tipo: float
-  Longitud: 20,4
-  Obligatorio: 'No'
-  Descripción: Precio de compra del articulo
-  Formato: ''
-- Campo: prop1
-  Tipo: string
-  Longitud: '64'
-  Obligatorio: 'No'
-  Descripción: '• AUDIFONOS: Marca • LENTES DE CONTACTO: Marca • LENTES: Marca • MONTURAS
+table: ARTICULOS
+columns:
+- name: cdgArt
+  type: string
+  length: 20
+  required: true
+  description: Código artículo
+- name: dsc
+  type: string
+  length: 50
+  required: true
+  description: Descripción
+- name: precio_costo
+  type: float
+  precision: 20
+  scale: 4
+  required: false
+  description: Precio de compra del articulo
+- name: prop1
+  type: string
+  length: 64
+  required: false
+  description: '• AUDIFONOS: Marca • LENTES DE CONTACTO: Marca • LENTES: Marca • MONTURAS
     - SOL: Marca • VARIOS/PDTOS DE MANTENIMIENTO: Marca'
-  Formato: ''
-- Campo: prop2
-  Tipo: string
-  Longitud: '64'
-  Obligatorio: 'No'
-  Descripción: '• AUDIFONOS: Familia • LENTES DE CONTACTO: Reposición • LENTES: Foco
+- name: prop2
+  type: string
+  length: 64
+  required: false
+  description: '• AUDIFONOS: Familia • LENTES DE CONTACTO: Reposición • LENTES: Foco
     • MONTURAS - SOL: Material • VARIOS/PDTOS DE MANTENIMIENTO: Grupo'
-  Formato: ''
-- Campo: prop3
-  Tipo: string
-  Longitud: '64'
-  Obligatorio: 'No'
-  Descripción: '• AUDIFONOS: Tipo • LENTES DE CONTACTO: Categoría • LENTES: Tipo •
+- name: prop3
+  type: string
+  length: 64
+  required: false
+  description: '• AUDIFONOS: Tipo • LENTES DE CONTACTO: Categoría • LENTES: Tipo •
     MONTURAS - SOL: Destinatario • VARIOS/PDTOS DE MANTENIMIENTO: Familia • AUDIFONOS:
     Tecnología • LENTES DE CONTACTO: Stock/Fabricación • LENTES: Gama • MONTURAS-SOL:
     Modelo • VARIOS/PDTOS DE MANTENIMIENTO: Capacidad'
-  Formato: ''
-- Campo: prop4
-  Tipo: string
-  Longitud: '64'
-  Obligatorio: 'No'
-  Descripción: ''
-  Formato: ''
-- Campo: prop5
-  Tipo: string
-  Longitud: '64'
-  Obligatorio: 'No'
-  Descripción: '• LENTES DE CONTACTO: Gama • LENTES: Esfera • MONTURAS - SOL: Color'
-  Formato: ''
-- Campo: prop6
-  Tipo: string
-  Longitud: '64'
-  Obligatorio: 'No'
-  Descripción: '• LENTES DE CONTACTO: Diámetro • LENTES: Cilindro • MONTURAS - SOL:
+- name: prop4
+  type: string
+  length: 64
+  required: false
+- name: prop5
+  type: string
+  length: 64
+  required: false
+  description: '• LENTES DE CONTACTO: Gama • LENTES: Esfera • MONTURAS - SOL: Color'
+- name: prop6
+  type: string
+  length: 64
+  required: false
+  description: '• LENTES DE CONTACTO: Diámetro • LENTES: Cilindro • MONTURAS - SOL:
     Calibre'
-  Formato: ''
-- Campo: prop7
-  Tipo: string
-  Longitud: '64'
-  Obligatorio: 'No'
-  Descripción: '• LENTES DE CONTACTO: Radio • LENTES: Diámetro • MONTURAS-SOL: Puente'
-  Formato: ''
-- Campo: prop8
-  Tipo: string
-  Longitud: '64'
-  Obligatorio: 'No'
-  Descripción: '• LENTES DE CONTACTO: Esfera • MONTURAS-SOL: Estado'
-  Formato: ''
-- Campo: cdgBarras
-  Tipo: string
-  Longitud: '50'
-  Obligatorio: 'No'
-  Descripción: Código de barras
-  Formato: ''
-- Campo: cdgEdi
-  Tipo: string
-  Longitud: '13'
-  Obligatorio: 'No'
-  Descripción: Código registrado en el GS1 para el intercambio electrónico de este
+- name: prop7
+  type: string
+  length: 64
+  required: false
+  description: '• LENTES DE CONTACTO: Radio • LENTES: Diámetro • MONTURAS-SOL: Puente'
+- name: prop8
+  type: string
+  length: 64
+  required: false
+  description: '• LENTES DE CONTACTO: Esfera • MONTURAS-SOL: Estado'
+- name: cdgBarras
+  type: string
+  length: 50
+  required: false
+  description: Código de barras
+- name: cdgEdi
+  type: string
+  length: 13
+  required: false
+  description: Código registrado en el GS1 para el intercambio electrónico de este
     producto.
-  Formato: ''
-- Campo: pvp1
-  Tipo: float
-  Longitud: 20,4
-  Obligatorio: Sí
-  Descripción: Precio principal de venta para el artículo.
-  Formato: ''
-- Campo: pvp2
-  Tipo: float
-  Longitud: 20,4
-  Obligatorio: 'No'
-  Descripción: Precio secundario de venta para el artículo.
-  Formato: ''
-- Campo: pvp3
-  Tipo: float
-  Longitud: 20,4
-  Obligatorio: 'No'
-  Descripción: Precio secundario de venta para el artículo.
-  Formato: ''
-- Campo: pvp4
-  Tipo: float
-  Longitud: 20,4
-  Obligatorio: 'No'
-  Descripción: Precio secundario de venta para el artículo.
-  Formato: ''
-- Campo: pvp5
-  Tipo: float
-  Longitud: 20,4
-  Obligatorio: 'No'
-  Descripción: Precio secundario de venta para el artículo.
-  Formato: ''
-- Campo: tipo
-  Tipo: string
-  Longitud: '40'
-  Obligatorio: Sí
-  Descripción: 'Familia del articulo Valores posibles: [ LENTES, LC, GRADUADO, SOL,
+- name: pvp1
+  type: float
+  precision: 20
+  scale: 4
+  required: true
+  description: Precio principal de venta para el artículo.
+- name: pvp2
+  type: float
+  precision: 20
+  scale: 4
+  required: false
+  description: Precio secundario de venta para el artículo.
+- name: pvp3
+  type: float
+  precision: 20
+  scale: 4
+  required: false
+  description: Precio secundario de venta para el artículo.
+- name: pvp4
+  type: float
+  precision: 20
+  scale: 4
+  required: false
+  description: Precio secundario de venta para el artículo.
+- name: pvp5
+  type: float
+  precision: 20
+  scale: 4
+  required: false
+  description: Precio secundario de venta para el artículo.
+- name: tipo
+  type: string
+  length: 40
+  required: true
+  description: 'Familia del articulo Valores posibles: [ LENTES, LC, GRADUADO, SOL,
     PDTOS MANTENIMIENTO VARIOS, AUDIFONOS, VARIOS AUDIO ]'
-  Formato: ''
-  Enum:
+  enum:
   - LENTES
   - LC
   - GRADUADO
@@ -128,50 +116,48 @@
   - PDTOS MANTENIMIENTO VARIOS
   - AUDIFONOS
   - VARIOS AUDIO
-- Campo: proveedor
-  Tipo: DECIMAL
-  Longitud: ''
-  Obligatorio: Sí
-  Descripción: Proveedores.cdgProv Valor por defecto 1, si no se dispone de esta información
-  Formato: ''
+- name: proveedor
+  type: DECIMAL
+  required: true
+  description: Proveedores.cdgProv Valor por defecto 1, si no se dispone de esta información
   foreign_key: Proveedores.cdgProv
-- Campo: pdtosProv
-  Tipo: DECIMAL
-  Longitud: 20,6
-  Obligatorio: 'No'
-  Descripción: Descuento de compra que ofrece el proveedor sobre el artículo.
-  Formato: ''
-- Campo: fechaUltCompra
-  Tipo: date
-  Longitud: ''
-  Obligatorio: 'No'
-  Descripción: Fecha que corresponde a la última compra del artículo.
-  Formato: dd/mm/yyyy
-- Campo: fecha_UltVenta
-  Tipo: date
-  Longitud: ''
-  Obligatorio: 'No'
-  Descripción: Fecha que corresponde a la última venta del artículo.
-  Formato: dd/mm/yyyy
-- Campo: fechaCreacion
-  Tipo: date
-  Longitud: ''
-  Obligatorio: 'No'
-  Descripción: Fecha de creación del artículo.
-  Formato: dd/mm/yyyy
-- Campo: saft
-  Tipo: string
-  Longitud: '1'
-  Obligatorio: 'No'
-  Descripción: Deprecado
-  Formato: ''
-  Deprecado: true
-- Campo: descatalogado
-  Tipo: string
-  Longitud: '2'
-  Obligatorio: Sí
-  Descripción: Producto que ya no esta activo en la empresa Valores posible SI/NO
-  Formato: ''
-  Enum:
+- name: pdtosProv
+  type: DECIMAL
+  precision: 20
+  scale: 6
+  required: false
+  description: Descuento de compra que ofrece el proveedor sobre el artículo.
+- name: fechaUltCompra
+  type: date
+  required: false
+  format: dd/mm/yyyy
+  description: Fecha que corresponde a la última compra del artículo.
+- name: fecha_UltVenta
+  type: date
+  required: false
+  format: dd/mm/yyyy
+  description: Fecha que corresponde a la última venta del artículo.
+- name: fechaCreacion
+  type: date
+  required: false
+  format: dd/mm/yyyy
+  description: Fecha de creación del artículo.
+- name: saft
+  type: string
+  length: 1
+  required: false
+  description: Deprecado
+  deprecated: true
+- name: descatalogado
+  type: string
+  length: 2
+  required: true
+  description: Producto que ya no esta activo en la empresa Valores posible SI/NO
+  enum:
   - SI
   - 'NO'
+unique:
+- entre ellos y entre cualquier otro registro de la tabla
+notes:
+- En Gio, los artículos se agrupan por familias, y estas familias tienen asignadas
+  6 precios y de 1 a 8 propiedades dependiendo de la familia a la que pertenece

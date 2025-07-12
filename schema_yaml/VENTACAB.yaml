@@ -1,104 +1,99 @@
-- Campo: venta
-  Tipo: integer
-  Longitud: '10'
-  Obligatorio: Sí
-  Descripción: Código de venta
-  Formato: ''
-- Campo: talon
-  Tipo: string
-  Longitud: '25'
-  Obligatorio: 'No'
-  Descripción: Código que se utiliza en los traspasos para identificar la venta de origen si el campo venta debe recalcular en Gioweb
-  Formato: ''
-- Campo: importeTotal
-  Tipo: float
-  Longitud: 20,6
-  Obligatorio: Sí
-  Descripción: Importe total venta
-  Formato: ''
-- Campo: fechaRetirado
-  Tipo: date
-  Longitud: ''
-  Obligatorio: 'No'
-  Descripción: Fecha retirada
-  Formato: dd/mm/yyyy hh:mm:ss
-- Campo: idCliente
-  Tipo: integer
-  Longitud: '10'
-  Obligatorio: Sí
-  Descripción: Clientes.id
-  Formato: ''
+table: VENTACAB
+columns:
+- name: venta
+  type: integer
+  length: 10
+  required: true
+  description: Código de venta
+- name: talon
+  type: string
+  length: 25
+  required: false
+  description: Código que se utiliza en los traspasos para identificar la venta de
+    origen si el campo venta debe recalcular en Gioweb
+- name: importeTotal
+  type: float
+  precision: 20
+  scale: 6
+  required: true
+  description: Importe total venta
+- name: fechaRetirado
+  type: date
+  required: false
+  format: dd/mm/yyyy hh:mm:ss
+  description: Fecha retirada
+- name: idCliente
+  type: integer
+  length: 10
+  required: true
+  description: Clientes.id
   foreign_key: Clientes.id
-- Campo: tienda
-  Tipo: integer
-  Longitud: '6'
-  Obligatorio: Sí
-  Descripción: Código tienda
-  Formato: ''
-- Campo: facturado
-  Tipo: string
-  Longitud: '2'
-  Obligatorio: 'No'
-  Descripción: SI/NO
-  Formato: ''
-  Enum:
+- name: tienda
+  type: integer
+  length: 6
+  required: true
+  description: Código tienda
+- name: facturado
+  type: string
+  length: 2
+  required: false
+  description: SI/NO
+  enum:
   - SI
   - 'NO'
-- Campo: factura
-  Tipo: string
-  Longitud: '20'
-  Obligatorio: 'No'
-  Descripción: Número de la venta que origina la factura
-  Formato: ''
-- Campo: obs
-  Tipo: string
-  Longitud: 4GB
-  Obligatorio: 'No'
-  Descripción: Observaciones
-  Formato: ''
-- Campo: usuario
-  Tipo: integer
-  Longitud: '6'
-  Obligatorio: Sí
-  Descripción: Usuarios.cdgusuario
-  Formato: ''
+- name: factura
+  type: string
+  length: 20
+  required: false
+  description: Número de la venta que origina la factura
+- name: obs
+  type: string
+  required: false
+  description: Observaciones
+- name: usuario
+  type: integer
+  length: 6
+  required: true
+  description: Usuarios.cdgusuario
   foreign_key: Usuarios.cdgusuario
-- Campo: copago
-  Tipo: string
-  Longitud: '14'
-  Obligatorio: 'No'
-  Descripción: Deprecado
-  Formato: ''
-  Deprecado: true
-- Campo: tiendaDevuelta
-  Tipo: integer
-  Longitud: '6'
-  Obligatorio: 'No'
-  Descripción: Tienda asociada a la devolución
-  Formato: ''
-- Campo: ventaDevuelta
-  Tipo: integer
-  Longitud: '10'
-  Obligatorio: 'No'
-  Descripción: Venta asociada a la devolución
-  Formato: ''
-- Campo: fecha
-  Tipo: date
-  Longitud: ''
-  Obligatorio: Sí
-  Descripción: Fecha de realización de la venta
-  Formato: dd/mm/yyyy hh:mm:ss
-- Campo: anticipo
-  Tipo: float
-  Longitud: '20'
-  Obligatorio: 'No'
-  Descripción: Deprecado
-  Formato: ''
-  Deprecado: true
-- Campo: formPagoAnticipo Alfanumericos
-  Tipo: ''
-  Longitud: '50'
-  Obligatorio: 'No'
-  Descripción: Deprecado
-  Formato: ''
-  Deprecado: true
+- name: copago
+  type: string
+  length: 14
+  required: false
+  description: Deprecado
+  deprecated: true
+- name: tiendaDevuelta
+  type: integer
+  length: 6
+  required: false
+  description: Tienda asociada a la devolución
+- name: ventaDevuelta
+  type: integer
+  length: 10
+  required: false
+  description: Venta asociada a la devolución
+- name: fecha
+  type: date
+  required: true
+  format: dd/mm/yyyy hh:mm:ss
+  description: Fecha de realización de la venta
+- name: anticipo
+  type: float
+  length: 20
+  required: false
+  description: Deprecado
+  deprecated: true
+- name: formPagoAnticipo Alfanumericos
+  type: null
+  length: 50
+  required: false
+  description: Deprecado
+  deprecated: true
+primary_key: &id001
+- venta
+- tienda
+checks:
+  primary_key:
+    operation: concat
+    fields: *id001
+    expression: venta + tienda
