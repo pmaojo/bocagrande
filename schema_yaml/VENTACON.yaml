@@ -1,122 +1,141 @@
-- Campo: venta
-  Tipo: integer
-  Longitud: '10'
-  Obligatorio: Sí
-  Descripción: Ventacab.venta
+table: VENTACON
+columns:
+- name: venta
+  type: integer
+  length: 10
+  required: true
+  description: Ventacab.venta
   foreign_key: Ventacab.venta
-- Campo: linea
-  Tipo: integer
-  Longitud: '10'
-  Obligatorio: Sí
-  Descripción: Número de línea
-- Campo: cdg_art
-  Tipo: string
-  Longitud: '20'
-  Obligatorio: Sí
-  Descripción: Articulos.id
+- name: linea
+  type: integer
+  length: 10
+  required: true
+  description: Número de línea
+- name: cdg_art
+  type: string
+  length: 20
+  required: true
+  description: Articulos.id
   foreign_key: Articulos.id
-- Campo: cdg_pro
-  Tipo: string
-  Longitud: '20'
-  Obligatorio: 'No'
-  Descripción: Campo deprecado
-  Deprecado: true
-- Campo: producto
-  Tipo: string
-  Longitud: '80'
-  Obligatorio: Sí
-  Descripción: Descripción
-- Campo: und
-  Tipo: integer
-  Longitud: '10'
-  Obligatorio: Sí
-  Descripción: Unidades vendidas
-- Campo: coste
-  Tipo: float
-  Longitud: 20,6
-  Obligatorio: 'No'
-  Descripción: Precio de compradel articulo
-- Campo: pvp
-  Tipo: float
-  Longitud: 20,6
-  Obligatorio: Sí
-  Descripción: Precio de venta
-- Campo: dcto
-  Tipo: float
-  Longitud: 20,6
-  Obligatorio: 'No'
-  Descripción: Descuento en euros
-- Campo: dcto_porcentaje
-  Tipo: float
-  Longitud: 20,6
-  Obligatorio: 'No'
-  Descripción: Descuento %
-- Campo: precio
-  Tipo: float
-  Longitud: 20,6
-  Obligatorio: Sí
-  Descripción: Precio total línea + descuento + impuesto
-- Campo: IVA
-  Tipo: float
-  Longitud: 20,6
-  Obligatorio: Sí
-  Descripción: Porcentaje de impuesto aplicado
-- Campo: tipo
-  Tipo: string
-  Longitud: '40'
-  Obligatorio: Sí
-  Descripción: 'Familia del articulo seleccionado Valores disponibles: Cristales =
+- name: cdg_pro
+  type: string
+  length: 20
+  required: false
+  description: Campo deprecado
+  deprecated: true
+- name: producto
+  type: string
+  length: 80
+  required: true
+  description: Descripción
+- name: und
+  type: integer
+  length: 10
+  required: true
+  description: Unidades vendidas
+- name: coste
+  type: float
+  precision: 20
+  scale: 6
+  required: false
+  description: Precio de compradel articulo
+- name: pvp
+  type: float
+  precision: 20
+  scale: 6
+  required: true
+  description: Precio de venta
+- name: dcto
+  type: float
+  precision: 20
+  scale: 6
+  required: false
+  description: Descuento en euros
+- name: dcto_porcentaje
+  type: float
+  precision: 20
+  scale: 6
+  required: false
+  description: Descuento %
+- name: precio
+  type: float
+  precision: 20
+  scale: 6
+  required: true
+  description: Precio total línea + descuento + impuesto
+- name: IVA
+  type: float
+  precision: 20
+  scale: 6
+  required: true
+  description: Porcentaje de impuesto aplicado
+- name: tipo
+  type: string
+  length: 40
+  required: true
+  description: 'Familia del articulo seleccionado Valores disponibles: Cristales =
     1 Lentillas = 2 Graduado = 3 Varios = 4 Sol = 5 Pdtos Mantenimiento = 6 Audifonos
     = 7 Varios Audio = 8'
-- Campo: tienda
-  Tipo: integer
-  Longitud: '6'
-  Obligatorio: Sí
-  Descripción: Ventacab.tienda
+- name: tienda
+  type: integer
+  length: 6
+  required: true
+  description: Ventacab.tienda
   foreign_key: Ventacab.tienda
-- Campo: estado
-  Tipo: string
-  Longitud: '25'
-  Obligatorio: 'No'
-  Descripción: Deprecado
-  Deprecado: true
-- Campo: pedido
-  Tipo: string
-  Longitud: '10'
-  Obligatorio: 'No'
-  Descripción: Deprecado
-  Deprecado: true
-- Campo: cdgSucPedido
-  Tipo: string
-  Longitud: '10'
-  Obligatorio: 'No'
-  Descripción: Deprecado
-  Deprecado: true
-- Campo: cdgPedido
-  Tipo: string
-  Longitud: '10'
-  Obligatorio: 'No'
-  Descripción: Deprecado
-  Deprecado: true
-- Campo: cdgLineaPedido Alfanumérico
-  Tipo: ''
-  Longitud: '10'
-  Obligatorio: 'No'
-  Descripción: Deprecado
-  Deprecado: true
-- Campo: alturaFocal
-  Tipo: string
-  Longitud: '20'
-  Obligatorio: 'No'
-  Descripción: Altura focal de la lente seleccionada en el detalle de la venta Si
+- name: estado
+  type: string
+  length: 25
+  required: false
+  description: Deprecado
+  deprecated: true
+- name: pedido
+  type: string
+  length: 10
+  required: false
+  description: Deprecado
+  deprecated: true
+- name: cdgSucPedido
+  type: string
+  length: 10
+  required: false
+  description: Deprecado
+  deprecated: true
+- name: cdgPedido
+  type: string
+  length: 10
+  required: false
+  description: Deprecado
+  deprecated: true
+- name: cdgLineaPedido Alfanumérico
+  type: null
+  length: 10
+  required: false
+  description: Deprecado
+  deprecated: true
+- name: alturaFocal
+  type: string
+  length: 20
+  required: false
+  description: Altura focal de la lente seleccionada en el detalle de la venta Si
     la linea es de tipo lentes
-- Campo: vision
-  Tipo: string
-  Longitud: '10'
-  Obligatorio: 'No'
-  Descripción: Si la lente es de Lejos se introduce una L, si de cerca una C
-- Campo: ojo
-  Tipo: string
-  Longitud: '10'
-  Obligatorio: 'No'
-  Descripción: Si es ojo Derecho D, si no I para lineas de tipo lentes
+- name: vision
+  type: string
+  length: 10
+  required: false
+  description: Si la lente es de Lejos se introduce una L, si de cerca una C
+- name: ojo
+  type: string
+  length: 10
+  required: false
+  description: Si es ojo Derecho D, si no I para lineas de tipo lentes
+unique: &id001
+- venta
+- tienda
+- linea
+checks:
+  unique_key:
+    operation: concat
+    fields: *id001
+    expression: venta + tienda + linea
+notes:
+- El tipo que debe asignarse es la clave y no la descripcion

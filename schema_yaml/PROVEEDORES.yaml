@@ -1,56 +1,58 @@
-- Campo: cdgProv
-  Tipo: integer
-  Longitud: '10'
-  Obligatorio: Sí
-  Descripción: Código proveedor
-- Campo: nombre
-  Tipo: string
-  Longitud: '35'
-  Obligatorio: Sí
-  Descripción: Nombre proveedor
-- Campo: nif
-  Tipo: string
-  Longitud: '10'
-  Obligatorio: 'No'
-  Descripción: NIF
-- Campo: direccion
-  Tipo: string
-  Longitud: '35'
-  Obligatorio: 'No'
-  Descripción: Dirección
-- Campo: cp
-  Tipo: string
-  Longitud: '10'
-  Obligatorio: 'No'
-  Descripción: Código postal
-- Campo: poblacion
-  Tipo: string
-  Longitud: '35'
-  Obligatorio: 'No'
-  Descripción: Población
-- Campo: provincia
-  Tipo: string
-  Longitud: '35'
-  Obligatorio: 'No'
-  Descripción: Provincia
-- Campo: telefono
-  Tipo: string
-  Longitud: '25'
-  Obligatorio: 'No'
-  Descripción: Teléfono 1
-- Campo: telefono2
-  Tipo: string
-  Longitud: '25'
-  Obligatorio: 'No'
-  Descripción: Teléfono 2
-- Campo: fax
-  Tipo: string
-  Longitud: '30'
-  Obligatorio: 'No'
-  Descripción: deprecado
-  Deprecado: true
-- Campo: email
-  Tipo: string
-  Longitud: '50'
-  Obligatorio: 'No'
-  Descripción: Email
+table: PROVEEDORES
+columns:
+- name: cdgProv
+  type: integer
+  length: 10
+  required: true
+  description: Código proveedor
+- name: nombre
+  type: string
+  length: 35
+  required: true
+  description: Nombre proveedor
+- name: nif
+  type: string
+  length: 10
+  required: false
+  description: NIF
+- name: direccion
+  type: string
+  length: 35
+  required: false
+  description: Dirección
+- name: cp
+  type: string
+  length: 10
+  required: false
+  description: Código postal
+- name: poblacion
+  type: string
+  length: 35
+  required: false
+  description: Población
+- name: provincia
+  type: string
+  length: 35
+  required: false
+  description: Provincia
+- name: telefono
+  type: string
+  length: 25
+  required: false
+  description: Teléfono 1
+- name: telefono2
+  type: string
+  length: 25
+  required: false
+  description: Teléfono 2
+- name: fax
+  type: string
+  length: 30
+  required: false
+  description: deprecado
+  deprecated: true
+- name: email
+  type: string
+  length: 50
+  required: false
+  description: Email
