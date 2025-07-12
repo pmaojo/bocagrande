@@ -11,6 +11,9 @@ import traceback
 import google.generativeai as genai # Añadir import para Gemini
 import json # Mover import json aquí para que esté siempre disponible
 import re
+import io
+from pathlib import Path
+import pandas.errors
 
 # Añadir la raíz del proyecto al sys.path para asegurar la detección de módulos
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -32,7 +35,46 @@ from ontology.tbox_builder import build_global_tbox
 def get_global_tbox():
     return build_global_tbox()
 
-def main(reasoner: Reasoner = HermiTReasoner()):
+# --- Utilidad universal para leer archivos a DataFrame ---
+def leer_a_dataframe(archivo, sin_cabecera=False):
+    nombre = archivo.name.lower()
+    try:
+        if nombre.endswith('.csv'):
+            if sin_cabecera:
+                return pd.read_csv(archivo, header=None)
+            else:
+                return pd.read_csv(archivo)
+        elif nombre.endswith('.xlsx') or nombre.endswith('.xls'):
+            return pd.read_excel(archivo, header=None if sin_cabecera else 0)
+        elif nombre.endswith('.parquet'):
+            return pd.read_parquet(archivo)
+        else:
+            st.error(f"Formato de archivo no soportado: {nombre}")
+            return None
+    except pandas.errors.EmptyDataError:
+        st.error("El archivo está vacío o no tiene columnas para parsear. Por favor, revisa el archivo de entrada.")
+        return None
+    except Exception as e:
+        st.error(f"Error al leer el archivo: {e}")
+        return None
+
+# --- Utilidad universal para exportar DataFrame ---
+def exportar_dataframe(df, formato):
+    buffer = io.BytesIO()
+    if formato == 'csv':
+        return df.to_csv(index=False).encode('utf-8')
+    elif formato == 'excel':
+        with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
+            df.to_excel(writer, index=False)
+        return buffer.getvalue()
+    elif formato == 'parquet':
+        df.to_parquet(buffer, index=False)
+        return buffer.getvalue()
+    else:
+        st.error(f"Formato de exportación no soportado: {formato}")
+        return None
+
+def main():
     """
     Orquesta la carga de archivos, comparación, prueba y aplicación de transformaciones.
     """
@@ -41,9 +83,8 @@ def main(reasoner: Reasoner = HermiTReasoner()):
 
     # --- 1. Comparación y Generación de Transformaciones ---
     st.header("1. Comparación y Generación de Transformaciones")
-    from pathlib import Path
-    import re
-    archivo_muestra_comparacion = st.file_uploader("Sube un archivo de muestra para comparación (CSV)", type=["csv"], key="comparacion_data")
+    sin_cabecera = st.checkbox("El archivo no tiene cabecera (primera fila)", key="sin_cabecera")
+    archivo_muestra_comparacion = st.file_uploader("Sube un archivo de muestra para comparación (CSV, Excel, Parquet)", type=["csv", "xlsx", "xls", "parquet"], key="comparacion_data")
     esquemas_disponibles_comparacion = list(Path("schema_yaml").glob("*.yaml"))
 
     # Autoselección de esquema YAML para comparación
@@ -60,6 +101,11 @@ def main(reasoner: Reasoner = HermiTReasoner()):
         return None
 
     if archivo_muestra_comparacion:
+        df_muestra = leer_a_dataframe(archivo_muestra_comparacion, sin_cabecera)
+        if df_muestra is None:
+            st.error("El archivo está vacío, corrupto o no tiene columnas para parsear. Por favor, revisa el archivo de entrada.")
+            st.stop()
+        st.write("**Campos de entrada detectados:**", list(df_muestra.columns))
         sugerido = sugerir_esquema_yaml(archivo_muestra_comparacion, esquemas_disponibles_comparacion)
         if sugerido and (not st.session_state.get("comparacion_schema") or st.session_state["comparacion_schema"] != sugerido):
             st.session_state["comparacion_schema"] = sugerido
@@ -73,7 +119,10 @@ def main(reasoner: Reasoner = HermiTReasoner()):
         st.info("Archivo de muestra y esquema de destino seleccionados para comparación.")
         transformaciones_sugeridas = st.session_state.get('transformaciones_sugeridas', [])
         if st.button("Generar Transformaciones Sugeridas con IA"):
-            df_muestra = pd.read_csv(archivo_muestra_comparacion)
+            df_muestra = leer_a_dataframe(archivo_muestra_comparacion)
+            if df_muestra is None:
+                st.error("El archivo está vacío, corrupto o no tiene columnas para parsear. Por favor, revisa el archivo de entrada.")
+                st.stop()
             headers_csv = df_muestra.columns.tolist()
             st.write("Campos de entrada (CSV):", headers_csv)
 
@@ -177,7 +226,7 @@ Devuelve una lista JSON de transformaciones, usando SIEMPRE los nombres de clave
         archivo_muestra_prueba = st.file_uploader("Sube un archivo CSV para probar las transformaciones (muestra)", type=["csv"], key="muestra_prueba")
         n_muestra = st.number_input("Tamaño de la muestra aleatoria", min_value=1, max_value=100, value=5, step=1, key="tamano_muestra")
         if archivo_muestra_prueba:
-            df_prueba = pd.read_csv(archivo_muestra_prueba)
+            df_prueba = leer_a_dataframe(archivo_muestra_prueba)
             muestra = df_prueba.sample(n=min(n_muestra, len(df_prueba)), random_state=42)
             st.write("Muestra aleatoria del CSV de entrada:")
             st.dataframe(muestra)
@@ -214,7 +263,7 @@ Devuelve una lista JSON de transformaciones, usando SIEMPRE los nombres de clave
         archivo_datos_transformar = st.file_uploader("Sube el archivo de datos para transformar (CSV)", type=["csv"], key="data_transformar")
         if archivo_datos_transformar:
             if st.button("Aplicar Transformaciones (ETL)"):
-                df_original = pd.read_csv(archivo_datos_transformar)
+                df_original = leer_a_dataframe(archivo_datos_transformar)
                 df_transformado = df_original.copy()
                 transformaciones_a_aplicar = st.session_state['transformaciones_aceptadas']
                 for t in transformaciones_a_aplicar:
@@ -273,6 +322,56 @@ Devuelve una lista JSON de transformaciones, usando SIEMPRE los nombres de clave
                         st.text(logs_shacl)
                 except Exception as e:
                     st.warning(f"No se pudo validar semánticamente el resultado: {e}")
+
+                # --- Ejemplo de lógica de transformación (simplificado) ---
+                # (esto debe ir en el bloque donde aplicas las transformaciones)
+                if archivo_datos_transformar and 'transformaciones_aceptadas' in st.session_state:
+                    df = leer_a_dataframe(archivo_datos_transformar)
+                    transformaciones = st.session_state['transformaciones_aceptadas']
+                    sobrescribir = st.session_state.get('sobrescribir', True)
+                    generados, sobrescritos, faltantes = [], [], []
+                    df_result = pd.DataFrame()
+                    for t in transformaciones:
+                        campo_entrada = t.get('campo_entrada')
+                        campo_salida = t.get('campo_salida')
+                        if not campo_salida:
+                            continue
+                        if campo_entrada and campo_entrada in df.columns:
+                            if sobrescribir or campo_salida not in df_result.columns or df_result[campo_salida].isnull().all():
+                                df_result[campo_salida] = df[campo_entrada]
+                                if campo_salida in df.columns:
+                                    sobrescritos.append(campo_salida)
+                                else:
+                                    generados.append(campo_salida)
+                            else:
+                                # No sobrescribe, solo rellena vacíos
+                                df_result[campo_salida] = df_result[campo_salida].combine_first(df[campo_entrada])
+                                generados.append(campo_salida)
+                        elif t.get('tipo_transformacion') == 'formula' and t.get('formula'):
+                            # Aquí puedes evaluar la fórmula de forma segura (eval limitada o pandas.eval)
+                            try:
+                                df_result[campo_salida] = df.eval(t['formula'])
+                                generados.append(campo_salida)
+                            except Exception:
+                                faltantes.append(campo_salida)
+                        else:
+                            faltantes.append(campo_salida)
+                    # Asegura el orden de columnas de salida
+                    columnas_salida = [t['campo_salida'] for t in transformaciones if 'campo_salida' in t]
+                    for col in columnas_salida:
+                        if col not in df_result.columns:
+                            df_result[col] = None
+                    df_result = df_result[columnas_salida]
+                    st.subheader("Datos Transformados (solo columnas de salida):")
+                    st.dataframe(df_result)
+                    st.info(f"Campos generados: {generados}")
+                    st.info(f"Campos sobrescritos: {sobrescritos}")
+                    if faltantes:
+                        st.warning(f"Campos faltantes/no generados: {faltantes}")
+                    # Exportar
+                    formato_export = st.selectbox("Formato de exportación", ["csv", "excel", "parquet"])
+                    datos_export = exportar_dataframe(df_result, formato_export)
+                    st.download_button("Descargar datos transformados", datos_export, file_name=f"datos_transformados.{formato_export if formato_export != 'excel' else 'xlsx'}")
 
                 csv_output = df_transformado.to_csv(index=False).encode('utf-8')
                 st.download_button(
