@@ -81,6 +81,21 @@ fields:
     assert schema.fields[0].length is None
 
 
+def test_load_schema_unique(tmp_path):
+    yaml_content = """
+fields:
+  - Campo: id
+    Tipo: integer
+unique:
+  - [id]
+"""
+    file = tmp_path / "unique.yaml"
+    file.write_text(yaml_content)
+    schema = load_schema(str(file))
+    assert schema is not None
+    assert schema.unique == [["id"]]
+
+
 def test_gradgafa_formats_loaded():
     """Ensure that all Formato values from GRADGAFA.yaml are parsed correctly."""
     path = Path("schema_yaml/GRADGAFA.yaml")

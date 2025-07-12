@@ -28,4 +28,5 @@ def test_table_schema_defaults():
     assert schema.name == "TEST"
     assert schema.fields[0].name == "id"
     assert schema.primary_key == []
+    assert schema.unique == []
     assert schema.metadata == {}
