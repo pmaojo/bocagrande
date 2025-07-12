@@ -8,8 +8,7 @@
   Tipo: string
   Longitud: '25'
   Obligatorio: 'No'
-  Descripción: "Código que se utiliza en los traspasos para identificar la venta de\
-    \ \r\norigen si el campo venta debe recalcular en Gioweb"
+  Descripción: Código que se utiliza en los traspasos para identificar la venta de origen si el campo venta debe recalcular en Gioweb
   Formato: ''
 - Campo: importeTotal
   Tipo: float
