@@ -8,3 +8,7 @@ rdflib
 pyyaml
 pyshacl
 pytest-asyncio
+langchain
+langchain-core
+langchain-community
+langchain-google-genai
