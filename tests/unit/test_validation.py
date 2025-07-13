@@ -1,5 +1,7 @@
+import os
+import tempfile
+
 import pandas as pd
-from rdflib import Graph
 from bocagrande.validation import validate_dataframe
 from ontology.model import TableSchema, PropertyDef
 
@@ -31,3 +33,32 @@ def test_validate_dataframe_runs_reasoner_and_shacl(monkeypatch, tmp_path):
     assert reasoner.called
     assert "ok" in logs_hermit
     assert "shacl ok" in logs_shacl
+
+
+def test_validate_dataframe_cleans_temp_files(monkeypatch, tmp_path):
+    schema = TableSchema("TEST", [PropertyDef("name")])
+    df = pd.DataFrame({"name": ["x"]})
+
+    created_files: list[str] = []
+    original_tmp = tempfile.NamedTemporaryFile
+
+    def capture_tmp(*args, **kwargs):
+        kwargs.setdefault("dir", tmp_path)
+        tmp = original_tmp(*args, **kwargs)
+        created_files.append(tmp.name)
+        return tmp
+
+    monkeypatch.setattr(tempfile, "NamedTemporaryFile", capture_tmp)
+
+    def fake_validate(owl_path, shacl_path=None):
+        assert os.path.exists(owl_path)
+        assert os.path.exists(shacl_path)
+        return True, "shacl ok"
+
+    monkeypatch.setattr("bocagrande.validation.validate_shacl", fake_validate)
+
+    reasoner = DummyReasoner()
+    validate_dataframe(df, schema, reasoner=reasoner)
+
+    for path in created_files:
+        assert not os.path.exists(path)
