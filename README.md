@@ -19,6 +19,7 @@ A Streamlit UI orchestrates the process and integrates Google Gemini to suggest 
 ```bash
 # Install dependencies
 pip install -r requirements.txt
+pip install -e .
 
 # Configure credentials
 cp .env.example .env
