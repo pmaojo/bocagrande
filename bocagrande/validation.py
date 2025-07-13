@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from typing import Tuple
 import tempfile
+import os
 from rdflib import Graph
 import pandas as pd
 
@@ -39,7 +40,14 @@ def validate_dataframe(
         tmp_sh.write(shape_ttl)
         shacl_path = tmp_sh.name
 
-    shacl_ok, shacl_logs = validate_shacl(owl_path, shacl_path)
+    try:
+        shacl_ok, shacl_logs = validate_shacl(owl_path, shacl_path)
+    finally:
+        for path in (owl_path, shacl_path):
+            try:
+                os.unlink(path)
+            except FileNotFoundError:
+                pass
 
     return hermit_ok, shacl_ok, hermit_logs, shacl_logs
 
