@@ -40,6 +40,11 @@ bocagrande --schema schema_yaml/CLIENTES.yaml --csv raw/CLIENTES_sample.csv --ou
 ```
 You can also use `python -m bocagrande` with the same arguments.
 
+## LangChain-based ETL step generation
+`bocagrande.langchain_agent` integrates [LangChain](https://github.com/langchain-ai/langchain) to produce `ETLStep` definitions from the CSV headers and the YAML schema. The default chain uses the Gemini model provided by `google-generativeai`.
+
+Set the `GEMINI_API_KEY` environment variable to enable this feature. Required packages are listed under `requirements.txt` (`langchain`, `langchain-core`, `langchain-community`, `langchain-google-genai` and `google-generativeai`).
+
 ## Testing workflow
 Linting and typing checks are performed with `flake8` and `mypy` respectively. Unit and integration tests run with `pytest`.
 End‑to‑end tests live under `tests/e2e` and drive the Streamlit UI with Playwright. They can be executed through Docker Compose:
