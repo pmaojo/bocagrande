@@ -2,7 +2,7 @@ import pytest
 from playwright.sync_api import Page, expect
 import os
 import time
-import requests # Añadir import para requests
+import requests 
 
 # Asegúrate de que la API key de Gemini esté disponible para el entorno de pruebas
 os.environ["GEMINI_API_KEY"] = os.getenv("GEMINI_API_KEY", "TEST_API_KEY_FALLBACK") # Usar una fallback para tests
