@@ -6,7 +6,7 @@ import streamlit as st
 import sys
 import os
 import pandas as pd # Añadir import para pandas
-import numpy as np
+from streamlit.runtime.uploaded_file_manager import UploadedFile
 import traceback
 from bocagrande.langchain_agent import generate_steps
 import re
@@ -39,7 +39,7 @@ def get_reasoner() -> HermiTReasoner:
     return HermiTReasoner()
 
 # --- Utilidad universal para leer archivos a DataFrame ---
-def leer_a_dataframe(archivo, sin_cabecera=False):
+def leer_a_dataframe(archivo: UploadedFile, sin_cabecera: bool = False) -> pd.DataFrame | None:
     nombre = archivo.name.lower()
     try:
         if nombre.endswith('.csv'):
@@ -62,7 +62,7 @@ def leer_a_dataframe(archivo, sin_cabecera=False):
         return None
 
 # --- Utilidad universal para exportar DataFrame ---
-def exportar_dataframe(df, formato):
+def exportar_dataframe(df: pd.DataFrame, formato: str) -> bytes | None:
     buffer = io.BytesIO()
     if formato == 'csv':
         return df.to_csv(index=False).encode('utf-8')
@@ -77,7 +77,7 @@ def exportar_dataframe(df, formato):
         st.error(f"Formato de exportación no soportado: {formato}")
         return None
 
-def main():
+def main() -> None:
     """
     Orquesta la carga de archivos, comparación, prueba y aplicación de transformaciones.
     """
