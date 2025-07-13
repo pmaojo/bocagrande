@@ -32,7 +32,7 @@ class DefaultPatchGenerator:
             "Given the following pytest output, propose a unified diff patch that "
             "fixes the failures. Only respond with the diff.\n" + report
         )
-        response = genai.generate_text(model=self.model, prompt=prompt)
+        response = genai.generate_text(model=self.model, prompt=prompt)  # type: ignore[attr-defined]
         return response.result
 
 

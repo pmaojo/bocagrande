@@ -35,7 +35,6 @@ def _parse_precision_scale(value: Any) -> Tuple[Optional[int], Optional[int]]:
     return None, None
 
 
-
 def _parse_bool(value: Any) -> Optional[bool]:
     """Parse ``value`` into a boolean if possible."""
     if value is None:

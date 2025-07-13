@@ -3,9 +3,9 @@ Interfaz: UI Streamlit para orquestar el pipeline semántico.
 """
 import tempfile
 import streamlit as st
+import pandas as pd  # Añadir import para pandas
 import sys
 import os
-import pandas as pd # Añadir import para pandas
 from streamlit.runtime.uploaded_file_manager import UploadedFile
 import traceback
 from bocagrande.langchain_agent import generate_steps
@@ -13,9 +13,6 @@ import re
 import io
 from pathlib import Path
 import pandas.errors
-
-# Añadir la raíz del proyecto al sys.path para asegurar la detección de módulos
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from adapter.yaml_loader import load_schema
 from adapter.csv_loader import read_csv
