@@ -8,8 +8,7 @@ import os
 import pandas as pd # Añadir import para pandas
 import numpy as np
 import traceback
-import google.generativeai as genai # Añadir import para Gemini
-import json # Mover import json aquí para que esté siempre disponible
+from bocagrande.langchain_agent import generate_steps
 import re
 import io
 from pathlib import Path
@@ -139,7 +138,6 @@ def main():
             else:
                 campos_destino = [campo.name for campo in tabla_schema_destino.fields]
                 st.write("Campos de salida (esquema YAML):", campos_destino)
-
                 st.subheader("Sugerencias de Transformación (Generadas por IA)")
                 st.info("Conectando con Gemini para generar transformaciones...")
 
@@ -147,78 +145,14 @@ def main():
                 if not gemini_api_key:
                     st.error("Error: La variable de entorno GEMINI_API_KEY no está configurada. Por favor, añádela a tu archivo .env")
                 else:
-                    genai.configure(api_key=gemini_api_key)
-                    model = genai.GenerativeModel('gemini-2.5-flash')
-                    # --- Contexto Pentaho/ETL para Gemini ---
-                    if tabla_schema_destino:
-                        campos_destino = [
-                            {
-                                "campo_salida": campo.name,
-                                "tipo": campo.tipo,
-                                "obligatorio": campo.requerido,
-                                **campo.metadata
-                            }
-                            for campo in tabla_schema_destino.fields
-                        ]
-                        metadatos = tabla_schema_destino.metadata if hasattr(tabla_schema_destino, 'metadata') else {}
-                        contexto_gemini = {
-                            "campos_salida": campos_destino,
-                            "primary_key": getattr(tabla_schema_destino, 'primary_key', []),
-                            "metadatos": metadatos
-                        }
-                    else:
-                        contexto_gemini = {}
-                    prompt = f"""
-Eres un asistente experto en ETL. Dado el siguiente contexto de esquema de salida (campos de salida, tipos, obligatorios, metadatos, claves primarias):
-{contexto_gemini}
-Y los campos de entrada del CSV:
-{headers_csv}
-Sugiere transformaciones para convertir los datos del CSV al esquema de salida. Usa la siguiente estructura para cada transformación:
-{{
-  "campo_salida": "nombre del campo de salida",
-  "campo_entrada": "nombre del campo de entrada" (si aplica),
-  "tipo_transformacion": "mapping" | "calculo",
-  "formula": "expresión o fórmula SQL si es cálculo",
-  "descripcion": "explicación breve"
-}}
-Devuelve una lista JSON de transformaciones, usando SIEMPRE los nombres de clave anteriores.
-"""
-                    st.session_state['prompt_gemini'] = prompt
+                    from langchain_google_genai import ChatGoogleGenerativeAI
+                    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", google_api_key=gemini_api_key)
                     try:
-                        response = model.generate_content(prompt)
-                        st.info("Respuesta de Gemini recibida.")
-                        st.text(f"DEBUG: Raw Gemini response: {response.text}")
+                        steps = generate_steps(headers_csv, tabla_schema_destino, llm)
+                        st.session_state['transformaciones_sugeridas'] = [s.__dict__ for s in steps]
+                        st.dataframe(pd.DataFrame(st.session_state['transformaciones_sugeridas']))
                     except Exception as e:
-                        st.error(f"Error al llamar a la API de Gemini: {e}")
-                        return
-                    try:
-                        transformaciones_str = response.text.strip()
-                        match = re.search(r"```json\s*(.*?)\s*```", transformaciones_str, re.DOTALL)
-                        if not match:
-                            match = re.search(r"```\s*(.*?)\s*```", transformaciones_str, re.DOTALL)
-                        if match:
-                            json_str = match.group(1)
-                        else:
-                            match = re.search(r"(\[.*?\])", transformaciones_str, re.DOTALL)
-                            if match:
-                                json_str = match.group(1)
-                            else:
-                                st.error("No se encontró un bloque JSON en la respuesta de Gemini. Revisa el prompt o la respuesta.")
-                                raise ValueError("No se encontró un bloque JSON en la respuesta de Gemini.")
-                        transformaciones_sugeridas = json.loads(json_str)
-                        st.session_state['transformaciones_sugeridas'] = transformaciones_sugeridas
-                        st.session_state['prompt_gemini'] = prompt
-                        st.subheader("Transformaciones Sugeridas (ETL):")
-                        if transformaciones_sugeridas:
-                            st.dataframe(pd.DataFrame(transformaciones_sugeridas))
-                        else:
-                            st.info("No se han generado transformaciones sugeridas aún. Si esperabas verlas, revisa el prompt y la respuesta de Gemini.")
-                    except json.JSONDecodeError as e:
-                        st.error(f"Error al parsear la respuesta de Gemini como JSON: {e}")
-                        st.text(response.text)
-                    except Exception as e:
-                        st.error(f"Error inesperado al procesar la respuesta de Gemini: {e}")
-                        st.text(response.text)
+                        st.error(f"Error al generar transformaciones: {e}")
 
         # Botón de aceptación SIEMPRE visible si hay sugeridas
         if st.session_state.get('transformaciones_sugeridas'):
