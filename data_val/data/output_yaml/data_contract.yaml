@@ -1,0 +1,65 @@
+# data_contract.yaml  –  contrato maestro de trasvase GIO
+contract:
+  name: trasvase_gio
+  version: 2.0.0
+  owner: datos@tu-empresa.com
+
+globals:
+  enforce_column_order: true
+  column_case_sensitive: true
+  csv_options:
+    delimiter: ","
+    quotechar: "\""
+    decimal: "."
+    encoding: "utf-8"
+  date_formats:
+    - "%d/%m/%Y"
+    - "%d/%m/%Y %H:%M:%S"
+
+tables:
+  - file: T_CLIENTES.csv
+    schema: schema_yaml/CLIENTES.yaml
+    primary_key: [id, tienda]
+    description: Información básica de clientes
+  - file: T_USUARIOS.csv
+    schema: schema_yaml/USUARIOS.yaml
+    primary_key: [cdgusuario]
+    description: Tabla de usuarios del sistema
+  - file: T_DOCTORES.csv
+    schema: schema_yaml/DOCTORES.yaml
+    primary_key: [cod_origen]
+    description: Catálogo de doctores
+  - file: T_GRADGAFA.csv
+    schema: schema_yaml/GRADGAFA.yaml
+    primary_key: [id, tienda]
+    notes:
+      - Requerimientos para el trasvase de datos 2
+  - file: T_GRADLENT.csv
+    schema: schema_yaml/GRADLENT.yaml
+    primary_key: [id, tienda]
+    description: Graduaciones contactológicas
+  - file: T_PROVEEDORES.csv
+    schema: schema_yaml/PROVEEDORES.yaml
+    primary_key: [cdg_prov]
+  - file: T_ARTICULOS.csv
+    schema: schema_yaml/ARTICULOS.yaml
+    primary_key: [cdg_art]
+    unique:
+      - [cdg_barras]
+      - [cdg_edi]
+    notes:
+      - "cdgArt, cdgBarras y cdgEdi deben ser UNIQUE entre sí y con el resto."
+  - file: T_STOCK.csv
+    schema: schema_yaml/STOCK.yaml
+    primary_key: [tienda, cdg_articulo]
+  - file: T_VENTACAB.csv
+    schema: schema_yaml/VENTACAB.yaml
+    primary_key: [venta, tienda]
+  - file: T_VENTACON.csv
+    schema: schema_yaml/VENTACON.yaml
+    primary_key: [venta, tienda, linea]
+    notes:
+      - "El campo tipo es la clave (no la descripción)."
+  - file: T_CAJAS.csv
+    schema: schema_yaml/CAJAS.yaml
+    primary_key: [venta, tienda]

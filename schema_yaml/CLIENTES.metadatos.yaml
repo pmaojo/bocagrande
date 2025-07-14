@@ -1,9 +1,0 @@
-CLIENTES:
-  formulas:
-    primary_key:
-      operation: concat
-      fields: &id001
-      - id
-      - tienda
-      expression: id + tienda
-  primary_key: *id001

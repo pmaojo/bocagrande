@@ -1,0 +1,193 @@
+- Campo: id
+  Tipo: integer
+  Longitud: '10'
+  Obligatorio: Sí
+  Descripción: Identificador graduación
+  Formnato: ''
+- Campo: tienda
+  Tipo: integer
+  Longitud: '10'
+  Obligatorio: Sí
+  Descripción: Código tienda
+  Formnato: ''
+- Campo: idClientes
+  Tipo: integer
+  Longitud: '10'
+  Obligatorio: Sí
+  Descripción: Clientes.id
+  Formnato: ''
+  foreign_key: Clientes.id
+- Campo: ejeD
+  Tipo: integer
+  Longitud: '4'
+  Obligatorio: 'No'
+  Descripción: Campo para la medición del eje derecho.
+  Formnato: '[-XXX, XXX]'
+- Campo: cilindroD
+  Tipo: integer
+  Longitud: '6'
+  Obligatorio: 'No'
+  Descripción: Campo para la medición del cilindro derecho.
+  Formnato: '[-XX.XX, XX.XX]'
+- Campo: esferaD
+  Tipo: integer
+  Longitud: '6'
+  Obligatorio: 'No'
+  Descripción: Campo para la medición de la esfera derecha.
+  Formnato: '[-XX.XX, XX.XX]'
+- Campo: ejeI
+  Tipo: integer
+  Longitud: '4'
+  Obligatorio: 'No'
+  Descripción: Campo para la medición del eje izquierdo.
+  Formnato: '[-XXX, XXX]'
+- Campo: cilindroI
+  Tipo: integer
+  Longitud: '6'
+  Obligatorio: 'No'
+  Descripción: Campo para la medición del cilindro izquierdo.
+  Formnato: '[-XX.XX, XX.XX]'
+- Campo: esferaI
+  Tipo: integer
+  Longitud: '6'
+  Obligatorio: 'No'
+  Descripción: Campo para la medición de la esfera izquierda.
+  Formnato: '[-XX.XX, XX.XX]'
+- Campo: adicionD
+  Tipo: integer
+  Longitud: '4'
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos de la adición ojo derecho.
+  Formnato: '[X.XX]'
+- Campo: adicionI
+  Tipo: integer
+  Longitud: '4'
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos de la adición ojo izquierdo.
+  Formnato: '[X.XX]'
+- Campo: esferaCercaD
+  Tipo: integer
+  Longitud: '6'
+  Obligatorio: 'No'
+  Descripción: Campo para la medición de la esfera de cerca derecha.
+  Formnato: '[-XX.XX, XX.XX]'
+- Campo: esferaCercaI
+  Tipo: integer
+  Longitud: '6'
+  Obligatorio: 'No'
+  Descripción: Campo para la medición de la esfera de cerca izquierda.
+  Formnato: '[-XX.XX, XX.XX]'
+- Campo: avscd
+  Tipo: integer
+  Longitud: '4'
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos de la agudeza visual sin corrección
+    del ojo derecho.
+  Formnato: '[X.XX]'
+- Campo: avsci
+  Tipo: integer
+  Longitud: '4'
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos de la agudeza visual sin corrección
+    del ojo izquierdo
+  Formnato: '[X.XX]'
+- Campo: avd
+  Tipo: integer
+  Longitud: '4'
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos de la agudeza visual del ojo derecho.
+  Formnato: '[X.XX]'
+- Campo: avi
+  Tipo: integer
+  Longitud: '4'
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos de la agudeza visual del ojo izquierdo.
+  Formnato: '[X.XX]'
+- Campo: avao
+  Tipo: integer
+  Longitud: '4'
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos de la agudeza visual ambos ojos.
+  Formnato: '[X.XX]'
+- Campo: dnpd
+  Tipo: integer
+  Longitud: '10'
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos de la distancia naso-pupilar derecha.
+  Formnato: ''
+- Campo: dnpi
+  Tipo: integer
+  Longitud: '10'
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos de la distancia naso-pupilar izquierda.
+  Formnato: ''
+- Campo: prismaD
+  Tipo: string
+  Longitud: '20'
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos del prisma derecho
+  Formnato: ''
+- Campo: prismaI
+  Tipo: string
+  Longitud: '20'
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos del prisma izquierdo
+  Formnato: ''
+- Campo: di
+  Tipo: integer
+  Longitud: '2'
+  Obligatorio: 'No'
+  Descripción: Campo deprecado
+  Formnato: ''
+  Deprecado: true
+- Campo: obs
+  Tipo: string
+  Longitud: 4GB
+  Obligatorio: 'No'
+  Descripción: Notas relacionadas con la graduación optométrica.
+  Formnato: ''
+- Campo: fecha
+  Tipo: date
+  Longitud: ''
+  Obligatorio: Si
+  Descripción: Fecha de creación para la graduación optométrica.
+  Formnato: dd/mm/yyyy hh:mm:ss
+- Campo: usuario
+  Tipo: integer
+  Longitud: '6'
+  Obligatorio: Si
+  Descripción: Identificador del Usuario que tramitó está graduación
+  Formnato: ''
+- Campo: codVendedor
+  Tipo: integer
+  Longitud: ''
+  Obligatorio: 'No'
+  Descripción: Uduarios.cdgusuario
+  Formnato: ''
+  foreign_key: Uduarios.cdgusuario
+- Campo: dnpCercaD
+  Tipo: integer
+  Longitud: ''
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos de la distancia naso-pupilar cerca derecha.
+  Formnato: ''
+- Campo: dnpCercaI
+  Tipo: integer
+  Longitud: ''
+  Obligatorio: 'No'
+  Descripción: "Campo para registrar los datos de la \ndistancia naso-pupilar cerca\
+    \ izquierda."
+  Formnato: ''
+- Campo: doctor
+  Tipo: integer
+  Longitud: '8'
+  Obligatorio: Si
+  Descripción: DOCTORES.codOrigen
+  Formnato: ''
+  foreign_key: DOCTORES.codOrigen
+- Campo: proxGraduacion
+  Tipo: date
+  Longitud: ''
+  Obligatorio: 'No'
+  Descripción: Próxima revisión optométrica del paciente.
+  Formnato: dd/mm/yyyy hh:mm:ss

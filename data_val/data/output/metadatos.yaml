@@ -1,0 +1,285 @@
+ARTICULOS:
+  campos:
+  - cdgArt
+  - dsc
+  - precio_costo
+  - prop1
+  - prop2
+  - prop3
+  - prop4
+  - prop5
+  - prop6
+  - prop7
+  - prop8
+  - cdgBarras
+  - cdgEdi
+  - pvp1
+  - pvp2
+  - pvp3
+  - pvp4
+  - pvp5
+  - tipo
+  - proveedor
+  - pdtosProv
+  - fechaUltCompra
+  - fecha_UltVenta
+  - fechaCreacion
+  - saft
+  - descatalogado
+  primary_key:
+  - cdgArt
+  - dsc
+  - pvp1
+  - tipo
+  - proveedor
+  - descatalogado
+CAJAS:
+  campos:
+  - venta
+  - pedido
+  - tienda
+  - fecha
+  - fPago
+  - agente
+  - importe
+  - numtpv
+  - numero_cheque
+  primary_key:
+  - venta
+  - tienda
+  - fecha
+  - fPago
+  - importe
+CLIENTES:
+  campos:
+  - id
+  - tienda
+  - nombre
+  - apellido1
+  - apellido2
+  - direccion
+  - poblacion
+  - provincia
+  - pais
+  - sexo
+  - cp
+  - fechaNac
+  - telefono
+  - telefono2
+  - movil
+  - fax
+  - email
+  - dni
+  - porSms
+  - porMail
+  - ultVisita
+  - primeraVisita
+  - obs
+  - motivo
+  - profesion
+  - lopd
+  - mailing
+  - grupoCliente
+  - inactivo
+  primary_key:
+  - id
+  - tienda
+  - nombre
+  - porSms
+  - porMail
+  - lopd
+  - mailing
+  - inactivo
+DOCTORES:
+  campos:
+  - codOrigen
+  - nombre
+  - apellidos
+  - numeroColegiado Alfanumérico
+  - direccion
+  - cp
+  - provincia
+  - poblacion
+  primary_key:
+  - codOrigen
+  - nombre
+GRADGAFA:
+  campos:
+  - id
+  - tienda
+  - idClientes
+  - ejeD
+  - cilindroD
+  - esferaD
+  - ejeI
+  - cilindroI
+  - esferaI
+  - adicionD
+  - adicionI
+  - esferaCercaD
+  - esferaCercaI
+  - avscd
+  - avsci
+  - avd
+  - avi
+  - avao
+  - dnpd
+  - dnpi
+  - prismaD
+  - prismaI
+  - di
+  - obs
+  - fecha
+  - usuario
+  - codVendedor
+  - dnpCercaD
+  - dnpCercaI
+  - doctor
+  - proxGraduacion
+  primary_key:
+  - id
+  - tienda
+  - idClientes
+  - fecha
+  - usuario
+  - doctor
+GRADLENT:
+  campos:
+  - id
+  - idCliente
+  - dsc
+  - ejeD
+  - cilindroD
+  - esferaD
+  - adicionD
+  - avd
+  - rcd
+  - ejeI
+  - cilindroI
+  - esferaI
+  - adicionI
+  - avi
+  - rci
+  - fecha
+  - doctor
+  - diametroD
+  - diametroI
+  - obs
+  - avao
+  - dzod
+  - dzoi
+  - codigolcd
+  - codigolci
+  - marcaD
+  - marcaI
+  - laboratorioD
+  - laboratorioI
+  - proxRevision
+  - tipolenteD
+  - tipoLenteI
+  - tienda
+  - usuario
+  primary_key:
+  - id
+  - idCliente
+  - dsc
+  - fecha
+  - doctor
+  - tienda
+  - usuario
+PROVEEDORES:
+  campos:
+  - cdgProv
+  - nombre
+  - nif
+  - direccion
+  - cp
+  - poblacion
+  - provincia
+  - telefono
+  - telefono2
+  - fax
+  - email
+  primary_key:
+  - cdgProv
+  - nombre
+STOCK:
+  campos:
+  - tienda
+  - cdgArticulo
+  - unidades
+  primary_key:
+  - tienda
+  - cdgArticulo
+  - unidades
+USUARIOS:
+  campos:
+  - cdgusuario
+  - nombre
+  - usuario
+  - tienda
+  primary_key:
+  - cdgusuario
+  - nombre
+  - usuario
+  - tienda
+VENTACAB:
+  campos:
+  - venta
+  - talon
+  - importeTotal
+  - fechaRetirado
+  - idCliente
+  - tienda
+  - facturado
+  - factura
+  - obs
+  - usuario
+  - copago
+  - tiendaDevuelta
+  - ventaDevuelta
+  - fecha
+  - anticipo
+  - formPagoAnticipo Alfanumericos
+  primary_key:
+  - venta
+  - importeTotal
+  - idCliente
+  - tienda
+  - usuario
+  - fecha
+VENTACON:
+  campos:
+  - venta
+  - linea
+  - cdg_art
+  - cdg_pro
+  - producto
+  - und
+  - coste
+  - pvp
+  - dcto
+  - dcto_porcentaje
+  - precio
+  - IVA
+  - tipo
+  - tienda
+  - estado
+  - pedido
+  - cdgSucPedido
+  - cdgPedido
+  - cdgLineaPedido Alfanumérico
+  - alturaFocal
+  - vision
+  - ojo
+  primary_key:
+  - venta
+  - linea
+  - cdg_art
+  - producto
+  - und
+  - pvp
+  - precio
+  - IVA
+  - tipo
+  - tienda

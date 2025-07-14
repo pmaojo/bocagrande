@@ -1,0 +1,1263 @@
+USUARIOS:
+- Campo: cdgusuario
+  Tipo: Numérico
+  Longitud: '6'
+  Obligatorio: Sí
+  Descripción: Código de usuario
+  ? ''
+  : ''
+- Campo: nombre
+  Tipo: Alfanumérico
+  Longitud: '35'
+  Obligatorio: Sí
+  Descripción: Nombre completo
+  ? ''
+  : ''
+- Campo: usuario
+  Tipo: Alfanumérico
+  Longitud: '35'
+  Obligatorio: Sí
+  Descripción: Nombre de usuario
+  ? ''
+  : ''
+- Campo: tienda
+  Tipo: Alfanumérico
+  Longitud: '6'
+  Obligatorio: Sí
+  Descripción: Código de tienda
+  ? ''
+  : ''
+CLIENTES:
+- Campo: id
+  Tipo: Numérico
+  Longitud: '10'
+  Obligatorio: Sí
+  Descripción: Código de cliente
+  ? ''
+  : ''
+- Campo: tienda
+  Tipo: Numérico
+  Longitud: '6'
+  Obligatorio: Sí
+  Descripción: Código de tienda
+  ? ''
+  : ''
+- Campo: nombre
+  Tipo: Alfanumérico
+  Longitud: '35'
+  Obligatorio: Sí
+  Descripción: Nombre
+  ? ''
+  : ''
+- Campo: apellido1
+  Tipo: Alfanumérico
+  Longitud: '25'
+  Obligatorio: 'No'
+  Descripción: Primer apellido
+  ? ''
+  : ''
+- Campo: apellido2
+  Tipo: Alfanumérico
+  Longitud: '25'
+  Obligatorio: 'No'
+  Descripción: Segundo apellido
+  ? ''
+  : ''
+- Campo: direccion
+  Tipo: Alfanumérico
+  Longitud: '64'
+  Obligatorio: 'No'
+  Descripción: Dirección
+  ? ''
+  : ''
+- Campo: poblacion
+  Tipo: Alfanumérico
+  Longitud: '64'
+  Obligatorio: 'No'
+  Descripción: Población
+  ? ''
+  : ''
+- Campo: provincia
+  Tipo: Alfanumérico
+  Longitud: '64'
+  Obligatorio: 'No'
+  Descripción: Provincia
+  ? ''
+  : ''
+- Campo: pais
+  Tipo: Alfanumérico
+  Longitud: '64'
+  Obligatorio: 'No'
+  Descripción: País
+  ? ''
+  : ''
+- Campo: sexo
+  Tipo: Alfanumérico
+  Longitud: '1'
+  Obligatorio: 'No'
+  Descripción: M= Mujer, H= Hombre
+  ? ''
+  : ''
+- Campo: cp
+  Tipo: Alfanumérico
+  Longitud: '10'
+  Obligatorio: 'No'
+  Descripción: Código postal
+  ? ''
+  : ''
+- Campo: fechaNac
+  Tipo: Fecha
+  Longitud: ''
+  Obligatorio: 'No'
+  Descripción: Fecha nacimiento (dd/mm/yyyy)
+  ? ''
+  : ''
+- Campo: telefono
+  Tipo: Alfanumérico
+  Longitud: '25'
+  Obligatorio: 'No'
+  Descripción: Teléfono principal
+  ? ''
+  : ''
+- Campo: telefono2
+  Tipo: Alfanumérico
+  Longitud: '25'
+  Obligatorio: 'No'
+  Descripción: Teléfono secundario
+  ? ''
+  : ''
+- Campo: movil
+  Tipo: Alfanumérico
+  Longitud: '25'
+  Obligatorio: 'No'
+  Descripción: Teléfono móvil
+  ? ''
+  : ''
+- Campo: fax
+  Tipo: Alfanumérico
+  Longitud: '25'
+  Obligatorio: 'No'
+  Descripción: Campo deprecado
+  ? ''
+  : ''
+- Campo: email
+  Tipo: Alfanumérico
+  Longitud: '256'
+  Obligatorio: 'No'
+  Descripción: Correo electrónico
+  ? ''
+  : ''
+- Campo: dni
+  Tipo: Alfanumérico
+  Longitud: '16'
+  Obligatorio: 'No'
+  Descripción: DNI/NIF/NIE
+  ? ''
+  : ''
+- Campo: porSms
+  Tipo: Alfanumérico
+  Longitud: '2'
+  Obligatorio: Si
+  Descripción: Permiso SMS (SI/NO)
+  ? ''
+  : ''
+- Campo: porMail
+  Tipo: Alfanumérico
+  Longitud: '2'
+  Obligatorio: Si
+  Descripción: Permiso Mail (SI/NO)
+  ? ''
+  : ''
+- Campo: ultVisita
+  Tipo: Fecha
+  Longitud: ''
+  Obligatorio: 'No'
+  Descripción: Última visita
+  ? ''
+  : ''
+- Campo: primeraVisita
+  Tipo: Fecha
+  Longitud: ''
+  Obligatorio: 'No'
+  Descripción: Primera visita
+  ? ''
+  : ''
+- Campo: obs
+  Tipo: Alfanumérico
+  Longitud: 4GB
+  Obligatorio: 'No'
+  Descripción: Observaciones
+  ? ''
+  : ''
+- Campo: motivo
+  Tipo: Alfanumérico
+  Longitud: '5'
+  Obligatorio: 'No'
+  Descripción: Campo deprecado
+  ? ''
+  : ''
+- Campo: profesion
+  Tipo: Alfanumérico
+  Longitud: '64'
+  Obligatorio: 'No'
+  Descripción: Profesión
+  ? ''
+  : ''
+- Campo: lopd
+  Tipo: Alfanumérico
+  Longitud: '2'
+  Obligatorio: Si
+  Descripción: LOPD aceptada (SI/NO)
+  ? ''
+  : ''
+- Campo: mailing
+  Tipo: Alfanumérico
+  Longitud: '2'
+  Obligatorio: Si
+  Descripción: Permiso mailing (SI/NO)
+  ? ''
+  : ''
+- Campo: grupoCliente
+  Tipo: Alfanumérico
+  Longitud: '10'
+  Obligatorio: 'No'
+  Descripción: Agrupación de clientes (No se utiliza)
+  ? ''
+  : ''
+- Campo: inactivo
+  Tipo: Alfanumérico
+  Longitud: '2'
+  Obligatorio: Si
+  Descripción: Cliente inactivo (SI/NO)
+  ? ''
+  : ''
+DOCTORES:
+- Campo: codOrigen
+  Tipo: Numérico
+  Longitud: '8'
+  Obligatorio: Sí
+  Descripción: Identificador doctor
+  ? ''
+  : ''
+- Campo: nombre
+  Tipo: Alfanumérico
+  Longitud: '20'
+  Obligatorio: Sí
+  Descripción: Nombre
+  ? ''
+  : ''
+- Campo: apellidos
+  Tipo: Alfanumérico
+  Longitud: '70'
+  Obligatorio: 'No'
+  Descripción: Apellidos
+  ? ''
+  : ''
+- Campo: numeroColegiado Alfanumérico
+  Tipo: ''
+  Longitud: '16'
+  Obligatorio: 'No'
+  Descripción: Número colegiado
+  ? ''
+  : ''
+- Campo: direccion
+  Tipo: Alfanumérico
+  Longitud: '50'
+  Obligatorio: 'No'
+  Descripción: Dirección
+  ? ''
+  : ''
+- Campo: cp
+  Tipo: Alfanumérico
+  Longitud: '5'
+  Obligatorio: 'No'
+  Descripción: Código postal
+  ? ''
+  : ''
+- Campo: provincia
+  Tipo: Alfanumérico
+  Longitud: '35'
+  Obligatorio: 'No'
+  Descripción: Provincia
+  ? ''
+  : ''
+- Campo: poblacion
+  Tipo: Alfanumérico
+  Longitud: '16'
+  Obligatorio: 'No'
+  Descripción: Población
+  ? ''
+  : ''
+GRADGAFA:
+- Campo: id
+  Tipo: Numérico
+  Longitud: '10'
+  Obligatorio: Sí
+  Descripción: Identificador graduación
+  Formnato: ''
+- Campo: tienda
+  Tipo: Numérico
+  Longitud: '10'
+  Obligatorio: Sí
+  Descripción: Código tienda
+  Formnato: ''
+- Campo: idClientes
+  Tipo: Numérico
+  Longitud: '10'
+  Obligatorio: Sí
+  Descripción: Clientes.id
+  Formnato: ''
+- Campo: ejeD
+  Tipo: Numérico
+  Longitud: '4'
+  Obligatorio: 'No'
+  Descripción: Campo para la medición del eje derecho.
+  Formnato: '[-XXX, XXX]'
+- Campo: cilindroD
+  Tipo: Numérico
+  Longitud: '6'
+  Obligatorio: 'No'
+  Descripción: Campo para la medición del cilindro derecho.
+  Formnato: '[-XX.XX, XX.XX]'
+- Campo: esferaD
+  Tipo: Numérico
+  Longitud: '6'
+  Obligatorio: 'No'
+  Descripción: Campo para la medición de la esfera derecha.
+  Formnato: '[-XX.XX, XX.XX]'
+- Campo: ejeI
+  Tipo: Numérico
+  Longitud: '4'
+  Obligatorio: 'No'
+  Descripción: Campo para la medición del eje izquierdo.
+  Formnato: '[-XXX, XXX]'
+- Campo: cilindroI
+  Tipo: Numérico
+  Longitud: '6'
+  Obligatorio: 'No'
+  Descripción: Campo para la medición del cilindro izquierdo.
+  Formnato: '[-XX.XX, XX.XX]'
+- Campo: esferaI
+  Tipo: Numérico
+  Longitud: '6'
+  Obligatorio: 'No'
+  Descripción: Campo para la medición de la esfera izquierda.
+  Formnato: '[-XX.XX, XX.XX]'
+- Campo: adicionD
+  Tipo: Numérico
+  Longitud: '4'
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos de la adición ojo derecho.
+  Formnato: '[X.XX]'
+- Campo: adicionI
+  Tipo: Numérico
+  Longitud: '4'
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos de la adición ojo izquierdo.
+  Formnato: '[X.XX]'
+- Campo: esferaCercaD
+  Tipo: Numérico
+  Longitud: '6'
+  Obligatorio: 'No'
+  Descripción: Campo para la medición de la esfera de cerca derecha.
+  Formnato: '[-XX.XX, XX.XX]'
+- Campo: esferaCercaI
+  Tipo: Numérico
+  Longitud: '6'
+  Obligatorio: 'No'
+  Descripción: Campo para la medición de la esfera de cerca izquierda.
+  Formnato: '[-XX.XX, XX.XX]'
+- Campo: avscd
+  Tipo: Numérico
+  Longitud: '4'
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos de la agudeza visual sin corrección
+    del ojo derecho.
+  Formnato: '[X.XX]'
+- Campo: avsci
+  Tipo: Numérico
+  Longitud: '4'
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos de la agudeza visual sin corrección
+    del ojo izquierdo
+  Formnato: '[X.XX]'
+- Campo: avd
+  Tipo: Numérico
+  Longitud: '4'
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos de la agudeza visual del ojo derecho.
+  Formnato: '[X.XX]'
+- Campo: avi
+  Tipo: Numérico
+  Longitud: '4'
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos de la agudeza visual del ojo izquierdo.
+  Formnato: '[X.XX]'
+- Campo: avao
+  Tipo: Numérico
+  Longitud: '4'
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos de la agudeza visual ambos ojos.
+  Formnato: '[X.XX]'
+- Campo: dnpd
+  Tipo: Numérico
+  Longitud: '10'
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos de la distancia naso-pupilar derecha.
+  Formnato: ''
+- Campo: dnpi
+  Tipo: Numérico
+  Longitud: '10'
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos de la distancia naso-pupilar izquierda.
+  Formnato: ''
+- Campo: prismaD
+  Tipo: Alfanumérico
+  Longitud: '20'
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos del prisma derecho
+  Formnato: ''
+- Campo: prismaI
+  Tipo: Alfanumérico
+  Longitud: '20'
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos del prisma izquierdo
+  Formnato: ''
+- Campo: di
+  Tipo: Numérico
+  Longitud: '2'
+  Obligatorio: 'No'
+  Descripción: Campo deprecado
+  Formnato: ''
+- Campo: obs
+  Tipo: Alfanumérico
+  Longitud: 4GB
+  Obligatorio: 'No'
+  Descripción: Notas relacionadas con la graduación optométrica.
+  Formnato: ''
+- Campo: fecha
+  Tipo: Fecha
+  Longitud: ''
+  Obligatorio: Si
+  Descripción: Fecha de creación para la graduación optométrica.
+  Formnato: dd/mm/yyyy hh:mm:ss
+- Campo: usuario
+  Tipo: Numérico
+  Longitud: '6'
+  Obligatorio: Si
+  Descripción: Identificador del Usuario que tramitó está graduación
+  Formnato: ''
+- Campo: codVendedor
+  Tipo: Numérico
+  Longitud: ''
+  Obligatorio: 'No'
+  Descripción: Uduarios.cdgusuario
+  Formnato: ''
+- Campo: 'dnpCercaD   '
+  Tipo: Numérico
+  Longitud: ''
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos de la distancia naso-pupilar cerca derecha.
+  Formnato: ''
+- Campo: dnpCercaI
+  Tipo: Numérico
+  Longitud: ''
+  Obligatorio: 'No'
+  Descripción: "Campo para registrar los datos de la \r\ndistancia naso-pupilar cerca\
+    \ izquierda."
+  Formnato: ''
+- Campo: doctor
+  Tipo: Numérico
+  Longitud: '8'
+  Obligatorio: Si
+  Descripción: DOCTORES.codOrigen
+  Formnato: ''
+- Campo: proxGraduacion
+  Tipo: Fecha
+  Longitud: ''
+  Obligatorio: 'No'
+  Descripción: Próxima revisión optométrica del paciente.
+  Formnato: dd/mm/yyyy hh:mm:ss
+GRADLENT:
+- Campo: id
+  Tipo: Numérico
+  Longitud: '10'
+  Obligatorio: Sí
+  Descripción: Identificador graduación
+  Formato: ''
+- Campo: idCliente
+  Tipo: Numérico
+  Longitud: '10'
+  Obligatorio: Sí
+  Descripción: Clientes.id
+  Formato: ''
+- Campo: dsc
+  Tipo: Alfanumérico
+  Longitud: '1'
+  Obligatorio: Sí
+  Descripción: Si es definitiva una D si es una prueba o adaptación P
+  Formato: ''
+- Campo: ejeD
+  Tipo: Numérico
+  Longitud: '4'
+  Obligatorio: 'No'
+  Descripción: Campo para la medición del eje derecho.
+  Formato: '[-XXX, XXX]'
+- Campo: cilindroD
+  Tipo: Numérico
+  Longitud: '6'
+  Obligatorio: 'No'
+  Descripción: Campo para la medición del cilindro derecho.
+  Formato: '[-XX.XX, XX.XX]'
+- Campo: esferaD
+  Tipo: Numérico
+  Longitud: '6'
+  Obligatorio: 'No'
+  Descripción: Campo para la medición de la esfera derecha.
+  Formato: '[-XX.XX, XX.XX]'
+- Campo: adicionD
+  Tipo: Numérico
+  Longitud: '4'
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos de la adición ojo derecho
+  Formato: '[-XXX, XXX]'
+- Campo: avd
+  Tipo: Numérico
+  Longitud: '4'
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos de la agudeza visual del ojo derecho
+  Formato: '[X.XX]'
+- Campo: rcd
+  Tipo: Alfanumérico
+  Longitud: '20'
+  Obligatorio: 'No'
+  Descripción: Campo para indicar el radio de curvatura de la lente derecha
+  Formato: ''
+- Campo: ejeI
+  Tipo: Numérico
+  Longitud: '4'
+  Obligatorio: 'No'
+  Descripción: Campo para la medición del eje izquierdo.
+  Formato: '[X.XX]'
+- Campo: cilindroI
+  Tipo: Numérico
+  Longitud: '4'
+  Obligatorio: 'No'
+  Descripción: Campo para la medición del cilindro izquierdo.
+  Formato: '[-XX.XX, XX.XX]'
+- Campo: esferaI
+  Tipo: Numérico
+  Longitud: '6'
+  Obligatorio: 'No'
+  Descripción: Campo para la medición del Esfera izquierda.
+  Formato: '[-XX.XX, XX.XX]'
+- Campo: adicionI
+  Tipo: Numérico
+  Longitud: '4'
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos de la adición ojo izquierda
+  Formato: '[X.XX]'
+- Campo: avi
+  Tipo: Numérico
+  Longitud: '4'
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos de la agudeza visual del ojo izquierdo
+  Formato: '[X.XX]'
+- Campo: rci
+  Tipo: Alfanumérico
+  Longitud: '20'
+  Obligatorio: 'No'
+  Descripción: Campo para indicar el radio de curvatura de la lente izquierda
+  Formato: ''
+- Campo: fecha
+  Tipo: Fecha
+  Longitud: ''
+  Obligatorio: Si
+  Descripción: Fecha de creación para la graduación optométrica.
+  Formato: dd/mm/yyyy hh:mm:ss
+- Campo: doctor
+  Tipo: Numérico
+  Longitud: '8'
+  Obligatorio: Si
+  Descripción: Doctores.codOrigen
+  Formato: ''
+- Campo: diametroD
+  Tipo: Alfanumérico
+  Longitud: '20'
+  Obligatorio: 'No'
+  Descripción: Campo para guardar la información del diámetro del ojo derecho en la
+    graduación contactológica.
+  Formato: ''
+- Campo: diametroI
+  Tipo: Alfanumérico
+  Longitud: '20'
+  Obligatorio: 'No'
+  Descripción: Campo para guardar la información del diámetro del ojo izquierdo en
+    la graduación contactológica.
+  Formato: ''
+- Campo: obs
+  Tipo: Alfanumérico
+  Longitud: 4GB
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos de la distancia naso-pupilar derecha.
+  Formato: ''
+- Campo: avao
+  Tipo: Numérico
+  Longitud: '10'
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos de la agudeza visual ambos ojos.
+  Formato: '[X.XX]'
+- Campo: dzod
+  Tipo: Alfanumérico
+  Longitud: '20'
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos del diámetro para el ojo derecho
+  Formato: ''
+- Campo: dzoi
+  Tipo: Alfanumérico
+  Longitud: '20'
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos del diámetr para el ojo izquierdo
+  Formato: ''
+- Campo: codigolcd
+  Tipo: Alfanumérico
+  Longitud: '5'
+  Obligatorio: 'No'
+  Descripción: Campo deprecado
+  Formato: ''
+- Campo: codigolci
+  Tipo: Alfanumérico
+  Longitud: '5'
+  Obligatorio: 'No'
+  Descripción: Campo deprecado
+  Formato: ''
+- Campo: marcaD
+  Tipo: Alfanumérico
+  Longitud: '30'
+  Obligatorio: 'No'
+  Descripción: Campo deprecado
+  Formato: dd/mm/yyyy hh:mm:ss
+- Campo: marcaI
+  Tipo: Alfanumérico
+  Longitud: '30'
+  Obligatorio: 'No'
+  Descripción: Campo deprecado
+  Formato: ''
+- Campo: laboratorioD
+  Tipo: Alfanumérico
+  Longitud: '200'
+  Obligatorio: 'No'
+  Descripción: Uduarios.cdgusuario
+  Formato: ''
+- Campo: laboratorioI
+  Tipo: Alfanumérico
+  Longitud: '200'
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos de la distancia naso-pupilar cerca derecha.
+  Formato: ''
+- Campo: proxRevision
+  Tipo: Date
+  Longitud: ''
+  Obligatorio: 'No'
+  Descripción: Campo para registrar los datos de la distancia naso-pupilar cerca izquierda.
+  Formato: dd/mm/yyyy hh:mm:ss
+- Campo: tipolenteD
+  Tipo: Alfanumérico
+  Longitud: '50'
+  Obligatorio: 'No'
+  Descripción: Tipo de lente prescrita del ojo derecho para la graduación contactológica.
+  Formato: ''
+- Campo: tipoLenteI
+  Tipo: Alfanumérico
+  Longitud: '50'
+  Obligatorio: 'No'
+  Descripción: Tipo de lente prescrita del ojo izquierdo para la graduación contactológica.
+  Formato: ''
+- Campo: tienda
+  Tipo: Numérico
+  Longitud: '6'
+  Obligatorio: Si
+  Descripción: Indica la tienda a la que pertenece la graduación.
+  Formato: ''
+- Campo: usuario
+  Tipo: Numérico
+  Longitud: '6'
+  Obligatorio: Si
+  Descripción: Usuarios.cdgusuario
+  Formato: ''
+PROVEEDORES:
+- Campo: cdgProv
+  Tipo: Numérico
+  Longitud: '10'
+  Obligatorio: Sí
+  Descripción: Código proveedor
+  ? ''
+  : ''
+- Campo: nombre
+  Tipo: Alfanumérico
+  Longitud: '35'
+  Obligatorio: Sí
+  Descripción: Nombre proveedor
+  ? ''
+  : ''
+- Campo: nif
+  Tipo: Alfanumérico
+  Longitud: '10'
+  Obligatorio: 'No'
+  Descripción: NIF
+  ? ''
+  : ''
+- Campo: direccion
+  Tipo: Alfanumérico
+  Longitud: '35'
+  Obligatorio: 'No'
+  Descripción: Dirección
+  ? ''
+  : ''
+- Campo: cp
+  Tipo: Alfanumérico
+  Longitud: '10'
+  Obligatorio: 'No'
+  Descripción: Código postal
+  ? ''
+  : ''
+- Campo: poblacion
+  Tipo: Alfanumérico
+  Longitud: '35'
+  Obligatorio: 'No'
+  Descripción: Población
+  ? ''
+  : ''
+- Campo: provincia
+  Tipo: Alfanumérico
+  Longitud: '35'
+  Obligatorio: 'No'
+  Descripción: Provincia
+  ? ''
+  : ''
+- Campo: telefono
+  Tipo: Alfanumérico
+  Longitud: '25'
+  Obligatorio: 'No'
+  Descripción: Teléfono 1
+  ? ''
+  : ''
+- Campo: telefono2
+  Tipo: Alfanumérico
+  Longitud: '25'
+  Obligatorio: 'No'
+  Descripción: Teléfono 2
+  ? ''
+  : ''
+- Campo: fax
+  Tipo: Alfanumérico
+  Longitud: '30'
+  Obligatorio: 'No'
+  Descripción: deprecado
+  ? ''
+  : ''
+- Campo: email
+  Tipo: Alfanumérico
+  Longitud: '50'
+  Obligatorio: 'No'
+  Descripción: Email
+  ? ''
+  : ''
+ARTICULOS:
+- Campo: cdgArt
+  Tipo: Alfanumérico
+  Longitud: '20'
+  Obligatorio: Sí
+  Descripción: Código artículo
+  Formato: ''
+- Campo: dsc
+  Tipo: Alfanumérico
+  Longitud: '50'
+  Obligatorio: Sí
+  Descripción: Descripción
+  Formato: ''
+- Campo: precio_costo
+  Tipo: Decimal
+  Longitud: 20,4
+  Obligatorio: 'No'
+  Descripción: Precio de compra del articulo
+  Formato: ''
+- Campo: prop1
+  Tipo: Alfanumérico
+  Longitud: '64'
+  Obligatorio: 'No'
+  Descripción: '• AUDIFONOS: Marca • LENTES DE CONTACTO: Marca • LENTES: Marca • MONTURAS
+    - SOL: Marca • VARIOS/PDTOS DE MANTENIMIENTO: Marca'
+  Formato: ''
+- Campo: prop2
+  Tipo: Alfanumérico
+  Longitud: '64'
+  Obligatorio: 'No'
+  Descripción: '• AUDIFONOS: Familia • LENTES DE CONTACTO: Reposición • LENTES: Foco
+    • MONTURAS - SOL: Material • VARIOS/PDTOS DE MANTENIMIENTO: Grupo'
+  Formato: ''
+- Campo: prop3
+  Tipo: Alfanumérico
+  Longitud: '64'
+  Obligatorio: 'No'
+  Descripción: '• AUDIFONOS: Tipo • LENTES DE CONTACTO: Categoría • LENTES: Tipo •
+    MONTURAS - SOL: Destinatario • VARIOS/PDTOS DE MANTENIMIENTO: Familia • AUDIFONOS:
+    Tecnología • LENTES DE CONTACTO: Stock/Fabricación • LENTES: Gama • MONTURAS-SOL:
+    Modelo • VARIOS/PDTOS DE MANTENIMIENTO: Capacidad'
+  Formato: ''
+- Campo: prop4
+  Tipo: Alfanumérico
+  Longitud: '64'
+  Obligatorio: 'No'
+  Descripción: ''
+  Formato: ''
+- Campo: prop5
+  Tipo: Alfanumérico
+  Longitud: '64'
+  Obligatorio: 'No'
+  Descripción: '• LENTES DE CONTACTO: Gama • LENTES: Esfera • MONTURAS - SOL: Color'
+  Formato: ''
+- Campo: prop6
+  Tipo: Alfanumérico
+  Longitud: '64'
+  Obligatorio: 'No'
+  Descripción: '• LENTES DE CONTACTO: Diámetro • LENTES: Cilindro • MONTURAS - SOL:
+    Calibre'
+  Formato: ''
+- Campo: prop7
+  Tipo: Alfanumérico
+  Longitud: '64'
+  Obligatorio: 'No'
+  Descripción: '• LENTES DE CONTACTO: Radio • LENTES: Diámetro • MONTURAS-SOL: Puente'
+  Formato: ''
+- Campo: prop8
+  Tipo: Alfanumérico
+  Longitud: '64'
+  Obligatorio: 'No'
+  Descripción: '• LENTES DE CONTACTO: Esfera • MONTURAS-SOL: Estado'
+  Formato: ''
+- Campo: cdgBarras
+  Tipo: Alfanumérico
+  Longitud: '50'
+  Obligatorio: 'No'
+  Descripción: Código de barras
+  Formato: ''
+- Campo: cdgEdi
+  Tipo: Alfanumérico
+  Longitud: '13'
+  Obligatorio: 'No'
+  Descripción: Código registrado en el GS1 para el intercambio electrónico de este
+    producto.
+  Formato: ''
+- Campo: pvp1
+  Tipo: Decimal
+  Longitud: 20,4
+  Obligatorio: Si
+  Descripción: Precio principal de venta para el artículo.
+  Formato: ''
+- Campo: pvp2
+  Tipo: Decimal
+  Longitud: 20,4
+  Obligatorio: 'No'
+  Descripción: Precio secundario de venta para el artículo.
+  Formato: ''
+- Campo: pvp3
+  Tipo: Decimal
+  Longitud: 20,4
+  Obligatorio: 'No'
+  Descripción: Precio secundario de venta para el artículo.
+  Formato: ''
+- Campo: pvp4
+  Tipo: Decimal
+  Longitud: 20,4
+  Obligatorio: 'No'
+  Descripción: Precio secundario de venta para el artículo.
+  Formato: ''
+- Campo: pvp5
+  Tipo: Decimal
+  Longitud: 20,4
+  Obligatorio: 'No'
+  Descripción: Precio secundario de venta para el artículo.
+  Formato: ''
+- Campo: tipo
+  Tipo: Alfanumérico
+  Longitud: '40'
+  Obligatorio: Si
+  Descripción: 'Familia del articulo Valores posibles: [ LENTES, LC, GRADUADO, SOL,
+    PDTOS MANTENIMIENTO VARIOS, AUDIFONOS, VARIOS AUDIO ]'
+  Formato: ''
+- Campo: proveedor
+  Tipo: DECIMAL
+  Longitud: ''
+  Obligatorio: Si
+  Descripción: Proveedores.cdgProv Valor por defecto 1, si no se dispone de esta información
+  Formato: ''
+- Campo: pdtosProv
+  Tipo: DECIMAL
+  Longitud: 20,6
+  Obligatorio: 'No'
+  Descripción: Descuento de compra que ofrece el proveedor sobre el artículo.
+  Formato: ''
+- Campo: fechaUltCompra
+  Tipo: Fecha
+  Longitud: ''
+  Obligatorio: 'No'
+  Descripción: Fecha que corresponde a la última compra del artículo.
+  Formato: dd/mm/yyyy
+- Campo: fecha_UltVenta
+  Tipo: Fecha
+  Longitud: ''
+  Obligatorio: 'No'
+  Descripción: Fecha que corresponde a la última venta del artículo.
+  Formato: dd/mm/yyyy
+- Campo: fechaCreacion
+  Tipo: Fecha
+  Longitud: ''
+  Obligatorio: 'No'
+  Descripción: Fecha de creación del artículo.
+  Formato: dd/mm/yyyy
+- Campo: saft
+  Tipo: Alfanumérico
+  Longitud: '1'
+  Obligatorio: 'No'
+  Descripción: Deprecado
+  Formato: ''
+- Campo: descatalogado
+  Tipo: Alfanumérico
+  Longitud: '2'
+  Obligatorio: Si
+  Descripción: Producto que ya no esta activo en la empresa Valores posible SI/NO
+  Formato: ''
+STOCK:
+- Campo: tienda
+  Tipo: Numérico
+  Longitud: '5'
+  Obligatorio: Sí
+  Descripción: Código tienda
+  ? ''
+  : ''
+- Campo: cdgArticulo
+  Tipo: Alfanumérico
+  Longitud: '20'
+  Obligatorio: Sí
+  Descripción: Articulos.cdgArt
+  ? ''
+  : ''
+- Campo: unidades
+  Tipo: Numérico
+  Longitud: '5'
+  Obligatorio: Sí
+  Descripción: Unidades en stock
+  ? ''
+  : ''
+VENTACAB:
+- Campo: venta
+  Tipo: Numérico
+  Longitud: '10'
+  Obligatorio: Sí
+  Descripción: Código de venta
+  Formato: ''
+- Campo: talon
+  Tipo: Alfanumérico
+  Longitud: '25'
+  Obligatorio: 'No'
+  Descripción: "Código que se utiliza en los traspasos para identificar la venta de\
+    \ \r\norigen si el campo venta debe recalcular en Gioweb"
+  Formato: ''
+- Campo: importeTotal
+  Tipo: Decimal
+  Longitud: 20,6
+  Obligatorio: Sí
+  Descripción: Importe total venta
+  Formato: ''
+- Campo: fechaRetirado
+  Tipo: Fecha
+  Longitud: ''
+  Obligatorio: 'No'
+  Descripción: Fecha retirada
+  Formato: dd/mm/yyyy hh:mm:ss
+- Campo: idCliente
+  Tipo: Numérico
+  Longitud: '10'
+  Obligatorio: Sí
+  Descripción: Clientes.id
+  Formato: ''
+- Campo: tienda
+  Tipo: Numérico
+  Longitud: '6'
+  Obligatorio: Sí
+  Descripción: Código tienda
+  Formato: ''
+- Campo: facturado
+  Tipo: Alfanumérico
+  Longitud: '2'
+  Obligatorio: 'No'
+  Descripción: SI/NO
+  Formato: ''
+- Campo: factura
+  Tipo: Alfanumérico
+  Longitud: '20'
+  Obligatorio: 'No'
+  Descripción: Número de la venta que origina la factura
+  Formato: ''
+- Campo: obs
+  Tipo: Alfanumérico
+  Longitud: 4GB
+  Obligatorio: 'No'
+  Descripción: Observaciones
+  Formato: ''
+- Campo: usuario
+  Tipo: Numérico
+  Longitud: '6'
+  Obligatorio: Si
+  Descripción: Usuarios.cdgusuario
+  Formato: ''
+- Campo: copago
+  Tipo: Alfanumérico
+  Longitud: '14'
+  Obligatorio: 'No'
+  Descripción: Deprecado
+  Formato: ''
+- Campo: tiendaDevuelta
+  Tipo: Numérico
+  Longitud: '6'
+  Obligatorio: 'No'
+  Descripción: Tienda asociada a la devolución
+  Formato: ''
+- Campo: ventaDevuelta
+  Tipo: Numérico
+  Longitud: '10'
+  Obligatorio: 'No'
+  Descripción: Venta asociada a la devolución
+  Formato: ''
+- Campo: fecha
+  Tipo: Fecha
+  Longitud: ''
+  Obligatorio: Sí
+  Descripción: Fecha de realización de la venta
+  Formato: dd/mm/yyyy hh:mm:ss
+- Campo: anticipo
+  Tipo: Decimal
+  Longitud: '20'
+  Obligatorio: 'No'
+  Descripción: Deprecado
+  Formato: ''
+- Campo: formPagoAnticipo Alfanumericos
+  Tipo: ''
+  Longitud: '50'
+  Obligatorio: 'No'
+  Descripción: Deprecado
+  Formato: ''
+VENTACON:
+- Campo: venta
+  Tipo: Numérico
+  Longitud: '10'
+  Obligatorio: Sí
+  Descripción: Ventacab.venta
+  ? ''
+  : ''
+- Campo: linea
+  Tipo: Numérico
+  Longitud: '10'
+  Obligatorio: Sí
+  Descripción: Número de línea
+  ? ''
+  : ''
+- Campo: cdg_art
+  Tipo: Alfanumérico
+  Longitud: '20'
+  Obligatorio: Sí
+  Descripción: Articulos.id
+  ? ''
+  : ''
+- Campo: cdg_pro
+  Tipo: Alfanumérico
+  Longitud: '20'
+  Obligatorio: 'No'
+  Descripción: Campo deprecado
+  ? ''
+  : ''
+- Campo: producto
+  Tipo: Alfanumérico
+  Longitud: '80'
+  Obligatorio: Si
+  Descripción: Descripción
+  ? ''
+  : ''
+- Campo: und
+  Tipo: Numérico
+  Longitud: '10'
+  Obligatorio: Si
+  Descripción: Unidades vendidas
+  ? ''
+  : ''
+- Campo: coste
+  Tipo: Decimal
+  Longitud: 20,6
+  Obligatorio: 'No'
+  Descripción: Precio de compradel articulo
+  ? ''
+  : ''
+- Campo: pvp
+  Tipo: Decimal
+  Longitud: 20,6
+  Obligatorio: Si
+  Descripción: Precio de venta
+  ? ''
+  : ''
+- Campo: dcto
+  Tipo: Decimal
+  Longitud: 20,6
+  Obligatorio: 'No'
+  Descripción: Descuento en euros
+  ? ''
+  : ''
+- Campo: dcto_porcentaje
+  Tipo: Decimal
+  Longitud: 20,6
+  Obligatorio: 'No'
+  Descripción: Descuento %
+  ? ''
+  : ''
+- Campo: precio
+  Tipo: Decimal
+  Longitud: 20,6
+  Obligatorio: Si
+  Descripción: Precio total línea + descuento + impuesto
+  ? ''
+  : ''
+- Campo: IVA
+  Tipo: Decimal
+  Longitud: 20,6
+  Obligatorio: Si
+  Descripción: Porcentaje de impuesto aplicado
+  ? ''
+  : ''
+- Campo: tipo
+  Tipo: Alfanumérico
+  Longitud: '40'
+  Obligatorio: Si
+  Descripción: 'Familia del articulo seleccionado Valores disponibles: Cristales =
+    1 Lentillas = 2 Graduado = 3 Varios = 4 Sol = 5 Pdtos Mantenimiento = 6 Audifonos
+    = 7 Varios Audio = 8'
+  ? ''
+  : ''
+- Campo: tienda
+  Tipo: Numérico
+  Longitud: '6'
+  Obligatorio: Si
+  Descripción: Ventacab.tienda
+  ? ''
+  : ''
+- Campo: estado
+  Tipo: Alfanumérico
+  Longitud: '25'
+  Obligatorio: 'No'
+  Descripción: Deprecado
+  ? ''
+  : ''
+- Campo: pedido
+  Tipo: Alfanumérico
+  Longitud: '10'
+  Obligatorio: 'No'
+  Descripción: Deprecado
+  ? ''
+  : ''
+- Campo: cdgSucPedido
+  Tipo: Alfanumérico
+  Longitud: '10'
+  Obligatorio: 'No'
+  Descripción: Deprecado
+  ? ''
+  : ''
+- Campo: cdgPedido
+  Tipo: Alfanumérico
+  Longitud: '10'
+  Obligatorio: 'No'
+  Descripción: Deprecado
+  ? ''
+  : ''
+- Campo: cdgLineaPedido Alfanumérico
+  Tipo: ''
+  Longitud: '10'
+  Obligatorio: 'No'
+  Descripción: Deprecado
+  ? ''
+  : ''
+- Campo: alturaFocal
+  Tipo: Alfanumérico
+  Longitud: '20'
+  Obligatorio: 'No'
+  Descripción: Altura focal de la lente seleccionada en el detalle de la venta Si
+    la linea es de tipo lentes
+  ? ''
+  : ''
+- Campo: vision
+  Tipo: Alfanumérico
+  Longitud: '10'
+  Obligatorio: 'No'
+  Descripción: Si la lente es de Lejos se introduce una L, si de cerca una C
+  ? ''
+  : ''
+- Campo: ojo
+  Tipo: Alfanumérico
+  Longitud: '10'
+  Obligatorio: 'No'
+  Descripción: Si es ojo Derecho D, si no I para lineas de tipo lentes
+  ? ''
+  : ''
+CAJAS:
+- Campo: venta
+  Tipo: Numérico
+  Longitud: '10'
+  Obligatorio: Sí
+  Descripción: Ventacab.venta
+  Formato: ''
+- Campo: pedido
+  Tipo: Numérico
+  Longitud: '10'
+  Obligatorio: 'No'
+  Descripción: Deprecado
+  Formato: ''
+- Campo: tienda
+  Tipo: Numérico
+  Longitud: '3'
+  Obligatorio: Sí
+  Descripción: Ventacab.tienda
+  Formato: ''
+- Campo: fecha
+  Tipo: Fecha
+  Longitud: ''
+  Obligatorio: Sí
+  Descripción: Fecha de cobro
+  Formato: dd/mm/yyyy hh:mm:ss
+- Campo: fPago
+  Tipo: Alfanumérico
+  Longitud: '50'
+  Obligatorio: Sí
+  Descripción: Forma de pago
+  Formato: ''
+- Campo: agente
+  Tipo: Numérico
+  Longitud: '6'
+  Obligatorio: 'No'
+  Descripción: Usuarios.cdgusuario
+  Formato: ''
+- Campo: importe
+  Tipo: Decimal
+  Longitud: 20, 6
+  Obligatorio: Sí
+  Descripción: Importe cobrado
+  Formato: ''
+- Campo: numtpv
+  Tipo: Numérico
+  Longitud: '3'
+  Obligatorio: 'No'
+  Descripción: Deprecado
+  Formato: ''
+- Campo: numero_cheque
+  Tipo: Alfanumérico
+  Longitud: '15'
+  Obligatorio: 'No'
+  Descripción: Deprecado
+  Formato: ''

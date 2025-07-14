@@ -1,0 +1,105 @@
+- Campo: venta
+  Tipo: integer
+  Longitud: '10'
+  Obligatorio: Sí
+  Descripción: Código de venta
+  Formato: ''
+- Campo: talon
+  Tipo: string
+  Longitud: '25'
+  Obligatorio: 'No'
+  Descripción: "Código que se utiliza en los traspasos para identificar la venta de\
+    \ \norigen si el campo venta debe recalcular en Gioweb"
+  Formato: ''
+- Campo: importeTotal
+  Tipo: float
+  Longitud: 20,6
+  Obligatorio: Sí
+  Descripción: Importe total venta
+  Formato: ''
+- Campo: fechaRetirado
+  Tipo: date
+  Longitud: ''
+  Obligatorio: 'No'
+  Descripción: Fecha retirada
+  Formato: dd/mm/yyyy hh:mm:ss
+- Campo: idCliente
+  Tipo: integer
+  Longitud: '10'
+  Obligatorio: Sí
+  Descripción: Clientes.id
+  Formato: ''
+  foreign_key: Clientes.id
+- Campo: tienda
+  Tipo: integer
+  Longitud: '6'
+  Obligatorio: Sí
+  Descripción: Código tienda
+  Formato: ''
+- Campo: facturado
+  Tipo: string
+  Longitud: '2'
+  Obligatorio: 'No'
+  Descripción: SI/NO
+  Formato: ''
+  Enum:
+  - SI
+  - 'NO'
+- Campo: factura
+  Tipo: string
+  Longitud: '20'
+  Obligatorio: 'No'
+  Descripción: Número de la venta que origina la factura
+  Formato: ''
+- Campo: obs
+  Tipo: string
+  Longitud: 4GB
+  Obligatorio: 'No'
+  Descripción: Observaciones
+  Formato: ''
+- Campo: usuario
+  Tipo: integer
+  Longitud: '6'
+  Obligatorio: Si
+  Descripción: Usuarios.cdgusuario
+  Formato: ''
+  foreign_key: Usuarios.cdgusuario
+- Campo: copago
+  Tipo: string
+  Longitud: '14'
+  Obligatorio: 'No'
+  Descripción: Deprecado
+  Formato: ''
+  Deprecado: true
+- Campo: tiendaDevuelta
+  Tipo: integer
+  Longitud: '6'
+  Obligatorio: 'No'
+  Descripción: Tienda asociada a la devolución
+  Formato: ''
+- Campo: ventaDevuelta
+  Tipo: integer
+  Longitud: '10'
+  Obligatorio: 'No'
+  Descripción: Venta asociada a la devolución
+  Formato: ''
+- Campo: fecha
+  Tipo: date
+  Longitud: ''
+  Obligatorio: Sí
+  Descripción: Fecha de realización de la venta
+  Formato: dd/mm/yyyy hh:mm:ss
+- Campo: anticipo
+  Tipo: float
+  Longitud: '20'
+  Obligatorio: 'No'
+  Descripción: Deprecado
+  Formato: ''
+  Deprecado: true
+- Campo: formPagoAnticipo Alfanumericos
+  Tipo: ''
+  Longitud: '50'
+  Obligatorio: 'No'
+  Descripción: Deprecado
+  Formato: ''
+  Deprecado: true

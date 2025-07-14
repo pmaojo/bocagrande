@@ -1,0 +1,4517 @@
+ficheros:
+- pagina: 1
+  nombre_logico: Usuarios
+  nombre_fichero: T_USUARIOS.csv
+  clave: null
+  esquema:
+  - nombre: cdgusuario
+    tipo: int
+    max_length: 6
+    required: true
+    descripcion: Código de usuario
+  - nombre: nombre
+    tipo: string
+    max_length: 35
+    required: true
+    descripcion: Nombre completo
+  - nombre: usuario
+    tipo: string
+    max_length: 35
+    required: true
+    descripcion: Nombre de usuario
+  - nombre: tienda
+    tipo: string
+    max_length: 6
+    required: true
+    descripcion: Código de tienda
+  - nombre: id
+    tipo: int
+    max_length: 10
+    required: true
+    descripcion: Código de cliente
+  - nombre: tienda
+    tipo: int
+    max_length: 6
+    required: true
+    descripcion: Código de tienda
+  - nombre: nombre
+    tipo: string
+    max_length: 35
+    required: true
+    descripcion: Nombre
+  - nombre: apellido1
+    tipo: string
+    max_length: 25
+    required: false
+    descripcion: Primer apellido
+  - nombre: apellido2
+    tipo: string
+    max_length: 25
+    required: false
+    descripcion: Segundo apellido
+  - nombre: direccion
+    tipo: string
+    max_length: 64
+    required: false
+    descripcion: Dirección
+  - nombre: poblacion
+    tipo: string
+    max_length: 64
+    required: false
+    descripcion: Población
+  - nombre: provincia
+    tipo: string
+    max_length: 64
+    required: false
+    descripcion: Provincia
+  - nombre: pais
+    tipo: string
+    max_length: 64
+    required: false
+    descripcion: País
+  - nombre: sexo
+    tipo: string
+    max_length: 1
+    required: false
+    descripcion: M Mujer, H Hombre
+  metadatos:
+    separador_csv: ','
+    decimal: .
+    case_sensitive: true
+    orden_columnas: true
+    clob_comillas: '"'
+    formatos_especiales:
+      fecha: YYYY-MM-DD
+      medicion_oftalmologica: ver especificación
+  tablas:
+  - columnas:
+    - Campo
+    - Tipo
+    - Longitud
+    - Obligatorio
+    - Descripción
+    filas:
+    - campo: cdgusuario
+      tipo: Numérico
+      longitud: '6'
+      obligatorio: Sí
+      descripción: Código de usuario
+    - campo: nombre
+      tipo: Alfanumérico
+      longitud: '35'
+      obligatorio: Sí
+      descripción: Nombre completo
+    - campo: usuario
+      tipo: Alfanumérico
+      longitud: '35'
+      obligatorio: Sí
+      descripción: Nombre de usuario
+    - campo: tienda
+      tipo: Alfanumérico
+      longitud: '6'
+      obligatorio: Sí
+      descripción: Código de tienda
+  - columnas:
+    - Campo
+    - Tipo
+    - Longitud
+    - Obligatorio
+    - Descripción
+    filas:
+    - campo: id
+      tipo: Numérico
+      longitud: '10'
+      obligatorio: Sí
+      descripción: Código de cliente
+    - campo: tienda
+      tipo: Numérico
+      longitud: '6'
+      obligatorio: Sí
+      descripción: Código de tienda
+    - campo: nombre
+      tipo: Alfanumérico
+      longitud: '35'
+      obligatorio: Sí
+      descripción: Nombre
+    - campo: apellido1
+      tipo: Alfanumérico
+      longitud: '25'
+      obligatorio: 'No'
+      descripción: Primer apellido
+    - campo: apellido2
+      tipo: Alfanumérico
+      longitud: '25'
+      obligatorio: 'No'
+      descripción: Segundo apellido
+    - campo: direccion
+      tipo: Alfanumérico
+      longitud: '64'
+      obligatorio: 'No'
+      descripción: Dirección
+    - campo: poblacion
+      tipo: Alfanumérico
+      longitud: '64'
+      obligatorio: 'No'
+      descripción: Población
+    - campo: provincia
+      tipo: Alfanumérico
+      longitud: '64'
+      obligatorio: 'No'
+      descripción: Provincia
+    - campo: pais
+      tipo: Alfanumérico
+      longitud: '64'
+      obligatorio: 'No'
+      descripción: País
+    - campo: sexo
+      tipo: Alfanumérico
+      longitud: '1'
+      obligatorio: 'No'
+      descripción: M Mujer, H Hombre
+  texto_fuera_tablas: 'Requerimientos para el trasvase de
+
+    datos
+
+    Es importante recalcar que los campos están ordenador por orden de columnas en
+    el CSV.
+
+    También destacar que es case sensitive, por lo que se debe respetar completamente
+    la semántica y el
+
+    orden además.
+
+    El separador que usan todos los documentos CSV es el por defecto ‘,ʼ
+
+    El símbolo de decimales va marcado por un .
+
+    Si van a usar valores con caracteres especiales en campos de tipo CLOB, utilizar
+    las “ˮ para envolver
+
+    el contenido
+
+    Es importante respetar los formatos de campos como fechas o de mediciones oftalmológicas
+
+    1. Usuarios (T_USUARIOS.csv)
+
+    Campo Tipo Longitud Obligatorio Descripción
+
+    cdgusuario Numérico 6 Sí Código de usuario
+
+    nombre Alfanumérico 35 Sí Nombre completo
+
+    usuario Alfanumérico 35 Sí Nombre de usuario
+
+    tienda Alfanumérico 6 Sí Código de tienda
+
+    2. Clientes (T_CLIENTES.csv)
+
+    La clave de cliente se genera con la combinación de id + tienda
+
+    Campo Tipo Longitud Obligatorio Descripción
+
+    id Numérico 10 Sí Código de cliente
+
+    tienda Numérico 6 Sí Código de tienda
+
+    nombre Alfanumérico 35 Sí Nombre
+
+    apellido1 Alfanumérico 25 No Primer apellido
+
+    apellido2 Alfanumérico 25 No Segundo apellido
+
+    direccion Alfanumérico 64 No Dirección
+
+    poblacion Alfanumérico 64 No Población
+
+    provincia Alfanumérico 64 No Provincia
+
+    pais Alfanumérico 64 No País
+
+    sexo Alfanumérico 1 No M Mujer, H Hombre
+
+    Requerimientos para el trasvase de datos 1'
+- pagina: 2
+  nombre_logico: Graduaciones Optométricas
+  nombre_fichero: T_GRADGAFA.csv
+  clave:
+  - id
+  - 'tienda
+
+    Requerimientos para el trasvase de datos 2'
+  esquema:
+  - nombre: cp
+    tipo: string
+    max_length: 10
+    required: false
+    descripcion: Código postal
+  - nombre: fechaNac
+    tipo: date
+    required: false
+    descripcion: Fecha nacimiento (dd/mm/yyyy)
+  - nombre: telefono
+    tipo: string
+    max_length: 25
+    required: false
+    descripcion: Teléfono principal
+  - nombre: telefono2
+    tipo: string
+    max_length: 25
+    required: false
+    descripcion: Teléfono secundario
+  - nombre: movil
+    tipo: string
+    max_length: 25
+    required: false
+    descripcion: Teléfono móvil
+  - nombre: fax
+    tipo: string
+    max_length: 25
+    required: false
+    descripcion: Campo deprecado
+  - nombre: email
+    tipo: string
+    max_length: 256
+    required: false
+    descripcion: Correo electrónico
+  - nombre: dni
+    tipo: string
+    max_length: 16
+    required: false
+    descripcion: DNI/NIF/NIE
+  - nombre: porSms
+    tipo: string
+    max_length: 2
+    required: true
+    descripcion: Permiso SMS SI/NO
+  - nombre: porMail
+    tipo: string
+    max_length: 2
+    required: true
+    descripcion: Permiso Mail SI/NO
+  - nombre: ultVisita
+    tipo: date
+    required: false
+    descripcion: Última visita
+  - nombre: primeraVisita
+    tipo: date
+    required: false
+    descripcion: Primera visita
+  - nombre: obs
+    tipo: string
+    required: false
+    descripcion: Observaciones
+  - nombre: motivo
+    tipo: string
+    max_length: 5
+    required: false
+    descripcion: Campo deprecado
+  - nombre: profesion
+    tipo: string
+    max_length: 64
+    required: false
+    descripcion: Profesión
+  - nombre: lopd
+    tipo: string
+    max_length: 2
+    required: true
+    descripcion: LOPD aceptada SI/NO
+  - nombre: mailing
+    tipo: string
+    max_length: 2
+    required: true
+    descripcion: Permiso mailing SI/NO
+  - nombre: grupoCliente
+    tipo: string
+    max_length: 10
+    required: false
+    descripcion: Agrupación de clientes No se utiliza)
+  - nombre: inactivo
+    tipo: string
+    max_length: 2
+    required: true
+    descripcion: Cliente inactivo SI/NO
+  - nombre: codOrigen
+    tipo: int
+    max_length: 8
+    required: true
+    descripcion: Identificador doctor
+  - nombre: nombre
+    tipo: string
+    max_length: 20
+    required: true
+    descripcion: Nombre
+  - nombre: apellidos
+    tipo: string
+    max_length: 70
+    required: false
+    descripcion: Apellidos
+  - nombre: numeroColegiado
+    tipo: string
+    max_length: 16
+    required: false
+    descripcion: Número colegiado
+  - nombre: direccion
+    tipo: string
+    max_length: 50
+    required: false
+    descripcion: Dirección
+  - nombre: cp
+    tipo: string
+    max_length: 5
+    required: false
+    descripcion: Código postal
+  - nombre: provincia
+    tipo: string
+    max_length: 35
+    required: false
+    descripcion: Provincia
+  - nombre: poblacion
+    tipo: string
+    max_length: 16
+    required: false
+    descripcion: Población
+  metadatos:
+    separador_csv: ','
+    decimal: .
+    case_sensitive: true
+    orden_columnas: true
+    clob_comillas: '"'
+    formatos_especiales:
+      fecha: YYYY-MM-DD
+      medicion_oftalmologica: ver especificación
+  tablas:
+  - columnas:
+    - Campo
+    - Tipo
+    - Longitud
+    - Obligatorio
+    - Descripción
+    filas:
+    - campo: cp
+      tipo: Alfanumérico
+      longitud: '10'
+      obligatorio: 'No'
+      descripción: Código postal
+    - campo: fechaNac
+      tipo: Fecha
+      longitud: ''
+      obligatorio: 'No'
+      descripción: Fecha nacimiento (dd/mm/yyyy)
+    - campo: telefono
+      tipo: Alfanumérico
+      longitud: '25'
+      obligatorio: 'No'
+      descripción: Teléfono principal
+    - campo: telefono2
+      tipo: Alfanumérico
+      longitud: '25'
+      obligatorio: 'No'
+      descripción: Teléfono secundario
+    - campo: movil
+      tipo: Alfanumérico
+      longitud: '25'
+      obligatorio: 'No'
+      descripción: Teléfono móvil
+    - campo: fax
+      tipo: Alfanumérico
+      longitud: '25'
+      obligatorio: 'No'
+      descripción: Campo deprecado
+    - campo: email
+      tipo: Alfanumérico
+      longitud: '256'
+      obligatorio: 'No'
+      descripción: Correo electrónico
+    - campo: dni
+      tipo: Alfanumérico
+      longitud: '16'
+      obligatorio: 'No'
+      descripción: DNI/NIF/NIE
+    - campo: porSms
+      tipo: Alfanumérico
+      longitud: '2'
+      obligatorio: Si
+      descripción: Permiso SMS SI/NO
+    - campo: porMail
+      tipo: Alfanumérico
+      longitud: '2'
+      obligatorio: Si
+      descripción: Permiso Mail SI/NO
+    - campo: ultVisita
+      tipo: Fecha
+      longitud: ''
+      obligatorio: 'No'
+      descripción: Última visita
+    - campo: primeraVisita
+      tipo: Fecha
+      longitud: ''
+      obligatorio: 'No'
+      descripción: Primera visita
+    - campo: obs
+      tipo: Alfanumérico
+      longitud: 4GB
+      obligatorio: 'No'
+      descripción: Observaciones
+    - campo: motivo
+      tipo: Alfanumérico
+      longitud: '5'
+      obligatorio: 'No'
+      descripción: Campo deprecado
+    - campo: profesion
+      tipo: Alfanumérico
+      longitud: '64'
+      obligatorio: 'No'
+      descripción: Profesión
+    - campo: lopd
+      tipo: Alfanumérico
+      longitud: '2'
+      obligatorio: Si
+      descripción: LOPD aceptada SI/NO
+    - campo: mailing
+      tipo: Alfanumérico
+      longitud: '2'
+      obligatorio: Si
+      descripción: Permiso mailing SI/NO
+    - campo: grupoCliente
+      tipo: Alfanumérico
+      longitud: '10'
+      obligatorio: 'No'
+      descripción: Agrupación de clientes No se utiliza)
+    - campo: inactivo
+      tipo: Alfanumérico
+      longitud: '2'
+      obligatorio: Si
+      descripción: Cliente inactivo SI/NO
+  - columnas:
+    - Campo
+    - Tipo
+    - Longitud
+    - Obligatorio
+    - Descripción
+    filas:
+    - campo: codOrigen
+      tipo: Numérico
+      longitud: '8'
+      obligatorio: Sí
+      descripción: Identificador doctor
+    - campo: nombre
+      tipo: Alfanumérico
+      longitud: '20'
+      obligatorio: Sí
+      descripción: Nombre
+    - campo: apellidos
+      tipo: Alfanumérico
+      longitud: '70'
+      obligatorio: 'No'
+      descripción: Apellidos
+    - campo: numeroColegiado
+      tipo: Alfanumérico
+      longitud: '16'
+      obligatorio: 'No'
+      descripción: Número colegiado
+    - campo: direccion
+      tipo: Alfanumérico
+      longitud: '50'
+      obligatorio: 'No'
+      descripción: Dirección
+    - campo: cp
+      tipo: Alfanumérico
+      longitud: '5'
+      obligatorio: 'No'
+      descripción: Código postal
+    - campo: provincia
+      tipo: Alfanumérico
+      longitud: '35'
+      obligatorio: 'No'
+      descripción: Provincia
+    - campo: poblacion
+      tipo: Alfanumérico
+      longitud: '16'
+      obligatorio: 'No'
+      descripción: Población
+  texto_fuera_tablas: 'Campo Tipo Longitud Obligatorio Descripción
+
+    cp Alfanumérico 10 No Código postal
+
+    fechaNac Fecha No Fecha nacimiento (dd/mm/yyyy)
+
+    telefono Alfanumérico 25 No Teléfono principal
+
+    telefono2 Alfanumérico 25 No Teléfono secundario
+
+    movil Alfanumérico 25 No Teléfono móvil
+
+    fax Alfanumérico 25 No Campo deprecado
+
+    email Alfanumérico 256 No Correo electrónico
+
+    dni Alfanumérico 16 No DNI/NIF/NIE
+
+    porSms Alfanumérico 2 Si Permiso SMS SI/NO
+
+    porMail Alfanumérico 2 Si Permiso Mail SI/NO
+
+    ultVisita Fecha No Última visita
+
+    primeraVisita Fecha No Primera visita
+
+    obs Alfanumérico 4GB No Observaciones
+
+    motivo Alfanumérico 5 No Campo deprecado
+
+    profesion Alfanumérico 64 No Profesión
+
+    lopd Alfanumérico 2 Si LOPD aceptada SI/NO
+
+    mailing Alfanumérico 2 Si Permiso mailing SI/NO
+
+    grupoCliente Alfanumérico 10 No Agrupación de clientes No se utiliza)
+
+    inactivo Alfanumérico 2 Si Cliente inactivo SI/NO
+
+    3. Doctores (T_DOCTORES.CSV)
+
+    Campo Tipo Longitud Obligatorio Descripción
+
+    codOrigen Numérico 8 Sí Identificador doctor
+
+    nombre Alfanumérico 20 Sí Nombre
+
+    apellidos Alfanumérico 70 No Apellidos
+
+    numeroColegiado Alfanumérico 16 No Número colegiado
+
+    direccion Alfanumérico 50 No Dirección
+
+    cp Alfanumérico 5 No Código postal
+
+    provincia Alfanumérico 35 No Provincia
+
+    poblacion Alfanumérico 16 No Población
+
+    4. Graduaciones Optométricas (T_GRADGAFA.csv)
+
+    La clave de este fichero es la combinación de id + tienda
+
+    Requerimientos para el trasvase de datos 2'
+- pagina: 3
+  nombre_logico: null
+  nombre_fichero: null
+  clave: null
+  esquema:
+  - nombre: id
+    tipo: int
+    max_length: 10
+    required: true
+    descripcion: 'Identificador
+
+      graduación'
+  - nombre: tienda
+    tipo: int
+    max_length: 10
+    required: true
+    descripcion: Código tienda
+  - nombre: idClientes
+    tipo: int
+    max_length: 10
+    required: true
+    descripcion: Clientes.id
+  - nombre: ejeD
+    tipo: int
+    max_length: 4
+    required: false
+    descripcion: 'Campo para la
+
+      medición del eje
+
+      derecho.'
+    formnato: XXX, XXX
+  - nombre: cilindroD
+    tipo: int
+    max_length: 6
+    required: false
+    descripcion: 'Campo para la
+
+      medición del cilindro
+
+      derecho.'
+    formnato: 'XX.XX,
+
+      XX.XX'
+  - nombre: esferaD
+    tipo: int
+    max_length: 6
+    required: false
+    descripcion: 'Campo para la
+
+      medición de la esfera
+
+      derecha.'
+    formnato: 'XX.XX,
+
+      XX.XX'
+  - nombre: ejeI
+    tipo: int
+    max_length: 4
+    required: false
+    descripcion: 'Campo para la
+
+      medición del eje
+
+      izquierdo.'
+    formnato: XXX, XXX
+  - nombre: cilindroI
+    tipo: int
+    max_length: 6
+    required: false
+    descripcion: 'Campo para la
+
+      medición del cilindro
+
+      izquierdo.'
+    formnato: 'XX.XX,
+
+      XX.XX'
+  - nombre: esferaI
+    tipo: int
+    max_length: 6
+    required: false
+    descripcion: 'Campo para la
+
+      medición de la esfera
+
+      izquierda.'
+    formnato: 'XX.XX,
+
+      XX.XX'
+  - nombre: adicionD
+    tipo: int
+    max_length: 4
+    required: false
+    descripcion: 'Campo para registrar
+
+      los datos de la adición
+
+      ojo derecho.'
+    formnato: X.XX
+  - nombre: adicionI
+    tipo: int
+    max_length: 4
+    required: false
+    descripcion: 'Campo para registrar
+
+      los datos de la adición
+
+      ojo izquierdo.'
+    formnato: X.XX
+  - nombre: esferaCercaD
+    tipo: int
+    max_length: 6
+    required: false
+    descripcion: 'Campo para la
+
+      medición de la esfera
+
+      de cerca derecha.'
+    formnato: 'XX.XX,
+
+      XX.XX'
+  - nombre: esferaCercaI
+    tipo: int
+    max_length: 6
+    required: false
+    descripcion: 'Campo para la
+
+      medición de la esfera
+
+      de cerca izquierda.'
+    formnato: 'XX.XX,
+
+      XX.XX'
+  - nombre: avscd
+    tipo: int
+    max_length: 4
+    required: false
+    descripcion: 'Campo para registrar
+
+      los datos de la
+
+      agudeza visual sin
+
+      corrección del ojo
+
+      derecho.'
+    formnato: X.XX
+  metadatos:
+    separador_csv: ','
+    decimal: .
+    case_sensitive: true
+    orden_columnas: true
+    clob_comillas: '"'
+    formatos_especiales:
+      fecha: YYYY-MM-DD
+      medicion_oftalmologica: ver especificación
+  tablas:
+  - columnas:
+    - Campo
+    - Tipo
+    - Longitud
+    - Obligatorio
+    - Descripción
+    - Formnato
+    filas:
+    - campo: id
+      tipo: Numérico
+      longitud: '10'
+      obligatorio: Sí
+      descripción: 'Identificador
+
+        graduación'
+      formnato: ''
+    - campo: tienda
+      tipo: Numérico
+      longitud: '10'
+      obligatorio: Sí
+      descripción: Código tienda
+      formnato: ''
+    - campo: idClientes
+      tipo: Numérico
+      longitud: '10'
+      obligatorio: Sí
+      descripción: Clientes.id
+      formnato: ''
+    - campo: ejeD
+      tipo: Numérico
+      longitud: '4'
+      obligatorio: 'No'
+      descripción: 'Campo para la
+
+        medición del eje
+
+        derecho.'
+      formnato: XXX, XXX
+    - campo: cilindroD
+      tipo: Numérico
+      longitud: '6'
+      obligatorio: 'No'
+      descripción: 'Campo para la
+
+        medición del cilindro
+
+        derecho.'
+      formnato: 'XX.XX,
+
+        XX.XX'
+    - campo: esferaD
+      tipo: Numérico
+      longitud: '6'
+      obligatorio: 'No'
+      descripción: 'Campo para la
+
+        medición de la esfera
+
+        derecha.'
+      formnato: 'XX.XX,
+
+        XX.XX'
+    - campo: ejeI
+      tipo: Numérico
+      longitud: '4'
+      obligatorio: 'No'
+      descripción: 'Campo para la
+
+        medición del eje
+
+        izquierdo.'
+      formnato: XXX, XXX
+    - campo: cilindroI
+      tipo: Numérico
+      longitud: '6'
+      obligatorio: 'No'
+      descripción: 'Campo para la
+
+        medición del cilindro
+
+        izquierdo.'
+      formnato: 'XX.XX,
+
+        XX.XX'
+    - campo: esferaI
+      tipo: Numérico
+      longitud: '6'
+      obligatorio: 'No'
+      descripción: 'Campo para la
+
+        medición de la esfera
+
+        izquierda.'
+      formnato: 'XX.XX,
+
+        XX.XX'
+    - campo: adicionD
+      tipo: Numérico
+      longitud: '4'
+      obligatorio: 'No'
+      descripción: 'Campo para registrar
+
+        los datos de la adición
+
+        ojo derecho.'
+      formnato: X.XX
+    - campo: adicionI
+      tipo: Numérico
+      longitud: '4'
+      obligatorio: 'No'
+      descripción: 'Campo para registrar
+
+        los datos de la adición
+
+        ojo izquierdo.'
+      formnato: X.XX
+    - campo: esferaCercaD
+      tipo: Numérico
+      longitud: '6'
+      obligatorio: 'No'
+      descripción: 'Campo para la
+
+        medición de la esfera
+
+        de cerca derecha.'
+      formnato: 'XX.XX,
+
+        XX.XX'
+    - campo: esferaCercaI
+      tipo: Numérico
+      longitud: '6'
+      obligatorio: 'No'
+      descripción: 'Campo para la
+
+        medición de la esfera
+
+        de cerca izquierda.'
+      formnato: 'XX.XX,
+
+        XX.XX'
+    - campo: avscd
+      tipo: Numérico
+      longitud: '4'
+      obligatorio: 'No'
+      descripción: 'Campo para registrar
+
+        los datos de la
+
+        agudeza visual sin
+
+        corrección del ojo
+
+        derecho.'
+      formnato: X.XX
+  texto_fuera_tablas: 'Campo Tipo Longitud Obligatorio Descripción Formnato
+
+    Identificador
+
+    id Numérico 10 Sí
+
+    graduación
+
+    tienda Numérico 10 Sí Código tienda
+
+    idClientes Numérico 10 Sí Clientes.id
+
+    Campo para la
+
+    ejeD Numérico 4 No medición del eje XXX, XXX
+
+    derecho.
+
+    Campo para la
+
+    XX.XX,
+
+    cilindroD Numérico 6 No medición del cilindro
+
+    XX.XX
+
+    derecho.
+
+    Campo para la
+
+    XX.XX,
+
+    esferaD Numérico 6 No medición de la esfera
+
+    XX.XX
+
+    derecha.
+
+    Campo para la
+
+    ejeI Numérico 4 No medición del eje XXX, XXX
+
+    izquierdo.
+
+    Campo para la
+
+    XX.XX,
+
+    cilindroI Numérico 6 No medición del cilindro
+
+    XX.XX
+
+    izquierdo.
+
+    Campo para la
+
+    XX.XX,
+
+    esferaI Numérico 6 No medición de la esfera
+
+    XX.XX
+
+    izquierda.
+
+    Campo para registrar
+
+    adicionD Numérico 4 No los datos de la adición X.XX
+
+    ojo derecho.
+
+    Campo para registrar
+
+    adicionI Numérico 4 No los datos de la adición X.XX
+
+    ojo izquierdo.
+
+    Campo para la
+
+    XX.XX,
+
+    esferaCercaD Numérico 6 No medición de la esfera
+
+    XX.XX
+
+    de cerca derecha.
+
+    Campo para la
+
+    XX.XX,
+
+    esferaCercaI Numérico 6 No medición de la esfera
+
+    XX.XX
+
+    de cerca izquierda.
+
+    Campo para registrar
+
+    los datos de la
+
+    avscd Numérico 4 No agudeza visual sin X.XX
+
+    corrección del ojo
+
+    derecho.
+
+    Requerimientos para el trasvase de datos 3'
+- pagina: 4
+  nombre_logico: null
+  nombre_fichero: null
+  clave: null
+  esquema:
+  - nombre: avsci
+    tipo: int
+    max_length: 4
+    required: false
+    descripcion: 'Campo para registrar
+
+      los datos de la
+
+      agudeza visual sin
+
+      corrección del ojo
+
+      izquierdo'
+    formnato: X.XX
+  - nombre: avd
+    tipo: int
+    max_length: 4
+    required: false
+    descripcion: 'Campo para registrar
+
+      los datos de la
+
+      agudeza visual del ojo
+
+      derecho.'
+    formnato: X.XX
+  - nombre: avi
+    tipo: int
+    max_length: 4
+    required: false
+    descripcion: 'Campo para registrar
+
+      los datos de la
+
+      agudeza visual del ojo
+
+      izquierdo.'
+    formnato: X.XX
+  - nombre: avao
+    tipo: int
+    max_length: 4
+    required: false
+    descripcion: 'Campo para registrar
+
+      los datos de la
+
+      agudeza visual ambos
+
+      ojos.'
+    formnato: X.XX
+  - nombre: dnpd
+    tipo: int
+    max_length: 10
+    required: false
+    descripcion: 'Campo para registrar
+
+      los datos de la
+
+      distancia naso-pupilar
+
+      derecha.'
+  - nombre: dnpi
+    tipo: int
+    max_length: 10
+    required: false
+    descripcion: 'Campo para registrar
+
+      los datos de la
+
+      distancia naso-pupilar
+
+      izquierda.'
+  - nombre: prismaD
+    tipo: string
+    max_length: 20
+    required: false
+    descripcion: 'Campo para registrar
+
+      los datos del prisma
+
+      derecho'
+  - nombre: prismaI
+    tipo: string
+    max_length: 20
+    required: false
+    descripcion: 'Campo para registrar
+
+      los datos del prisma
+
+      izquierdo'
+  - nombre: di
+    tipo: int
+    max_length: 2
+    required: false
+    descripcion: Campo deprecado
+  - nombre: obs
+    tipo: string
+    required: false
+    descripcion: 'Notas relacionadas con
+
+      la graduación
+
+      optométrica.'
+  - nombre: fecha
+    tipo: date
+    required: true
+    descripcion: 'Fecha de creación para
+
+      la graduación
+
+      optométrica.'
+    formnato: 'dd/mm/yyyy
+
+      hh:mm:ss'
+  - nombre: usuario
+    tipo: int
+    max_length: 6
+    required: true
+    descripcion: 'Identificador del
+
+      Usuario que tramitó
+
+      está graduación'
+  - nombre: codVendedor
+    tipo: int
+    required: false
+    descripcion: Uduarios.cdgusuario
+  metadatos:
+    separador_csv: ','
+    decimal: .
+    case_sensitive: true
+    orden_columnas: true
+    clob_comillas: '"'
+    formatos_especiales:
+      fecha: YYYY-MM-DD
+      medicion_oftalmologica: ver especificación
+  tablas:
+  - columnas:
+    - Campo
+    - Tipo
+    - Longitud
+    - Obligatorio
+    - Descripción
+    - Formnato
+    filas:
+    - campo: avsci
+      tipo: Numérico
+      longitud: '4'
+      obligatorio: 'No'
+      descripción: 'Campo para registrar
+
+        los datos de la
+
+        agudeza visual sin
+
+        corrección del ojo
+
+        izquierdo'
+      formnato: X.XX
+    - campo: avd
+      tipo: Numérico
+      longitud: '4'
+      obligatorio: 'No'
+      descripción: 'Campo para registrar
+
+        los datos de la
+
+        agudeza visual del ojo
+
+        derecho.'
+      formnato: X.XX
+    - campo: avi
+      tipo: Numérico
+      longitud: '4'
+      obligatorio: 'No'
+      descripción: 'Campo para registrar
+
+        los datos de la
+
+        agudeza visual del ojo
+
+        izquierdo.'
+      formnato: X.XX
+    - campo: avao
+      tipo: Numérico
+      longitud: '4'
+      obligatorio: 'No'
+      descripción: 'Campo para registrar
+
+        los datos de la
+
+        agudeza visual ambos
+
+        ojos.'
+      formnato: X.XX
+    - campo: dnpd
+      tipo: Numérico
+      longitud: '10'
+      obligatorio: 'No'
+      descripción: 'Campo para registrar
+
+        los datos de la
+
+        distancia naso-pupilar
+
+        derecha.'
+      formnato: ''
+    - campo: dnpi
+      tipo: Numérico
+      longitud: '10'
+      obligatorio: 'No'
+      descripción: 'Campo para registrar
+
+        los datos de la
+
+        distancia naso-pupilar
+
+        izquierda.'
+      formnato: ''
+    - campo: prismaD
+      tipo: Alfanumérico
+      longitud: '20'
+      obligatorio: 'No'
+      descripción: 'Campo para registrar
+
+        los datos del prisma
+
+        derecho'
+      formnato: ''
+    - campo: prismaI
+      tipo: Alfanumérico
+      longitud: '20'
+      obligatorio: 'No'
+      descripción: 'Campo para registrar
+
+        los datos del prisma
+
+        izquierdo'
+      formnato: ''
+    - campo: di
+      tipo: Numérico
+      longitud: '2'
+      obligatorio: 'No'
+      descripción: Campo deprecado
+      formnato: ''
+    - campo: obs
+      tipo: Alfanumérico
+      longitud: 4GB
+      obligatorio: 'No'
+      descripción: 'Notas relacionadas con
+
+        la graduación
+
+        optométrica.'
+      formnato: ''
+    - campo: fecha
+      tipo: Fecha
+      longitud: ''
+      obligatorio: Si
+      descripción: 'Fecha de creación para
+
+        la graduación
+
+        optométrica.'
+      formnato: 'dd/mm/yyyy
+
+        hh:mm:ss'
+    - campo: usuario
+      tipo: Numérico
+      longitud: '6'
+      obligatorio: Si
+      descripción: 'Identificador del
+
+        Usuario que tramitó
+
+        está graduación'
+      formnato: ''
+    - campo: codVendedor
+      tipo: Numérico
+      longitud: ''
+      obligatorio: 'No'
+      descripción: Uduarios.cdgusuario
+      formnato: ''
+  texto_fuera_tablas: 'Campo Tipo Longitud Obligatorio Descripción Formnato
+
+    Campo para registrar
+
+    los datos de la
+
+    avsci Numérico 4 No agudeza visual sin X.XX
+
+    corrección del ojo
+
+    izquierdo
+
+    Campo para registrar
+
+    los datos de la
+
+    avd Numérico 4 No X.XX
+
+    agudeza visual del ojo
+
+    derecho.
+
+    Campo para registrar
+
+    los datos de la
+
+    avi Numérico 4 No X.XX
+
+    agudeza visual del ojo
+
+    izquierdo.
+
+    Campo para registrar
+
+    los datos de la
+
+    avao Numérico 4 No X.XX
+
+    agudeza visual ambos
+
+    ojos.
+
+    Campo para registrar
+
+    los datos de la
+
+    dnpd Numérico 10 No
+
+    distancia naso-pupilar
+
+    derecha.
+
+    Campo para registrar
+
+    los datos de la
+
+    dnpi Numérico 10 No
+
+    distancia naso-pupilar
+
+    izquierda.
+
+    Campo para registrar
+
+    prismaD Alfanumérico 20 No los datos del prisma
+
+    derecho
+
+    Campo para registrar
+
+    prismaI Alfanumérico 20 No los datos del prisma
+
+    izquierdo
+
+    di Numérico 2 No Campo deprecado
+
+    Notas relacionadas con
+
+    obs Alfanumérico 4GB No la graduación
+
+    optométrica.
+
+    Fecha de creación para
+
+    dd/mm/yyyy
+
+    fecha Fecha Si la graduación
+
+    hh:mm:ss
+
+    optométrica.
+
+    Identificador del
+
+    usuario Numérico 6 Si Usuario que tramitó
+
+    está graduación
+
+    codVendedor Numérico No Uduarios.cdgusuario
+
+    dnpCercaD Numérico No Campo para registrar
+
+    los datos de la
+
+    Requerimientos para el trasvase de datos 4'
+- pagina: 5
+  nombre_logico: Graduaciones Contactológicas
+  nombre_fichero: T_GRADLENT.csv
+  clave:
+  - id
+  - 'tienda
+
+    Campo Tipo Longitud Obligatorio Descripción Formato
+
+    Identificador
+
+    id Numérico 10 Sí
+
+    graduación'
+  esquema:
+  - nombre: ''
+    tipo: ''
+    required: false
+    descripcion: 'distancia naso-pupilar-
+
+      cerca derecha.'
+  - nombre: dnpCercaI
+    tipo: int
+    required: false
+    descripcion: 'Campo para registrar
+
+      los datos de la
+
+      distancia naso-pupilar-
+
+      cerca izquierda.'
+  - nombre: doctor
+    tipo: int
+    max_length: 8
+    required: true
+    descripcion: DOCTORES.codOrigen
+  - nombre: proxGraduacion
+    tipo: date
+    required: false
+    descripcion: 'Próxima revisión
+
+      optométrica del
+
+      paciente.'
+    formnato: 'dd/mm/yyyy
+
+      hh:mm:ss'
+  - nombre: id
+    tipo: int
+    max_length: 10
+    required: true
+    descripcion: 'Identificador
+
+      graduación'
+  - nombre: idCliente
+    tipo: int
+    max_length: 10
+    required: true
+    descripcion: Clientes.id
+  - nombre: dsc
+    tipo: string
+    max_length: 1
+    required: true
+    descripcion: 'Si es definitiva una D si
+
+      es una prueba o
+
+      adaptación P'
+  - nombre: ejeD
+    tipo: int
+    max_length: 4
+    required: false
+    descripcion: 'Campo para la
+
+      medición del eje
+
+      derecho.'
+    formato: XXX, XXX
+  - nombre: cilindroD
+    tipo: int
+    max_length: 6
+    required: false
+    descripcion: 'Campo para la
+
+      medición del cilindro
+
+      derecho.'
+    formato: 'XX.XX,
+
+      XX.XX'
+  - nombre: esferaD
+    tipo: int
+    max_length: 6
+    required: false
+    descripcion: 'Campo para la
+
+      medición de la esfera
+
+      derecha.'
+    formato: 'XX.XX,
+
+      XX.XX'
+  - nombre: adicionD
+    tipo: int
+    max_length: 4
+    required: false
+    descripcion: 'Campo para registrar
+
+      los datos de la adición
+
+      ojo derecho'
+    formato: XXX, XXX
+  - nombre: avd
+    tipo: int
+    max_length: 4
+    required: false
+    descripcion: 'Campo para registrar
+
+      los datos de la agudeza
+
+      visual del ojo derecho'
+    formato: X.XX
+  - nombre: rcd
+    tipo: string
+    max_length: 20
+    required: false
+    descripcion: 'Campo para indicar el
+
+      radio de curvatura de
+
+      la lente derecha'
+  metadatos:
+    separador_csv: ','
+    decimal: .
+    case_sensitive: true
+    orden_columnas: true
+    clob_comillas: '"'
+    formatos_especiales:
+      fecha: YYYY-MM-DD
+      medicion_oftalmologica: ver especificación
+  tablas:
+  - columnas:
+    - Campo
+    - Tipo
+    - Longitud
+    - Obligatorio
+    - Descripción
+    - Formnato
+    filas:
+    - campo: ''
+      tipo: ''
+      longitud: ''
+      obligatorio: ''
+      descripción: 'distancia naso-pupilar-
+
+        cerca derecha.'
+      formnato: ''
+    - campo: dnpCercaI
+      tipo: Numérico
+      longitud: ''
+      obligatorio: 'No'
+      descripción: 'Campo para registrar
+
+        los datos de la
+
+        distancia naso-pupilar-
+
+        cerca izquierda.'
+      formnato: ''
+    - campo: doctor
+      tipo: Numérico
+      longitud: '8'
+      obligatorio: Si
+      descripción: DOCTORES.codOrigen
+      formnato: ''
+    - campo: proxGraduacion
+      tipo: Fecha
+      longitud: ''
+      obligatorio: 'No'
+      descripción: 'Próxima revisión
+
+        optométrica del
+
+        paciente.'
+      formnato: 'dd/mm/yyyy
+
+        hh:mm:ss'
+  - columnas:
+    - Campo
+    - Tipo
+    - Longitud
+    - Obligatorio
+    - Descripción
+    - Formato
+    filas:
+    - campo: id
+      tipo: Numérico
+      longitud: '10'
+      obligatorio: Sí
+      descripción: 'Identificador
+
+        graduación'
+      formato: ''
+    - campo: idCliente
+      tipo: Numérico
+      longitud: '10'
+      obligatorio: Sí
+      descripción: Clientes.id
+      formato: ''
+    - campo: dsc
+      tipo: Alfanumérico
+      longitud: '1'
+      obligatorio: Sí
+      descripción: 'Si es definitiva una D si
+
+        es una prueba o
+
+        adaptación P'
+      formato: ''
+    - campo: ejeD
+      tipo: Numérico
+      longitud: '4'
+      obligatorio: 'No'
+      descripción: 'Campo para la
+
+        medición del eje
+
+        derecho.'
+      formato: XXX, XXX
+    - campo: cilindroD
+      tipo: Numérico
+      longitud: '6'
+      obligatorio: 'No'
+      descripción: 'Campo para la
+
+        medición del cilindro
+
+        derecho.'
+      formato: 'XX.XX,
+
+        XX.XX'
+    - campo: esferaD
+      tipo: Numérico
+      longitud: '6'
+      obligatorio: 'No'
+      descripción: 'Campo para la
+
+        medición de la esfera
+
+        derecha.'
+      formato: 'XX.XX,
+
+        XX.XX'
+    - campo: adicionD
+      tipo: Numérico
+      longitud: '4'
+      obligatorio: 'No'
+      descripción: 'Campo para registrar
+
+        los datos de la adición
+
+        ojo derecho'
+      formato: XXX, XXX
+    - campo: avd
+      tipo: Numérico
+      longitud: '4'
+      obligatorio: 'No'
+      descripción: 'Campo para registrar
+
+        los datos de la agudeza
+
+        visual del ojo derecho'
+      formato: X.XX
+    - campo: rcd
+      tipo: Alfanumérico
+      longitud: '20'
+      obligatorio: 'No'
+      descripción: 'Campo para indicar el
+
+        radio de curvatura de
+
+        la lente derecha'
+      formato: ''
+  texto_fuera_tablas: 'Campo Tipo Longitud Obligatorio Descripción Formnato
+
+    distancia naso-pupilar-
+
+    cerca derecha.
+
+    Campo para registrar
+
+    los datos de la
+
+    dnpCercaI Numérico No
+
+    distancia naso-pupilar-
+
+    cerca izquierda.
+
+    doctor Numérico 8 Si DOCTORES.codOrigen
+
+    Próxima revisión
+
+    dd/mm/yyyy
+
+    proxGraduacion Fecha No optométrica del
+
+    hh:mm:ss
+
+    paciente.
+
+    5. Graduaciones Contactológicas (T_GRADLENT.csv)
+
+    La clave de este fichero es la combinación de id + tienda
+
+    Campo Tipo Longitud Obligatorio Descripción Formato
+
+    Identificador
+
+    id Numérico 10 Sí
+
+    graduación
+
+    idCliente Numérico 10 Sí Clientes.id
+
+    Si es definitiva una D si
+
+    dsc Alfanumérico 1 Sí es una prueba o
+
+    adaptación P
+
+    Campo para la
+
+    ejeD Numérico 4 No medición del eje XXX, XXX
+
+    derecho.
+
+    Campo para la
+
+    XX.XX,
+
+    cilindroD Numérico 6 No medición del cilindro
+
+    XX.XX
+
+    derecho.
+
+    Campo para la
+
+    XX.XX,
+
+    esferaD Numérico 6 No medición de la esfera
+
+    XX.XX
+
+    derecha.
+
+    Campo para registrar
+
+    adicionD Numérico 4 No los datos de la adición XXX, XXX
+
+    ojo derecho
+
+    Campo para registrar
+
+    avd Numérico 4 No los datos de la agudeza X.XX
+
+    visual del ojo derecho
+
+    Campo para indicar el
+
+    rcd Alfanumérico 20 No radio de curvatura de
+
+    la lente derecha
+
+    ejeI Numérico 4 No Campo para la X.XX
+
+    medición del eje
+
+    Requerimientos para el trasvase de datos 5'
+- pagina: 6
+  nombre_logico: null
+  nombre_fichero: null
+  clave: null
+  esquema:
+  - nombre: ''
+    tipo: ''
+    required: false
+    descripcion: izquierdo.
+  - nombre: cilindroI
+    tipo: int
+    max_length: 4
+    required: false
+    descripcion: 'Campo para la
+
+      medición del cilindro
+
+      izquierdo.'
+    formato: 'XX.XX,
+
+      XX.XX'
+  - nombre: esferaI
+    tipo: int
+    max_length: 6
+    required: false
+    descripcion: 'Campo para la
+
+      medición del Esfera
+
+      izquierda.'
+    formato: 'XX.XX,
+
+      XX.XX'
+  - nombre: adicionI
+    tipo: int
+    max_length: 4
+    required: false
+    descripcion: 'Campo para registrar
+
+      los datos de la adición
+
+      ojo izquierda'
+    formato: X.XX
+  - nombre: avi
+    tipo: int
+    max_length: 4
+    required: false
+    descripcion: 'Campo para registrar
+
+      los datos de la agudeza
+
+      visual del ojo izquierdo'
+    formato: X.XX
+  - nombre: rci
+    tipo: string
+    max_length: 20
+    required: false
+    descripcion: 'Campo para indicar el
+
+      radio de curvatura de
+
+      la lente izquierda'
+  - nombre: fecha
+    tipo: date
+    required: true
+    descripcion: 'Fecha de creación para
+
+      la graduación
+
+      optométrica.'
+    formato: 'dd/mm/yyyy
+
+      hh:mm:ss'
+  - nombre: doctor
+    tipo: int
+    max_length: 8
+    required: true
+    descripcion: Doctores.codOrigen
+  - nombre: diametroD
+    tipo: string
+    max_length: 20
+    required: false
+    descripcion: 'Campo para guardar la
+
+      información del
+
+      diámetro del ojo
+
+      derecho en la
+
+      graduación
+
+      contactológica.'
+  - nombre: diametroI
+    tipo: string
+    max_length: 20
+    required: false
+    descripcion: 'Campo para guardar la
+
+      información del
+
+      diámetro del ojo
+
+      izquierdo en la
+
+      graduación
+
+      contactológica.'
+  - nombre: obs
+    tipo: string
+    required: false
+    descripcion: 'Campo para registrar
+
+      los datos de la
+
+      distancia naso-pupilar
+
+      derecha.'
+  - nombre: avao
+    tipo: int
+    max_length: 10
+    required: false
+    descripcion: 'Campo para registrar
+
+      los datos de la agudeza
+
+      visual ambos ojos.'
+    formato: X.XX
+  - nombre: dzod
+    tipo: string
+    max_length: 20
+    required: false
+    descripcion: 'Campo para registrar
+
+      los datos del diámetro
+
+      para el ojo derecho'
+  metadatos:
+    separador_csv: ','
+    decimal: .
+    case_sensitive: true
+    orden_columnas: true
+    clob_comillas: '"'
+    formatos_especiales:
+      fecha: YYYY-MM-DD
+      medicion_oftalmologica: ver especificación
+  tablas:
+  - columnas:
+    - Campo
+    - Tipo
+    - Longitud
+    - Obligatorio
+    - Descripción
+    - Formato
+    filas:
+    - campo: ''
+      tipo: ''
+      longitud: ''
+      obligatorio: ''
+      descripción: izquierdo.
+      formato: ''
+    - campo: cilindroI
+      tipo: Numérico
+      longitud: '4'
+      obligatorio: 'No'
+      descripción: 'Campo para la
+
+        medición del cilindro
+
+        izquierdo.'
+      formato: 'XX.XX,
+
+        XX.XX'
+    - campo: esferaI
+      tipo: Numérico
+      longitud: '6'
+      obligatorio: 'No'
+      descripción: 'Campo para la
+
+        medición del Esfera
+
+        izquierda.'
+      formato: 'XX.XX,
+
+        XX.XX'
+    - campo: adicionI
+      tipo: Numérico
+      longitud: '4'
+      obligatorio: 'No'
+      descripción: 'Campo para registrar
+
+        los datos de la adición
+
+        ojo izquierda'
+      formato: X.XX
+    - campo: avi
+      tipo: Numérico
+      longitud: '4'
+      obligatorio: 'No'
+      descripción: 'Campo para registrar
+
+        los datos de la agudeza
+
+        visual del ojo izquierdo'
+      formato: X.XX
+    - campo: rci
+      tipo: Alfanumérico
+      longitud: '20'
+      obligatorio: 'No'
+      descripción: 'Campo para indicar el
+
+        radio de curvatura de
+
+        la lente izquierda'
+      formato: ''
+    - campo: fecha
+      tipo: Fecha
+      longitud: ''
+      obligatorio: Si
+      descripción: 'Fecha de creación para
+
+        la graduación
+
+        optométrica.'
+      formato: 'dd/mm/yyyy
+
+        hh:mm:ss'
+    - campo: doctor
+      tipo: Numérico
+      longitud: '8'
+      obligatorio: Si
+      descripción: Doctores.codOrigen
+      formato: ''
+    - campo: diametroD
+      tipo: Alfanumérico
+      longitud: '20'
+      obligatorio: 'No'
+      descripción: 'Campo para guardar la
+
+        información del
+
+        diámetro del ojo
+
+        derecho en la
+
+        graduación
+
+        contactológica.'
+      formato: ''
+    - campo: diametroI
+      tipo: Alfanumérico
+      longitud: '20'
+      obligatorio: 'No'
+      descripción: 'Campo para guardar la
+
+        información del
+
+        diámetro del ojo
+
+        izquierdo en la
+
+        graduación
+
+        contactológica.'
+      formato: ''
+    - campo: obs
+      tipo: Alfanumérico
+      longitud: 4GB
+      obligatorio: 'No'
+      descripción: 'Campo para registrar
+
+        los datos de la
+
+        distancia naso-pupilar
+
+        derecha.'
+      formato: ''
+    - campo: avao
+      tipo: Numérico
+      longitud: '10'
+      obligatorio: 'No'
+      descripción: 'Campo para registrar
+
+        los datos de la agudeza
+
+        visual ambos ojos.'
+      formato: X.XX
+    - campo: dzod
+      tipo: Alfanumérico
+      longitud: '20'
+      obligatorio: 'No'
+      descripción: 'Campo para registrar
+
+        los datos del diámetro
+
+        para el ojo derecho'
+      formato: ''
+  texto_fuera_tablas: 'Campo Tipo Longitud Obligatorio Descripción Formato
+
+    izquierdo.
+
+    Campo para la
+
+    XX.XX,
+
+    cilindroI Numérico 4 No medición del cilindro
+
+    XX.XX
+
+    izquierdo.
+
+    Campo para la
+
+    XX.XX,
+
+    esferaI Numérico 6 No medición del Esfera
+
+    XX.XX
+
+    izquierda.
+
+    Campo para registrar
+
+    adicionI Numérico 4 No los datos de la adición X.XX
+
+    ojo izquierda
+
+    Campo para registrar
+
+    avi Numérico 4 No los datos de la agudeza X.XX
+
+    visual del ojo izquierdo
+
+    Campo para indicar el
+
+    rci Alfanumérico 20 No radio de curvatura de
+
+    la lente izquierda
+
+    Fecha de creación para
+
+    dd/mm/yyyy
+
+    fecha Fecha Si la graduación
+
+    hh:mm:ss
+
+    optométrica.
+
+    doctor Numérico 8 Si Doctores.codOrigen
+
+    Campo para guardar la
+
+    información del
+
+    diámetro del ojo
+
+    diametroD Alfanumérico 20 No
+
+    derecho en la
+
+    graduación
+
+    contactológica.
+
+    Campo para guardar la
+
+    información del
+
+    diámetro del ojo
+
+    diametroI Alfanumérico 20 No
+
+    izquierdo en la
+
+    graduación
+
+    contactológica.
+
+    Campo para registrar
+
+    los datos de la
+
+    obs Alfanumérico 4GB No
+
+    distancia naso-pupilar
+
+    derecha.
+
+    Campo para registrar
+
+    avao Numérico 10 No los datos de la agudeza X.XX
+
+    visual ambos ojos.
+
+    Campo para registrar
+
+    dzod Alfanumérico 20 No los datos del diámetro
+
+    para el ojo derecho
+
+    dzoi Alfanumérico 20 No Campo para registrar
+
+    los datos del diámetro
+
+    Requerimientos para el trasvase de datos 6'
+- pagina: 7
+  nombre_logico: Proveedores
+  nombre_fichero: T_PROVEEDORES.csv
+  clave: null
+  esquema:
+  - nombre: ''
+    tipo: ''
+    required: false
+    descripcion: para el ojo izquierdo
+  - nombre: codigolcd
+    tipo: string
+    max_length: 5
+    required: false
+    descripcion: Campo deprecado
+  - nombre: codigolci
+    tipo: string
+    max_length: 5
+    required: false
+    descripcion: Campo deprecado
+  - nombre: marcaD
+    tipo: string
+    max_length: 30
+    required: false
+    descripcion: Campo deprecado
+    formato: 'dd/mm/yyyy
+
+      hh:mm:ss'
+  - nombre: marcaI
+    tipo: string
+    max_length: 30
+    required: false
+    descripcion: Campo deprecado
+  - nombre: laboratorioD
+    tipo: string
+    max_length: 200
+    required: false
+    descripcion: Uduarios.cdgusuario
+  - nombre: laboratorioI
+    tipo: string
+    max_length: 200
+    required: false
+    descripcion: 'Campo para registrar
+
+      los datos de la
+
+      distancia naso-pupilar-
+
+      cerca derecha.'
+  - nombre: proxRevision
+    tipo: date
+    required: false
+    descripcion: 'Campo para registrar
+
+      los datos de la
+
+      distancia naso-pupilar-
+
+      cerca izquierda.'
+    formato: 'dd/mm/yyyy
+
+      hh:mm:ss'
+  - nombre: tipolenteD
+    tipo: string
+    max_length: 50
+    required: false
+    descripcion: 'Tipo de lente prescrita
+
+      del ojo derecho para la
+
+      graduación
+
+      contactológica.'
+  - nombre: tipoLenteI
+    tipo: string
+    max_length: 50
+    required: false
+    descripcion: 'Tipo de lente prescrita
+
+      del ojo izquierdo para
+
+      la graduación
+
+      contactológica.'
+  - nombre: tienda
+    tipo: int
+    max_length: 6
+    required: true
+    descripcion: 'Indica la tienda a la que
+
+      pertenece la
+
+      graduación.'
+  - nombre: usuario
+    tipo: int
+    max_length: 6
+    required: true
+    descripcion: Usuarios.cdgusuario
+  - nombre: cdgProv
+    tipo: int
+    max_length: 10
+    required: true
+    descripcion: Código proveedor
+  - nombre: nombre
+    tipo: string
+    max_length: 35
+    required: true
+    descripcion: Nombre proveedor
+  - nombre: nif
+    tipo: string
+    max_length: 10
+    required: false
+    descripcion: NIF
+  - nombre: direccion
+    tipo: string
+    max_length: 35
+    required: false
+    descripcion: Dirección
+  - nombre: cp
+    tipo: string
+    max_length: 10
+    required: false
+    descripcion: Código postal
+  - nombre: poblacion
+    tipo: string
+    max_length: 35
+    required: false
+    descripcion: Población
+  - nombre: provincia
+    tipo: string
+    max_length: 35
+    required: false
+    descripcion: Provincia
+  - nombre: telefono
+    tipo: string
+    max_length: 25
+    required: false
+    descripcion: Teléfono 1
+  - nombre: telefono2
+    tipo: string
+    max_length: 25
+    required: false
+    descripcion: Teléfono 2
+  metadatos:
+    separador_csv: ','
+    decimal: .
+    case_sensitive: true
+    orden_columnas: true
+    clob_comillas: '"'
+    formatos_especiales:
+      fecha: YYYY-MM-DD
+      medicion_oftalmologica: ver especificación
+  tablas:
+  - columnas:
+    - Campo
+    - Tipo
+    - Longitud
+    - Obligatorio
+    - Descripción
+    - Formato
+    filas:
+    - campo: ''
+      tipo: ''
+      longitud: ''
+      obligatorio: ''
+      descripción: para el ojo izquierdo
+      formato: ''
+    - campo: codigolcd
+      tipo: Alfanumérico
+      longitud: '5'
+      obligatorio: 'No'
+      descripción: Campo deprecado
+      formato: ''
+    - campo: codigolci
+      tipo: Alfanumérico
+      longitud: '5'
+      obligatorio: 'No'
+      descripción: Campo deprecado
+      formato: ''
+    - campo: marcaD
+      tipo: Alfanumérico
+      longitud: '30'
+      obligatorio: 'No'
+      descripción: Campo deprecado
+      formato: 'dd/mm/yyyy
+
+        hh:mm:ss'
+    - campo: marcaI
+      tipo: Alfanumérico
+      longitud: '30'
+      obligatorio: 'No'
+      descripción: Campo deprecado
+      formato: ''
+    - campo: laboratorioD
+      tipo: Alfanumérico
+      longitud: '200'
+      obligatorio: 'No'
+      descripción: Uduarios.cdgusuario
+      formato: ''
+    - campo: laboratorioI
+      tipo: Alfanumérico
+      longitud: '200'
+      obligatorio: 'No'
+      descripción: 'Campo para registrar
+
+        los datos de la
+
+        distancia naso-pupilar-
+
+        cerca derecha.'
+      formato: ''
+    - campo: proxRevision
+      tipo: Date
+      longitud: ''
+      obligatorio: 'No'
+      descripción: 'Campo para registrar
+
+        los datos de la
+
+        distancia naso-pupilar-
+
+        cerca izquierda.'
+      formato: 'dd/mm/yyyy
+
+        hh:mm:ss'
+    - campo: tipolenteD
+      tipo: Alfanumérico
+      longitud: '50'
+      obligatorio: 'No'
+      descripción: 'Tipo de lente prescrita
+
+        del ojo derecho para la
+
+        graduación
+
+        contactológica.'
+      formato: ''
+    - campo: tipoLenteI
+      tipo: Alfanumérico
+      longitud: '50'
+      obligatorio: 'No'
+      descripción: 'Tipo de lente prescrita
+
+        del ojo izquierdo para
+
+        la graduación
+
+        contactológica.'
+      formato: ''
+    - campo: tienda
+      tipo: Numérico
+      longitud: '6'
+      obligatorio: Si
+      descripción: 'Indica la tienda a la que
+
+        pertenece la
+
+        graduación.'
+      formato: ''
+    - campo: usuario
+      tipo: Numérico
+      longitud: '6'
+      obligatorio: Si
+      descripción: Usuarios.cdgusuario
+      formato: ''
+  - columnas:
+    - Campo
+    - Tipo
+    - Longitud
+    - Obligatorio
+    - Descripción
+    filas:
+    - campo: cdgProv
+      tipo: Numérico
+      longitud: '10'
+      obligatorio: Sí
+      descripción: Código proveedor
+    - campo: nombre
+      tipo: Alfanumérico
+      longitud: '35'
+      obligatorio: Sí
+      descripción: Nombre proveedor
+    - campo: nif
+      tipo: Alfanumérico
+      longitud: '10'
+      obligatorio: 'No'
+      descripción: NIF
+    - campo: direccion
+      tipo: Alfanumérico
+      longitud: '35'
+      obligatorio: 'No'
+      descripción: Dirección
+    - campo: cp
+      tipo: Alfanumérico
+      longitud: '10'
+      obligatorio: 'No'
+      descripción: Código postal
+    - campo: poblacion
+      tipo: Alfanumérico
+      longitud: '35'
+      obligatorio: 'No'
+      descripción: Población
+    - campo: provincia
+      tipo: Alfanumérico
+      longitud: '35'
+      obligatorio: 'No'
+      descripción: Provincia
+    - campo: telefono
+      tipo: Alfanumérico
+      longitud: '25'
+      obligatorio: 'No'
+      descripción: Teléfono 1
+    - campo: telefono2
+      tipo: Alfanumérico
+      longitud: '25'
+      obligatorio: 'No'
+      descripción: Teléfono 2
+  texto_fuera_tablas: 'Campo Tipo Longitud Obligatorio Descripción Formato
+
+    para el ojo izquierdo
+
+    codigolcd Alfanumérico 5 No Campo deprecado
+
+    codigolci Alfanumérico 5 No Campo deprecado
+
+    dd/mm/yyyy
+
+    marcaD Alfanumérico 30 No Campo deprecado
+
+    hh:mm:ss
+
+    marcaI Alfanumérico 30 No Campo deprecado
+
+    laboratorioD Alfanumérico 200 No Uduarios.cdgusuario
+
+    Campo para registrar
+
+    los datos de la
+
+    laboratorioI Alfanumérico 200 No
+
+    distancia naso-pupilar-
+
+    cerca derecha.
+
+    Campo para registrar
+
+    los datos de la dd/mm/yyyy
+
+    proxRevision Date No
+
+    distancia naso-pupilar- hh:mm:ss
+
+    cerca izquierda.
+
+    Tipo de lente prescrita
+
+    del ojo derecho para la
+
+    tipolenteD Alfanumérico 50 No
+
+    graduación
+
+    contactológica.
+
+    Tipo de lente prescrita
+
+    del ojo izquierdo para
+
+    tipoLenteI Alfanumérico 50 No
+
+    la graduación
+
+    contactológica.
+
+    Indica la tienda a la que
+
+    tienda Numérico 6 Si pertenece la
+
+    graduación.
+
+    usuario Numérico 6 Si Usuarios.cdgusuario
+
+    5. Proveedores (T_PROVEEDORES.csv)
+
+    Campo Tipo Longitud Obligatorio Descripción
+
+    cdgProv Numérico 10 Sí Código proveedor
+
+    nombre Alfanumérico 35 Sí Nombre proveedor
+
+    nif Alfanumérico 10 No NIF
+
+    direccion Alfanumérico 35 No Dirección
+
+    cp Alfanumérico 10 No Código postal
+
+    poblacion Alfanumérico 35 No Población
+
+    provincia Alfanumérico 35 No Provincia
+
+    telefono Alfanumérico 25 No Teléfono 1
+
+    telefono2 Alfanumérico 25 No Teléfono 2
+
+    Requerimientos para el trasvase de datos 7'
+- pagina: 8
+  nombre_logico: Artículos
+  nombre_fichero: T_ARTICULOS.csv
+  clave: null
+  esquema:
+  - nombre: fax
+    tipo: string
+    max_length: 30
+    required: false
+    descripcion: deprecado
+  - nombre: email
+    tipo: string
+    max_length: 50
+    required: false
+    descripcion: Email
+  - nombre: cdgArt
+    tipo: string
+    max_length: 20
+    required: true
+    descripcion: Código artículo
+  - nombre: dsc
+    tipo: string
+    max_length: 50
+    required: true
+    descripcion: Descripción
+  - nombre: precio_costo
+    tipo: float
+    required: false
+    descripcion: 'Precio de compra del
+
+      articulo'
+  - nombre: prop1
+    tipo: string
+    max_length: 64
+    required: false
+    descripcion: ' AUDIFONOS Marca
+
+       LENTES DE
+
+      CONTACTO Marca
+
+       LENTES Marca
+
+       MONTURAS  SOL
+
+      Marca
+
+       VARIOS/PDTOS DE
+
+      MANTENIMIENTO
+
+      Marca'
+  - nombre: prop2
+    tipo: string
+    max_length: 64
+    required: false
+    descripcion: ' AUDIFONOS Familia
+
+       LENTES DE
+
+      CONTACTO
+
+      Reposición
+
+       LENTES Foco
+
+       MONTURAS  SOL
+
+      Material
+
+       VARIOS/PDTOS DE
+
+      MANTENIMIENTO
+
+      Grupo'
+  metadatos:
+    separador_csv: ','
+    decimal: .
+    case_sensitive: true
+    orden_columnas: true
+    clob_comillas: '"'
+    formatos_especiales:
+      fecha: YYYY-MM-DD
+      medicion_oftalmologica: ver especificación
+  tablas:
+  - columnas:
+    - Campo
+    - Tipo
+    - Longitud
+    - Obligatorio
+    - Descripción
+    filas:
+    - campo: fax
+      tipo: Alfanumérico
+      longitud: '30'
+      obligatorio: 'No'
+      descripción: deprecado
+    - campo: email
+      tipo: Alfanumérico
+      longitud: '50'
+      obligatorio: 'No'
+      descripción: Email
+  - columnas:
+    - Campo
+    - Tipo
+    - Longitud
+    - Obligatorio
+    - Descripción
+    - Formato
+    filas:
+    - campo: cdgArt
+      tipo: Alfanumérico
+      longitud: '20'
+      obligatorio: Sí
+      descripción: Código artículo
+      formato: ''
+    - campo: dsc
+      tipo: Alfanumérico
+      longitud: '50'
+      obligatorio: Sí
+      descripción: Descripción
+      formato: ''
+    - campo: precio_costo
+      tipo: Decimal
+      longitud: 20,4
+      obligatorio: 'No'
+      descripción: 'Precio de compra del
+
+        articulo'
+      formato: ''
+    - campo: prop1
+      tipo: Alfanumérico
+      longitud: '64'
+      obligatorio: 'No'
+      descripción: ' AUDIFONOS Marca
+
+         LENTES DE
+
+        CONTACTO Marca
+
+         LENTES Marca
+
+         MONTURAS  SOL
+
+        Marca
+
+         VARIOS/PDTOS DE
+
+        MANTENIMIENTO
+
+        Marca'
+      formato: ''
+    - campo: prop2
+      tipo: Alfanumérico
+      longitud: '64'
+      obligatorio: 'No'
+      descripción: ' AUDIFONOS Familia
+
+         LENTES DE
+
+        CONTACTO
+
+        Reposición
+
+         LENTES Foco
+
+         MONTURAS  SOL
+
+        Material
+
+         VARIOS/PDTOS DE
+
+        MANTENIMIENTO
+
+        Grupo'
+      formato: ''
+  texto_fuera_tablas: 'Campo Tipo Longitud Obligatorio Descripción
+
+    fax Alfanumérico 30 No deprecado
+
+    email Alfanumérico 50 No Email
+
+    6. Artículos (T_ARTICULOS.csv)
+
+    En Gio, los artículos se agrupan por familias, y estas familias tienen asignadas
+    6 precios y de 1 a 8
+
+    propiedades dependiendo de la familia a la que pertenece
+
+    Es importante saber que los campos cdgArt, los cdgBarras y los cdgEdi deben ser
+    UNIQUE, entre
+
+    ellos y entre cualquier otro registro de la tabla. Si no se sabe si en origen
+    hay duplicaciones con
+
+    alguno de estos campos, recomendamos solo traspasar el Codigo de articulo
+
+    Campo Tipo Longitud Obligatorio Descripción Formato
+
+    cdgArt Alfanumérico 20 Sí Código artículo
+
+    dsc Alfanumérico 50 Sí Descripción
+
+    Precio de compra del
+
+    precio_costo Decimal 20,4 No
+
+    articulo
+
+     AUDIFONOS Marca
+
+     LENTES DE
+
+    CONTACTO Marca
+
+     LENTES Marca
+
+     MONTURAS  SOL
+
+    prop1 Alfanumérico 64 No
+
+    Marca
+
+     VARIOS/PDTOS DE
+
+    MANTENIMIENTO
+
+    Marca
+
+     AUDIFONOS Familia
+
+     LENTES DE
+
+    CONTACTO
+
+    Reposición
+
+     LENTES Foco
+
+    prop2 Alfanumérico 64 No
+
+     MONTURAS  SOL
+
+    Material
+
+     VARIOS/PDTOS DE
+
+    MANTENIMIENTO
+
+    Grupo
+
+    prop3 Alfanumérico 64 No  AUDIFONOS Tipo
+
+     LENTES DE
+
+    CONTACTO
+
+    Categoría
+
+     LENTES Tipo
+
+     MONTURAS  SOL
+
+    Destinatario
+
+     VARIOS/PDTOS DE
+
+    Requerimientos para el trasvase de datos 8'
+- pagina: 9
+  nombre_logico: null
+  nombre_fichero: null
+  clave: null
+  esquema:
+  - nombre: ''
+    tipo: ''
+    required: false
+    descripcion: 'MANTENIMIENTO
+
+      Familia'
+  - nombre: prop4
+    tipo: string
+    max_length: 64
+    required: false
+    descripcion: ' AUDIFONOS
+
+      Tecnología
+
+       LENTES DE
+
+      CONTACTO
+
+      Stock/Fabricación
+
+       LENTES Gama
+
+       MONTURASSOL
+
+      Modelo
+
+       VARIOS/PDTOS DE
+
+      MANTENIMIENTO
+
+      Capacidad'
+  - nombre: prop5
+    tipo: string
+    max_length: 64
+    required: false
+    descripcion: ' LENTES DE
+
+      CONTACTO Gama
+
+       LENTES Esfera
+
+       MONTURAS  SOL
+
+      Color'
+  - nombre: prop6
+    tipo: string
+    max_length: 64
+    required: false
+    descripcion: ' LENTES DE
+
+      CONTACTO Diámetro
+
+       LENTES Cilindro
+
+       MONTURAS  SOL
+
+      Calibre'
+  - nombre: prop7
+    tipo: string
+    max_length: 64
+    required: false
+    descripcion: ' LENTES DE
+
+      CONTACTO Radio
+
+       LENTES Diámetro
+
+       MONTURASSOL
+
+      Puente'
+  - nombre: prop8
+    tipo: string
+    max_length: 64
+    required: false
+    descripcion: ' LENTES DE
+
+      CONTACTO Esfera
+
+       MONTURASSOL
+
+      Estado'
+  - nombre: cdgBarras
+    tipo: string
+    max_length: 50
+    required: false
+    descripcion: Código de barras
+  - nombre: cdgEdi
+    tipo: string
+    max_length: 13
+    required: false
+    descripcion: 'Código registrado en
+
+      el GS1 para
+
+      el intercambio
+
+      electrónico de
+
+      este producto.'
+  - nombre: pvp1
+    tipo: float
+    required: true
+    descripcion: 'Precio principal de
+
+      venta para el
+
+      artículo.'
+  metadatos:
+    separador_csv: ','
+    decimal: .
+    case_sensitive: true
+    orden_columnas: true
+    clob_comillas: '"'
+    formatos_especiales:
+      fecha: YYYY-MM-DD
+      medicion_oftalmologica: ver especificación
+  tablas:
+  - columnas:
+    - Campo
+    - Tipo
+    - Longitud
+    - Obligatorio
+    - Descripción
+    - Formato
+    filas:
+    - campo: ''
+      tipo: ''
+      longitud: ''
+      obligatorio: ''
+      descripción: 'MANTENIMIENTO
+
+        Familia'
+      formato: ''
+    - campo: prop4
+      tipo: Alfanumérico
+      longitud: '64'
+      obligatorio: 'No'
+      descripción: ' AUDIFONOS
+
+        Tecnología
+
+         LENTES DE
+
+        CONTACTO
+
+        Stock/Fabricación
+
+         LENTES Gama
+
+         MONTURASSOL
+
+        Modelo
+
+         VARIOS/PDTOS DE
+
+        MANTENIMIENTO
+
+        Capacidad'
+      formato: ''
+    - campo: prop5
+      tipo: Alfanumérico
+      longitud: '64'
+      obligatorio: 'No'
+      descripción: ' LENTES DE
+
+        CONTACTO Gama
+
+         LENTES Esfera
+
+         MONTURAS  SOL
+
+        Color'
+      formato: ''
+    - campo: prop6
+      tipo: Alfanumérico
+      longitud: '64'
+      obligatorio: 'No'
+      descripción: ' LENTES DE
+
+        CONTACTO Diámetro
+
+         LENTES Cilindro
+
+         MONTURAS  SOL
+
+        Calibre'
+      formato: ''
+    - campo: prop7
+      tipo: Alfanumérico
+      longitud: '64'
+      obligatorio: 'No'
+      descripción: ' LENTES DE
+
+        CONTACTO Radio
+
+         LENTES Diámetro
+
+         MONTURASSOL
+
+        Puente'
+      formato: ''
+    - campo: prop8
+      tipo: Alfanumérico
+      longitud: '64'
+      obligatorio: 'No'
+      descripción: ' LENTES DE
+
+        CONTACTO Esfera
+
+         MONTURASSOL
+
+        Estado'
+      formato: ''
+    - campo: cdgBarras
+      tipo: Alfanumérico
+      longitud: '50'
+      obligatorio: 'No'
+      descripción: Código de barras
+      formato: ''
+    - campo: cdgEdi
+      tipo: Alfanumérico
+      longitud: '13'
+      obligatorio: 'No'
+      descripción: 'Código registrado en
+
+        el GS1 para
+
+        el intercambio
+
+        electrónico de
+
+        este producto.'
+      formato: ''
+    - campo: pvp1
+      tipo: Decimal
+      longitud: 20,4
+      obligatorio: Si
+      descripción: 'Precio principal de
+
+        venta para el
+
+        artículo.'
+      formato: ''
+  texto_fuera_tablas: 'Campo Tipo Longitud Obligatorio Descripción Formato
+
+    MANTENIMIENTO
+
+    Familia
+
+     AUDIFONOS
+
+    Tecnología
+
+     LENTES DE
+
+    CONTACTO
+
+    Stock/Fabricación
+
+     LENTES Gama
+
+    prop4 Alfanumérico 64 No
+
+     MONTURASSOL
+
+    Modelo
+
+     VARIOS/PDTOS DE
+
+    MANTENIMIENTO
+
+    Capacidad
+
+     LENTES DE
+
+    CONTACTO Gama
+
+    prop5 Alfanumérico 64 No  LENTES Esfera
+
+     MONTURAS  SOL
+
+    Color
+
+     LENTES DE
+
+    CONTACTO Diámetro
+
+    prop6 Alfanumérico 64 No  LENTES Cilindro
+
+     MONTURAS  SOL
+
+    Calibre
+
+     LENTES DE
+
+    CONTACTO Radio
+
+    prop7 Alfanumérico 64 No  LENTES Diámetro
+
+     MONTURASSOL
+
+    Puente
+
+     LENTES DE
+
+    CONTACTO Esfera
+
+    prop8 Alfanumérico 64 No  MONTURASSOL
+
+    Estado
+
+    cdgBarras Alfanumérico 50 No Código de barras
+
+    Código registrado en
+
+    el GS1 para
+
+    cdgEdi Alfanumérico 13 No el intercambio
+
+    electrónico de
+
+    este producto.
+
+    Precio principal de
+
+    pvp1 Decimal 20,4 Si venta para el
+
+    artículo.
+
+    Requerimientos para el trasvase de datos 9'
+- pagina: 10
+  nombre_logico: null
+  nombre_fichero: null
+  clave: null
+  esquema:
+  - nombre: pvp2
+    tipo: float
+    required: false
+    descripcion: 'Precio secundario de
+
+      venta para el
+
+      artículo.'
+  - nombre: pvp3
+    tipo: float
+    required: false
+    descripcion: 'Precio secundario de
+
+      venta para el
+
+      artículo.'
+  - nombre: pvp4
+    tipo: float
+    required: false
+    descripcion: 'Precio secundario de
+
+      venta para el
+
+      artículo.'
+  - nombre: pvp5
+    tipo: float
+    required: false
+    descripcion: 'Precio secundario de
+
+      venta para el
+
+      artículo.'
+  - nombre: tipo
+    tipo: string
+    max_length: 40
+    required: true
+    descripcion: 'Familia del articulo
+
+      Valores posibles: [
+
+      LENTES,
+
+      LC,
+
+      GRADUADO,
+
+      SOL,
+
+      PDTOS
+
+      MANTENIMIENTO
+
+      VARIOS,
+
+      AUDIFONOS,
+
+      VARIOS AUDIO
+
+      ]'
+  - nombre: proveedor
+    tipo: float
+    required: true
+    descripcion: 'Proveedores.cdgProv
+
+      Valor por defecto 1, si
+
+      no se dispone de esta
+
+      información'
+  - nombre: pdtosProv
+    tipo: float
+    required: false
+    descripcion: 'Descuento de compra
+
+      que ofrece
+
+      el proveedor sobre el
+
+      artículo.'
+  - nombre: fechaUltCompra
+    tipo: date
+    required: false
+    descripcion: 'Fecha que
+
+      corresponde a la
+
+      última compra del
+
+      artículo.'
+    formato: dd/mm/yyyy
+  - nombre: fecha_UltVenta
+    tipo: date
+    required: false
+    descripcion: 'Fecha que
+
+      corresponde a la
+
+      última venta del
+
+      artículo.'
+    formato: dd/mm/yyyy
+  - nombre: fechaCreacion
+    tipo: date
+    required: false
+    descripcion: 'Fecha de creación del
+
+      artículo.'
+    formato: dd/mm/yyyy
+  - nombre: saft
+    tipo: string
+    max_length: 1
+    required: false
+    descripcion: Deprecado
+  metadatos:
+    separador_csv: ','
+    decimal: .
+    case_sensitive: true
+    orden_columnas: true
+    clob_comillas: '"'
+    formatos_especiales:
+      fecha: YYYY-MM-DD
+      medicion_oftalmologica: ver especificación
+  tablas:
+  - columnas:
+    - Campo
+    - Tipo
+    - Longitud
+    - Obligatorio
+    - Descripción
+    - Formato
+    filas:
+    - campo: pvp2
+      tipo: Decimal
+      longitud: 20,4
+      obligatorio: 'No'
+      descripción: 'Precio secundario de
+
+        venta para el
+
+        artículo.'
+      formato: ''
+    - campo: pvp3
+      tipo: Decimal
+      longitud: 20,4
+      obligatorio: 'No'
+      descripción: 'Precio secundario de
+
+        venta para el
+
+        artículo.'
+      formato: ''
+    - campo: pvp4
+      tipo: Decimal
+      longitud: 20,4
+      obligatorio: 'No'
+      descripción: 'Precio secundario de
+
+        venta para el
+
+        artículo.'
+      formato: ''
+    - campo: pvp5
+      tipo: Decimal
+      longitud: 20,4
+      obligatorio: 'No'
+      descripción: 'Precio secundario de
+
+        venta para el
+
+        artículo.'
+      formato: ''
+    - campo: tipo
+      tipo: Alfanumérico
+      longitud: '40'
+      obligatorio: Si
+      descripción: 'Familia del articulo
+
+        Valores posibles: [
+
+        LENTES,
+
+        LC,
+
+        GRADUADO,
+
+        SOL,
+
+        PDTOS
+
+        MANTENIMIENTO
+
+        VARIOS,
+
+        AUDIFONOS,
+
+        VARIOS AUDIO
+
+        ]'
+      formato: ''
+    - campo: proveedor
+      tipo: DECIMAL
+      longitud: ''
+      obligatorio: Si
+      descripción: 'Proveedores.cdgProv
+
+        Valor por defecto 1, si
+
+        no se dispone de esta
+
+        información'
+      formato: ''
+    - campo: pdtosProv
+      tipo: DECIMAL
+      longitud: 20,6
+      obligatorio: 'No'
+      descripción: 'Descuento de compra
+
+        que ofrece
+
+        el proveedor sobre el
+
+        artículo.'
+      formato: ''
+    - campo: fechaUltCompra
+      tipo: Fecha
+      longitud: ''
+      obligatorio: 'No'
+      descripción: 'Fecha que
+
+        corresponde a la
+
+        última compra del
+
+        artículo.'
+      formato: dd/mm/yyyy
+    - campo: fecha_UltVenta
+      tipo: Fecha
+      longitud: ''
+      obligatorio: 'No'
+      descripción: 'Fecha que
+
+        corresponde a la
+
+        última venta del
+
+        artículo.'
+      formato: dd/mm/yyyy
+    - campo: fechaCreacion
+      tipo: Fecha
+      longitud: ''
+      obligatorio: 'No'
+      descripción: 'Fecha de creación del
+
+        artículo.'
+      formato: dd/mm/yyyy
+    - campo: saft
+      tipo: Alfanumérico
+      longitud: '1'
+      obligatorio: 'No'
+      descripción: Deprecado
+      formato: ''
+  texto_fuera_tablas: 'Campo Tipo Longitud Obligatorio Descripción Formato
+
+    Precio secundario de
+
+    pvp2 Decimal 20,4 No venta para el
+
+    artículo.
+
+    Precio secundario de
+
+    pvp3 Decimal 20,4 No venta para el
+
+    artículo.
+
+    Precio secundario de
+
+    pvp4 Decimal 20,4 No venta para el
+
+    artículo.
+
+    Precio secundario de
+
+    pvp5 Decimal 20,4 No venta para el
+
+    artículo.
+
+    Familia del articulo
+
+    Valores posibles: [
+
+    LENTES,
+
+    LC,
+
+    GRADUADO,
+
+    SOL,
+
+    tipo Alfanumérico 40 Si
+
+    PDTOS
+
+    MANTENIMIENTO
+
+    VARIOS,
+
+    AUDIFONOS,
+
+    VARIOS AUDIO
+
+    ]
+
+    Proveedores.cdgProv
+
+    Valor por defecto 1, si
+
+    proveedor DECIMAL Si
+
+    no se dispone de esta
+
+    información
+
+    Descuento de compra
+
+    que ofrece
+
+    pdtosProv DECIMAL 20,6 No
+
+    el proveedor sobre el
+
+    artículo.
+
+    Fecha que
+
+    corresponde a la
+
+    fechaUltCompra Fecha No dd/mm/yyyy
+
+    última compra del
+
+    artículo.
+
+    Fecha que
+
+    corresponde a la
+
+    fecha_UltVenta Fecha No dd/mm/yyyy
+
+    última venta del
+
+    artículo.
+
+    Fecha de creación del
+
+    fechaCreacion Fecha No dd/mm/yyyy
+
+    artículo.
+
+    saft Alfanumérico 1 No Deprecado
+
+    Requerimientos para el trasvase de datos 10'
+- pagina: 11
+  nombre_logico: Stock
+  nombre_fichero: T_STOCK.csv
+  clave: null
+  esquema:
+  - nombre: descatalogado
+    tipo: string
+    max_length: 2
+    required: true
+    descripcion: 'Producto que ya no
+
+      esta activo en la
+
+      empresa
+
+      Valores posible SI/NO'
+  - nombre: tienda
+    tipo: int
+    max_length: 5
+    required: true
+    descripcion: Código tienda
+  - nombre: cdgArticulo
+    tipo: string
+    max_length: 20
+    required: true
+    descripcion: Articulos.cdgArt
+  - nombre: unidades
+    tipo: int
+    max_length: 5
+    required: true
+    descripcion: Unidades en stock
+  - nombre: venta
+    tipo: int
+    max_length: 10
+    required: true
+    descripcion: Código de venta
+  - nombre: talon
+    tipo: string
+    max_length: 25
+    required: false
+    descripcion: 'Código que se utiliza
+
+      en los traspasos para
+
+      identificar la venta de
+
+      origen si el campo
+
+      venta debe recalcular
+
+      en Gioweb'
+  - nombre: importeTotal
+    tipo: float
+    required: true
+    descripcion: Importe total venta
+  - nombre: fechaRetirado
+    tipo: date
+    required: false
+    descripcion: Fecha retirada
+    formato: 'dd/mm/yyyy
+
+      hh:mm:ss'
+  - nombre: idCliente
+    tipo: int
+    max_length: 10
+    required: true
+    descripcion: Clientes.id
+  - nombre: tienda
+    tipo: int
+    max_length: 6
+    required: true
+    descripcion: Código tienda
+  - nombre: facturado
+    tipo: string
+    max_length: 2
+    required: false
+    descripcion: SI/NO
+  - nombre: factura
+    tipo: string
+    max_length: 20
+    required: false
+    descripcion: 'Número de la venta
+
+      que origina la factura'
+  - nombre: obs
+    tipo: string
+    required: false
+    descripcion: Observaciones
+  - nombre: usuario
+    tipo: int
+    max_length: 6
+    required: true
+    descripcion: Usuarios.cdgusuario
+  - nombre: copago
+    tipo: string
+    max_length: 14
+    required: false
+    descripcion: Deprecado
+  - nombre: tiendaDevuelta
+    tipo: int
+    max_length: 6
+    required: false
+    descripcion: 'Tienda asociada a la
+
+      devolución'
+  metadatos:
+    separador_csv: ','
+    decimal: .
+    case_sensitive: true
+    orden_columnas: true
+    clob_comillas: '"'
+    formatos_especiales:
+      fecha: YYYY-MM-DD
+      medicion_oftalmologica: ver especificación
+  tablas:
+  - columnas:
+    - Campo
+    - Tipo
+    - Longitud
+    - Obligatorio
+    - Descripción
+    - Formato
+    filas:
+    - campo: descatalogado
+      tipo: Alfanumérico
+      longitud: '2'
+      obligatorio: Si
+      descripción: 'Producto que ya no
+
+        esta activo en la
+
+        empresa
+
+        Valores posible SI/NO'
+      formato: ''
+  - columnas:
+    - Campo
+    - Tipo
+    - Longitud
+    - Obligatorio
+    - Descripción
+    filas:
+    - campo: tienda
+      tipo: Numérico
+      longitud: '5'
+      obligatorio: Sí
+      descripción: Código tienda
+    - campo: cdgArticulo
+      tipo: Alfanumérico
+      longitud: '20'
+      obligatorio: Sí
+      descripción: Articulos.cdgArt
+    - campo: unidades
+      tipo: Numérico
+      longitud: '5'
+      obligatorio: Sí
+      descripción: Unidades en stock
+  - columnas:
+    - Campo
+    - Tipo
+    - Longitud
+    - Obligatorio
+    - Descripción
+    - Formato
+    filas:
+    - campo: venta
+      tipo: Numérico
+      longitud: '10'
+      obligatorio: Sí
+      descripción: Código de venta
+      formato: ''
+    - campo: talon
+      tipo: Alfanumérico
+      longitud: '25'
+      obligatorio: 'No'
+      descripción: 'Código que se utiliza
+
+        en los traspasos para
+
+        identificar la venta de
+
+        origen si el campo
+
+        venta debe recalcular
+
+        en Gioweb'
+      formato: ''
+    - campo: importeTotal
+      tipo: Decimal
+      longitud: 20,6
+      obligatorio: Sí
+      descripción: Importe total venta
+      formato: ''
+    - campo: fechaRetirado
+      tipo: Fecha
+      longitud: ''
+      obligatorio: 'No'
+      descripción: Fecha retirada
+      formato: 'dd/mm/yyyy
+
+        hh:mm:ss'
+    - campo: idCliente
+      tipo: Numérico
+      longitud: '10'
+      obligatorio: Sí
+      descripción: Clientes.id
+      formato: ''
+    - campo: tienda
+      tipo: Numérico
+      longitud: '6'
+      obligatorio: Sí
+      descripción: Código tienda
+      formato: ''
+    - campo: facturado
+      tipo: Alfanumérico
+      longitud: '2'
+      obligatorio: 'No'
+      descripción: SI/NO
+      formato: ''
+    - campo: factura
+      tipo: Alfanumérico
+      longitud: '20'
+      obligatorio: 'No'
+      descripción: 'Número de la venta
+
+        que origina la factura'
+      formato: ''
+    - campo: obs
+      tipo: Alfanumérico
+      longitud: 4GB
+      obligatorio: 'No'
+      descripción: Observaciones
+      formato: ''
+    - campo: usuario
+      tipo: Numérico
+      longitud: '6'
+      obligatorio: Si
+      descripción: Usuarios.cdgusuario
+      formato: ''
+    - campo: copago
+      tipo: Alfanumérico
+      longitud: '14'
+      obligatorio: 'No'
+      descripción: Deprecado
+      formato: ''
+    - campo: tiendaDevuelta
+      tipo: Numérico
+      longitud: '6'
+      obligatorio: 'No'
+      descripción: 'Tienda asociada a la
+
+        devolución'
+      formato: ''
+  texto_fuera_tablas: 'Campo Tipo Longitud Obligatorio Descripción Formato
+
+    Producto que ya no
+
+    esta activo en la
+
+    descatalogado Alfanumérico 2 Si empresa
+
+    Valores posible SI/NO
+
+    7. Stock (T_STOCK.csv)
+
+    La clave esta compuesta por tienda + cdgArticulo
+
+    Campo Tipo Longitud Obligatorio Descripción
+
+    tienda Numérico 5 Sí Código tienda
+
+    cdgArticulo Alfanumérico 20 Sí Articulos.cdgArt
+
+    unidades Numérico 5 Sí Unidades en stock
+
+    8. Cabecera Venta (T_VENTACAB.csv)
+
+    La clave esta compuesta por venta + tienda
+
+    Campo Tipo Longitud Obligatorio Descripción Formato
+
+    venta Numérico 10 Sí Código de venta
+
+    Código que se utiliza
+
+    en los traspasos para
+
+    identificar la venta de
+
+    talon Alfanumérico 25 No
+
+    origen si el campo
+
+    venta debe recalcular
+
+    en Gioweb
+
+    importeTotal Decimal 20,6 Sí Importe total venta
+
+    dd/mm/yyyy
+
+    fechaRetirado Fecha No Fecha retirada
+
+    hh:mm:ss
+
+    idCliente Numérico 10 Sí Clientes.id
+
+    tienda Numérico 6 Sí Código tienda
+
+    facturado Alfanumérico 2 No SI/NO
+
+    Número de la venta
+
+    factura Alfanumérico 20 No
+
+    que origina la factura
+
+    obs Alfanumérico 4GB No Observaciones
+
+    usuario Numérico 6 Si Usuarios.cdgusuario
+
+    copago Alfanumérico 14 No Deprecado
+
+    Tienda asociada a la
+
+    tiendaDevuelta Numérico 6 No
+
+    devolución
+
+    Requerimientos para el trasvase de datos 11'
+- pagina: 12
+  nombre_logico: Detalle Venta
+  nombre_fichero: T_VENTACON.csv
+  clave: null
+  esquema:
+  - nombre: ventaDevuelta
+    tipo: int
+    max_length: 10
+    required: false
+    descripcion: 'Venta asociada a la
+
+      devolución'
+  - nombre: fecha
+    tipo: date
+    required: true
+    descripcion: 'Fecha de realización
+
+      de la venta'
+    formato: 'dd/mm/yyyy
+
+      hh:mm:ss'
+  - nombre: anticipo
+    tipo: float
+    max_length: 20
+    required: false
+    descripcion: Deprecado
+  - nombre: formPagoAnticipo
+    tipo: alfanumericos
+    max_length: 50
+    required: false
+    descripcion: Deprecado
+  - nombre: venta
+    tipo: int
+    max_length: 10
+    required: true
+    descripcion: Ventacab.venta
+  - nombre: linea
+    tipo: int
+    max_length: 10
+    required: true
+    descripcion: Número de línea
+  - nombre: cdg_art
+    tipo: string
+    max_length: 20
+    required: true
+    descripcion: Articulos.id
+  - nombre: cdg_pro
+    tipo: string
+    max_length: 20
+    required: false
+    descripcion: Campo deprecado
+  - nombre: producto
+    tipo: string
+    max_length: 80
+    required: true
+    descripcion: Descripción
+  - nombre: und
+    tipo: int
+    max_length: 10
+    required: true
+    descripcion: Unidades vendidas
+  - nombre: coste
+    tipo: float
+    required: false
+    descripcion: Precio de compradel articulo
+  - nombre: pvp
+    tipo: float
+    required: true
+    descripcion: Precio de venta
+  - nombre: dcto
+    tipo: float
+    required: false
+    descripcion: Descuento en euros
+  - nombre: dcto_porcentaje
+    tipo: float
+    required: false
+    descripcion: Descuento %
+  - nombre: precio
+    tipo: float
+    required: true
+    descripcion: Precio total línea + descuento + impuesto
+  - nombre: IVA
+    tipo: float
+    required: true
+    descripcion: Porcentaje de impuesto aplicado
+  - nombre: tipo
+    tipo: string
+    max_length: 40
+    required: true
+    descripcion: 'Familia del articulo seleccionado
+
+      Valores disponibles
+
+      Cristales  1
+
+      Lentillas  2
+
+      Graduado  3
+
+      Varios  4
+
+      Sol  5
+
+      Pdtos Mantenimiento  6
+
+      Audifonos  7
+
+      Varios Audio  8'
+  - nombre: tienda
+    tipo: int
+    max_length: 6
+    required: true
+    descripcion: Ventacab.tienda
+  - nombre: estado
+    tipo: string
+    max_length: 25
+    required: false
+    descripcion: Deprecado
+  metadatos:
+    separador_csv: ','
+    decimal: .
+    case_sensitive: true
+    orden_columnas: true
+    clob_comillas: '"'
+    formatos_especiales:
+      fecha: YYYY-MM-DD
+      medicion_oftalmologica: ver especificación
+  tablas:
+  - columnas:
+    - Campo
+    - Tipo
+    - Longitud
+    - Obligatorio
+    - Descripción
+    - Formato
+    filas:
+    - campo: ventaDevuelta
+      tipo: Numérico
+      longitud: '10'
+      obligatorio: 'No'
+      descripción: 'Venta asociada a la
+
+        devolución'
+      formato: ''
+    - campo: fecha
+      tipo: Fecha
+      longitud: ''
+      obligatorio: Sí
+      descripción: 'Fecha de realización
+
+        de la venta'
+      formato: 'dd/mm/yyyy
+
+        hh:mm:ss'
+    - campo: anticipo
+      tipo: Decimal
+      longitud: '20'
+      obligatorio: 'No'
+      descripción: Deprecado
+      formato: ''
+    - campo: formPagoAnticipo
+      tipo: Alfanumericos
+      longitud: '50'
+      obligatorio: 'No'
+      descripción: Deprecado
+      formato: ''
+  - columnas:
+    - Campo
+    - Tipo
+    - Longitud
+    - Obligatorio
+    - Descripción
+    filas:
+    - campo: venta
+      tipo: Numérico
+      longitud: '10'
+      obligatorio: Sí
+      descripción: Ventacab.venta
+    - campo: linea
+      tipo: Numérico
+      longitud: '10'
+      obligatorio: Sí
+      descripción: Número de línea
+    - campo: cdg_art
+      tipo: Alfanumérico
+      longitud: '20'
+      obligatorio: Sí
+      descripción: Articulos.id
+    - campo: cdg_pro
+      tipo: Alfanumérico
+      longitud: '20'
+      obligatorio: 'No'
+      descripción: Campo deprecado
+    - campo: producto
+      tipo: Alfanumérico
+      longitud: '80'
+      obligatorio: Si
+      descripción: Descripción
+    - campo: und
+      tipo: Numérico
+      longitud: '10'
+      obligatorio: Si
+      descripción: Unidades vendidas
+    - campo: coste
+      tipo: Decimal
+      longitud: 20,6
+      obligatorio: 'No'
+      descripción: Precio de compradel articulo
+    - campo: pvp
+      tipo: Decimal
+      longitud: 20,6
+      obligatorio: Si
+      descripción: Precio de venta
+    - campo: dcto
+      tipo: Decimal
+      longitud: 20,6
+      obligatorio: 'No'
+      descripción: Descuento en euros
+    - campo: dcto_porcentaje
+      tipo: Decimal
+      longitud: 20,6
+      obligatorio: 'No'
+      descripción: Descuento %
+    - campo: precio
+      tipo: Decimal
+      longitud: 20,6
+      obligatorio: Si
+      descripción: Precio total línea + descuento + impuesto
+    - campo: IVA
+      tipo: Decimal
+      longitud: 20,6
+      obligatorio: Si
+      descripción: Porcentaje de impuesto aplicado
+    - campo: tipo
+      tipo: Alfanumérico
+      longitud: '40'
+      obligatorio: Si
+      descripción: 'Familia del articulo seleccionado
+
+        Valores disponibles
+
+        Cristales  1
+
+        Lentillas  2
+
+        Graduado  3
+
+        Varios  4
+
+        Sol  5
+
+        Pdtos Mantenimiento  6
+
+        Audifonos  7
+
+        Varios Audio  8'
+    - campo: tienda
+      tipo: Numérico
+      longitud: '6'
+      obligatorio: Si
+      descripción: Ventacab.tienda
+    - campo: estado
+      tipo: Alfanumérico
+      longitud: '25'
+      obligatorio: 'No'
+      descripción: Deprecado
+  texto_fuera_tablas: 'Campo Tipo Longitud Obligatorio Descripción Formato
+
+    Venta asociada a la
+
+    ventaDevuelta Numérico 10 No
+
+    devolución
+
+    Fecha de realización dd/mm/yyyy
+
+    fecha Fecha Sí
+
+    de la venta hh:mm:ss
+
+    anticipo Decimal 20 No Deprecado
+
+    formPagoAnticipo Alfanumericos 50 No Deprecado
+
+    9. Detalle Venta (T_VENTACON.csv)
+
+    La clave de unicidad de esta tabla es la relacion entre venta + tienda + linea
+
+    El tipo que debe asignarse es la clave y no la descripcion
+
+    Campo Tipo Longitud Obligatorio Descripción
+
+    venta Numérico 10 Sí Ventacab.venta
+
+    linea Numérico 10 Sí Número de línea
+
+    cdg_art Alfanumérico 20 Sí Articulos.id
+
+    cdg_pro Alfanumérico 20 No Campo deprecado
+
+    producto Alfanumérico 80 Si Descripción
+
+    und Numérico 10 Si Unidades vendidas
+
+    coste Decimal 20,6 No Precio de compradel articulo
+
+    pvp Decimal 20,6 Si Precio de venta
+
+    dcto Decimal 20,6 No Descuento en euros
+
+    dcto_porcentaje Decimal 20,6 No Descuento %
+
+    precio Decimal 20,6 Si Precio total línea + descuento + impuesto
+
+    IVA Decimal 20,6 Si Porcentaje de impuesto aplicado
+
+    Familia del articulo seleccionado
+
+    Valores disponibles
+
+    Cristales  1
+
+    Lentillas  2
+
+    Graduado  3
+
+    tipo Alfanumérico 40 Si
+
+    Varios  4
+
+    Sol  5
+
+    Pdtos Mantenimiento  6
+
+    Audifonos  7
+
+    Varios Audio  8
+
+    tienda Numérico 6 Si Ventacab.tienda
+
+    estado Alfanumérico 25 No Deprecado
+
+    Requerimientos para el trasvase de datos 12'
+- pagina: 13
+  nombre_logico: Cobros
+  nombre_fichero: T_CAJAS.csv
+  clave: null
+  esquema:
+  - nombre: pedido
+    tipo: string
+    max_length: 10
+    required: false
+    descripcion: Deprecado
+  - nombre: cdgSucPedido
+    tipo: string
+    max_length: 10
+    required: false
+    descripcion: Deprecado
+  - nombre: cdgPedido
+    tipo: string
+    max_length: 10
+    required: false
+    descripcion: Deprecado
+  - nombre: cdgLineaPedido
+    tipo: string
+    max_length: 10
+    required: false
+    descripcion: Deprecado
+  - nombre: alturaFocal
+    tipo: string
+    max_length: 20
+    required: false
+    descripcion: 'Altura focal de la lente seleccionada en
+
+      el detalle de la venta Si la linea es de tipo
+
+      lentes'
+  - nombre: vision
+    tipo: string
+    max_length: 10
+    required: false
+    descripcion: 'Si la lente es de Lejos se introduce una L,
+
+      si de cerca una C'
+  - nombre: ojo
+    tipo: string
+    max_length: 10
+    required: false
+    descripcion: 'Si es ojo Derecho D, si no I para lineas de
+
+      tipo lentes'
+  - nombre: venta
+    tipo: int
+    max_length: 10
+    required: true
+    descripcion: Ventacab.venta
+  - nombre: pedido
+    tipo: int
+    max_length: 10
+    required: false
+    descripcion: Deprecado
+  - nombre: tienda
+    tipo: int
+    max_length: 3
+    required: true
+    descripcion: Ventacab.tienda
+  - nombre: fecha
+    tipo: date
+    required: true
+    descripcion: Fecha de cobro
+    formato: 'dd/mm/yyyy
+
+      hh:mm:ss'
+  - nombre: fPago
+    tipo: string
+    max_length: 50
+    required: true
+    descripcion: Forma de pago
+  - nombre: agente
+    tipo: int
+    max_length: 6
+    required: false
+    descripcion: Usuarios.cdgusuario
+  - nombre: importe
+    tipo: float
+    required: true
+    descripcion: Importe cobrado
+  - nombre: numtpv
+    tipo: int
+    max_length: 3
+    required: false
+    descripcion: Deprecado
+  - nombre: numero_cheque
+    tipo: string
+    max_length: 15
+    required: false
+    descripcion: Deprecado
+  metadatos:
+    separador_csv: ','
+    decimal: .
+    case_sensitive: true
+    orden_columnas: true
+    clob_comillas: '"'
+    formatos_especiales:
+      fecha: YYYY-MM-DD
+      medicion_oftalmologica: ver especificación
+  tablas:
+  - columnas:
+    - Campo
+    - Tipo
+    - Longitud
+    - Obligatorio
+    - Descripción
+    filas:
+    - campo: pedido
+      tipo: Alfanumérico
+      longitud: '10'
+      obligatorio: 'No'
+      descripción: Deprecado
+    - campo: cdgSucPedido
+      tipo: Alfanumérico
+      longitud: '10'
+      obligatorio: 'No'
+      descripción: Deprecado
+    - campo: cdgPedido
+      tipo: Alfanumérico
+      longitud: '10'
+      obligatorio: 'No'
+      descripción: Deprecado
+    - campo: cdgLineaPedido
+      tipo: Alfanumérico
+      longitud: '10'
+      obligatorio: 'No'
+      descripción: Deprecado
+    - campo: alturaFocal
+      tipo: Alfanumérico
+      longitud: '20'
+      obligatorio: 'No'
+      descripción: 'Altura focal de la lente seleccionada en
+
+        el detalle de la venta Si la linea es de tipo
+
+        lentes'
+    - campo: vision
+      tipo: Alfanumérico
+      longitud: '10'
+      obligatorio: 'No'
+      descripción: 'Si la lente es de Lejos se introduce una L,
+
+        si de cerca una C'
+    - campo: ojo
+      tipo: Alfanumérico
+      longitud: '10'
+      obligatorio: 'No'
+      descripción: 'Si es ojo Derecho D, si no I para lineas de
+
+        tipo lentes'
+  - columnas:
+    - Campo
+    - Tipo
+    - Longitud
+    - Obligatorio
+    - Descripción
+    - Formato
+    filas:
+    - campo: venta
+      tipo: Numérico
+      longitud: '10'
+      obligatorio: Sí
+      descripción: Ventacab.venta
+      formato: ''
+    - campo: pedido
+      tipo: Numérico
+      longitud: '10'
+      obligatorio: 'No'
+      descripción: Deprecado
+      formato: ''
+    - campo: tienda
+      tipo: Numérico
+      longitud: '3'
+      obligatorio: Sí
+      descripción: Ventacab.tienda
+      formato: ''
+    - campo: fecha
+      tipo: Fecha
+      longitud: ''
+      obligatorio: Sí
+      descripción: Fecha de cobro
+      formato: 'dd/mm/yyyy
+
+        hh:mm:ss'
+    - campo: fPago
+      tipo: Alfanumérico
+      longitud: '50'
+      obligatorio: Sí
+      descripción: Forma de pago
+      formato: ''
+    - campo: agente
+      tipo: Numérico
+      longitud: '6'
+      obligatorio: 'No'
+      descripción: Usuarios.cdgusuario
+      formato: ''
+    - campo: importe
+      tipo: Decimal
+      longitud: 20, 6
+      obligatorio: Sí
+      descripción: Importe cobrado
+      formato: ''
+    - campo: numtpv
+      tipo: Numérico
+      longitud: '3'
+      obligatorio: 'No'
+      descripción: Deprecado
+      formato: ''
+    - campo: numero_cheque
+      tipo: Alfanumérico
+      longitud: '15'
+      obligatorio: 'No'
+      descripción: Deprecado
+      formato: ''
+  texto_fuera_tablas: 'Campo Tipo Longitud Obligatorio Descripción
+
+    pedido Alfanumérico 10 No Deprecado
+
+    cdgSucPedido Alfanumérico 10 No Deprecado
+
+    cdgPedido Alfanumérico 10 No Deprecado
+
+    cdgLineaPedido Alfanumérico 10 No Deprecado
+
+    Altura focal de la lente seleccionada en
+
+    alturaFocal Alfanumérico 20 No el detalle de la venta Si la linea es de tipo
+
+    lentes
+
+    Si la lente es de Lejos se introduce una L,
+
+    vision Alfanumérico 10 No
+
+    si de cerca una C
+
+    Si es ojo Derecho D, si no I para lineas de
+
+    ojo Alfanumérico 10 No
+
+    tipo lentes
+
+    10. Cobros (T_CAJAS.csv)
+
+    La clave primaria de esta tabla esta compuesta por venta + tienda
+
+    Campo Tipo Longitud Obligatorio Descripción Formato
+
+    venta Numérico 10 Sí Ventacab.venta
+
+    pedido Numérico 10 No Deprecado
+
+    tienda Numérico 3 Sí Ventacab.tienda
+
+    dd/mm/yyyy
+
+    fecha Fecha Sí Fecha de cobro
+
+    hh:mm:ss
+
+    fPago Alfanumérico 50 Sí Forma de pago
+
+    agente Numérico 6 No Usuarios.cdgusuario
+
+    importe Decimal 20, 6 Sí Importe cobrado
+
+    numtpv Numérico 3 No Deprecado
+
+    numero_cheque Alfanumérico 15 No Deprecado
+
+    Requerimientos para el trasvase de datos 13'
