@@ -15,7 +15,7 @@ from pathlib import Path
 import pandas.errors
 
 from adapter.yaml_loader import load_schema
-from adapter.csv_loader import read_csv
+from adapter.data_io import read_dataframe, export_dataframe
 from adapter.hermit_runner import HermiTReasoner
 from ontology.tbox_builder import build_global_tbox
 from bocagrande.transform import ETLStep, apply_transformations
@@ -37,41 +37,19 @@ def get_reasoner() -> HermiTReasoner:
 
 # --- Utilidad universal para leer archivos a DataFrame ---
 def leer_a_dataframe(archivo: UploadedFile, sin_cabecera: bool = False) -> pd.DataFrame | None:
-    nombre = archivo.name.lower()
+    header = None if sin_cabecera else 0
     try:
-        if nombre.endswith('.csv'):
-            if sin_cabecera:
-                return pd.read_csv(archivo, header=None)
-            else:
-                return pd.read_csv(archivo)
-        elif nombre.endswith('.xlsx') or nombre.endswith('.xls'):
-            return pd.read_excel(archivo, header=None if sin_cabecera else 0)
-        elif nombre.endswith('.parquet'):
-            return pd.read_parquet(archivo)
-        else:
-            st.error(f"Formato de archivo no soportado: {nombre}")
-            return None
-    except pandas.errors.EmptyDataError:
-        st.error("El archivo está vacío o no tiene columnas para parsear. Por favor, revisa el archivo de entrada.")
-        return None
+        return read_dataframe(archivo, header=header)
     except Exception as e:
         st.error(f"Error al leer el archivo: {e}")
         return None
 
 # --- Utilidad universal para exportar DataFrame ---
 def exportar_dataframe(df: pd.DataFrame, formato: str) -> bytes | None:
-    buffer = io.BytesIO()
-    if formato == 'csv':
-        return df.to_csv(index=False).encode('utf-8')
-    elif formato == 'excel':
-        with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
-            df.to_excel(writer, index=False)
-        return buffer.getvalue()
-    elif formato == 'parquet':
-        df.to_parquet(buffer, index=False)
-        return buffer.getvalue()
-    else:
-        st.error(f"Formato de exportación no soportado: {formato}")
+    try:
+        return export_dataframe(df, formato)
+    except Exception as e:
+        st.error(f"Error al exportar el archivo: {e}")
         return None
 
 def main() -> None:

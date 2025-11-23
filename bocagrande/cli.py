@@ -5,7 +5,7 @@ import argparse
 from pathlib import Path
 import sys
 
-from adapter.csv_loader import read_csv
+from adapter.data_io import read_dataframe
 from adapter.yaml_loader import load_schema
 from adapter.hermit_runner import HermiTReasoner
 from ontology.tbox_builder import build_global_tbox
@@ -37,7 +37,7 @@ def main(argv: list[str] | None = None) -> None:
     if schema is None:
         raise SystemExit(f"Invalid schema: {args.schema}")
 
-    df = read_csv(args.csv)
+    df = read_dataframe(args.csv)
 
     tbox = build_global_tbox(Path(args.schema).parent)
 
