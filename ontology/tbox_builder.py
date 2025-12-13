@@ -4,8 +4,11 @@ Dominio: servicio para construir la TBox (ontología de clases y propiedades).
 from rdflib import Graph, RDF, RDFS, OWL, XSD
 from pathlib import Path
 from adapter.yaml_loader import load_schema
+import logging
 
 from .utils import BASE, limpiar_para_uri
+
+logger = logging.getLogger(__name__)
 
 def build_global_tbox(schema_dir: str = "schema_yaml") -> Graph:
     """
@@ -46,6 +49,6 @@ def build_global_tbox(schema_dir: str = "schema_yaml") -> Graph:
                 # Para strings, no se necesita RDFS.range explícito a XSD.string
 
         except Exception as e:
-            print(f"Error al procesar el esquema YAML {yaml_file}: {e}")
+            logger.warning("Error al procesar el esquema YAML %s: %s", yaml_file, e)
 
     return g 
