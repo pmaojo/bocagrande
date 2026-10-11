@@ -178,6 +178,19 @@ def _settle_identifiers(df, table, names, columns, decisions, gate) -> None:
         info.note = f"decision model: {decision.answer}"
 
 
+def schema_from_columns(name: str, columns: List[Dict[str, object]]) -> TableSchema:
+    """A schema from columns reflected from a database table (``adapter.db_io.reflect_columns``).
+
+    The database's own types are authoritative, so nothing is guessed: ``NOT NULL`` columns are required
+    and ``VARCHAR(n)`` keeps its length.
+    """
+    return TableSchema(name=name, fields=[
+        PropertyDef(name=str(c["name"]), tipo=str(c["tipo"]), requerido=bool(c.get("required")),
+                    length=c.get("length") or None)
+        for c in columns
+    ])
+
+
 def schema_to_yaml(schema: TableSchema) -> str:
     """Serialise ``schema`` in the canonical YAML layout that ``load_schema`` reads."""
     columns = []
@@ -185,9 +198,11 @@ def schema_to_yaml(schema: TableSchema) -> str:
         column = {"name": f.name, "type": f.tipo}
         if f.formato:
             column["format"] = f.formato
+        if f.length:
+            column["length"] = f.length
         column["required"] = bool(f.requerido)
         columns.append(column)
     return yaml.safe_dump({"table": schema.name, "columns": columns}, allow_unicode=True, sort_keys=False)
 
 
-__all__ = ["ColumnInference", "InferenceResult", "infer_schema", "schema_to_yaml"]
+__all__ = ["ColumnInference", "InferenceResult", "infer_schema", "schema_from_columns", "schema_to_yaml"]
