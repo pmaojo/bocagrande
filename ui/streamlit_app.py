@@ -9,6 +9,7 @@ import os
 from streamlit.runtime.uploaded_file_manager import UploadedFile
 import traceback
 from bocagrande.langchain_agent import generate_steps
+from bocagrande.mapping import suggest_steps
 import re
 import io
 from pathlib import Path
@@ -16,6 +17,7 @@ import pandas.errors
 
 from adapter.yaml_loader import load_schema
 from adapter.data_io import read_dataframe, export_dataframe
+from adapter.openrouter_decisions import OpenRouterDecisions
 from adapter.reasoner import Reasoner
 from adapter.reasoner_factory import DEFAULT_REASONER, create_reasoner
 from ontology.tbox_builder import build_global_tbox
@@ -115,18 +117,34 @@ def main() -> None:
                 campos_destino = [campo.name for campo in tabla_schema_destino.fields]
                 st.write("Campos de salida (esquema YAML):", campos_destino)
                 st.subheader("Sugerencias de Transformación (Generadas por IA)")
-                st.info("Conectando con Gemini para generar transformaciones...")
+                st.info("Generando transformaciones...")
 
+                decisions = OpenRouterDecisions.from_env()  # modelo de decisión (Mercury Decide, Jev...)
                 gemini_api_key = os.getenv("GEMINI_API_KEY")
-                if not gemini_api_key:
-                    st.error("Error: La variable de entorno GEMINI_API_KEY no está configurada. Por favor, añádela a tu archivo .env")
+                if decisions is None and not gemini_api_key:
+                    st.error("Error: configura GEMINI_API_KEY u OPENROUTER_API_KEY en tu archivo .env")
                 else:
-                    from langchain_google_genai import ChatGoogleGenerativeAI
-                    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", google_api_key=gemini_api_key)
+                    llm = None
+                    if gemini_api_key:
+                        from langchain_google_genai import ChatGoogleGenerativeAI
+                        llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", google_api_key=gemini_api_key)
                     try:
-                        steps = generate_steps(headers_csv, tabla_schema_destino, llm)
+                        mapping = None
+                        if decisions is not None:
+                            # Nombres iguales por código; el resto, un modelo de decisión; lo dudoso, Gemini
+                            fallback = (lambda h, sch: generate_steps(h, sch, llm)) if llm else None
+                            mapping = suggest_steps(headers_csv, tabla_schema_destino, decisions,
+                                                    sample=df_muestra, fallback=fallback)
+                            steps = mapping.steps
+                            if mapping.pending:
+                                st.warning("Sin mapeo fiable para: " + ", ".join(mapping.pending))
+                        else:
+                            steps = generate_steps(headers_csv, tabla_schema_destino, llm)
                         st.session_state['transformaciones_sugeridas'] = [s.__dict__ for s in steps]
-                        st.dataframe(pd.DataFrame(st.session_state['transformaciones_sugeridas']))
+                        tabla_sugeridas = pd.DataFrame(st.session_state['transformaciones_sugeridas'])
+                        if mapping is not None and not tabla_sugeridas.empty:
+                            tabla_sugeridas["origen"] = tabla_sugeridas["campo_salida"].map(mapping.sources)
+                        st.dataframe(tabla_sugeridas)
                     except Exception as e:
                         st.error(f"Error al generar transformaciones: {e}")
 

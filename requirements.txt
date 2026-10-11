@@ -11,3 +11,4 @@ pytest-asyncio
 langchain-core
 langchain-google-genai
 ontologos
+requests

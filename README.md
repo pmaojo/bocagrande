@@ -58,6 +58,27 @@ In the Streamlit app set `BOCAGRANDE_REASONER=hermit` to use HermiT. In Docker, 
 
 Set the `GEMINI_API_KEY` environment variable to enable this feature. Required packages are listed under `requirements.txt` (`langchain-core`, `langchain-google-genai` and `google-generativeai`).
 
+## Decision models (optional)
+
+Bocagrande can use fast, typed "System One" decision models through OpenRouter
+([Mercury Decide](https://openrouter.ai/inception/mercury-decide:free), Jev). They do not write text:
+they answer narrow questions and return a calibrated probability, so the code decides what to trust.
+
+Set `OPENROUTER_API_KEY` (and optionally `DECISION_MODEL`) to enable them. Today they are used to map
+CSV columns to schema fields (`bocagrande/mapping.py`):
+
+1. Columns whose name matches a field (ignoring case, accents and separators) are mapped by code, with no model call.
+2. The remaining fields go to the decision model in **one request**. Only answers with confidence of at
+   least 0.8 are used, and a column feeds at most one field.
+3. Everything else is listed as pending, or handed to Gemini if `GEMINI_API_KEY` is also set.
+
+Only column names and field descriptions are sent. Example values from your data are sent only if you pass
+`send_samples=True`. Without `OPENROUTER_API_KEY` the Streamlit app behaves exactly as before.
+
+Formulas written by a language model are checked by `bocagrande/formula_screen.py` before `DataFrame.eval`
+runs them: only arithmetic, comparisons, a few math functions and `.str`/`.dt` accessors are accepted. It is a
+screen, not a sandbox.
+
 ## Testing workflow
 Linting and typing checks are performed with `flake8` and `mypy` respectively. Unit and integration tests run with `pytest`.
 End‑to‑end tests live under `tests/e2e` and drive the Streamlit UI with Playwright. They can be executed through Docker Compose:
