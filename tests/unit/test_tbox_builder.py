@@ -26,3 +26,11 @@ def test_build_global_tbox_ignores_invalid_yaml(tmp_path):
     g = build_global_tbox(str(tmp_path))
     assert (URIRef("http://bocagrande.local/ont#BAD"), RDF.type, OWL.Class) not in g
     assert len(g) > 0
+
+
+def test_invalid_yaml_is_logged_not_printed(tmp_path, caplog, capsys):
+    (tmp_path / "bad.yaml").write_text("foo: [bar")
+    with caplog.at_level("WARNING", logger="ontology.tbox_builder"):
+        build_global_tbox(str(tmp_path))
+    assert "bad.yaml" in caplog.text
+    assert capsys.readouterr().out == ""
