@@ -28,7 +28,7 @@ from sqlalchemy.exc import ArgumentError, NoSuchModuleError, SQLAlchemyError
 
 SQL_TYPES = {"postgresql", "mysql", "sqlite", "mssql", "oracle"}
 DB_TYPES = SQL_TYPES | {"mongodb"}
-IF_EXISTS = ("fail", "replace", "append")
+IF_EXISTS = ("fail", "replace", "append", "truncate")
 DRIVER_HINTS = {
     "postgresql": "psycopg[binary] (use postgresql+psycopg://)", "mysql": "pymysql (use mysql+pymysql://)",
     "mssql": "pyodbc (use mssql+pyodbc://)", "oracle": "oracledb (use oracle+oracledb://)",
@@ -181,6 +181,10 @@ def write_database(df: pd.DataFrame, config: Dict[str, Any]) -> None:
         with engine.begin() as connection:
             if if_exists == "fail" and inspect(connection).has_table(table, schema=schema):
                 raise TargetExistsError(f"Table '{table}' already exists and if_exists is 'fail'")
+            if if_exists == "truncate":
+                if inspect(connection).has_table(table, schema=schema):
+                    connection.execute(text(f"DELETE FROM {_quoted(connection, table, schema)}"))
+                if_exists = "append"
             df.to_sql(table, con=connection, if_exists=if_exists, index=config.get("index", False),
                       chunksize=config.get("chunksize"), schema=schema)
     except DatabaseError:
@@ -193,6 +197,12 @@ def write_database(df: pd.DataFrame, config: Dict[str, Any]) -> None:
         engine.dispose()
 
 
+def _quoted(connection, table: str, schema: Optional[str]) -> str:
+    """The table name quoted for this database's dialect, so a name cannot change the statement."""
+    prepare = connection.dialect.identifier_preparer
+    return f"{prepare.quote_schema(schema)}.{prepare.quote(table)}" if schema else prepare.quote(table)
+
+
 def _write_mongo(df: pd.DataFrame, config: Dict[str, Any], connection_string: str, if_exists: str) -> None:
     client = _mongo_client(connection_string)
     try:
@@ -202,6 +212,8 @@ def _write_mongo(df: pd.DataFrame, config: Dict[str, Any], connection_string: st
             raise TargetExistsError(f"Collection '{config['collection_name']}' is not empty and if_exists is 'fail'")
         if if_exists == "replace":
             collection.drop()
+        elif if_exists == "truncate":
+            collection.delete_many({})
         if records:
             collection.insert_many(records, ordered=False)
     except DatabaseError:
