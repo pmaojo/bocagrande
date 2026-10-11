@@ -150,14 +150,14 @@ def test_gradgafa_formats_loaded():
 
 
 def test_clientes_date_formats_loaded():
-    """Check Formato values for CLIENTES.yaml date fields."""
+    """Check format values for the date fields of the CLIENTES example schema."""
     path = Path("schema_yaml/CLIENTES.yaml")
     raw_schema = yaml.safe_load(path.read_text())
     raw_fields = raw_schema["columns"]
     schema = load_schema(str(path))
     assert schema is not None
 
-    target = {"fechaNac", "ultVisita", "primeraVisita"}
+    target = {"birthdate", "created_at", "updated_at"}
     expected = {f["name"]: f.get("format") for f in raw_fields if f["name"] in target}
     loaded = {field.name: field.formato for field in schema.fields if field.name in target}
     assert expected == loaded

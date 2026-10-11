@@ -142,10 +142,10 @@ def extraer_metadatos_logicos(ruta_csv):
     campos_conocidos = set()
     with open(ruta_csv, "r", encoding="utf-8") as f:
         for linea in f:
-            l = linea.strip().strip(',')
-            if not l:
+            texto = linea.strip().strip(',')
+            if not texto:
                 continue
-            m = patron_titulo.match(l)
+            m = patron_titulo.match(texto)
             if m:
                 tabla_actual = m.group(2).upper()
                 if tabla_actual not in metadatos:
@@ -154,30 +154,30 @@ def extraer_metadatos_logicos(ruta_csv):
                 campos_conocidos = set()
                 continue
             # Detectar cabecera de campos para filtrar nombres de campo
-            if l.lower().startswith("campo, ") or l.lower().startswith("campo,"):
-                partes = [x.strip() for x in l.split(",") if x.strip()]
+            if texto.lower().startswith("campo, ") or texto.lower().startswith("campo,"):
+                partes = [x.strip() for x in texto.split(",") if x.strip()]
                 campos_conocidos.update(partes)
                 continue
             # Si es una línea de comentario o nota (no cabecera ni campo)
-            if tabla_actual and not l.lower().startswith("campo") and not l.split(',')[0].strip() in ("", "Campo"):
-                partes = [x.strip() for x in l.split(",")]
+            if tabla_actual and not texto.lower().startswith("campo") and not texto.split(',')[0].strip() in ("", "Campo"):
+                partes = [x.strip() for x in texto.split(",")]
                 # Heurística: solo añadir a notas si NO es una fila de campo (muchas comas y parece una definición de campo)
                 es_fila_campo = (
                     len(partes) >= 4 and
                     all(partes[i] for i in range(3)) and
-                    not any(kw in l.lower() for kw in ["clave", "unique", "deprecado", "restricción", "formato", "nota", "observación"])
+                    not any(kw in texto.lower() for kw in ["clave", "unique", "deprecado", "restricción", "formato", "nota", "observación"])
                 )
                 if es_fila_campo:
                     continue  # Es una fila de campo, no nota
                 # Heurística: buscar claves compuestas tipo 'La clave está compuesta por ...'
-                l_lower = l.lower()
+                l_lower = texto.lower()
                 if ("clave" in l_lower and "compuesta por" in l_lower) or ("clave" in l_lower and "combinación de" in l_lower):
                     campos = []
                     expr = None
                     if "compuesta por" in l_lower:
-                        expr = l.split("compuesta por",1)[1].strip()
+                        expr = texto.split("compuesta por", 1)[1].strip()
                     elif "combinación de" in l_lower:
-                        expr = l.split("combinación de",1)[1].strip()
+                        expr = texto.split("combinación de", 1)[1].strip()
                     if expr:
                         if "+" in expr:
                             campos = [c.strip() for c in expr.split("+")]
@@ -199,17 +199,17 @@ def extraer_metadatos_logicos(ruta_csv):
                         metadatos[tabla_actual]["primary_key"] = campos
                 if "unique" in l_lower:
                     campos = []
-                    if ":" in l:
-                        parte = l.split(":",1)[1]
+                    if ":" in texto:
+                        parte = texto.split(":", 1)[1]
                         campos = [c.strip().replace(' y ', ',').replace(' + ', ',').replace('.', '') for c in parte.split(',')]
                         campos = [c for c in ','.join(campos).split(',') if c]
                     else:
-                        parte = l.split("deben ser UNIQUE")[0] if "deben ser UNIQUE" in l else l
+                        parte = texto.split("deben ser UNIQUE")[0] if "deben ser UNIQUE" in texto else texto
                         campos = [c.strip() for c in parte.split(',') if c.strip()]
                     if campos:
                         metadatos[tabla_actual]["unique"] = campos
                 # Acumular solo notas/comentarios
-                buffer_notas.append(l)
+                buffer_notas.append(texto)
                 metadatos[tabla_actual]["notes"] = buffer_notas.copy()
     return metadatos
 

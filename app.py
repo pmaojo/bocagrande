@@ -93,7 +93,7 @@ if st.button("Generar OWL y validar con HermiT"):
                 g.serialize(owl_path, format="xml")
             logs += f"OWL serializado en: {owl_path}\n"
             # Ejecutar HermiT
-            cmd = ["java", "-jar", HERMIT_JAR, "-input", owl_path]
+            cmd = ["java", "-jar", HERMIT_JAR, "-k", owl_path]
             logs += f"Ejecutando HermiT: {' '.join(cmd)}\n"
             result = subprocess.run(cmd, capture_output=True, text=True)
             logs += result.stdout

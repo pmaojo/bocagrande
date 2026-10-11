@@ -1,4 +1,27 @@
-__pycache__/
+# Secrets and local config
 .env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+*_env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+
+# Tooling and artifacts
+.autoenv/
+artifacts/
+.gradio/
 .vscode/
+.idea/
+.DS_Store
 screenshot_*.png
+*.ttl

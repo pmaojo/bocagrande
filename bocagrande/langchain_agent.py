@@ -7,7 +7,6 @@ from typing import List
 
 from langchain_core.language_models.base import BaseLanguageModel
 from langchain_core.prompts import PromptTemplate
-from langchain.chains.llm import LLMChain
 from langchain_core.output_parsers import JsonOutputParser as JSONOutputParser
 
 from ontology.model import TableSchema
@@ -28,10 +27,8 @@ def generate_steps(headers: List[str], schema: TableSchema, llm: BaseLanguageMod
         ),
     )
 
-    chain = LLMChain(llm=llm, prompt=prompt)
-    result = chain.invoke({"headers": headers, "schema": schema_json})
-    parser = JSONOutputParser()
-    data = parser.parse(result["text"])
+    chain = prompt | llm | JSONOutputParser()
+    data = chain.invoke({"headers": headers, "schema": schema_json})
     return [ETLStep(**item) for item in data]
 
 

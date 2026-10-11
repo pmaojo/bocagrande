@@ -20,7 +20,7 @@ def test_main_runs_pipeline(tmp_path, monkeypatch):
     out_file = tmp_path / "out.ttl"
 
     dummy = DummyReasoner()
-    monkeypatch.setattr(cli, "HermiTReasoner", lambda jar_path: dummy)
+    monkeypatch.setattr(cli, "create_reasoner", lambda name, hermit_jar=None: dummy)
 
     cli.main([
         "--schema",
@@ -52,3 +52,30 @@ def test_main_skip_reasoner_validates_csv(tmp_path):
             str(out_file),
             "--skip-reasoner",
         ])
+
+
+def test_main_default_reasoner_runs_end_to_end_without_java(tmp_path):
+    out_file = tmp_path / "clientes.ttl"
+
+    cli.main([
+        "--schema", "schema_yaml/CLIENTES.yaml",
+        "--csv", "raw/CLIENTES_sample.csv",
+        "--output", str(out_file),
+    ])
+
+    assert out_file.exists() and out_file.stat().st_size > 0
+
+
+def test_main_reasoner_none_skips_reasoning(tmp_path, monkeypatch):
+    called = []
+    monkeypatch.setattr(cli, "create_reasoner", lambda name, hermit_jar=None: called.append(name))
+    out_file = tmp_path / "out.ttl"
+
+    cli.main([
+        "--schema", "schema_yaml/CLIENTES.yaml",
+        "--csv", "raw/CLIENTES_sample.csv",
+        "--output", str(out_file),
+        "--reasoner", "none",
+    ])
+
+    assert out_file.exists()

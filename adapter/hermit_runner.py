@@ -14,7 +14,8 @@ class HermiTReasoner:
         self.jar_path = jar_path
 
     async def _reason_async(self, owl_path: str, *, timeout: float | None = None) -> Tuple[bool, str]:
-        cmd = ["java", "-jar", self.jar_path, owl_path]
+        # -k: check consistency (without it HermiT only parses the file and prints nothing)
+        cmd = ["java", "-jar", self.jar_path, "-k", owl_path]
         proc = await asyncio.create_subprocess_exec(
             *cmd,
             stdout=asyncio.subprocess.PIPE,
@@ -30,7 +31,8 @@ class HermiTReasoner:
         ok = (
             proc.returncode == 0
             and "inconsistent" not in lower_logs
-            and "consistent" in lower_logs
+            and "not satisfiable" not in lower_logs
+            and ("consistent" in lower_logs or "is satisfiable" in lower_logs)
         )
         return ok, logs
 

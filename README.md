@@ -2,16 +2,18 @@
 
 Bocagrande is a small semantic ETL prototype. CSV files are mapped to OWL graphs using YAML schemas.
 A Streamlit UI orchestrates the process and integrates Google Gemini to suggest transformations.
+Consistency is checked with [OntoLogos](https://pypi.org/project/ontologos/) (a Rust reasoner, no Java needed) or, optionally, HermiT.
 
 ## Main components
-- `adapter/` contains infrastructure such as CSV and YAML loaders, a wrapper for the HermiT reasoner and SHACL validation helpers.
+- `adapter/` contains infrastructure such as CSV and YAML loaders, reasoner backends (OntoLogos, HermiT) and SHACL validation helpers.
 - `ontology/` defines dataclasses representing the domain and services to build the OWL graphs.
 - `ui/streamlit_app.py` offers a Streamlit interface to compare data against schemas, generate suggestions and run the semantic pipeline.
 - `tests/` holds unit tests and Playwright-based end‑to‑end tests.
 - `docker-compose.yml` builds the app container and a service to run the e2e tests.
 
 ## Prerequisites
- - Python 3.12 or later.
+ - Python 3.12 or later. Tested on 3.12, 3.13 and 3.14; 3.15 is experimental (see [Python versions](#python-versions)).
+ - Java is only needed if you choose the optional HermiT reasoner.
 - The dependencies listed in `requirements.txt` (use `requirements-dev.txt` to install lint and typing tools).
 - A `.env` file with the environment variables shown in `.env.example`.
 
@@ -41,10 +43,20 @@ bocagrande --schema schema_yaml/CLIENTES.yaml --csv raw/CLIENTES_sample.csv --ou
 ```
 You can also use `python -m bocagrande` with the same arguments.
 
+The reasoner is selectable with `--reasoner`:
+
+| Value | Needs | Notes |
+|---|---|---|
+| `ontologos` (default) | nothing extra | Rust, OWL 2 RL/EL profiles. If it cannot fully reason about some axioms it warns that the result is incomplete. |
+| `hermit` | Java 8+ | Full OWL 2 DL, uses `HermiT/HermiT.jar` (`--hermit` to change the path). |
+| `none` | - | Skip reasoning (same as `--skip-reasoner`). |
+
+In the Streamlit app set `BOCAGRANDE_REASONER=hermit` to use HermiT. In Docker, build with `--build-arg INSTALL_JAVA=true` if you need it.
+
 ## LangChain-based ETL step generation
 `bocagrande.langchain_agent` integrates [LangChain](https://github.com/langchain-ai/langchain) to produce `ETLStep` definitions from the CSV headers and the YAML schema. The default chain uses the Gemini model provided by `google-generativeai`.
 
-Set the `GEMINI_API_KEY` environment variable to enable this feature. Required packages are listed under `requirements.txt` (`langchain`, `langchain-core`, `langchain-community`, `langchain-google-genai` and `google-generativeai`).
+Set the `GEMINI_API_KEY` environment variable to enable this feature. Required packages are listed under `requirements.txt` (`langchain-core`, `langchain-google-genai` and `google-generativeai`).
 
 ## Testing workflow
 Linting and typing checks are performed with `flake8` and `mypy` respectively. Unit and integration tests run with `pytest`.
@@ -76,3 +88,15 @@ In GitHub Actions simply invoke the script in a step:
 
 ## Configuration
 Use `.env.example` as a template for your own `.env` file. Currently only `GEMINI_API_KEY` is required.
+
+## Python versions
+
+Python 3.12, 3.13 and 3.14 are supported. Python 3.15 runs the test suite, but installing the
+dependencies needs a workaround: Streamlit pins `pyarrow<26` while `pyarrow` 26 is the first
+release with 3.15 wheels. The CI runs 3.15 as an experimental job using `uv pip install --override`.
+Once Streamlit relaxes that pin, 3.15 becomes a normal target. Set the Docker version with
+`--build-arg PYTHON_VERSION=3.14`.
+
+## License
+
+MIT, see [LICENSE](LICENSE). `HermiT/HermiT.jar` is a third-party component with its own terms, see [NOTICE](NOTICE).
