@@ -52,13 +52,13 @@ def read_dataframe(file: FileType, header: int | None | str = 0) -> pd.DataFrame
         # Si no tiene extensión conocida y es un objeto archivo, intentamos leer como CSV?
         # Mejor ser explícito con el error como en streamlit_app.py
         if not filename:
-             # Si no hay nombre, intentamos leer como CSV (caso test con BytesIO sin name)
-             try:
-                 df = pd.read_csv(file, header=header)
-             except pd.errors.EmptyDataError:
-                 raise
-             except Exception:
-                 raise ValueError("No se pudo determinar el formato del archivo y falló la lectura como CSV.")
+            # Si no hay nombre, intentamos leer como CSV (caso test con BytesIO sin name)
+            try:
+                df = pd.read_csv(file, header=header)
+            except pd.errors.EmptyDataError:
+                raise
+            except Exception:
+                raise ValueError("No se pudo determinar el formato del archivo y falló la lectura como CSV.")
         else:
             raise ValueError(f"Formato de archivo no soportado: {filename}")
 

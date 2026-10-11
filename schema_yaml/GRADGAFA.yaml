@@ -1,0 +1,175 @@
+table: GRADGAFA
+columns:
+- name: id
+  type: integer
+  length: '10'
+  required: true
+  description: Identificador graduación
+- name: tienda
+  type: integer
+  length: '10'
+  required: true
+  description: Código tienda
+- name: idClientes
+  type: integer
+  length: '10'
+  required: true
+  description: Clientes.id
+  foreign_key: Clientes.id
+- name: ejeD
+  type: integer
+  length: '4'
+  required: false
+  description: Campo para la medición del eje derecho.
+  format: '[-XXX, XXX]'
+- name: cilindroD
+  type: integer
+  length: '6'
+  required: false
+  description: Campo para la medición del cilindro derecho.
+  format: '[-XX.XX, XX.XX]'
+- name: esferaD
+  type: integer
+  length: '6'
+  required: false
+  description: Campo para la medición de la esfera derecha.
+  format: '[-XX.XX, XX.XX]'
+- name: ejeI
+  type: integer
+  length: '4'
+  required: false
+  description: Campo para la medición del eje izquierdo.
+  format: '[-XXX, XXX]'
+- name: cilindroI
+  type: integer
+  length: '6'
+  required: false
+  description: Campo para la medición del cilindro izquierdo.
+  format: '[-XX.XX, XX.XX]'
+- name: esferaI
+  type: integer
+  length: '6'
+  required: false
+  description: Campo para la medición de la esfera izquierda.
+  format: '[-XX.XX, XX.XX]'
+- name: adicionD
+  type: integer
+  length: '4'
+  required: false
+  description: Campo para registrar los datos de la adición ojo derecho.
+  format: '[X.XX]'
+- name: adicionI
+  type: integer
+  length: '4'
+  required: false
+  description: Campo para registrar los datos de la adición ojo izquierdo.
+  format: '[X.XX]'
+- name: esferaCercaD
+  type: integer
+  length: '6'
+  required: false
+  description: Campo para la medición de la esfera de cerca derecha.
+  format: '[-XX.XX, XX.XX]'
+- name: esferaCercaI
+  type: integer
+  length: '6'
+  required: false
+  description: Campo para la medición de la esfera de cerca izquierda.
+  format: '[-XX.XX, XX.XX]'
+- name: avscd
+  type: integer
+  length: '4'
+  required: false
+  description: Campo para registrar los datos de la agudeza visual sin corrección
+    del ojo derecho.
+  format: '[X.XX]'
+- name: avsci
+  type: integer
+  length: '4'
+  required: false
+  description: Campo para registrar los datos de la agudeza visual sin corrección
+    del ojo izquierdo
+  format: '[X.XX]'
+- name: avd
+  type: integer
+  length: '4'
+  required: false
+  description: Campo para registrar los datos de la agudeza visual del ojo derecho.
+  format: '[X.XX]'
+- name: avi
+  type: integer
+  length: '4'
+  required: false
+  description: Campo para registrar los datos de la agudeza visual del ojo izquierdo.
+  format: '[X.XX]'
+- name: avao
+  type: integer
+  length: '4'
+  required: false
+  description: Campo para registrar los datos de la agudeza visual ambos ojos.
+  format: '[X.XX]'
+- name: dnpd
+  type: integer
+  length: '10'
+  required: false
+  description: Campo para registrar los datos de la distancia naso-pupilar derecha.
+- name: dnpi
+  type: integer
+  length: '10'
+  required: false
+  description: Campo para registrar los datos de la distancia naso-pupilar izquierda.
+- name: prismaD
+  type: string
+  length: '20'
+  required: false
+  description: Campo para registrar los datos del prisma derecho
+- name: prismaI
+  type: string
+  length: '20'
+  required: false
+  description: Campo para registrar los datos del prisma izquierdo
+- name: di
+  type: integer
+  length: '2'
+  required: false
+  description: Campo deprecado
+- name: obs
+  type: string
+  length: 4GB
+  required: false
+  description: Notas relacionadas con la graduación optométrica.
+- name: fecha
+  type: date
+  required: true
+  description: Fecha de creación para la graduación optométrica.
+  format: dd/mm/yyyy hh:mm:ss
+- name: usuario
+  type: integer
+  length: '6'
+  required: true
+  description: Identificador del Usuario que tramitó está graduación
+- name: codVendedor
+  type: integer
+  required: false
+  description: Uduarios.cdgusuario
+  foreign_key: Uduarios.cdgusuario
+- name: dnpCercaD
+  type: integer
+  required: false
+  description: Campo para registrar los datos de la distancia naso-pupilar cerca derecha.
+- name: dnpCercaI
+  type: integer
+  required: false
+  description: "Campo para registrar los datos de la \ndistancia naso-pupilar cerca\
+    \ izquierda."
+- name: doctor
+  type: integer
+  length: '8'
+  required: true
+  description: DOCTORES.codOrigen
+  foreign_key: DOCTORES.codOrigen
+- name: proxGraduacion
+  type: date
+  required: false
+  description: Próxima revisión optométrica del paciente.
+  format: dd/mm/yyyy hh:mm:ss
