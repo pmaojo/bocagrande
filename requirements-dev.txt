@@ -5,3 +5,5 @@ pre-commit
 requests
 mongomock
 psycopg[binary]
+fastapi
+httpx

@@ -121,6 +121,24 @@ bocagrande-run adultos.yaml --param PAIS=FR  # run; exits 1 if any node fails
   from outside cannot copy other secrets into, say, a file path. Run only pipelines you trust.
 - `Context(sandbox=True)` or `--sandbox` keeps every file path inside the base directory.
 
+## Pipeline editor
+
+A small React editor to draw a pipeline, run it and import Pentaho files.
+
+```bash
+pip install -r requirements.txt -r requirements-api.txt
+(cd frontend && npm ci && npm run build)
+bocagrande-api --workspace ./work          # http://127.0.0.1:8000
+```
+
+Everything the editor does happens inside the workspace directory: file paths and SQLite files cannot leave it,
+pipelines cannot read environment variables, and uploaded `.ktr`/`.kjb` files are parsed in memory. Saved
+pipelines go to `<workspace>/pipelines/<name>.yaml`, the same format `bocagrande-run` reads. The service listens
+on localhost; set `BOCAGRANDE_API_TOKEN` to require `Authorization: Bearer <token>` (the editor asks for it).
+A pipeline can still connect to any database server it has a URL for, so do not expose the service to people you
+would not give a shell. For development run `bocagrande-api` and `npm run dev` in `frontend/` (the dev server
+proxies `/api`).
+
 ## Importing from Pentaho
 
 ```bash
