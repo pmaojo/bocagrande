@@ -9,9 +9,14 @@ specified by the steps in the order they appear.
 """
 from __future__ import annotations
 
+import logging
 from dataclasses import dataclass
 from typing import Iterable, Optional, List
 import pandas as pd
+
+from bocagrande.formula_screen import check_formula
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -73,6 +78,12 @@ def apply_transformations(
                 result[out_col] = None
                 faltantes.append(out_col)
         elif step.tipo_transformacion in {"calculo", "formula"} and step.formula:
+            allowed, reason = check_formula(step.formula)
+            if not allowed:
+                logger.warning("Formula for '%s' rejected: %s", out_col, reason)
+                result[out_col] = None
+                faltantes.append(out_col)
+                continue
             try:
                 result[out_col] = df.eval(step.formula)
                 generados.append(out_col)

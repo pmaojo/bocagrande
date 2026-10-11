@@ -9,6 +9,8 @@ import os
 from streamlit.runtime.uploaded_file_manager import UploadedFile
 import traceback
 from bocagrande.langchain_agent import generate_steps
+from bocagrande.dtypes import string_dtypes
+from bocagrande.mapping import suggest_steps
 import re
 import io
 from pathlib import Path
@@ -16,11 +18,12 @@ import pandas.errors
 
 from adapter.yaml_loader import load_schema
 from adapter.data_io import read_dataframe, export_dataframe
+from adapter.decision_log import create_decisions
 from adapter.reasoner import Reasoner
 from adapter.reasoner_factory import DEFAULT_REASONER, create_reasoner
 from ontology.tbox_builder import build_global_tbox
 from bocagrande.transform import ETLStep, apply_transformations
-from bocagrande.validation import validate_dataframe
+from bocagrande.validation import validate_dataframe_report
 
 # Estructura básica de la UI
 
@@ -37,10 +40,10 @@ def get_reasoner() -> Reasoner:
     return create_reasoner(os.environ.get("BOCAGRANDE_REASONER", DEFAULT_REASONER))
 
 # --- Utilidad universal para leer archivos a DataFrame ---
-def leer_a_dataframe(archivo: UploadedFile, sin_cabecera: bool = False) -> pd.DataFrame | None:
+def leer_a_dataframe(archivo: UploadedFile, sin_cabecera: bool = False, dtype: dict | None = None) -> pd.DataFrame | None:
     header = None if sin_cabecera else 0
     try:
-        return read_dataframe(archivo, header=header)
+        return read_dataframe(archivo, header=header, dtype=dtype)
     except Exception as e:
         st.error(f"Error al leer el archivo: {e}")
         return None
@@ -115,18 +118,34 @@ def main() -> None:
                 campos_destino = [campo.name for campo in tabla_schema_destino.fields]
                 st.write("Campos de salida (esquema YAML):", campos_destino)
                 st.subheader("Sugerencias de Transformación (Generadas por IA)")
-                st.info("Conectando con Gemini para generar transformaciones...")
+                st.info("Generando transformaciones...")
 
+                decisions = create_decisions("mapping")  # modelo de decisión (Mercury Decide, Jev...)
                 gemini_api_key = os.getenv("GEMINI_API_KEY")
-                if not gemini_api_key:
-                    st.error("Error: La variable de entorno GEMINI_API_KEY no está configurada. Por favor, añádela a tu archivo .env")
+                if decisions is None and not gemini_api_key:
+                    st.error("Error: configura GEMINI_API_KEY u OPENROUTER_API_KEY en tu archivo .env")
                 else:
-                    from langchain_google_genai import ChatGoogleGenerativeAI
-                    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", google_api_key=gemini_api_key)
+                    llm = None
+                    if gemini_api_key:
+                        from langchain_google_genai import ChatGoogleGenerativeAI
+                        llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", google_api_key=gemini_api_key)
                     try:
-                        steps = generate_steps(headers_csv, tabla_schema_destino, llm)
+                        mapping = None
+                        if decisions is not None:
+                            # Nombres iguales por código; el resto, un modelo de decisión; lo dudoso, Gemini
+                            fallback = (lambda h, sch: generate_steps(h, sch, llm)) if llm else None
+                            mapping = suggest_steps(headers_csv, tabla_schema_destino, decisions,
+                                                    sample=df_muestra, fallback=fallback)
+                            steps = mapping.steps
+                            if mapping.pending:
+                                st.warning("Sin mapeo fiable para: " + ", ".join(mapping.pending))
+                        else:
+                            steps = generate_steps(headers_csv, tabla_schema_destino, llm)
                         st.session_state['transformaciones_sugeridas'] = [s.__dict__ for s in steps]
-                        st.dataframe(pd.DataFrame(st.session_state['transformaciones_sugeridas']))
+                        tabla_sugeridas = pd.DataFrame(st.session_state['transformaciones_sugeridas'])
+                        if mapping is not None and not tabla_sugeridas.empty:
+                            tabla_sugeridas["origen"] = tabla_sugeridas["campo_salida"].map(mapping.sources)
+                        st.dataframe(tabla_sugeridas)
                     except Exception as e:
                         st.error(f"Error al generar transformaciones: {e}")
 
@@ -162,8 +181,11 @@ def main() -> None:
         archivo_datos_transformar = st.file_uploader("Sube el archivo de datos para transformar (CSV)", type=["csv"], key="data_transformar")
         if archivo_datos_transformar:
             if st.button("Aplicar Transformaciones (ETL)"):
-                df_original = leer_a_dataframe(archivo_datos_transformar)
                 steps = [ETLStep(**t) for t in st.session_state['transformaciones_aceptadas']]
+                # Las columnas que alimentan campos de texto se leen como texto (conservan ceros a la izquierda)
+                schema_para_tipos = load_schema(str(esquema_destino_comparacion))
+                dtypes = string_dtypes(schema_para_tipos, steps) if schema_para_tipos else None
+                df_original = leer_a_dataframe(archivo_datos_transformar, dtype=dtypes)
                 df_transformado, _, _, _ = apply_transformations(df_original, steps)
                 st.subheader("Datos Transformados (ETL, solo columnas de salida):")
                 st.dataframe(df_transformado)
@@ -184,22 +206,38 @@ def main() -> None:
                 # --- Validación semántica y SHACL por detrás ---
                 try:
                     tabla_schema_destino = load_schema(str(esquema_destino_comparacion))
-                    hermit_ok, shacl_ok, logs_hermit, logs_shacl = validate_dataframe(
+                    report = validate_dataframe_report(
                         df_transformado,
                         tabla_schema_destino,
                         reasoner=reasoner,
+                        decisions=create_decisions("shacl"),
                     )
                     st.markdown(
                         "**Validación semántica:** "
-                        + ("✅ Consistente" if hermit_ok else "❌ Inconsistente")
+                        + ("✅ Consistente" if report.reasoner_ok else "❌ Inconsistente")
                     )
-                    with st.expander("Log HermiT", expanded=False):
-                        st.text(logs_hermit)
+                    with st.expander("Log del razonador", expanded=False):
+                        st.text(report.reasoner_logs)
                     st.markdown(
-                        "**Validación SHACL:** " + ("✅ Válido" if shacl_ok else "❌ Inválido")
+                        "**Validación SHACL:** " + ("✅ Válido" if report.shacl_ok else "❌ Inválido")
                     )
                     with st.expander("Log SHACL", expanded=False):
-                        st.text(logs_shacl)
+                        st.text(report.shacl.text)
+                    if report.triage:
+                        st.subheader("Causa probable de las violaciones SHACL")
+                        st.dataframe(pd.DataFrame([
+                            {
+                                "campo": t.group.field_name,
+                                "restricción": t.group.component,
+                                "filas afectadas": t.group.rows,
+                                "% de filas": round(100 * t.group.share, 1),
+                                "causa probable": t.category,
+                                "decidido por": t.source,
+                                "confianza": t.confidence,
+                                "qué hacer": t.action,
+                            }
+                            for t in report.triage
+                        ]))
                 except Exception as e:
                     st.warning(f"No se pudo validar semánticamente el resultado: {e}")
 

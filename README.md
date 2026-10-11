@@ -58,6 +58,78 @@ In the Streamlit app set `BOCAGRANDE_REASONER=hermit` to use HermiT. In Docker, 
 
 Set the `GEMINI_API_KEY` environment variable to enable this feature. Required packages are listed under `requirements.txt` (`langchain-core`, `langchain-google-genai` and `google-generativeai`).
 
+## Decision models (optional)
+
+Bocagrande can use fast, typed "System One" decision models through OpenRouter
+([Mercury Decide](https://openrouter.ai/inception/mercury-decide:free), Jev). They do not write text:
+they answer narrow questions and return a calibrated probability, so the code decides what to trust.
+
+Set `OPENROUTER_API_KEY` (and optionally `DECISION_MODEL`) to enable them. Today they are used to map
+CSV columns to schema fields (`bocagrande/mapping.py`):
+
+1. Columns whose name matches a field (ignoring case, accents and separators) are mapped by code, with no model call.
+2. The remaining fields go to the decision model in **one request**. Only answers with confidence of at
+   least 0.8 are used, and a column feeds at most one field.
+3. Everything else is listed as pending, or handed to Gemini if `GEMINI_API_KEY` is also set.
+
+Only column names and field descriptions are sent. Example values from your data are sent only if you pass
+`send_samples=True`. Without `OPENROUTER_API_KEY` the Streamlit app behaves exactly as before.
+
+Formulas written by a language model are checked by `bocagrande/formula_screen.py` before `DataFrame.eval`
+runs them: only arithmetic, comparisons, a few math functions and `.str`/`.dt` accessors are accepted. It is a
+screen, not a sandbox.
+
+## SHACL validation and triage
+
+`bocagrande/validation.py` checks the generated graph against SHACL shapes built from the YAML schema
+(datatype, required, maximum length, numeric precision, ISO date patterns). `validate_dataframe_report`
+returns each violation as data and classifies the groups of violations by likely cause
+(`bocagrande/shacl_triage.py`):
+
+| Cause | Meaning | Typical action |
+|---|---|---|
+| `data_error` | a few rows hold bad values | fix or remove those rows |
+| `schema_error` | the constraint is wrong or too strict | review the schema |
+| `mapping_error` | the wrong column, or none, feeds the field | check the mapping |
+| `needs_review` | not enough evidence | look at it manually |
+
+Violations are grouped by field and constraint, so thousands of rows failing the same way are one decision.
+Code settles the clear cases (up to 2% of rows failing is a data error; a required field empty in every row is
+a mapping error). The rest go to the decision model in one request and only answers with confidence of at
+least 0.8 are used; without a model they are reported as `needs_review`. Example values are sent only with
+`send_samples=True`.
+
+## Infer a schema from a file
+
+```bash
+bocagrande-schema --csv raw/CLIENTES_sample.csv --name CLIENTES --output schema_yaml/CLIENTES.yaml
+```
+
+Booleans, integers, floats, identifiers with leading zeros (`001` is text, not a number) and the date format
+a column parses with are settled by code. What the data cannot settle is marked `[assumed]` and listed at the
+end for you to confirm: day/month order when every value has both parts <= 12 (use `--month-first` to flip the
+default), and digit-only columns of fixed length, which could be a postal code or phone number. With a decision
+model configured, the second case is asked to it from the column name and its structure (length, distinct
+ratio, whether it is a sequence), never from the values.
+
+Text columns are read as text, so a value such as `001` reaches the graph unchanged. Dates are parsed with the
+`format` of their field.
+
+## Decision log
+
+Set `DECISION_LOG=decisions.jsonl` to record every decision model answer: purpose, question key (for example a
+field name), answer, confidence, probabilities and model. The data sent to the model is not written to the log.
+
+```bash
+bocagrande-decisions list   --log decisions.jsonl                          # decisions nobody has reviewed yet
+bocagrande-decisions mark   --log decisions.jsonl --id <id> --correct      # or --incorrect
+bocagrande-decisions report --log decisions.jsonl                          # accuracy per confidence band
+```
+
+`report` suggests the lowest confidence at which reviewed decisions were at least 95% correct (over at least
+20 of them), so the 0.8 and 2% defaults can be replaced by evidence. From code, `DecisionLog.record_outcome`
+does the same as `mark`. Nothing records outcomes automatically yet.
+
 ## Testing workflow
 Linting and typing checks are performed with `flake8` and `mypy` respectively. Unit and integration tests run with `pytest`.
 End‑to‑end tests live under `tests/e2e` and drive the Streamlit UI with Playwright. They can be executed through Docker Compose:

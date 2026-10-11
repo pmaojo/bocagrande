@@ -15,3 +15,5 @@ include = ["bocagrande", "adapter", "ontology"]
 
 [project.scripts]
 bocagrande = "bocagrande.cli:main"
+bocagrande-schema = "bocagrande.schema_cli:main"
+bocagrande-decisions = "bocagrande.decisions_cli:main"
