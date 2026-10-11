@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 
 from adapter.data_io import read_dataframe
-from adapter.openrouter_decisions import OpenRouterDecisions
+from adapter.decision_log import create_decisions
 from bocagrande.schema_inference import infer_schema, schema_to_yaml
 
 
@@ -23,7 +23,7 @@ def _parse_args(argv: list[str] | None) -> argparse.Namespace:
 def main(argv: list[str] | None = None) -> None:
     args = _parse_args(argv)
     df = read_dataframe(args.csv, dtype=str)  # keep the values exactly as written
-    result = infer_schema(df, args.name, OpenRouterDecisions.from_env(), prefer_day_first=not args.month_first)
+    result = infer_schema(df, args.name, create_decisions("schema"), prefer_day_first=not args.month_first)
     Path(args.output).write_text(schema_to_yaml(result.schema))
 
     for info in result.columns.values():

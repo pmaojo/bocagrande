@@ -99,6 +99,37 @@ a mapping error). The rest go to the decision model in one request and only answ
 least 0.8 are used; without a model they are reported as `needs_review`. Example values are sent only with
 `send_samples=True`.
 
+## Infer a schema from a file
+
+```bash
+bocagrande-schema --csv raw/CLIENTES_sample.csv --name CLIENTES --output schema_yaml/CLIENTES.yaml
+```
+
+Booleans, integers, floats, identifiers with leading zeros (`001` is text, not a number) and the date format
+a column parses with are settled by code. What the data cannot settle is marked `[assumed]` and listed at the
+end for you to confirm: day/month order when every value has both parts <= 12 (use `--month-first` to flip the
+default), and digit-only columns of fixed length, which could be a postal code or phone number. With a decision
+model configured, the second case is asked to it from the column name and its structure (length, distinct
+ratio, whether it is a sequence), never from the values.
+
+Text columns are read as text, so a value such as `001` reaches the graph unchanged. Dates are parsed with the
+`format` of their field.
+
+## Decision log
+
+Set `DECISION_LOG=decisions.jsonl` to record every decision model answer: purpose, question key (for example a
+field name), answer, confidence, probabilities and model. The data sent to the model is not written to the log.
+
+```bash
+bocagrande-decisions list   --log decisions.jsonl                          # decisions nobody has reviewed yet
+bocagrande-decisions mark   --log decisions.jsonl --id <id> --correct      # or --incorrect
+bocagrande-decisions report --log decisions.jsonl                          # accuracy per confidence band
+```
+
+`report` suggests the lowest confidence at which reviewed decisions were at least 95% correct (over at least
+20 of them), so the 0.8 and 2% defaults can be replaced by evidence. From code, `DecisionLog.record_outcome`
+does the same as `mark`. Nothing records outcomes automatically yet.
+
 ## Testing workflow
 Linting and typing checks are performed with `flake8` and `mypy` respectively. Unit and integration tests run with `pytest`.
 End‑to‑end tests live under `tests/e2e` and drive the Streamlit UI with Playwright. They can be executed through Docker Compose:

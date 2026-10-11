@@ -19,6 +19,7 @@ class Decision:
     probabilities: Dict[str, float] = field(default_factory=dict)
     confidence: float = 0.0
     model: Optional[str] = None
+    decision_id: Optional[str] = None  # set by the decision log, used to record whether it was right
 
 
 @dataclass

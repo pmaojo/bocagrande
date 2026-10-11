@@ -61,7 +61,7 @@ def test_a_required_field_empty_everywhere_is_a_mapping_error():
 
 def test_the_rest_go_to_the_model_in_one_request():
     vs = [viol("NOMBRE", "MaxLength", r, "Alejandra") for r in range(60)] + [viol("EDAD", "Datatype", r, "x") for r in range(30)]
-    fake = FakeDecisions({"0": (SCHEMA_ERROR, 0.91), "1": (DATA_ERROR, 0.88)})
+    fake = FakeDecisions({"NOMBRE:MaxLength": (SCHEMA_ERROR, 0.91), "EDAD:Datatype": (DATA_ERROR, 0.88)})
     results = triage(groups_for(vs), fake)
     assert len(fake.calls) == 1 and len(fake.calls[0]) == 2
     assert [(r.category, r.source) for r in results] == [(SCHEMA_ERROR, "decision"), (DATA_ERROR, "decision")]
@@ -71,7 +71,7 @@ def test_the_rest_go_to_the_model_in_one_request():
 
 def test_low_confidence_and_invalid_answers_need_review():
     vs = [viol("NOMBRE", "MaxLength", r) for r in range(50)] + [viol("EDAD", "Datatype", r) for r in range(50)]
-    fake = FakeDecisions({"0": (SCHEMA_ERROR, 0.5), "1": ("something_else", 0.99)})
+    fake = FakeDecisions({"NOMBRE:MaxLength": (SCHEMA_ERROR, 0.5), "EDAD:Datatype": ("something_else", 0.99)})
     results = triage(groups_for(vs), fake)
     assert [r.category for r in results] == [NEEDS_REVIEW, NEEDS_REVIEW]
     assert all(r.source == "escalated" for r in results)
@@ -89,15 +89,15 @@ def test_example_values_are_sent_only_when_requested():
     quiet, loud = FakeDecisions(), FakeDecisions()
     triage(groups_for(vs), quiet)
     triage(groups_for(vs), loud, send_samples=True)
-    assert "SECRET-NAME" not in str(quiet.calls[0]["0"].instructions)
-    assert "SECRET-NAME" in str(loud.calls[0]["0"].instructions)
+    assert "SECRET-NAME" not in str(quiet.calls[0]["NOMBRE:MaxLength"].instructions)
+    assert "SECRET-NAME" in str(loud.calls[0]["NOMBRE:MaxLength"].instructions)
 
 
 def test_the_question_describes_the_field_and_the_numbers():
     vs = [viol("NOMBRE", "MaxLength", r) for r in range(50)]
     fake = FakeDecisions()
     triage(groups_for(vs), fake)
-    info = fake.calls[0]["0"].instructions
+    info = fake.calls[0]["NOMBRE:MaxLength"].instructions
     assert info["violation"] == {"constraint": "MaxLength", "rows_affected": 50, "total_rows": 100, "share_of_rows": 0.5}
     assert info["field"]["name"] == "nombre" and info["field"]["length"] == 5
 
@@ -109,7 +109,7 @@ def test_end_to_end_report_with_real_validation():
     n = 100
     df = pd.DataFrame({"id": list(range(n)), "nombre": ["Alejandra"] * n, "edad": pd.Series([30] * n, dtype=object)})
     df.loc[7, "edad"] = "abc"
-    fake = FakeDecisions({"0": (SCHEMA_ERROR, 0.93)})
+    fake = FakeDecisions({"NOMBRE:MaxLength": (SCHEMA_ERROR, 0.93)})
 
     report = validate_dataframe_report(df, sch, reasoner=None, decisions=fake)
 

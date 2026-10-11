@@ -18,7 +18,7 @@ import pandas.errors
 
 from adapter.yaml_loader import load_schema
 from adapter.data_io import read_dataframe, export_dataframe
-from adapter.openrouter_decisions import OpenRouterDecisions
+from adapter.decision_log import create_decisions
 from adapter.reasoner import Reasoner
 from adapter.reasoner_factory import DEFAULT_REASONER, create_reasoner
 from ontology.tbox_builder import build_global_tbox
@@ -120,7 +120,7 @@ def main() -> None:
                 st.subheader("Sugerencias de Transformación (Generadas por IA)")
                 st.info("Generando transformaciones...")
 
-                decisions = OpenRouterDecisions.from_env()  # modelo de decisión (Mercury Decide, Jev...)
+                decisions = create_decisions("mapping")  # modelo de decisión (Mercury Decide, Jev...)
                 gemini_api_key = os.getenv("GEMINI_API_KEY")
                 if decisions is None and not gemini_api_key:
                     st.error("Error: configura GEMINI_API_KEY u OPENROUTER_API_KEY en tu archivo .env")
@@ -210,7 +210,7 @@ def main() -> None:
                         df_transformado,
                         tabla_schema_destino,
                         reasoner=reasoner,
-                        decisions=OpenRouterDecisions.from_env(),
+                        decisions=create_decisions("shacl"),
                     )
                     st.markdown(
                         "**Validación semántica:** "

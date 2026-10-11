@@ -171,6 +171,9 @@ def triage(
     results: Dict[int, Triage] = {}
     undecided: List[int] = []
 
+    def key(group: ViolationGroup) -> str:
+        return f"{group.path}:{group.component}"  # unique per group, and readable in the decision log
+
     for i, group in enumerate(groups):
         ruled = _rule(group, isolated_share)
         if ruled:
@@ -183,13 +186,14 @@ def triage(
         try:
             answers = decisions.decide(
                 {"table_violations": len(groups)},
-                {str(i): _question(groups[i], send_samples) for i in undecided},
+                {key(groups[i]): _question(groups[i], send_samples) for i in undecided},
             )
         except Exception as exc:
             logger.error("Decision model unavailable, %d group(s) need review: %s", len(undecided), exc)
 
     for i in undecided:
-        group, decision = groups[i], answers.get(str(i))
+        group = groups[i]
+        decision = answers.get(key(group))
         if decision is not None and gate.accepts(decision, allowed=CATEGORIES):
             results[i] = Triage(group, decision.answer, SOURCE_DECISION, decision.confidence,
                                 f"decision model, {decision.confidence:.0%} confident")
