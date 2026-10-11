@@ -79,6 +79,26 @@ Formulas written by a language model are checked by `bocagrande/formula_screen.p
 runs them: only arithmetic, comparisons, a few math functions and `.str`/`.dt` accessors are accepted. It is a
 screen, not a sandbox.
 
+## SHACL validation and triage
+
+`bocagrande/validation.py` checks the generated graph against SHACL shapes built from the YAML schema
+(datatype, required, maximum length, numeric precision, ISO date patterns). `validate_dataframe_report`
+returns each violation as data and classifies the groups of violations by likely cause
+(`bocagrande/shacl_triage.py`):
+
+| Cause | Meaning | Typical action |
+|---|---|---|
+| `data_error` | a few rows hold bad values | fix or remove those rows |
+| `schema_error` | the constraint is wrong or too strict | review the schema |
+| `mapping_error` | the wrong column, or none, feeds the field | check the mapping |
+| `needs_review` | not enough evidence | look at it manually |
+
+Violations are grouped by field and constraint, so thousands of rows failing the same way are one decision.
+Code settles the clear cases (up to 2% of rows failing is a data error; a required field empty in every row is
+a mapping error). The rest go to the decision model in one request and only answers with confidence of at
+least 0.8 are used; without a model they are reported as `needs_review`. Example values are sent only with
+`send_samples=True`.
+
 ## Testing workflow
 Linting and typing checks are performed with `flake8` and `mypy` respectively. Unit and integration tests run with `pytest`.
 End‑to‑end tests live under `tests/e2e` and drive the Streamlit UI with Playwright. They can be executed through Docker Compose:

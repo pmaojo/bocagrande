@@ -22,7 +22,7 @@ from adapter.reasoner import Reasoner
 from adapter.reasoner_factory import DEFAULT_REASONER, create_reasoner
 from ontology.tbox_builder import build_global_tbox
 from bocagrande.transform import ETLStep, apply_transformations
-from bocagrande.validation import validate_dataframe
+from bocagrande.validation import validate_dataframe_report
 
 # Estructura básica de la UI
 
@@ -202,22 +202,38 @@ def main() -> None:
                 # --- Validación semántica y SHACL por detrás ---
                 try:
                     tabla_schema_destino = load_schema(str(esquema_destino_comparacion))
-                    hermit_ok, shacl_ok, logs_hermit, logs_shacl = validate_dataframe(
+                    report = validate_dataframe_report(
                         df_transformado,
                         tabla_schema_destino,
                         reasoner=reasoner,
+                        decisions=OpenRouterDecisions.from_env(),
                     )
                     st.markdown(
                         "**Validación semántica:** "
-                        + ("✅ Consistente" if hermit_ok else "❌ Inconsistente")
+                        + ("✅ Consistente" if report.reasoner_ok else "❌ Inconsistente")
                     )
-                    with st.expander("Log HermiT", expanded=False):
-                        st.text(logs_hermit)
+                    with st.expander("Log del razonador", expanded=False):
+                        st.text(report.reasoner_logs)
                     st.markdown(
-                        "**Validación SHACL:** " + ("✅ Válido" if shacl_ok else "❌ Inválido")
+                        "**Validación SHACL:** " + ("✅ Válido" if report.shacl_ok else "❌ Inválido")
                     )
                     with st.expander("Log SHACL", expanded=False):
-                        st.text(logs_shacl)
+                        st.text(report.shacl.text)
+                    if report.triage:
+                        st.subheader("Causa probable de las violaciones SHACL")
+                        st.dataframe(pd.DataFrame([
+                            {
+                                "campo": t.group.field_name,
+                                "restricción": t.group.component,
+                                "filas afectadas": t.group.rows,
+                                "% de filas": round(100 * t.group.share, 1),
+                                "causa probable": t.category,
+                                "decidido por": t.source,
+                                "confianza": t.confidence,
+                                "qué hacer": t.action,
+                            }
+                            for t in report.triage
+                        ]))
                 except Exception as e:
                     st.warning(f"No se pudo validar semánticamente el resultado: {e}")
 
