@@ -7,7 +7,7 @@ import sys
 
 from adapter.data_io import read_dataframe
 from adapter.yaml_loader import load_schema
-from adapter.hermit_runner import HermiTReasoner
+from adapter.reasoner_factory import DEFAULT_REASONER, REASONERS, create_reasoner
 from ontology.tbox_builder import build_global_tbox
 from ontology.service import OntologyBuilder
 
@@ -18,14 +18,20 @@ def _parse_args(argv: list[str] | None) -> argparse.Namespace:
     parser.add_argument("--csv", required=True, help="CSV data file")
     parser.add_argument("--output", required=True, help="Output TTL file")
     parser.add_argument(
+        "--reasoner",
+        choices=REASONERS,
+        default=DEFAULT_REASONER,
+        help="Reasoner backend: ontologos (default, no Java), hermit (needs Java) or none",
+    )
+    parser.add_argument(
         "--hermit",
         default=str(Path("HermiT") / "HermiT.jar"),
-        help="Path to HermiT JAR",
+        help="Path to HermiT JAR (only with --reasoner hermit)",
     )
     parser.add_argument(
         "--skip-reasoner",
         action="store_true",
-        help="Skip semantic reasoning",
+        help="Skip semantic reasoning (same as --reasoner none)",
     )
     return parser.parse_args(argv)
 
@@ -41,11 +47,11 @@ def main(argv: list[str] | None = None) -> None:
 
     tbox = build_global_tbox(Path(args.schema).parent)
 
-    reasoner = None if args.skip_reasoner else HermiTReasoner(jar_path=args.hermit)
+    reasoner = None if args.skip_reasoner else create_reasoner(args.reasoner, hermit_jar=args.hermit)
     builder = OntologyBuilder(tbox, reasoner=reasoner)
     graph = builder.build_abox_graph(schema, df)
 
-    if not args.skip_reasoner:
+    if reasoner is not None:
         ok, logs = builder.reason_graph(graph)
         print(logs)
         if not ok:

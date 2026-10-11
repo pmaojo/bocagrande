@@ -16,7 +16,8 @@ import pandas.errors
 
 from adapter.yaml_loader import load_schema
 from adapter.data_io import read_dataframe, export_dataframe
-from adapter.hermit_runner import HermiTReasoner
+from adapter.reasoner import Reasoner
+from adapter.reasoner_factory import DEFAULT_REASONER, create_reasoner
 from ontology.tbox_builder import build_global_tbox
 from bocagrande.transform import ETLStep, apply_transformations
 from bocagrande.validation import validate_dataframe
@@ -29,11 +30,11 @@ from bocagrande.validation import validate_dataframe
 def get_global_tbox():
     return build_global_tbox()
 
-# --- Razonería HermiT reutilizable ---
+# --- Razonador reutilizable (BOCAGRANDE_REASONER=ontologos|hermit) ---
 @st.cache_resource
-def get_reasoner() -> HermiTReasoner:
-    """Return a cached HermiT reasoner instance."""
-    return HermiTReasoner()
+def get_reasoner() -> Reasoner:
+    """Return a cached reasoner instance (OntoLogos by default; no Java needed)."""
+    return create_reasoner(os.environ.get("BOCAGRANDE_REASONER", DEFAULT_REASONER))
 
 # --- Utilidad universal para leer archivos a DataFrame ---
 def leer_a_dataframe(archivo: UploadedFile, sin_cabecera: bool = False) -> pd.DataFrame | None:
@@ -189,7 +190,7 @@ def main() -> None:
                         reasoner=reasoner,
                     )
                     st.markdown(
-                        "**Validación semántica (HermiT):** "
+                        "**Validación semántica:** "
                         + ("✅ Consistente" if hermit_ok else "❌ Inconsistente")
                     )
                     with st.expander("Log HermiT", expanded=False):
