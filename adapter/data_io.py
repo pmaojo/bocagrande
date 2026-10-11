@@ -15,13 +15,14 @@ from streamlit.runtime.uploaded_file_manager import UploadedFile
 FileType = Union[str, Path, UploadedFile, BinaryIO, IO[str], IO[bytes]]
 
 
-def read_dataframe(file: FileType, header: int | None | str = 0) -> pd.DataFrame:
+def read_dataframe(file: FileType, header: int | None | str = 0, dtype: Optional[dict] = None) -> pd.DataFrame:
     """
     Lee un archivo (CSV, Excel, Parquet) y devuelve un DataFrame.
 
     Args:
         file: Ruta al archivo o objeto tipo archivo.
         header: Fila a usar como cabecera (0 por defecto). None para sin cabecera.
+        dtype: Tipos por columna, p. ej. {"codigo": str} para conservar ceros a la izquierda.
 
     Returns:
         pd.DataFrame con los datos.
@@ -39,9 +40,9 @@ def read_dataframe(file: FileType, header: int | None | str = 0) -> pd.DataFrame
         filename = file.name.lower()
 
     if filename.endswith('.csv'):
-        df = pd.read_csv(file, header=header)
+        df = pd.read_csv(file, header=header, dtype=dtype)
     elif filename.endswith('.xlsx') or filename.endswith('.xls'):
-        df = pd.read_excel(file, header=header)
+        df = pd.read_excel(file, header=header, dtype=dtype)
     elif filename.endswith('.parquet'):
         df = pd.read_parquet(file)
     else:
@@ -54,7 +55,7 @@ def read_dataframe(file: FileType, header: int | None | str = 0) -> pd.DataFrame
         if not filename:
             # Si no hay nombre, intentamos leer como CSV (caso test con BytesIO sin name)
             try:
-                df = pd.read_csv(file, header=header)
+                df = pd.read_csv(file, header=header, dtype=dtype)
             except pd.errors.EmptyDataError:
                 raise
             except Exception:

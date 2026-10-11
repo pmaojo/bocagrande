@@ -9,6 +9,7 @@ import os
 from streamlit.runtime.uploaded_file_manager import UploadedFile
 import traceback
 from bocagrande.langchain_agent import generate_steps
+from bocagrande.dtypes import string_dtypes
 from bocagrande.mapping import suggest_steps
 import re
 import io
@@ -39,10 +40,10 @@ def get_reasoner() -> Reasoner:
     return create_reasoner(os.environ.get("BOCAGRANDE_REASONER", DEFAULT_REASONER))
 
 # --- Utilidad universal para leer archivos a DataFrame ---
-def leer_a_dataframe(archivo: UploadedFile, sin_cabecera: bool = False) -> pd.DataFrame | None:
+def leer_a_dataframe(archivo: UploadedFile, sin_cabecera: bool = False, dtype: dict | None = None) -> pd.DataFrame | None:
     header = None if sin_cabecera else 0
     try:
-        return read_dataframe(archivo, header=header)
+        return read_dataframe(archivo, header=header, dtype=dtype)
     except Exception as e:
         st.error(f"Error al leer el archivo: {e}")
         return None
@@ -180,8 +181,11 @@ def main() -> None:
         archivo_datos_transformar = st.file_uploader("Sube el archivo de datos para transformar (CSV)", type=["csv"], key="data_transformar")
         if archivo_datos_transformar:
             if st.button("Aplicar Transformaciones (ETL)"):
-                df_original = leer_a_dataframe(archivo_datos_transformar)
                 steps = [ETLStep(**t) for t in st.session_state['transformaciones_aceptadas']]
+                # Las columnas que alimentan campos de texto se leen como texto (conservan ceros a la izquierda)
+                schema_para_tipos = load_schema(str(esquema_destino_comparacion))
+                dtypes = string_dtypes(schema_para_tipos, steps) if schema_para_tipos else None
+                df_original = leer_a_dataframe(archivo_datos_transformar, dtype=dtypes)
                 df_transformado, _, _, _ = apply_transformations(df_original, steps)
                 st.subheader("Datos Transformados (ETL, solo columnas de salida):")
                 st.dataframe(df_transformado)
