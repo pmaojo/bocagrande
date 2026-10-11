@@ -22,7 +22,7 @@ jobs:
       postgres:
         image: postgres:16
         env:
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_HOST_AUTH_METHOD: trust  # throwaway service container, no password needed
         ports:
           - 5432:5432
         options: >-
@@ -31,7 +31,7 @@ jobs:
           --health-timeout 5s
           --health-retries 10
     env:
-      BOCAGRANDE_TEST_POSTGRES_URL: postgresql+psycopg://postgres:postgres@localhost:5432/postgres
+      BOCAGRANDE_TEST_POSTGRES_URL: postgresql+psycopg://postgres@localhost:5432/postgres
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
