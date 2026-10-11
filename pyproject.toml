@@ -11,9 +11,10 @@ requires-python = ">=3.12"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["bocagrande", "adapter", "ontology"]
+include = ["bocagrande*", "adapter*", "ontology*"]
 
 [project.scripts]
 bocagrande = "bocagrande.cli:main"
 bocagrande-schema = "bocagrande.schema_cli:main"
 bocagrande-decisions = "bocagrande.decisions_cli:main"
+bocagrande-run = "bocagrande.pipeline.cli:main"

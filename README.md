@@ -81,6 +81,46 @@ bocagrande-schema --db-url sqlite:///data.db --table clientes --name CLIENTES --
 - Tested against SQLite, a real PostgreSQL 16, and MongoDB through `mongomock`. MySQL, SQL Server and Oracle go
   through the same SQLAlchemy code but have not been run against a server.
 
+## Pipelines
+
+A pipeline is a small graph of **sources**, **transformations** and **destinations**, stored as YAML or JSON. It is the
+format the Pentaho importer produces and the one a pipeline editor edits.
+
+```yaml
+name: adultos
+parameters: {PAIS: ES}
+nodes:
+  - {id: src, type: source.database, config: {connection_string: "sqlite:///data.db", table_name: clientes}}
+  - {id: sel, type: transform.select, config: {columns: [{name: id, rename: codigo}, {name: nombre}, {name: edad}]}}
+  - {id: adult, type: transform.filter, config: {condition: "edad >= 18"}}
+  - {id: graph, type: destination.graph, config: {schema: schema_yaml/CLIENTES.yaml, output: adultos.ttl, validate: true}}
+edges:
+  - {source: src, target: sel}
+  - {source: sel, target: adult}
+  - {source: adult, target: graph}
+```
+
+```bash
+bocagrande-run adultos.yaml --check          # validate only
+bocagrande-run adultos.yaml --param PAIS=FR  # run; exits 1 if any node fails
+```
+
+| Node | Does |
+|---|---|
+| `source.file`, `source.database` | read a CSV/Excel/Parquet file (`options`: pandas options such as `sep`, `text_columns`), or a table/query |
+| `transform.select` | keep, rename and drop columns |
+| `transform.mapping` | output columns from mapping steps and screened formulas |
+| `transform.constant`, `transform.sort`, `transform.filter`, `transform.merge_join` | add constant columns, sort, keep rows matching a screened condition, join two inputs (edges to the join carry `handle: left` / `right`) |
+| `destination.database`, `destination.file`, `destination.graph` | write a table, a CSV/Excel/Parquet/JSON file, or an OWL graph (Turtle) with reasoning and optional SHACL validation (`validate`, `fail_on_violations`) |
+| `unsupported.*` | a step that could not be converted; it is kept visible but does not run |
+
+- The run follows the edges. A node that fails skips everything downstream of it but not other branches, and the
+  report says what each node did.
+- `${NAME}` in a node's settings is replaced by a pipeline parameter. Environment variables are read **only inside
+  `connection_string`**, and only if the runner allows it (`Context(allow_env=False)` turns it off), so a pipeline
+  from outside cannot copy other secrets into, say, a file path. Run only pipelines you trust.
+- `Context(sandbox=True)` or `--sandbox` keeps every file path inside the base directory.
+
 ## Decision models (optional)
 
 Bocagrande can use fast, typed "System One" decision models through OpenRouter
