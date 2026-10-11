@@ -1,0 +1,13 @@
+Bocagrande
+Copyright (c) 2025-2026 Pelayo Maojo, released under the MIT license (see LICENSE).
+
+Third-party components
+----------------------
+HermiT/HermiT.jar is the HermiT OWL reasoner (University of Oxford), included
+unmodified for convenience. It is NOT covered by this project's MIT license and
+remains under its own terms; check them at http://www.hermit-reasoner.com before
+redistributing. It can be replaced by any HermiT build placed at the same path.
+
+Python and JavaScript dependencies keep their own licenses; see requirements.txt.
+Gemini, Groq, OpenRouter, Inception (Mercury) and TypeSafe AI (Jev) are names of
+their respective owners, used only to describe compatibility.
