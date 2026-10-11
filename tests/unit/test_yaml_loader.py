@@ -198,3 +198,16 @@ columns:
     assert field.metadata["foreign_key"] == "Others.code"
     assert field.metadata["deprecated"] is False
     assert field.metadata["extra"] == "foo"
+
+
+def test_schema_unique_is_normalised_and_validated(tmp_path):
+    from adapter.yaml_loader import normalize_unique
+
+    assert normalize_unique(None) == [] and normalize_unique([]) == []
+    assert normalize_unique(["a", "b"]) == [["a", "b"]]
+    assert normalize_unique([["a"], ["b", "c"]]) == [["a"], ["b", "c"]]
+    with pytest.raises(TypeError):
+        normalize_unique("a")
+    schema_file = tmp_path / "t.yaml"
+    schema_file.write_text("table: T\nunique: [a, b]\ncolumns:\n  - name: a\n  - name: b\n")
+    assert load_schema(str(schema_file)).unique == [["a", "b"]]

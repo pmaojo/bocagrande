@@ -50,6 +50,21 @@ def _is_required(value: Any) -> bool:
     """Return ``True`` if ``value`` means the field is required."""
     return _parse_bool(value) is True
 
+def normalize_unique(value: Any) -> list:
+    """Return ``unique`` as a list of column lists.
+
+    A flat list of names is one composite constraint (``[a, b]`` -> ``[[a, b]]``); a list of lists is
+    kept; anything else raises ``TypeError``.
+    """
+    if value is None or value == []:
+        return []
+    if isinstance(value, list) and all(isinstance(u, str) for u in value):
+        return [value]
+    if isinstance(value, list) and all(isinstance(u, list) and all(isinstance(c, str) for c in u) for u in value):
+        return value
+    raise TypeError("unique must be a list of column names or a list of such lists")
+
+
 def load_schema(yaml_path: str) -> Optional[TableSchema]:
     """
     Carga un archivo YAML y devuelve un TableSchema, o None si el formato no es válido.
@@ -147,7 +162,7 @@ def load_schema(yaml_path: str) -> Optional[TableSchema]:
             fields.append(PropertyDef(name=col))
             
     primary_key = table_def.get('primary_key', [])
-    unique = table_def.get('unique', [])
+    unique = normalize_unique(table_def.get('unique', []))
     metadata = {
         k: v
         for k, v in table_def.items()

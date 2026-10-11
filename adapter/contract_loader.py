@@ -4,7 +4,7 @@ from typing import Any, Dict, List
 
 import yaml
 
-from .yaml_loader import load_schema
+from .yaml_loader import load_schema, normalize_unique
 from ontology.model import TableSchema
 
 
@@ -46,7 +46,7 @@ def load_data_contract(path: str) -> DataContract:
         if pk := entry.get("primary_key"):
             schema.primary_key = pk
         if unique := entry.get("unique"):
-            schema.unique = unique
+            schema.unique = normalize_unique(unique)
         if desc := entry.get("description"):
             schema.metadata["description"] = desc
         if notes := entry.get("notes"):
