@@ -9,7 +9,7 @@ from adapter.reasoner import Reasoner
 from rdflib import Graph, RDF, RDFS, OWL, Literal, URIRef, XSD
 import pandas as pd
 
-from .utils import BASE, limpiar_para_uri
+from .utils import BASE, a_xsd_datetime, limpiar_para_uri
 
 class OntologyBuilder:
     """
@@ -57,14 +57,7 @@ class OntologyBuilder:
                     elif field.tipo == "boolean":
                         literal_valor = Literal(valor, datatype=XSD.boolean)
                     elif field.tipo in ("date", "datetime"):
-                        # Forzar a xsd:dateTime (añadir T00:00:00 si es solo fecha)
-                        try:
-                            str_val = str(valor)
-                            if len(str_val) == 10 and str_val.count("-") == 2:
-                                str_val += "T00:00:00"
-                            literal_valor = Literal(str_val, datatype=XSD.dateTime)
-                        except Exception:
-                            literal_valor = Literal(str(valor))
+                        literal_valor = Literal(a_xsd_datetime(valor, field.formato), datatype=XSD.dateTime)
                     elif field.tipo == "string":
                         literal_valor = Literal(str(valor))  # pandas puede haberlo leído como número
                     else:

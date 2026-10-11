@@ -80,3 +80,29 @@ def test_date_in_the_wrong_format_is_reported(tmp_path):
     df.loc[0, "alta"] = "12/07/2025"
     report = run(people_schema(), df, tmp_path)
     assert {v.path for v in report.violations} == {"ALTA"} and not report.conforms
+
+
+def test_dates_are_parsed_with_the_schema_format(tmp_path):
+    schema = TableSchema(name="T", fields=[
+        PropertyDef(name="alta", tipo="date", formato="%d/%m/%Y"),
+        PropertyDef(name="hora", tipo="datetime", formato="%d/%m/%Y %H:%M"),
+    ])
+    df = pd.DataFrame({"alta": ["12/07/2025", "01/02/2024"], "hora": ["12/07/2025 10:30", "01/02/2024 08:00"]})
+    graph = OntologyBuilder(build_global_tbox(), reasoner=None).build_abox_graph(schema, df)
+    lexical = {str(o) for _, p, o in graph if str(p).endswith(("ALTA", "HORA"))}
+    assert lexical == {"2025-07-12T00:00:00", "2024-02-01T00:00:00", "2025-07-12T10:30:00", "2024-02-01T08:00:00"}
+    assert run(schema, df, tmp_path).conforms
+
+
+def test_a_date_that_does_not_match_the_format_is_left_alone_and_reported(tmp_path):
+    schema = TableSchema(name="T", fields=[PropertyDef(name="alta", tipo="date", formato="%d/%m/%Y")])
+    report = run(schema, pd.DataFrame({"alta": ["12/07/2025", "not a date"]}), tmp_path)
+    assert [(v.path, v.component, v.value) for v in report.violations] == [("ALTA", "Datatype", "not a date")]
+
+
+def test_datetime_objects_are_written_in_iso_form():
+    from ontology.utils import a_xsd_datetime
+
+    assert a_xsd_datetime(pd.Timestamp("2025-07-12 10:30:00")) == "2025-07-12T10:30:00"
+    assert a_xsd_datetime("2025-07-12") == "2025-07-12T00:00:00"
+    assert a_xsd_datetime("2025-07-12T10:20:30Z") == "2025-07-12T10:20:30Z"
