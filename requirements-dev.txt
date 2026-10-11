@@ -3,3 +3,5 @@ flake8
 mypy
 pre-commit
 requests
+mongomock
+psycopg[binary]

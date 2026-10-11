@@ -1,0 +1,8 @@
+# Optional database drivers. Install only the ones you use: pip install -r requirements-db.txt
+# SQLite needs nothing. Connection URLs: postgresql+psycopg://, mysql+pymysql://, mssql+pyodbc://,
+# oracle+oracledb://, mongodb://
+psycopg[binary]   # PostgreSQL
+pymysql           # MySQL / MariaDB
+pyodbc            # SQL Server (also needs the Microsoft ODBC driver on the machine)
+oracledb          # Oracle
+pymongo           # MongoDB

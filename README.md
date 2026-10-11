@@ -58,6 +58,29 @@ In the Streamlit app set `BOCAGRANDE_REASONER=hermit` to use HermiT. In Docker, 
 
 Set the `GEMINI_API_KEY` environment variable to enable this feature. Required packages are listed under `requirements.txt` (`langchain-core`, `langchain-google-genai` and `google-generativeai`).
 
+## Databases
+
+Read from or write to SQLite, PostgreSQL, MySQL, SQL Server, Oracle and MongoDB (`adapter/db_io.py`). SQLite
+needs nothing; for the others install the driver (`pip install -r requirements-db.txt`).
+
+```bash
+# a table, or a query, as the data source
+bocagrande --schema schema_yaml/CLIENTES.yaml --db-url "postgresql+psycopg://app:${DB_PASSWORD}@localhost/crm" \
+           --table clientes --output clientes.ttl
+
+# a schema from the table's own types (NOT NULL becomes required, VARCHAR(n) keeps its length)
+bocagrande-schema --db-url sqlite:///data.db --table clientes --name CLIENTES --output schema_yaml/CLIENTES.yaml
+```
+
+- `${NAME}` in a connection string is replaced by the environment variable `NAME`, so passwords stay out of
+  config files and shell history; an unset variable is an error. Error messages never include the connection string.
+- `--query` accepts any SQL the account is allowed to run. Use a read-only account for sources.
+- From code, `read_database` / `write_database` take a config dict (`connection_string`, `query` with bound
+  `params`, or `table_name`; `if_exists` = `fail` | `replace` | `append`). SQL writes run in one transaction,
+  so a failed write leaves the table as it was (on databases with transactional DDL, `replace` too).
+- Tested against SQLite, a real PostgreSQL 16, and MongoDB through `mongomock`. MySQL, SQL Server and Oracle go
+  through the same SQLAlchemy code but have not been run against a server.
+
 ## Decision models (optional)
 
 Bocagrande can use fast, typed "System One" decision models through OpenRouter
