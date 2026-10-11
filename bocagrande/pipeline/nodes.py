@@ -25,6 +25,7 @@ NodeFunction = Callable[[Dict[str, Any], List[pd.DataFrame], "Context"], NodeRes
 REGISTRY: Dict[str, NodeFunction] = {}
 FILE_FORMATS = ("csv", "xlsx", "parquet", "json")
 JOIN_TYPES = ("inner", "left", "right", "outer")
+CSV_WRITE_OPTIONS = ("sep", "encoding", "header", "quotechar")
 
 
 @dataclass
@@ -110,6 +111,23 @@ def transform_mapping(config, inputs, context):
     return result, f"{len(generated)} generated, {len(missing)} missing" + (f" ({', '.join(missing)})" if missing else "")
 
 
+@node("transform.compute")
+def transform_compute(config, inputs, context):
+    """Add or overwrite columns from screened formulas, in order (a later one can use an earlier one)."""
+    (df,) = inputs
+    _need(config, "columns")
+    result = df.copy()
+    for column in config["columns"]:
+        allowed, reason = check_formula(column.get("formula", ""))
+        if not allowed:
+            raise PipelineError(f"formula for '{column.get('name')}' rejected: {reason}")
+        try:
+            result[column["name"]] = result.eval(column["formula"])
+        except Exception as exc:
+            raise PipelineError(f"formula for '{column.get('name')}' failed: {exc}") from None
+    return result, f"computed {len(config['columns'])} column(s)"
+
+
 @node("transform.constant")
 def transform_constant(config, inputs, context):
     (df,) = inputs
@@ -179,7 +197,8 @@ def destination_file(config, inputs, context):
         raise PipelineError(f"Unsupported file format '{fmt}'. Use one of: {', '.join(FILE_FORMATS)}")
     path.parent.mkdir(parents=True, exist_ok=True)
     if fmt == "csv":
-        df.to_csv(path, index=False)
+        options = {k: v for k, v in (config.get("options") or {}).items() if k in CSV_WRITE_OPTIONS}
+        df.to_csv(path, index=False, **options)
     elif fmt == "xlsx":
         df.to_excel(path, index=False)
     elif fmt == "parquet":

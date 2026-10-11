@@ -13,3 +13,4 @@ langchain-google-genai
 ontologos
 requests
 sqlalchemy
+defusedxml

@@ -121,6 +121,23 @@ bocagrande-run adultos.yaml --param PAIS=FR  # run; exits 1 if any node fails
   from outside cannot copy other secrets into, say, a file path. Run only pipelines you trust.
 - `Context(sandbox=True)` or `--sandbox` keeps every file path inside the base directory.
 
+## Importing from Pentaho
+
+```bash
+bocagrande-import-pentaho flujo.ktr -o flujo.yaml     # then: bocagrande-run flujo.yaml --check
+```
+
+A Kettle transformation (`.ktr`) becomes a pipeline. Supported steps: Table input/output, CSV and text file input,
+Excel input, Select values, Constant, Sort rows, Filter rows, Calculator (add, subtract, multiply, divide, copy),
+Dummy, Merge join and Text file output. Anything else stays in the pipeline as an `unsupported.<Type>` node that
+does not run, and the command prints what was not converted and exits with status 1. Nothing is approximated: a step
+is converted completely or reported. A job (`.kjb`) is imported as an outline only (its entries and hops).
+
+Passwords are never read from the file. Each connection gets a `${<NAME>_PASSWORD}` reference; set it in the
+environment when you run the pipeline. XML is parsed with `defusedxml`, so entity tricks in untrusted files are refused.
+The converter was written from the Kettle file format and tested with hand-made files, not with files from a real
+installation; if a real file does not import as you expect, please report it.
+
 ## Decision models (optional)
 
 Bocagrande can use fast, typed "System One" decision models through OpenRouter
