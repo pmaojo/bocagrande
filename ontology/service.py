@@ -56,8 +56,8 @@ class OntologyBuilder:
                         literal_valor = Literal(valor, datatype=XSD.float)
                     elif field.tipo == "boolean":
                         literal_valor = Literal(valor, datatype=XSD.boolean)
-                    elif field.tipo == "date":
-                        # Forzar a xsd:dateTime (añadir T00:00:00 si no tiene parte de tiempo)
+                    elif field.tipo in ("date", "datetime"):
+                        # Forzar a xsd:dateTime (añadir T00:00:00 si es solo fecha)
                         try:
                             str_val = str(valor)
                             if len(str_val) == 10 and str_val.count("-") == 2:
@@ -65,8 +65,10 @@ class OntologyBuilder:
                             literal_valor = Literal(str_val, datatype=XSD.dateTime)
                         except Exception:
                             literal_valor = Literal(str(valor))
+                    elif field.tipo == "string":
+                        literal_valor = Literal(str(valor))  # pandas puede haberlo leído como número
                     else:
-                        literal_valor = Literal(valor) # Default a string
+                        literal_valor = Literal(valor)
                     g.add((ind_uri, prop_uri, literal_valor))
         return g
 
